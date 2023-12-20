@@ -52,6 +52,12 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis lacinia magn
     ordering="NONE"
     # Side this dependency is applied on - BOTH, CLIENT or SERVER
     side="BOTH"
+[[dependencies.modid]]
+    modId="create"
+    mandatory=true
+    versionRange="[0.5.1.b,)"
+    ordering="NONE"
+    side="BOTH"
 # Here's another dependency
 [[dependencies.vaultfilters]]
     modId="minecraft"
