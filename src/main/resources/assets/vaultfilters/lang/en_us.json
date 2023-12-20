@@ -2,6 +2,9 @@
   "create.item_attributes.gear_rarity": "is of rarity \"%1$s\"",
   "create.item_attributes.gear_rarity.inverted": "is not of rarity \"%1$s\"",
 
+  "create.item_attributes.prefix": "has prefix \"%1$s\"",
+  "create.item_attributes.prefix.inverted": "doesn't have prefix \"%1$s\"",
+
   "create.item_attributes.has_legendary": "has a legendary modifier",
   "create.item_attributes.has_legendary.inverted": "doesn't have a legendary modifier"
 }
