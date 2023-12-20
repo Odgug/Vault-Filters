@@ -1,8 +1,10 @@
 package net.joseph.vaultfilters.ItemAttributes.custom;
 
 import com.simibubi.create.content.logistics.filter.ItemAttribute;
+import iskallia.vault.config.InscriptionConfig;
 import iskallia.vault.gear.data.VaultGearData;
 import iskallia.vault.gear.item.VaultGearItem;
+import iskallia.vault.item.InscriptionItem;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 
@@ -14,7 +16,6 @@ public class GearRarityAttribute implements ItemAttribute {
     public static void register() {
         ItemAttribute.register(new GearRarityAttribute("dummy"));
     }
-
     String rarity;
 
     public GearRarityAttribute(String rarity) {
