@@ -1,6 +1,7 @@
 package net.joseph.vaultfilters;
 
 import com.mojang.logging.LogUtils;
+import net.joseph.vaultfilters.ItemAttributes.ModItemAttributes;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -35,6 +36,7 @@ public class vaultfilters
         // some preinit code
         LOGGER.info("HELLO FROM PREINIT");
         LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
+        ModItemAttributes.register();
     }
 
 

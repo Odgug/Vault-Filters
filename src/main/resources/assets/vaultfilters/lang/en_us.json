@@ -1,0 +1,4 @@
+{
+  "create.item_attributes.gear_rarity": "is of rarity \"%1$s\"",
+  "create.item_attributes.gear_rarity.inverted": "is not of rarity \"%1$s\""
+}
