@@ -5,6 +5,9 @@
   "create.item_attributes.level": "item level is >= \"%1$s\"",
   "create.item_attributes.level.inverted": "item level is < \"%1$s\"",
 
+  "create.item_attributes.size": "jewel size is <= \"%1$s\"",
+  "create.item_attributes.size.inverted": "jewel size is > \"%1$s\"",
+
 
   "create.item_attributes.implicit": "has implicit \"%1$s\"",
   "create.item_attributes.implicit.inverted": "doesn't have implicit \"%1$s\"",

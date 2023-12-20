@@ -10,5 +10,6 @@ public class ModItemAttributes {
         GearPrefixAttribute.register();
         GearSuffixAttribute.register();
         GearLevelAttribute.register();
+        JewelSizeAttribute.register();
     }
 }

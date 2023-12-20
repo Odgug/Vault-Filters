@@ -24,10 +24,10 @@ public class GearImplicitAttribute implements ItemAttribute {
 
     public boolean hasimplicit(ItemStack itemStack) {
         VaultGearData data = VaultGearData.read(itemStack);
-        List<VaultGearModifier<?>> implicites = data.getModifiers(VaultGearModifier.AffixType.IMPLICIT);
+        List<VaultGearModifier<?>> implicits = data.getModifiers(VaultGearModifier.AffixType.IMPLICIT);
 
-        for (int i = 0; i < implicites.size(); i++) {
-            if (implicites.get(i).getAttribute().getReader().getModifierName().equals(this.implicitname)) {
+        for (int i = 0; i < implicits.size(); i++) {
+            if (implicits.get(i).getAttribute().getReader().getModifierName().equals(this.implicitname)) {
                 return true;
             }
 
@@ -54,10 +54,10 @@ public class GearImplicitAttribute implements ItemAttribute {
         List<ItemAttribute> atts = new ArrayList<>();
        if (itemStack.getItem() instanceof VaultGearItem) {
            VaultGearData data = VaultGearData.read(itemStack);
-           List<VaultGearModifier<?>> implicites = data.getModifiers(VaultGearModifier.AffixType.IMPLICIT);
+           List<VaultGearModifier<?>> implicits = data.getModifiers(VaultGearModifier.AffixType.IMPLICIT);
 
-           for (int i = 0; i < implicites.size(); i++) {
-               atts.add(new GearImplicitAttribute(implicites.get(i).getAttribute().getReader().getModifierName()));
+           for (int i = 0; i < implicits.size(); i++) {
+               atts.add(new GearImplicitAttribute(implicits.get(i).getAttribute().getReader().getModifierName()));
            }
 
        }
