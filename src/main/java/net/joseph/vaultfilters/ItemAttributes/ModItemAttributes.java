@@ -6,10 +6,11 @@ public class ModItemAttributes {
     public static void register() {
         GearRarityAttribute.register();
         HasLegendaryAttribute.register();
+        GearLevelAttribute.register();
+        JewelSizeAttribute.register();
         GearImplicitAttribute.register();
         GearPrefixAttribute.register();
         GearSuffixAttribute.register();
-        GearLevelAttribute.register();
-        JewelSizeAttribute.register();
+
     }
 }
