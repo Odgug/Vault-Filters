@@ -6,6 +6,7 @@ import iskallia.vault.gear.attribute.VaultGearModifier;
 import iskallia.vault.gear.data.VaultGearData;
 import iskallia.vault.gear.item.VaultGearItem;
 import iskallia.vault.item.InscriptionItem;
+import iskallia.vault.item.tool.JewelItem;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 
@@ -18,7 +19,37 @@ public class GearRarityAttribute implements ItemAttribute {
         ItemAttribute.register(new GearRarityAttribute("dummy"));
     }
     String rarity;
+    public static String rarityToJewel(String rarity) {
+        if (rarity.equals("COMMON")) {
+            return "CHIPPED";
+        }
+        if (rarity.equals("RARE")) {
+            return "FLAWED";
+        }
+        if (rarity.equals("EPIC")) {
+            return "FLAWLESS";
+        }
+        if (rarity.equals("OMEGA")) {
+            return "PERFECT";
+        }
+        return "NULL";
+    }
 
+    public static String jewelToRarity(String jewel) {
+        if (jewel.equals("CHIPPED")) {
+            return "COMMON";
+        }
+        if (jewel.equals("FLAWED")) {
+            return "RARE";
+        }
+        if (jewel.equals("FLAWLESS")) {
+            return "EPIC";
+        }
+        if (jewel.equals("PERFECT")) {
+            return "OMEGA";
+        }
+        return "NULL";
+    }
     public GearRarityAttribute(String rarity) {
         this.rarity = rarity;
     }
@@ -27,10 +58,13 @@ public class GearRarityAttribute implements ItemAttribute {
     @Override
     public boolean appliesTo(ItemStack itemStack) {
 
-        if (itemStack.getItem() instanceof VaultGearItem) {
+        if (itemStack.getItem() instanceof VaultGearItem && !(itemStack.getItem() instanceof JewelItem)) {
             return (VaultGearData.read(itemStack).getRarity().toString().equals(rarity));
         }
 
+        if (itemStack.getItem() instanceof JewelItem) {
+            return (jewelToRarity(VaultGearData.read(itemStack).getRarity().toString()).equals(rarity));
+        }
         return false;
     }
 
@@ -38,8 +72,12 @@ public class GearRarityAttribute implements ItemAttribute {
     public List<ItemAttribute> listAttributesOf(ItemStack itemStack) {
 
         List<ItemAttribute> atts = new ArrayList<>();
-       if (itemStack.getItem() instanceof VaultGearItem) {
+       if (itemStack.getItem() instanceof VaultGearItem && !(itemStack.getItem() instanceof JewelItem)) {
            atts.add(new GearRarityAttribute(VaultGearData.read(itemStack).getRarity().toString()));
+       }
+
+       if (itemStack.getItem() instanceof JewelItem) {
+           atts.add(new GearRarityAttribute(rarityToJewel(VaultGearData.read(itemStack).getRarity().toString())));
        }
         return atts;
     }
