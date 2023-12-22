@@ -76,7 +76,7 @@ public class HasLegendaryAttribute implements ItemAttribute {
 
     @Override
     public ItemAttribute readNBT(CompoundTag nbt) {
-        return new GearRarityAttribute(nbt.getString("legendary"));
+        return new HasLegendaryAttribute(nbt.getString("legendary"));
     }
 
 

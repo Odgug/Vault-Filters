@@ -6,6 +6,7 @@ import iskallia.vault.gear.data.VaultGearData;
 import iskallia.vault.gear.item.VaultGearItem;
 import iskallia.vault.init.ModGearAttributes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
@@ -88,13 +89,14 @@ public class GearSuffixAttribute implements ItemAttribute {
         return new Object[]{suffixname};
     }
 
+
     @Override
     public void writeNBT(CompoundTag nbt) {
         nbt.putString("suffix", this.suffixname);
     }
-
     @Override
     public ItemAttribute readNBT(CompoundTag nbt) {
         return new GearSuffixAttribute(nbt.getString("suffix"));
     }
+
 }
