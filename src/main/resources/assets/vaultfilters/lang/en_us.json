@@ -2,6 +2,9 @@
   "create.item_attributes.gear_rarity": "is of rarity \"%1$s\"",
   "create.item_attributes.gear_rarity.inverted": "is not of rarity \"%1$s\"",
 
+  "create.item_attributes.repair": "item has >= \"%1$s\" repair slots",
+  "create.item_attributes.level.repair": "item has < \"%1$s\" repair slots",
+
   "create.item_attributes.level": "item level is >= \"%1$s\"",
   "create.item_attributes.level.inverted": "item level is < \"%1$s\"",
 
