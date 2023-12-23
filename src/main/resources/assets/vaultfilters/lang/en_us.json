@@ -2,8 +2,8 @@
   "create.item_attributes.gear_rarity": "is of rarity \"%1$s\"",
   "create.item_attributes.gear_rarity.inverted": "is not of rarity \"%1$s\"",
 
-  "create.item_attributes.repair": "has >= \"%1$s\" repair slots",
-  "create.item_attributes.level.repair": "has < \"%1$s\" repair slots",
+  "create.item_attributes.repair": "has >= \"%1$s\" unused repair slots",
+  "create.item_attributes.level.repair": "has < \"%1$s\" unused repair slots",
 
   "create.item_attributes.level": "item level is >= \"%1$s\"",
   "create.item_attributes.level.inverted": "item level is < \"%1$s\"",
@@ -31,11 +31,11 @@
   "create.item_attributes.inscription_time": "adds >= \"%1$s\" time",
   "create.item_attributes.inscription_time.inverted": "adds < \"%1$s\" time",
 
-  "create.item_attributes.inscription_completion": "adds >= \"%1$s\"% completion",
-  "create.item_attributes.inscription_completion.inverted": "adds < \"%1$s\"% completion",
+  "create.item_attributes.inscription_completion": "adds >= \"%1$s\" % completion",
+  "create.item_attributes.inscription_completion.inverted": "adds < \"%1$s\" % completion",
 
-  "create.item_attributes.inscription_instability": "adds <= \"%1$s\"% instability",
-  "create.item_attributes.inscription_instability.inverted": "adds > \"%1$s\"% instability",
+  "create.item_attributes.inscription_instability": "adds <= \"%1$s\" % instability",
+  "create.item_attributes.inscription_instability.inverted": "adds > \"%1$s\" % instability",
 
   "create.item_attributes.cut_count": "has been free cut \"%1$s\" times",
   "create.item_attributes.cut_count.inverted": "has not been free cut exactly \"%1$s\" times"
