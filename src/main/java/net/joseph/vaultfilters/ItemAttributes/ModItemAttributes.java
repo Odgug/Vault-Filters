@@ -7,6 +7,8 @@ public class ModItemAttributes {
         GearRarityAttribute.register();
         InscriptionRoomAttribute.register();
         InscriptionTimeAttribute.register();
+        InscriptionCompletionAttribute.register();
+
         HasLegendaryAttribute.register();
         GearLevelAttribute.register();
         JewelSizeAttribute.register();

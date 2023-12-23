@@ -29,5 +29,8 @@
   "create.item_attributes.inscription_room.inverted": "doesn't contain room \"%1$s\"",
 
   "create.item_attributes.inscription_time": "adds >= \"%1$s\" time",
-  "create.item_attributes.inscription_time.inverted": "adds < \"%1$s\" time"
+  "create.item_attributes.inscription_time.inverted": "adds < \"%1$s\" time",
+
+  "create.item_attributes.inscription_completion": "adds >= \"%1$s\"% completion",
+  "create.item_attributes.inscription_completion.inverted": "adds < \"%1$s\"% completion"
 }
