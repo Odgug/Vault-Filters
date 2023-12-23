@@ -23,5 +23,8 @@
   "create.item_attributes.suffix.inverted": "doesn't have suffix \"%1$s\"",
 
   "create.item_attributes.has_legendary": "has a legendary modifier",
-  "create.item_attributes.has_legendary.inverted": "doesn't have a legendary modifier"
+  "create.item_attributes.has_legendary.inverted": "doesn't have a legendary modifier",
+
+  "create.item_attributes.inscription_room": "contains room \"%1$s\"",
+  "create.item_attributes.inscription_room.inverted": "doesn't contain room \"%1$s\""
 }
