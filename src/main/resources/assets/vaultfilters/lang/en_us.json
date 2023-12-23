@@ -2,8 +2,8 @@
   "create.item_attributes.gear_rarity": "is of rarity \"%1$s\"",
   "create.item_attributes.gear_rarity.inverted": "is not of rarity \"%1$s\"",
 
-  "create.item_attributes.repair": "item has >= \"%1$s\" repair slots",
-  "create.item_attributes.level.repair": "item has < \"%1$s\" repair slots",
+  "create.item_attributes.repair": "has >= \"%1$s\" repair slots",
+  "create.item_attributes.level.repair": "has < \"%1$s\" repair slots",
 
   "create.item_attributes.level": "item level is >= \"%1$s\"",
   "create.item_attributes.level.inverted": "item level is < \"%1$s\"",
@@ -26,5 +26,8 @@
   "create.item_attributes.has_legendary.inverted": "doesn't have a legendary modifier",
 
   "create.item_attributes.inscription_room": "contains room \"%1$s\"",
-  "create.item_attributes.inscription_room.inverted": "doesn't contain room \"%1$s\""
+  "create.item_attributes.inscription_room.inverted": "doesn't contain room \"%1$s\"",
+
+  "create.item_attributes.inscription_time": "adds >= \"%1$s\" time",
+  "create.item_attributes.inscription_time.inverted": "adds < \"%1$s\" time"
 }
