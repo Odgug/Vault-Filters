@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "net.joseph.vaultfilters.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "InscriptionDataAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "vaultfilters.mixin-refmap.json"
+}
