@@ -35,5 +35,8 @@
   "create.item_attributes.inscription_completion.inverted": "adds < \"%1$s\"% completion",
 
   "create.item_attributes.inscription_instability": "adds <= \"%1$s\"% instability",
-  "create.item_attributes.inscription_instability.inverted": "adds > \"%1$s\"% instability"
+  "create.item_attributes.inscription_instability.inverted": "adds > \"%1$s\"% instability",
+
+  "create.item_attributes.cut_count": "has been cut \"%1$s\" times",
+  "create.item_attributes.cut_count.inverted": "has not been cut exactly \"%1$s\" times"
 }
