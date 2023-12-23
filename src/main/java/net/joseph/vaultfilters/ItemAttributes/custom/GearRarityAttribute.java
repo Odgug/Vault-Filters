@@ -63,7 +63,7 @@ public class GearRarityAttribute implements ItemAttribute {
         }
 
         if (itemStack.getItem() instanceof JewelItem) {
-            return (jewelToRarity(VaultGearData.read(itemStack).getRarity().toString()).equals(rarity));
+            return (rarityToJewel(VaultGearData.read(itemStack).getRarity().toString()).equals(rarity));
         }
         return false;
     }
