@@ -20,6 +20,7 @@ public class ModItemAttributes {
         CharmUsesAttribute.register();
         TrinketUsesAttribute.register();
         CharmAffinityAttribute.register();
+        CharmGodAttribute.register();
 
     }
 }
