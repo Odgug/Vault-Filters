@@ -53,7 +53,7 @@ public class InscriptionCompletionAttribute implements ItemAttribute {
 
     @Override
     public Object[] getTranslationParameters() {
-        return new Object[]{String.valueOf(comp)};
+        return new Object[]{String.valueOf(comp)+"%"};
     }
 
     @Override

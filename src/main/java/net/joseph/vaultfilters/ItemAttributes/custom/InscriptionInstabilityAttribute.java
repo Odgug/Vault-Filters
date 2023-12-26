@@ -53,7 +53,7 @@ public class InscriptionInstabilityAttribute implements ItemAttribute {
 
     @Override
     public Object[] getTranslationParameters() {
-        return new Object[]{String.valueOf(instab)};
+        return new Object[]{String.valueOf(instab)+"%"};
     }
 
     @Override
