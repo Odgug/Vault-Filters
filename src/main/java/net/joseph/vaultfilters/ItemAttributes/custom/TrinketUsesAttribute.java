@@ -2,7 +2,6 @@ package net.joseph.vaultfilters.ItemAttributes.custom;
 
 import com.simibubi.create.content.logistics.filter.ItemAttribute;
 import iskallia.vault.item.gear.TrinketItem;
-import iskallia.vault.item.gear.trinketItem;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 
@@ -11,8 +10,6 @@ import java.util.List;
 
 import static iskallia.vault.item.gear.TrinketItem.getUsedVaults;
 import static iskallia.vault.item.gear.TrinketItem.getUses;
-import static iskallia.vault.item.gear.trinketItem.getUsedVaults;
-import static iskallia.vault.item.gear.trinketItem.getUses;
 
 public class TrinketUsesAttribute implements ItemAttribute {
 
