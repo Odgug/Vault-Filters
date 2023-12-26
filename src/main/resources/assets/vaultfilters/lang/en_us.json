@@ -47,5 +47,8 @@
   "create.item_attributes.trinket_uses.inverted": "has < \"%1$s\" trinket uses left",
 
   "create.item_attributes.charm_affinity": "adds >= \"%1$s\" % affinity",
-  "create.item_attributes.charm_affinity.inverted": "adds < \"%1$s\" % affinity"
+  "create.item_attributes.charm_affinity.inverted": "adds < \"%1$s\" % affinity",
+
+  "create.charm_god.trinket_uses": "adds affinity for \"%1$s\"",
+  "create.item_attributes.charm_god.inverted": "doesn't add affinity for \"%1$s\""
 }

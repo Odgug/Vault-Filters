@@ -52,7 +52,7 @@ public class CharmAffinityAttribute implements ItemAttribute {
 
     @Override
     public Object[] getTranslationParameters() {
-        return new Object[]{String.valueOf(affinity)};
+        return new Object[]{affinity};
     }
 
     @Override
