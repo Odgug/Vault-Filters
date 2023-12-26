@@ -17,6 +17,7 @@ public class ModItemAttributes {
         GearImplicitAttribute.register();
         GearPrefixAttribute.register();
         GearSuffixAttribute.register();
+        CharmUsesAttribute.register();
 
     }
 }
