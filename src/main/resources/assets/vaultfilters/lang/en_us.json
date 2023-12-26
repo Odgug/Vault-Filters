@@ -41,5 +41,8 @@
   "create.item_attributes.cut_count.inverted": "has not been free cut exactly \"%1$s\" times",
 
   "create.item_attributes.charm_uses": "has >= \"%1$s\" altar uses left",
-  "create.item_attributes.charm_uses.inverted": "has < \"%1$s\" altar uses left"
+  "create.item_attributes.charm_uses.inverted": "has < \"%1$s\" altar uses left",
+
+  "create.item_attributes.trinket_uses": "has >= \"%1$s\" trinket uses left",
+  "create.item_attributes.trinket_uses.inverted": "has < \"%1$s\" trinket uses left"
 }

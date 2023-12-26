@@ -18,6 +18,7 @@ public class ModItemAttributes {
         GearPrefixAttribute.register();
         GearSuffixAttribute.register();
         CharmUsesAttribute.register();
+        TrinketUsesAttribute.register();
 
     }
 }
