@@ -1,8 +1,10 @@
 package net.joseph.vaultfilters.ItemAttributes.custom;
 
 import com.simibubi.create.content.logistics.filter.ItemAttribute;
+import iskallia.vault.gear.charm.CharmEffect;
 import iskallia.vault.gear.data.VaultGearData;
 import iskallia.vault.gear.item.VaultGearItem;
+import iskallia.vault.gear.reader.DecimalModifierReader;
 import iskallia.vault.init.ModItems;
 import iskallia.vault.item.gear.CharmItem;
 import iskallia.vault.item.tool.JewelItem;
@@ -21,17 +23,17 @@ public class CharmGodAttribute implements ItemAttribute {
     }
     String god;
     public static String getCharmGod(ItemStack itemStack) {
-       String tooltip = getCharm(itemStack).toString();
+       String tooltip = ((CharmEffect.Config)getCharm(itemStack).get().getCharmConfig().getConfig()).getAttribute().getReader().getModifierName();
        if (tooltip.contains("Velara")) {
            return "Velara";
        }
-        if (tooltip.contains("Velara")) {
+        if (tooltip.contains("Idona")) {
             return "Idona";
         }
-        if (tooltip.contains("Velara")) {
+        if (tooltip.contains("Tenos")) {
             return "Tenos";
         }
-        if (tooltip.contains("Velara")) {
+        if (tooltip.contains("Wendarr")) {
             return "Wendarr";
         }
         return tooltip;

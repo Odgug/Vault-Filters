@@ -22,14 +22,14 @@ public class CharmAffinityAttribute implements ItemAttribute {
         this.affinity = affinity;
     }
     public static int getCharmAffinity(ItemStack itemStack) {
-        return Integer.valueOf((int) (getValue(itemStack) * 100));
+        return Math.round(getValue(itemStack) * 100.0F);
     }
 
     @Override
     public boolean appliesTo(ItemStack itemStack) {
 
         if (itemStack.getItem() instanceof CharmItem) {
-            return (getCharmAffinity(itemStack) >= Integer.valueOf(affinity));
+            return (getCharmAffinity(itemStack) >= Integer.valueOf(this.affinity));
         }
 
         return false;
@@ -52,7 +52,7 @@ public class CharmAffinityAttribute implements ItemAttribute {
 
     @Override
     public Object[] getTranslationParameters() {
-        return new Object[]{affinity};
+        return new Object[]{String.valueOf(affinity)};
     }
 
     @Override

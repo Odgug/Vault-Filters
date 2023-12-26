@@ -21,6 +21,7 @@ public class ModItemAttributes {
         TrinketUsesAttribute.register();
         CharmAffinityAttribute.register();
         CharmGodAttribute.register();
+        TrinketNameAttribute.register();
 
     }
 }
