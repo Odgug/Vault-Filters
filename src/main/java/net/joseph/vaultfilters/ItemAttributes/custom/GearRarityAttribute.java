@@ -5,7 +5,9 @@ import iskallia.vault.config.InscriptionConfig;
 import iskallia.vault.gear.attribute.VaultGearModifier;
 import iskallia.vault.gear.data.VaultGearData;
 import iskallia.vault.gear.item.VaultGearItem;
+import iskallia.vault.init.ModItems;
 import iskallia.vault.item.InscriptionItem;
+import iskallia.vault.item.gear.CharmItem;
 import iskallia.vault.item.tool.JewelItem;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
@@ -50,6 +52,18 @@ public class GearRarityAttribute implements ItemAttribute {
         }
         return "NULL";
     }
+    public static String getCharmRarity(ItemStack itemStack) {
+        if (itemStack.getItem() == ModItems.SMALL_CHARM) {
+            return "NOBLE";
+        }
+        if (itemStack.getItem() == ModItems.LARGE_CHARM) {
+            return "DISTINGUISHED";
+        }
+        if (itemStack.getItem() == ModItems.GRAND_CHARM) {
+            return "REGAL";
+        }
+        return "MAJESTIC";
+    }
     public GearRarityAttribute(String rarity) {
         this.rarity = rarity;
     }
@@ -65,6 +79,9 @@ public class GearRarityAttribute implements ItemAttribute {
         if (itemStack.getItem() instanceof JewelItem) {
             return (rarityToJewel(VaultGearData.read(itemStack).getRarity().toString()).equals(rarity));
         }
+        if (itemStack.getItem() instanceof CharmItem) {
+            return (getCharmRarity(itemStack).equals(rarity));
+        }
         return false;
     }
 
@@ -78,6 +95,9 @@ public class GearRarityAttribute implements ItemAttribute {
 
        if (itemStack.getItem() instanceof JewelItem) {
            atts.add(new GearRarityAttribute(rarityToJewel(VaultGearData.read(itemStack).getRarity().toString())));
+       }
+       if (itemStack.getItem() instanceof CharmItem) {
+           atts.add(new GearRarityAttribute(getCharmRarity(itemStack)));
        }
         return atts;
     }
