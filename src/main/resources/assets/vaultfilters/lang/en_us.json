@@ -34,8 +34,8 @@
   "create.item_attributes.inscription_completion": "adds >= \"%1$s\" % completion",
   "create.item_attributes.inscription_completion.inverted": "adds < \"%1$s\" % completion",
 
-  "create.item_attributes.inscription_instability": "adds <= \"%1$s\" % instability",
-  "create.item_attributes.inscription_instability.inverted": "adds > \"%1$s\" % instability",
+  "create.item_attributes.inscription_instability": "adds <= \"%1$s\" instability",
+  "create.item_attributes.inscription_instability.inverted": "adds > \"%1$s\" instability",
 
   "create.item_attributes.cut_count": "has been free cut \"%1$s\" times",
   "create.item_attributes.cut_count.inverted": "has not been free cut exactly \"%1$s\" times",
@@ -43,8 +43,8 @@
   "create.item_attributes.charm_uses": "has >= \"%1$s\" altar uses left",
   "create.item_attributes.charm_uses.inverted": "has < \"%1$s\" altar uses left",
 
-  "create.item_attributes.charm_affinity": "adds >= \"%1$s\" % affinity",
-  "create.item_attributes.charm_affinity.inverted": "adds < \"%1$s\" % affinity",
+  "create.item_attributes.charm_affinity": "adds >= \"%1$s\" affinity",
+  "create.item_attributes.charm_affinity.inverted": "adds < \"%1$s\" affinity",
 
   "create.item_attributes.trinket_uses": "has >= \"%1$s\" trinket uses left",
   "create.item_attributes.trinket_uses.inverted": "has < \"%1$s\" trinket uses left",
