@@ -26,7 +26,7 @@ public class GearSuffixAttribute implements ItemAttribute {
         this.suffixname = suffixname;
     }
 
-    public boolean hassuffix(ItemStack itemStack) {
+    public boolean hasSuffix(ItemStack itemStack) {
         VaultGearData data = VaultGearData.read(itemStack);
         List<VaultGearModifier<?>> suffixes = data.getModifiers(VaultGearModifier.AffixType.SUFFIX);
 
@@ -63,7 +63,7 @@ public class GearSuffixAttribute implements ItemAttribute {
     public boolean appliesTo(ItemStack itemStack) {
 
         if (itemStack.getItem() instanceof VaultGearItem) {
-            return (hassuffix(itemStack));
+            return (hasSuffix(itemStack));
         }
 
         return false;

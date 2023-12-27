@@ -9,10 +9,11 @@ public class ModItemAttributes {
         InscriptionTimeAttribute.register();
         InscriptionCompletionAttribute.register();
         InscriptionInstabilityAttribute.register();
+        GearLevelAttribute.register();
+        GearTransmogAttribute.register();
         HasLegendaryAttribute.register();
         LegendaryPrefixAttribute.register();
         LegendarySuffixAttribute.register();
-        GearLevelAttribute.register();
         JewelSizeAttribute.register();
         JewelCutsAttribute.register();
         GearRepairSlotAttribute.register();
