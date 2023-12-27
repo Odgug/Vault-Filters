@@ -10,6 +10,8 @@ public class ModItemAttributes {
         InscriptionCompletionAttribute.register();
         InscriptionInstabilityAttribute.register();
         HasLegendaryAttribute.register();
+        LegendaryPrefixAttribute.register();
+        LegendarySuffixAttribute.register();
         GearLevelAttribute.register();
         JewelSizeAttribute.register();
         JewelCutsAttribute.register();

@@ -25,6 +25,13 @@
   "create.item_attributes.has_legendary": "has a legendary modifier",
   "create.item_attributes.has_legendary.inverted": "doesn't have a legendary modifier",
 
+  "create.item_attributes.legendary_prefix": "has a legendary \"%1$s\" prefix",
+  "create.item_attributes.legendary_prefix.inverted": "doesn't have a legendary \"%1$s\" prefix",
+
+  "create.item_attributes.legendary_suffix": "has a legendary \"%1$s\" suffix",
+  "create.item_attributes.legendary_suffix.inverted": "doesn't have a legendary \"%1$s\" suffix",
+
+
   "create.item_attributes.inscription_room": "contains room \"%1$s\"",
   "create.item_attributes.inscription_room.inverted": "doesn't contain room \"%1$s\"",
 
