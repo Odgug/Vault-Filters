@@ -26,5 +26,7 @@ public class ModItemAttributes {
         TrinketNameAttribute.register();
         TrinketColorAttribute.register();
 
+        NumberPrefixAttribute.register();
+
     }
 }
