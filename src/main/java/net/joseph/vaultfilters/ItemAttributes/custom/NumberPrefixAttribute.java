@@ -39,7 +39,7 @@ public class NumberPrefixAttribute implements ItemAttribute {
             }
         });
     }
-    public String getPrefixDisplay(int index, ItemStack itemStack) {
+    public  String getPrefixDisplay(int index, ItemStack itemStack) {
         VaultGearData data = VaultGearData.read(itemStack);
         VaultGearModifier modifier = data.getModifiers(VaultGearModifier.AffixType.PREFIX).get(index);
         return (getDisplay(modifier, data, VaultGearModifier.AffixType.PREFIX, itemStack).get().getString());

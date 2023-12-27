@@ -50,14 +50,14 @@
   "create.item_attributes.charm_uses": "has >= \"%1$s\" altar uses left",
   "create.item_attributes.charm_uses.inverted": "has < \"%1$s\" altar uses left",
 
-  "create.item_attributes.implicit_number": "has >= \"%1$s\" on an implicit",
-  "create.item_attributes.implicit_number.inverted": "has < \"%1$s\" on an implicit",
+  "create.item_attributes.implicit_number": "has an implicit that adds at least \"%1$s\"",
+  "create.item_attributes.implicit_number.inverted": "doesn't have an implicit that adds at least \"%1$s\"",
 
-  "create.item_attributes.prefix_number": "has >= \"%1$s\" on a prefix",
-  "create.item_attributes.prefix_number.inverted": "has < \"%1$s\" on a prefix",
+  "create.item_attributes.prefix_number": "has a prefix that adds at least \"%1$s\"",
+  "create.item_attributes.prefix_number.inverted": "doesn't have a prefix that adds at least \"%1$s\"",
 
-  "create.item_attributes.suffix_number": "has >= \"%1$s\" on a suffix",
-  "create.item_attributes.suffix_number.inverted": "has < \"%1$s\" on a suffix",
+  "create.item_attributes.suffix_number": "has a suffix that adds at least \"%1$s\"",
+  "create.item_attributes.suffix_number.inverted": "doesn't have a suffix that adds at least \"%1$s\"",
 
 
   "create.item_attributes.charm_affinity": "adds >= \"%1$s\" affinity",
