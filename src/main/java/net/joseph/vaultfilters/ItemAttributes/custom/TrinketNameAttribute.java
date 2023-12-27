@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static iskallia.vault.item.gear.TrinketItem.getTrinket;
+import static iskallia.vault.item.gear.TrinketItem.isIdentified;
 
 public class TrinketNameAttribute implements ItemAttribute {
 
@@ -38,6 +39,9 @@ public class TrinketNameAttribute implements ItemAttribute {
     public boolean appliesTo(ItemStack itemStack) {
 
         if (itemStack.getItem() instanceof TrinketItem) {
+            if (!isIdentified(itemStack)) {
+                return false;
+            }
             return (getTrinketName(itemStack).equals(name));
         }
 
@@ -50,6 +54,9 @@ public class TrinketNameAttribute implements ItemAttribute {
 
         List<ItemAttribute> atts = new ArrayList<>();
        if (itemStack.getItem() instanceof TrinketItem) {
+           if (!isIdentified(itemStack)) {
+               return atts;
+           }
            atts.add(new TrinketNameAttribute(getTrinketName(itemStack)));
        }
 
