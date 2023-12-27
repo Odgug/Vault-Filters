@@ -60,6 +60,23 @@ public class NumberSuffixAttribute implements ItemAttribute {
     public static double getModifierValue(String modifier) {
         boolean flag = false;
         int flagint = 0;
+        if (modifier.contains("Cloud")) {
+            if (modifier.contains("IV")) {
+                return 4;
+            }
+            if (modifier.contains("V")) {
+                return 5;
+            }
+            if (modifier.contains("III")) {
+                return 3;
+            }
+            if (modifier.contains("II")) {
+                return 2;
+            }
+            if (modifier.contains("I")) {
+                return 1;
+            }
+        }
         for (int i = 0; i < modifier.length(); i++) {
             if (isNumber(String.valueOf(modifier.charAt(i)))) {
                 flag = true;
@@ -82,8 +99,28 @@ public class NumberSuffixAttribute implements ItemAttribute {
         return Double.parseDouble(tempnum);
 
     }
-
+    public static String getCloudName(String modifier) {
+        if (modifier.contains("Healing")) {
+            return "Healing Cloud";
+        }
+        if (modifier.contains("Poison")) {
+            return "Poison Cloud";
+        }
+        if (modifier.contains("Slowness")) {
+            return "Slowness Cloud";
+        }
+        if (modifier.contains("Fear")) {
+            return "Fear Cloud";
+        }
+        if (modifier.contains("Chilling")) {
+            return "Chilling Cloud";
+        }
+        return "Effect Cloud";
+    }
     public static String getName(String modifier) {
+        if (modifier.contains("Cloud")) {
+            return getCloudName(modifier);
+        }
         int flagint = 0;
         for (int i = 0; i < modifier.length(); i++) {
             if (Character.isAlphabetic(modifier.charAt(i))) {

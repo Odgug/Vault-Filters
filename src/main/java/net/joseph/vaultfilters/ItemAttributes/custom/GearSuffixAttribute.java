@@ -11,6 +11,9 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import static net.joseph.vaultfilters.ItemAttributes.custom.NumberSuffixAttribute.getName;
 
 public class GearSuffixAttribute implements ItemAttribute {
 
@@ -28,6 +31,11 @@ public class GearSuffixAttribute implements ItemAttribute {
         List<VaultGearModifier<?>> suffixes = data.getModifiers(VaultGearModifier.AffixType.SUFFIX);
 
         for (int i = 0; i < suffixes.size(); i++) {
+            if (suffixes.get(i).getAttribute().getReader().getModifierName().contains("Cloud")) {
+                if (getName(getSuffixDisplay(i, itemStack)).equals(this.suffixname)) {
+                    return true;
+                }
+            }
             if (suffixes.get(i).getAttribute().getReader().getModifierName().equals(this.suffixname)) {
                 return true;
             }
@@ -70,7 +78,11 @@ public class GearSuffixAttribute implements ItemAttribute {
            List<VaultGearModifier<?>> suffixes = data.getModifiers(VaultGearModifier.AffixType.SUFFIX);
 
            for (int i = 0; i < suffixes.size(); i++) {
-               atts.add(new GearSuffixAttribute(suffixes.get(i).getAttribute().getReader().getModifierName()));
+               if (!suffixes.get(i).getAttribute().getReader().getModifierName().contains("Cloud")) {
+                   atts.add(new GearSuffixAttribute(suffixes.get(i).getAttribute().getReader().getModifierName()));
+               } else {
+                   atts.add(new GearSuffixAttribute(getName(getSuffixDisplay(i,itemStack))));
+               }
            }
            if (hasEmptysuffix(itemStack)) {
                atts.add(new GearSuffixAttribute("Empty Slot"));
@@ -99,4 +111,25 @@ public class GearSuffixAttribute implements ItemAttribute {
         return new GearSuffixAttribute(nbt.getString("suffix"));
     }
 
+    public Optional<MutableComponent> getDisplay2(VaultGearModifier modifier, VaultGearData data, VaultGearModifier.AffixType type, ItemStack stack) {
+        return Optional.ofNullable(modifier.getAttribute().getReader().getDisplay(modifier, data, type, stack));
+    }
+    public Optional<MutableComponent> getDisplay(VaultGearModifier modifier, VaultGearData data, VaultGearModifier.AffixType type, ItemStack stack) {
+
+
+        return getDisplay2(modifier, data, type, stack).map(VaultGearModifier.AffixCategory.NONE.getModifierFormatter()).map((displayText) -> {
+            if (!modifier.hasGameTimeAdded()) {
+                return displayText;
+            } else {
+
+
+                return displayText;
+            }
+        });
+    }
+    public String getSuffixDisplay(int index, ItemStack itemStack) {
+        VaultGearData data = VaultGearData.read(itemStack);
+        VaultGearModifier modifier = data.getModifiers(VaultGearModifier.AffixType.SUFFIX).get(index);
+        return (getDisplay(modifier, data, VaultGearModifier.AffixType.SUFFIX, itemStack).get().getString());
+    }
 }

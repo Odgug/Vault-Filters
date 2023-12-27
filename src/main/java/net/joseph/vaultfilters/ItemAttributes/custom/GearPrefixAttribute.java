@@ -32,12 +32,15 @@ public class GearPrefixAttribute implements ItemAttribute {
         List<VaultGearModifier<?>> prefixes = data.getModifiers(VaultGearModifier.AffixType.PREFIX);
 
         for (int i = 0; i < prefixes.size(); i++) {
+            if (prefixes.get(i).getAttribute().getReader().getModifierName().equals("")) {
+                if (getName(getPrefixDisplay(i, itemStack)).equals(this.prefixname)) {
+                    return true;
+                }
+            }
             if (prefixes.get(i).getAttribute().getReader().getModifierName().equals(this.prefixname)) {
                 return true;
             }
-            if (getName(getPrefixDisplay(i,itemStack)).equals(this.prefixname)) {
-                return true;
-            }
+
 
         }
         if (this.prefixname.equals("Empty Slot")) {
