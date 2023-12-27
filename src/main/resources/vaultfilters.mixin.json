@@ -3,7 +3,9 @@
   "package": "net.joseph.vaultfilters.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "InscriptionDataAccessor"
+    "InscriptionDataAccessor",
+    "MixinBulkItemMatcher",
+    "MixinSimpleItemMatcher"
   ],
   "injectors": {
     "defaultRequire": 1
