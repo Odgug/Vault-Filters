@@ -25,8 +25,8 @@ public class ModItemAttributes {
         CharmGodAttribute.register();
         TrinketNameAttribute.register();
         TrinketColorAttribute.register();
-
+        NumberImplicitAttribute.register();
         NumberPrefixAttribute.register();
-
+        NumberSuffixAttribute.register();
     }
 }
