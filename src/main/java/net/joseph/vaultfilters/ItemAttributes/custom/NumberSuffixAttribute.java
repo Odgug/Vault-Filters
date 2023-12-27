@@ -79,7 +79,7 @@ public class NumberSuffixAttribute implements ItemAttribute {
                 i = 100000;
             }
         }
-        return Integer.parseInt(tempnum);
+        return Double.parseDouble(tempnum);
 
     }
 

@@ -80,7 +80,7 @@ public class NumberImplicitAttribute implements ItemAttribute {
                 i = 100000;
             }
         }
-        return Integer.parseInt(tempnum);
+        return Double.parseDouble(tempnum);
 
     }
 
