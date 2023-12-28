@@ -6,7 +6,7 @@
   "create.item_attributes.gear_transmog.inverted": "doesn't use model \"%1$s\"",
 
   "create.item_attributes.repair": "has >= \"%1$s\" unused repair slots",
-  "create.item_attributes.level.repair": "has < \"%1$s\" unused repair slots",
+  "create.item_attributes.repair.inverted": "has < \"%1$s\" unused repair slots",
 
   "create.item_attributes.level": "item level is >= \"%1$s\"",
   "create.item_attributes.level.inverted": "item level is < \"%1$s\"",
