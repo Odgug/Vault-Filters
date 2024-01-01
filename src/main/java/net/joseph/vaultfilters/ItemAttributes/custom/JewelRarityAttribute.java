@@ -23,16 +23,16 @@ public class JewelRarityAttribute implements ItemAttribute {
     }
     String rarity;
     public static String rarityToJewel(String rarity) {
-        if (rarity.equals("Common")) {
+        if (rarity.equals("COMMON")) {
             return "Chipped";
         }
-        if (rarity.equals("Rare")) {
+        if (rarity.equals("RARE")) {
             return "Flawed";
         }
-        if (rarity.equals("Epic")) {
+        if (rarity.equals("EPIC")) {
             return "Flawless";
         }
-        if (rarity.equals("Omega")) {
+        if (rarity.equals("OMEGA")) {
             return "Perfect";
         }
         return "NULL";
