@@ -89,6 +89,16 @@ public class GearRarityAttribute implements ItemAttribute {
 
     @Override
     public ItemAttribute readNBT(CompoundTag nbt) {
+        String datafixer = nbt.getString("rarity");
+        if (datafixer.equals("NOBLE") || datafixer.equals("REGAL") || datafixer.equals("DISTINGUISHED") || datafixer.equals("MAJESTIC")) {
+            return new CharmRarityAttribute(capFirst(datafixer));
+        }
+        if (datafixer.equals("CHIPPED") || datafixer.equals("FLAWED") || datafixer.equals("FLAWLESS") || datafixer.equals("PERFECT")) {
+            return new JewelRarityAttribute(capFirst(datafixer));
+        }
+        if (datafixer.equals("SCRAPPY") || datafixer.equals("COMMON") || datafixer.equals("RARE") || datafixer.equals("EPIC") || datafixer.equals("OMEGA")) {
+            return new GearRarityAttribute(capFirst(datafixer));
+        }
         return new GearRarityAttribute(nbt.getString("gearRarity"));
     }
 }
