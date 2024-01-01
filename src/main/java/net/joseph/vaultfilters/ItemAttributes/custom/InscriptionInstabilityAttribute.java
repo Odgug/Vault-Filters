@@ -19,7 +19,7 @@ public class InscriptionInstabilityAttribute implements ItemAttribute {
 
     public static double getInstability(ItemStack itemStack) {
         InscriptionData data = InscriptionData.from(itemStack);
-        return ((InscriptionDataAccessor) data).getInstability() * 100.0F;
+        return Math.round(((InscriptionDataAccessor) data).getInstability() * 1000.0F)/10;
     }
     public InscriptionInstabilityAttribute(String instab) {
         this.instab = instab;
