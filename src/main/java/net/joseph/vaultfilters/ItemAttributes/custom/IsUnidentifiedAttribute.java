@@ -24,8 +24,7 @@ public class IsUnidentifiedAttribute implements ItemAttribute {
     public IsUnidentifiedAttribute(String unidentified) { this.unidentified = unidentified;}
 
     public static boolean isUnidentified(ItemStack stack) {
-            AttributeGearData data = AttributeGearData.read(stack);
-            return !(data.getFirstValue(ModGearAttributes.STATE).orElse(VaultGearState.UNIDENTIFIED) == VaultGearState.IDENTIFIED);
+            return VaultGearData.read(stack).getState() == VaultGearState.UNIDENTIFIED;
     }
     @Override
     public boolean appliesTo(ItemStack itemStack) {

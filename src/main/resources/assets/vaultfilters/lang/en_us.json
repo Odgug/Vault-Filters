@@ -29,7 +29,7 @@
   "create.item_attributes.has_legendary.inverted": "doesn't have a legendary modifier",
 
   "create.item_attributes.is_unidentified": "is unidentified",
-  "create.item_attributes.is_unidentified": "is identified",
+  "create.item_attributes.is_unidentified.inverted": "is identified",
 
   "create.item_attributes.legendary_prefix": "has a legendary \"%1$s\" prefix",
   "create.item_attributes.legendary_prefix.inverted": "doesn't have a legendary \"%1$s\" prefix",

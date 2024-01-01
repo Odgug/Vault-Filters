@@ -2,9 +2,13 @@ package net.joseph.vaultfilters.ItemAttributes.custom;
 
 import com.simibubi.create.content.logistics.filter.ItemAttribute;
 import iskallia.vault.config.InscriptionConfig;
+import iskallia.vault.gear.VaultGearHelper;
 import iskallia.vault.gear.attribute.VaultGearModifier;
+import iskallia.vault.gear.data.AttributeGearData;
 import iskallia.vault.gear.data.VaultGearData;
 import iskallia.vault.gear.item.VaultGearItem;
+import iskallia.vault.init.ModConfigs;
+import iskallia.vault.init.ModGearAttributes;
 import iskallia.vault.init.ModItems;
 import iskallia.vault.item.InscriptionItem;
 import iskallia.vault.item.gear.CharmItem;
@@ -14,6 +18,8 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.joseph.vaultfilters.ItemAttributes.custom.IsUnidentifiedAttribute.isUnidentified;
 
 public class GearRarityAttribute implements ItemAttribute {
 
@@ -73,6 +79,9 @@ public class GearRarityAttribute implements ItemAttribute {
     public boolean appliesTo(ItemStack itemStack) {
 
         if (itemStack.getItem() instanceof VaultGearItem && !(itemStack.getItem() instanceof JewelItem)) {
+            if (isUnidentified(itemStack)) {
+                return AttributeGearData.read(itemStack).getFirstValue(ModGearAttributes.GEAR_ROLL_TYPE).get().equals(rarity);
+            }
             return (VaultGearData.read(itemStack).getRarity().toString().equals(rarity));
         }
 
@@ -90,7 +99,12 @@ public class GearRarityAttribute implements ItemAttribute {
 
         List<ItemAttribute> atts = new ArrayList<>();
        if (itemStack.getItem() instanceof VaultGearItem && !(itemStack.getItem() instanceof JewelItem)) {
-           atts.add(new GearRarityAttribute(VaultGearData.read(itemStack).getRarity().toString()));
+           if (!isUnidentified(itemStack)) {
+               atts.add(new GearRarityAttribute(VaultGearData.read(itemStack).getRarity().toString()));
+           }
+           else {
+               atts.add(new GearRarityAttribute(AttributeGearData.read(itemStack).getFirstValue(ModGearAttributes.GEAR_ROLL_TYPE).get()));
+           }
        }
 
        if (itemStack.getItem() instanceof JewelItem) {
