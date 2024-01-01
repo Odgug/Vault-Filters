@@ -30,7 +30,7 @@ public class IsUnidentifiedAttribute implements ItemAttribute {
     @Override
     public boolean appliesTo(ItemStack itemStack) {
 
-        if (itemStack.getItem() instanceof VaultGearItem) {
+        if (itemStack.getItem() instanceof VaultGearItem || itemStack.getItem() instanceof TrinketItem) {
             return isUnidentified(itemStack);
         }
 
@@ -41,7 +41,7 @@ public class IsUnidentifiedAttribute implements ItemAttribute {
     public List<ItemAttribute> listAttributesOf(ItemStack itemStack) {
 
         List<ItemAttribute> atts = new ArrayList<>();
-       if (itemStack.getItem() instanceof VaultGearItem) {
+       if (itemStack.getItem() instanceof VaultGearItem  || itemStack.getItem() instanceof TrinketItem) {
            if (isUnidentified(itemStack)) {
                atts.add(new IsUnidentifiedAttribute("unidentified"));
            }
