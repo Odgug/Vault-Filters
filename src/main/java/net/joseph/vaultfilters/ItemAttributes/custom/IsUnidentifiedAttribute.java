@@ -14,6 +14,8 @@ import net.minecraft.world.item.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
+import static iskallia.vault.item.gear.TrinketItem.isIdentified;
+
 public class IsUnidentifiedAttribute implements ItemAttribute {
 
     public static void register() {
@@ -24,7 +26,13 @@ public class IsUnidentifiedAttribute implements ItemAttribute {
     public IsUnidentifiedAttribute(String unidentified) { this.unidentified = unidentified;}
 
     public static boolean isUnidentified(ItemStack stack) {
+        if (stack.getItem() instanceof VaultGearItem) {
             return VaultGearData.read(stack).getState() == VaultGearState.UNIDENTIFIED;
+        }
+        if (stack.getItem() instanceof TrinketItem) {
+            return !isIdentified(stack);
+        }
+        return false;
     }
     @Override
     public boolean appliesTo(ItemStack itemStack) {
