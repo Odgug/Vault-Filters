@@ -82,11 +82,11 @@ public class GearRarityAttribute implements ItemAttribute {
 
     @Override
     public void writeNBT(CompoundTag nbt) {
-        nbt.putString("rarity", this.rarity);
+        nbt.putString("gearRarity", this.rarity);
     }
 
     @Override
     public ItemAttribute readNBT(CompoundTag nbt) {
-        return new GearRarityAttribute(nbt.getString("rarity"));
+        return new GearRarityAttribute(nbt.getString("gearRarity"));
     }
 }
