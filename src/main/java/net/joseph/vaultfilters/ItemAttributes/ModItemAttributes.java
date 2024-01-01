@@ -5,6 +5,7 @@ import net.joseph.vaultfilters.ItemAttributes.custom.*;
 public class ModItemAttributes {
     public static void register() {
         GearRarityAttribute.register();
+        InscriptionRoomTypeAttribute.register();
         InscriptionRoomAttribute.register();
         InscriptionTimeAttribute.register();
         InscriptionCompletionAttribute.register();

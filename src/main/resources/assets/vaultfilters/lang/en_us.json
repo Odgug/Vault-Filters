@@ -38,6 +38,9 @@
   "create.item_attributes.inscription_room": "contains room \"%1$s\"",
   "create.item_attributes.inscription_room.inverted": "doesn't contain room \"%1$s\"",
 
+  "create.item_attributes.inscription_type": "has a \"%1$s\" room",
+  "create.item_attributes.inscription_type.inverted": "doesn't have a \"%1$s\" room",
+
   "create.item_attributes.inscription_time": "adds >= \"%1$s\" time",
   "create.item_attributes.inscription_time.inverted": "adds < \"%1$s\" time",
 
