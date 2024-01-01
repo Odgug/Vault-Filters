@@ -1,91 +1,91 @@
 {
-  "create.item_attributes.gear_rarity": "is of rarity \"%1$s\"",
-  "create.item_attributes.gear_rarity.inverted": "is not of rarity \"%1$s\"",
+  "create.item_attributes.gear_rarity": "is a \"%1$s\" gear piece",
+  "create.item_attributes.gear_rarity.inverted": "is not a \"%1$s\" gear piece",
 
-  "create.item_attributes.charm_rarity": "is of rarity \"%1$s\"",
-  "create.item_attributes.charm_rarity.inverted": "is not of rarity \"%1$s\"",
+  "create.item_attributes.charm_rarity": "is a \"%1$s\" charm",
+  "create.item_attributes.charm_rarity.inverted": "is not a \"%1$s\" charm",
 
-  "create.item_attributes.jewel_rarity": "is of rarity \"%1$s\"",
-  "create.item_attributes.jewel_rarity.inverted": "is not of rarity \"%1$s\"",
+  "create.item_attributes.jewel_rarity": "is a \"%1$s\" jewel",
+  "create.item_attributes.jewel_rarity.inverted": "is not a \"%1$s\" jewel",
 
-  "create.item_attributes.gear_transmog": "uses model \"%1$s\"",
-  "create.item_attributes.gear_transmog.inverted": "doesn't use model \"%1$s\"",
+  "create.item_attributes.gear_transmog": "is a gear piece that uses \"%1$s\" model",
+  "create.item_attributes.gear_transmog.inverted": "is not a gear piece that uses \"%1$s\" model",
 
-  "create.item_attributes.repair": "has >= \"%1$s\" unused repair slots",
-  "create.item_attributes.repair.inverted": "has < \"%1$s\" unused repair slots",
+  "create.item_attributes.repair": "is a gear piece with at least \"%1$s\" unused repair slots",
+  "create.item_attributes.repair.inverted": "is not a gear piece with at least \"%1$s\" unused repair slots",
 
-  "create.item_attributes.level": "item level is >= \"%1$s\"",
-  "create.item_attributes.level.inverted": "item level is < \"%1$s\"",
+  "create.item_attributes.level": "is a gear item that's at least level \"%1$s\"",
+  "create.item_attributes.level.inverted": "is not a gear item that's at least level \"%1$s\"",
 
-  "create.item_attributes.size": "jewel size is <= \"%1$s\"",
-  "create.item_attributes.size.inverted": "jewel size is > \"%1$s\"",
-
-
-  "create.item_attributes.implicit": "has implicit \"%1$s\"",
-  "create.item_attributes.implicit.inverted": "doesn't have implicit \"%1$s\"",
+  "create.item_attributes.size": "is a jewel with up to \"%1$s\" size",
+  "create.item_attributes.size.inverted": "is not a jewel with up to \"%1$s\"",
 
 
-  "create.item_attributes.prefix": "has prefix \"%1$s\"",
-  "create.item_attributes.prefix.inverted": "doesn't have prefix \"%1$s\"",
-
-  "create.item_attributes.suffix": "has suffix \"%1$s\"",
-  "create.item_attributes.suffix.inverted": "doesn't have suffix \"%1$s\"",
-
-  "create.item_attributes.has_legendary": "has a legendary modifier",
-  "create.item_attributes.has_legendary.inverted": "doesn't have a legendary modifier",
-
-  "create.item_attributes.is_unidentified": "is unidentified",
-  "create.item_attributes.is_unidentified.inverted": "is identified",
-
-  "create.item_attributes.legendary_prefix": "has a legendary \"%1$s\" prefix",
-  "create.item_attributes.legendary_prefix.inverted": "doesn't have a legendary \"%1$s\" prefix",
-
-  "create.item_attributes.legendary_suffix": "has a legendary \"%1$s\" suffix",
-  "create.item_attributes.legendary_suffix.inverted": "doesn't have a legendary \"%1$s\" suffix",
+  "create.item_attributes.implicit": "is a gear item that has an implicit adding \"%1$s\"",
+  "create.item_attributes.implicit.inverted": "is not a gear item that has an implicit adding \"%1$s\"",
 
 
-  "create.item_attributes.inscription_room": "contains room \"%1$s\"",
-  "create.item_attributes.inscription_room.inverted": "doesn't contain room \"%1$s\"",
+  "create.item_attributes.prefix": "is a gear item that has a prefix that adds \"%1$s\"",
+  "create.item_attributes.prefix.inverted": "is not a gear item that has a prefix that adds \"%1$s\"",
 
-  "create.item_attributes.inscription_type": "has a \"%1$s\" room",
-  "create.item_attributes.inscription_type.inverted": "doesn't have a \"%1$s\" room",
+  "create.item_attributes.suffix": "is a gear item that has a suffix that adds \"%1$s\"",
+  "create.item_attributes.suffix.inverted": "is not a gear item that has a suffix that adds \"%1$s\"",
 
-  "create.item_attributes.inscription_time": "adds >= \"%1$s\" time",
-  "create.item_attributes.inscription_time.inverted": "adds < \"%1$s\" time",
+  "create.item_attributes.has_legendary": "is a gear item that has a legendary modifier",
+  "create.item_attributes.has_legendary.inverted": "is not a gear item that has a legendary modifier",
 
-  "create.item_attributes.inscription_completion": "adds >= \"%1$s\" completion",
-  "create.item_attributes.inscription_completion.inverted": "adds < \"%1$s\" completion",
+  "create.item_attributes.is_unidentified": "is an unidentified gear item",
+  "create.item_attributes.is_unidentified.inverted": "is not an unidentified gear item",
 
-  "create.item_attributes.inscription_instability": "adds <= \"%1$s\" instability",
-  "create.item_attributes.inscription_instability.inverted": "adds > \"%1$s\" instability",
+  "create.item_attributes.legendary_prefix": "is a gear item that has a legendary prefix that adds \"%1$s\"",
+  "create.item_attributes.legendary_prefix.inverted": "is not a gear item that has a legendary prefix that adds \"%1$s\"",
 
-  "create.item_attributes.cut_count": "has been free cut \"%1$s\" times",
-  "create.item_attributes.cut_count.inverted": "has not been free cut exactly \"%1$s\" times",
-
-  "create.item_attributes.charm_uses": "has >= \"%1$s\" altar uses left",
-  "create.item_attributes.charm_uses.inverted": "has < \"%1$s\" altar uses left",
-
-  "create.item_attributes.implicit_number": "has an implicit that adds at least \"%1$s\"",
-  "create.item_attributes.implicit_number.inverted": "doesn't have an implicit that adds at least \"%1$s\"",
-
-  "create.item_attributes.prefix_number": "has a prefix that adds at least \"%1$s\"",
-  "create.item_attributes.prefix_number.inverted": "doesn't have a prefix that adds at least \"%1$s\"",
-
-  "create.item_attributes.suffix_number": "has a suffix that adds at least \"%1$s\"",
-  "create.item_attributes.suffix_number.inverted": "doesn't have a suffix that adds at least \"%1$s\"",
+  "create.item_attributes.legendary_suffix": "is a gear item that has a legendary prefix that adds \"%1$s\"",
+  "create.item_attributes.legendary_suffix.inverted": "is not a gear item that has a legendary prefix that adds \"%1$s\"",
 
 
-  "create.item_attributes.charm_affinity": "adds >= \"%1$s\" affinity",
-  "create.item_attributes.charm_affinity.inverted": "adds < \"%1$s\" affinity",
+  "create.item_attributes.inscription_room": "is an inscription that adds a \"%1$s\" room",
+  "create.item_attributes.inscription_room.inverted": "is not an inscription that adds a \"%1$s\" room",
 
-  "create.item_attributes.trinket_uses": "has >= \"%1$s\" trinket uses left",
-  "create.item_attributes.trinket_uses.inverted": "has < \"%1$s\" trinket uses left",
+  "create.item_attributes.inscription_type": "is an inscription that adds a \"%1$s\" type of room",
+  "create.item_attributes.inscription_type.inverted": "is not an inscription that adds a \"%1$s\" type of room",
 
-  "create.item_attributes.trinket_color": "is a \"%1$s\" trinket",
-  "create.item_attributes.trinket_color.inverted": "is not a \"%1$s\" trinket",
+  "create.item_attributes.inscription_time": "is an inscription that adds at least \"%1$s\"",
+  "create.item_attributes.inscription_time.inverted": "is not an inscription that adds at least \"%1$s\"",
 
-  "create.item_attributes.charm_god": "adds affinity for \"%1$s\"",
-  "create.item_attributes.charm_god.inverted": "doesn't add affinity for \"%1$s\"",
+  "create.item_attributes.inscription_completion": "is an inscription that adds at least \"%1$s\" completion",
+  "create.item_attributes.inscription_completion.inverted": "is not an inscription that adds at least \"%1$s\" completion",
+
+  "create.item_attributes.inscription_instability": "is an inscription that adds up to \"%1$s\" instability",
+  "create.item_attributes.inscription_instability.inverted": "is not an inscription that adds up to \"%1$s\" instability",
+
+  "create.item_attributes.cut_count": "is a jewel that has been free cut \"%1$s\" times",
+  "create.item_attributes.cut_count.inverted": "is not a jewel that has been free cut \"%1$s\" times",
+
+  "create.item_attributes.charm_uses": "is a charm with at least \"%1$s\" uses left",
+  "create.item_attributes.charm_uses.inverted": "is not a charm with at least \"%1$s\" uses left",
+
+  "create.item_attributes.implicit_number": "is a gear item that has an implicit adding at least \"%1$s\"",
+  "create.item_attributes.implicit_number.inverted": "is not a gear item that has an implicit adding at least \"%1$s\"",
+
+  "create.item_attributes.prefix_number": "is a gear item that has a prefix adding at least \"%1$s\"",
+  "create.item_attributes.prefix_number.inverted": "is not a gear item that has a prefix adding at least \"%1$s\"",
+
+  "create.item_attributes.suffix_number": "is a gear item that has a suffix adding at least \"%1$s\"",
+  "create.item_attributes.suffix_number.inverted": "is not a gear item that has a suffix adding at least \"%1$s\"",
+
+
+  "create.item_attributes.charm_affinity": "is a charm that adds at least \"%1$s\" affinity",
+  "create.item_attributes.charm_affinity.inverted": "is not a charm that adds at least \"%1$s\" affinity",
+
+  "create.item_attributes.trinket_uses": "is a trinket with at least \"%1$s\" uses left",
+  "create.item_attributes.trinket_uses.inverted": "is not a trinket with at least \"%1$s\" uses left",
+
+  "create.item_attributes.trinket_color": "is a \"%1$s\" colored trinket",
+  "create.item_attributes.trinket_color.inverted": "is not a \"%1$s\" colored trinket",
+
+  "create.item_attributes.charm_god": "is a charm that adds affinity for \"%1$s\"",
+  "create.item_attributes.charm_god.inverted": "is not a charm that adds affinity for \"%1$s\"",
 
   "create.item_attributes.trinket_name": "is a \"%1$s\" trinket",
   "create.item_attributes.trinket_name.inverted": "is not a \"%1$s\" trinket"
