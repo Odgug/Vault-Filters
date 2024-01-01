@@ -49,9 +49,9 @@ public class GearRarityAttribute implements ItemAttribute {
         return capFirst(tempRarity);
     }
     public static String capFirst(String word) {
-        word.toLowerCase();
-        word.substring(0,1).toUpperCase();
-        return word;
+        String word2 = word.toLowerCase();
+        word2 = word2.substring(0,1).toUpperCase();
+        return word2;
     }
     @Override
     public boolean appliesTo(ItemStack itemStack) {
