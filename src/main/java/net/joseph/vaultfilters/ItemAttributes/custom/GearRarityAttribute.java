@@ -28,6 +28,7 @@ public class GearRarityAttribute implements ItemAttribute {
     }
     String rarity;
 
+
     public GearRarityAttribute(String rarity) {
         this.rarity = rarity;
     }
@@ -45,9 +46,12 @@ public class GearRarityAttribute implements ItemAttribute {
         }
         VaultGearData data = VaultGearData.read(itemStack);
         String tempRarity = data.getRarity().toString();
-        tempRarity.toLowerCase();
-        tempRarity.substring(0,1).toUpperCase();
-        return tempRarity;
+        return capFirst(tempRarity);
+    }
+    public static String capFirst(String word) {
+        word.toLowerCase();
+        word.substring(0,1).toUpperCase();
+        return word;
     }
     @Override
     public boolean appliesTo(ItemStack itemStack) {
@@ -87,6 +91,13 @@ public class GearRarityAttribute implements ItemAttribute {
 
     @Override
     public ItemAttribute readNBT(CompoundTag nbt) {
+        String datafixer = nbt.getString("rarity");
+        if (datafixer.equals("NOBLE") || datafixer.equals("REGAL") || datafixer.equals("DISTINGUISHED") || datafixer.equals("MAJESTIC")) {
+            return new CharmRarityAttribute(capFirst(datafixer));
+        }
+        if (datafixer.equals("CHIPPED") || datafixer.equals("FLAWED") || datafixer.equals("FLAWLESS") || datafixer.equals("PERFECT")) {
+            return new JewelRarityAttribute(capFirst(datafixer));
+        }
         return new GearRarityAttribute(nbt.getString("gearRarity"));
     }
 }
