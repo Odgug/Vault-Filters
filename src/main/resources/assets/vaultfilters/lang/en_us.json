@@ -8,8 +8,8 @@
   "create.item_attributes.jewel_rarity": "is a \"%1$s\" jewel",
   "create.item_attributes.jewel_rarity.inverted": "is not a \"%1$s\" jewel",
 
-  "create.item_attributes.gear_transmog": "is a gear piece that uses \"%1$s\" model",
-  "create.item_attributes.gear_transmog.inverted": "is not a gear piece that uses \"%1$s\" model",
+  "create.item_attributes.gear_transmog": "is a gear piece that uses the \"%1$s\" model",
+  "create.item_attributes.gear_transmog.inverted": "is not a gear piece that uses the \"%1$s\" model",
 
   "create.item_attributes.repair": "is a gear piece with at least \"%1$s\" unused repair slots",
   "create.item_attributes.repair.inverted": "is not a gear piece with at least \"%1$s\" unused repair slots",
