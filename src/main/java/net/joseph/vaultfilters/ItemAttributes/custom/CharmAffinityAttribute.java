@@ -8,8 +8,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-import static iskallia.vault.item.gear.CharmItem.getUsedVaults;
-import static iskallia.vault.item.gear.CharmItem.getValue;
+import static iskallia.vault.item.gear.CharmItem.*;
 
 public class CharmAffinityAttribute implements ItemAttribute {
 
@@ -28,7 +27,7 @@ public class CharmAffinityAttribute implements ItemAttribute {
     @Override
     public boolean appliesTo(ItemStack itemStack) {
 
-        if (itemStack.getItem() instanceof CharmItem) {
+        if (itemStack.getItem() instanceof CharmItem && isIdentified(itemStack)) {
             return (getCharmAffinity(itemStack) >= Integer.valueOf(this.affinity));
         }
 
@@ -39,7 +38,7 @@ public class CharmAffinityAttribute implements ItemAttribute {
     public List<ItemAttribute> listAttributesOf(ItemStack itemStack) {
 
         List<ItemAttribute> atts = new ArrayList<>();
-       if (itemStack.getItem() instanceof CharmItem) {
+       if (itemStack.getItem() instanceof CharmItem && isIdentified(itemStack)) {
            atts.add(new CharmAffinityAttribute(String.valueOf(getCharmAffinity(itemStack))));
        }
         return atts;

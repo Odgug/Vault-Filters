@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static iskallia.vault.item.gear.CharmItem.getCharm;
+import static iskallia.vault.item.gear.CharmItem.isIdentified;
 
 public class CharmGodAttribute implements ItemAttribute {
 
@@ -47,7 +48,7 @@ public class CharmGodAttribute implements ItemAttribute {
     public boolean appliesTo(ItemStack itemStack) {
 
 
-        if (itemStack.getItem() instanceof CharmItem) {
+        if (itemStack.getItem() instanceof CharmItem && isIdentified(itemStack)) {
             return (getCharmGod(itemStack).equals(god));
         }
         return false;
@@ -58,7 +59,7 @@ public class CharmGodAttribute implements ItemAttribute {
 
         List<ItemAttribute> atts = new ArrayList<>();
 
-       if (itemStack.getItem() instanceof CharmItem) {
+       if (itemStack.getItem() instanceof CharmItem && isIdentified(itemStack)) {
            atts.add(new CharmGodAttribute(getCharmGod(itemStack)));
        }
         return atts;

@@ -7,6 +7,7 @@ import iskallia.vault.gear.data.AttributeGearData;
 import iskallia.vault.gear.data.VaultGearData;
 import iskallia.vault.gear.item.VaultGearItem;
 import iskallia.vault.init.ModGearAttributes;
+import iskallia.vault.item.gear.CharmItem;
 import iskallia.vault.item.gear.TrinketItem;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
@@ -30,14 +31,17 @@ public class IsUnidentifiedAttribute implements ItemAttribute {
             return VaultGearData.read(stack).getState() == VaultGearState.UNIDENTIFIED;
         }
         if (stack.getItem() instanceof TrinketItem) {
-            return !isIdentified(stack);
+            return !TrinketItem.isIdentified(stack);
+        }
+        if (stack.getItem() instanceof CharmItem) {
+            return !CharmItem.isIdentified(stack);
         }
         return false;
     }
     @Override
     public boolean appliesTo(ItemStack itemStack) {
 
-        if (itemStack.getItem() instanceof VaultGearItem || itemStack.getItem() instanceof TrinketItem) {
+        if (itemStack.getItem() instanceof VaultGearItem || itemStack.getItem() instanceof TrinketItem || itemStack.getItem() instanceof CharmItem) {
             return isUnidentified(itemStack);
         }
 

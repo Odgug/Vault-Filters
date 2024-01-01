@@ -56,7 +56,9 @@ public class InscriptionRoomTypeAttribute implements ItemAttribute {
 
         List<ItemAttribute> atts = new ArrayList<>();
        if (itemStack.getItem() instanceof InscriptionItem) {
+           if (!getType(itemStack).equals("Empty")) {
                atts.add(new InscriptionRoomTypeAttribute(getType(itemStack)));
+           }
        }
         return atts;
     }

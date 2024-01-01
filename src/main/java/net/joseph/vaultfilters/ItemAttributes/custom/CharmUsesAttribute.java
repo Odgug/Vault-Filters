@@ -10,8 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-import static iskallia.vault.item.gear.CharmItem.getUsedVaults;
-import static iskallia.vault.item.gear.CharmItem.getUses;
+import static iskallia.vault.item.gear.CharmItem.*;
 
 public class CharmUsesAttribute implements ItemAttribute {
 
@@ -30,7 +29,7 @@ public class CharmUsesAttribute implements ItemAttribute {
     @Override
     public boolean appliesTo(ItemStack itemStack) {
 
-        if (itemStack.getItem() instanceof CharmItem) {
+        if (itemStack.getItem() instanceof CharmItem && isIdentified(itemStack)) {
             return (getCharmUses(itemStack) >= Integer.valueOf(uses));
         }
 
@@ -41,7 +40,7 @@ public class CharmUsesAttribute implements ItemAttribute {
     public List<ItemAttribute> listAttributesOf(ItemStack itemStack) {
 
         List<ItemAttribute> atts = new ArrayList<>();
-       if (itemStack.getItem() instanceof CharmItem) {
+       if (itemStack.getItem() instanceof CharmItem && isIdentified(itemStack)) {
            atts.add(new CharmUsesAttribute(String.valueOf(getCharmUses(itemStack))));
        }
         return atts;
