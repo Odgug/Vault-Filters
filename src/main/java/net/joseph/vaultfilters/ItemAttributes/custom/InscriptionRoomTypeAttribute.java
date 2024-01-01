@@ -23,17 +23,17 @@ public class InscriptionRoomTypeAttribute implements ItemAttribute {
             return "Empty";
         }
         ArchitectRoomEntry entry = data.getEntries().get(0).toRoomEntry();
-        Type room = (Type)entry.get(entry.TYPE);
-        if (room == Type.COMMON) {
-            return "COMMON";
+        String color = String.valueOf(entry.getName().getStyle().getColor().getValue());
+        if (color.equals("15769088")) {
+            return "Challenge";
         }
-        if (room == Type.CHALLENGE) {
-            return "CHALLENGE";
+        if (color.equals("16777215")) {
+            return "Common";
         }
-        if (room == Type.OMEGA) {
-            return "OMEGA";
+        if (color.equals("5635925")) {
+            return "Omega";
         }
-        return "Empty";
+        return color;
     }
 
     public InscriptionRoomTypeAttribute(String type) {
@@ -56,9 +56,10 @@ public class InscriptionRoomTypeAttribute implements ItemAttribute {
 
         List<ItemAttribute> atts = new ArrayList<>();
        if (itemStack.getItem() instanceof InscriptionItem) {
-           if (!getType(itemStack).equals("Empty")) {
-               atts.add(new InscriptionRoomTypeAttribute(getType(itemStack)));
+           if (getType(itemStack).equals("Empty")) {
+               return atts;
            }
+               atts.add(new InscriptionRoomTypeAttribute(getType(itemStack)));
        }
         return atts;
     }
