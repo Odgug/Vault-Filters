@@ -47,6 +47,7 @@ public class GearRarityAttribute implements ItemAttribute {
         String tempRarity = data.getRarity().toString();
         tempRarity.toLowerCase();
         tempRarity.substring(0,1).toUpperCase();
+        return tempRarity;
     }
     @Override
     public boolean appliesTo(ItemStack itemStack) {
