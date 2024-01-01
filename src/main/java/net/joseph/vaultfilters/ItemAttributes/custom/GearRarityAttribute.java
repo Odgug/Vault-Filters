@@ -80,7 +80,8 @@ public class GearRarityAttribute implements ItemAttribute {
 
         if (itemStack.getItem() instanceof VaultGearItem && !(itemStack.getItem() instanceof JewelItem)) {
             if (isUnidentified(itemStack)) {
-                return AttributeGearData.read(itemStack).getFirstValue(ModGearAttributes.GEAR_ROLL_TYPE).get().equals(rarity);
+                String rolltype = AttributeGearData.read(itemStack).getFirstValue(ModGearAttributes.GEAR_ROLL_TYPE).get();
+                return rolltype.substring(0, rolltype.length() - 1).equals(rarity);
             }
             return (VaultGearData.read(itemStack).getRarity().toString().equals(rarity));
         }
@@ -103,7 +104,8 @@ public class GearRarityAttribute implements ItemAttribute {
                atts.add(new GearRarityAttribute(VaultGearData.read(itemStack).getRarity().toString()));
            }
            else {
-               atts.add(new GearRarityAttribute(AttributeGearData.read(itemStack).getFirstValue(ModGearAttributes.GEAR_ROLL_TYPE).get()));
+               String rolltype = AttributeGearData.read(itemStack).getFirstValue(ModGearAttributes.GEAR_ROLL_TYPE).get();
+               atts.add(new GearRarityAttribute(rolltype.substring(0,rolltype.length()-1)));
            }
        }
 
