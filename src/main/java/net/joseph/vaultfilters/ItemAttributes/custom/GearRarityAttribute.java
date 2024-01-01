@@ -98,6 +98,9 @@ public class GearRarityAttribute implements ItemAttribute {
         if (datafixer.equals("CHIPPED") || datafixer.equals("FLAWED") || datafixer.equals("FLAWLESS") || datafixer.equals("PERFECT")) {
             return new JewelRarityAttribute(capFirst(datafixer));
         }
+        if (datafixer.equals("SCRAPPY") || datafixer.equals("COMMON") || datafixer.equals("RARE") || datafixer.equals("EPIC") || datafixer.equals("OMEGA")) {
+            return new GearRarityAttribute(capFirst(datafixer));
+        }
         return new GearRarityAttribute(nbt.getString("gearRarity"));
     }
 }
