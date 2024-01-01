@@ -27,70 +27,32 @@ public class GearRarityAttribute implements ItemAttribute {
         ItemAttribute.register(new GearRarityAttribute("dummy"));
     }
     String rarity;
-    public static String rarityToJewel(String rarity) {
-        if (rarity.equals("COMMON")) {
-            return "CHIPPED";
-        }
-        if (rarity.equals("RARE")) {
-            return "FLAWED";
-        }
-        if (rarity.equals("EPIC")) {
-            return "FLAWLESS";
-        }
-        if (rarity.equals("OMEGA")) {
-            return "PERFECT";
-        }
-        return "NULL";
-    }
 
-    public static String jewelToRarity(String jewel) {
-        if (jewel.equals("CHIPPED")) {
-            return "COMMON";
-        }
-        if (jewel.equals("FLAWED")) {
-            return "RARE";
-        }
-        if (jewel.equals("FLAWLESS")) {
-            return "EPIC";
-        }
-        if (jewel.equals("PERFECT")) {
-            return "OMEGA";
-        }
-        return "NULL";
-    }
-    public static String getCharmRarity(ItemStack itemStack) {
-        if (itemStack.getItem() == ModItems.SMALL_CHARM) {
-            return "NOBLE";
-        }
-        if (itemStack.getItem() == ModItems.LARGE_CHARM) {
-            return "DISTINGUISHED";
-        }
-        if (itemStack.getItem() == ModItems.GRAND_CHARM) {
-            return "REGAL";
-        }
-        return "MAJESTIC";
-    }
     public GearRarityAttribute(String rarity) {
         this.rarity = rarity;
     }
 
-
+    public static String getGearRarity(ItemStack itemStack) {
+        if (itemStack.getItem() instanceof JewelItem) {
+            return "NULL";
+        }
+        if (!(itemStack.getItem() instanceof VaultGearItem)) {
+            return "NULL";
+        }
+        if (isUnidentified(itemStack)) {
+            String rolltype = AttributeGearData.read(itemStack).getFirstValue(ModGearAttributes.GEAR_ROLL_TYPE).get();
+            return rolltype.substring(0, rolltype.length() - 1);
+        }
+        VaultGearData data = VaultGearData.read(itemStack);
+        String tempRarity = data.getRarity().toString();
+        tempRarity.toLowerCase();
+        tempRarity.substring(0,1).toUpperCase();
+    }
     @Override
     public boolean appliesTo(ItemStack itemStack) {
 
         if (itemStack.getItem() instanceof VaultGearItem && !(itemStack.getItem() instanceof JewelItem)) {
-            if (isUnidentified(itemStack)) {
-                String rolltype = AttributeGearData.read(itemStack).getFirstValue(ModGearAttributes.GEAR_ROLL_TYPE).get();
-                return rolltype.substring(0, rolltype.length() - 1).toUpperCase().equals(rarity);
-            }
-            return (VaultGearData.read(itemStack).getRarity().toString().equals(rarity));
-        }
-
-        if (itemStack.getItem() instanceof JewelItem) {
-            return (rarityToJewel(VaultGearData.read(itemStack).getRarity().toString()).equals(rarity));
-        }
-        if (itemStack.getItem() instanceof CharmItem) {
-            return (getCharmRarity(itemStack).equals(rarity));
+           return (getGearRarity(itemStack).equals(rarity));
         }
         return false;
     }
@@ -100,20 +62,9 @@ public class GearRarityAttribute implements ItemAttribute {
 
         List<ItemAttribute> atts = new ArrayList<>();
        if (itemStack.getItem() instanceof VaultGearItem && !(itemStack.getItem() instanceof JewelItem)) {
-           if (!isUnidentified(itemStack)) {
-               atts.add(new GearRarityAttribute(VaultGearData.read(itemStack).getRarity().toString()));
-           }
-           else {
-               String rolltype = AttributeGearData.read(itemStack).getFirstValue(ModGearAttributes.GEAR_ROLL_TYPE).get();
-               atts.add(new GearRarityAttribute(rolltype.substring(0,rolltype.length()-1).toUpperCase()));
-           }
-       }
 
-       if (itemStack.getItem() instanceof JewelItem) {
-           atts.add(new GearRarityAttribute(rarityToJewel(VaultGearData.read(itemStack).getRarity().toString())));
-       }
-       if (itemStack.getItem() instanceof CharmItem) {
-           atts.add(new GearRarityAttribute(getCharmRarity(itemStack)));
+               atts.add(new GearRarityAttribute(getGearRarity(itemStack)));
+
        }
         return atts;
     }

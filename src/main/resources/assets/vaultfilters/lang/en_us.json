@@ -2,6 +2,12 @@
   "create.item_attributes.gear_rarity": "is of rarity \"%1$s\"",
   "create.item_attributes.gear_rarity.inverted": "is not of rarity \"%1$s\"",
 
+  "create.item_attributes.charm_rarity": "is of rarity \"%1$s\"",
+  "create.item_attributes.charm_rarity.inverted": "is not of rarity \"%1$s\"",
+
+  "create.item_attributes.jewel_rarity": "is of rarity \"%1$s\"",
+  "create.item_attributes.jewel_rarity.inverted": "is not of rarity \"%1$s\"",
+
   "create.item_attributes.gear_transmog": "uses model \"%1$s\"",
   "create.item_attributes.gear_transmog.inverted": "doesn't use model \"%1$s\"",
 
