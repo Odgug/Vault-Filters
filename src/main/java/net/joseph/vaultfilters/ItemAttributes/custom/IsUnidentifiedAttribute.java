@@ -52,7 +52,7 @@ public class IsUnidentifiedAttribute implements ItemAttribute {
     public List<ItemAttribute> listAttributesOf(ItemStack itemStack) {
 
         List<ItemAttribute> atts = new ArrayList<>();
-       if (itemStack.getItem() instanceof VaultGearItem  || itemStack.getItem() instanceof TrinketItem) {
+       if (itemStack.getItem() instanceof VaultGearItem  || itemStack.getItem() instanceof TrinketItem || itemStack.getItem() instanceof CharmItem) {
            if (isUnidentified(itemStack)) {
                atts.add(new IsUnidentifiedAttribute("unidentified"));
            }
