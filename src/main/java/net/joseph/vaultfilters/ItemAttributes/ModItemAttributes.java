@@ -4,6 +4,7 @@ import net.joseph.vaultfilters.ItemAttributes.custom.*;
 
 public class ModItemAttributes {
     public static void register() {
+        ItemTypeAttribute.register();
         GearRarityAttribute.register();
         JewelRarityAttribute.register();
         CharmRarityAttribute.register();
