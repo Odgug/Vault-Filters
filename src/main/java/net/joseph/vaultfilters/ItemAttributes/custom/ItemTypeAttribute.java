@@ -36,7 +36,7 @@ public class ItemTypeAttribute implements ItemAttribute {
             return "Inscription";
         }
         if (itemStack.getItem() instanceof VaultGearItem) {
-            return "Gear piece";
+            return "Gear Piece";
         }
         return "Empty";
     }
