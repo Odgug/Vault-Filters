@@ -29,19 +29,20 @@ public class GearSuffixAttribute implements ItemAttribute {
     public boolean hasSuffix(ItemStack itemStack) {
         VaultGearData data = VaultGearData.read(itemStack);
         List<VaultGearModifier<?>> suffixes = data.getModifiers(VaultGearModifier.AffixType.SUFFIX);
-
+        String name;
         for (int i = 0; i < suffixes.size(); i++) {
-            if (suffixes.get(i).getAttribute().getReader().getModifierName().equals("")) {
+            name = suffixes.get(i).getAttribute().getReader().getModifierName();
+            if (name.equals("")) {
                 if (NumberPrefixAttribute.getName(getSuffixDisplay(i, itemStack)).equals(this.suffixname)) {
                     return true;
                 }
             }
-            if (suffixes.get(i).getAttribute().getReader().getModifierName().contains("Cloud")) {
+            if (name.contains("Cloud")) {
                 if (getName(getSuffixDisplay(i, itemStack)).equals(this.suffixname)) {
                     return true;
                 }
             }
-            if (suffixes.get(i).getAttribute().getReader().getModifierName().equals(this.suffixname)) {
+            if (name.equals(this.suffixname)) {
                 return true;
             }
 
