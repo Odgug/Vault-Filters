@@ -6,8 +6,7 @@
     "InscriptionDataAccessor",
     "MixinBulkItemMatcher",
     "MixinAttributeResearchBypass",
-    "MixinSimpleItemMatcher",
-    "MixinRSItemMatcher"
+    "MixinSimpleItemMatcher"
   ],
   "injectors": {
     "defaultRequire": 1
