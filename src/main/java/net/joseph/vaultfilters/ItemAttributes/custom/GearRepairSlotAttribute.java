@@ -26,7 +26,8 @@ public class GearRepairSlotAttribute implements ItemAttribute {
     public boolean appliesTo(ItemStack itemStack) {
 
         if (itemStack.getItem() instanceof VaultGearItem && !(itemStack.getItem() instanceof JewelItem)) {
-            return (VaultGearData.read(itemStack).getRepairSlots()-VaultGearData.read(itemStack).getUsedRepairSlots() >= Integer.valueOf(repair));
+            VaultGearData data = VaultGearData.read(itemStack);
+            return data.getRepairSlots()-data.getUsedRepairSlots() >= Integer.valueOf(repair);
         }
 
         return false;
