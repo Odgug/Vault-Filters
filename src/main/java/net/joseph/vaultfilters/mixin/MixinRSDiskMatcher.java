@@ -85,5 +85,3 @@ public abstract class MixinRSDiskMatcher {
         }
         }
     }
-
-}
