@@ -24,7 +24,7 @@ public class vaultfilters
     // Directly reference a slf4j logger
     public static final String MOD_ID = "vaultfilters";
     private static final Logger LOGGER = LogUtils.getLogger();
-
+    public static final int CHECK_FILTER_FLAG = 456;
     public vaultfilters()
     {
         // Register the setup method for modloading
