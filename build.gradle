@@ -175,6 +175,19 @@ dependencies {
     implementation fg.deobf("curse.maven:curios-309927:4418032")
     implementation fg.deobf("curse.maven:modular-routers-250294:3776175")
     implementation fg.deobf("curse.maven:refined-storage-243076:4217424")
+    implementation fg.deobf("curse.maven:quark-243121:3840125")
+    implementation fg.deobf("curse.maven:applied-energistics-2-223794:4548560")
+    implementation fg.deobf("curse.maven:simple-storage-network-268495:3868680")
+    implementation fg.deobf("curse.maven:architects-palette-433862:4498424")
+    implementation fg.deobf("curse.maven:autoreglib-250363:3642382")
+    implementation fg.deobf("curse.maven:sophisticated-backpacks-vault-hunters-edition-696425:4287544")
+    implementation fg.deobf("curse.maven:configured-457570:4462832")
+    implementation fg.deobf("curse.maven:geckolib-388172:4181370")
+    implementation fg.deobf("curse.maven:citadel-331936:3783096")
+    implementation fg.deobf("curse.maven:jei-238222:4593548")
+    implementation fg.deobf("curse.maven:sophisticated-core-618298:4665730")
+    implementation fg.deobf("curse.maven:sophisticated-backpacks-422301:4637292")
+    implementation fg.deobf("curse.maven:storage-drawers-223852:3807626")
     // Real mod deobf dependency examples - these get remapped to your current mappings
     // compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api") // Adds JEI API as a compile dependency
     // runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}") // Adds the full JEI mod as a runtime dependency
