@@ -4,6 +4,9 @@ import net.joseph.vaultfilters.ItemAttributes.custom.*;
 
 public class ModItemAttributes {
     public static void register() {
+        HasSoulValueAttribute.register();
+        ExactSoulAttribute.register();
+        AtleastSoulAttribute.register();
         ItemTypeAttribute.register();
         GearRarityAttribute.register();
         JewelRarityAttribute.register();

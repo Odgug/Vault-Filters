@@ -2,6 +2,15 @@
   "create.item_attributes.item_type": "is a \"%1$s\" item",
   "create.item_attributes.item_type.inverted": "is not a \"%1$s\" item",
 
+  "create.item_attributes.has_soul": "has soul value",
+  "create.item_attributes.has_soul.inverted": "doesn't have soul value",
+
+  "create.item_attributes.exact_soul": "has exactly \"%1$s\" soul value",
+  "create.item_attributes.exact_soul.inverted": "doesn't have exactly \"%1$s\" soul value",
+
+  "create.item_attributes.atleast_soul": "has at least \"%1$s\" soul value",
+  "create.item_attributes.atleast_soul.inverted": "doesn't have at least \"%1$s\" soul value",
+
   "create.item_attributes.gear_rarity": "is a \"%1$s\" gear piece",
   "create.item_attributes.gear_rarity.inverted": "is not a \"%1$s\" gear piece",
 
