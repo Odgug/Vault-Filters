@@ -8,7 +8,8 @@
     "MixinAttributeResearchBypass",
     "MixinSimpleItemMatcher",
     "MixinRSItemMatcher",
-    "MixinRSDiskMatcher"
+    "MixinRSDiskMatcher",
+    "ExporterNetworkNodeMixin"
   ],
   "injectors": {
     "defaultRequire": 1
