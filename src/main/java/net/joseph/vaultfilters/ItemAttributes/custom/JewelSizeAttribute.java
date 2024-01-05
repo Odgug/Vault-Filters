@@ -41,6 +41,9 @@ public class JewelSizeAttribute implements ItemAttribute {
         if (itemStack.getItem() instanceof JewelItem) {
             VaultGearData data = VaultGearData.read(itemStack);
             List<VaultGearModifier<?>> implicits = data.getModifiers(VaultGearModifier.AffixType.IMPLICIT);
+            if (implicits.size() == 0) {
+                return false;
+            }
             return (Integer.valueOf((int) getModifierValue(getDisplay(implicits.get(0),data,VaultGearModifier.AffixType.IMPLICIT,itemStack,true).toString())) <= Integer.valueOf(size));
         }
 
@@ -54,6 +57,9 @@ public class JewelSizeAttribute implements ItemAttribute {
        if (itemStack.getItem() instanceof JewelItem) {
            VaultGearData data = VaultGearData.read(itemStack);
            List<VaultGearModifier<?>> implicits = data.getModifiers(VaultGearModifier.AffixType.IMPLICIT);
+           if (implicits.size() == 0) {
+               return atts;
+           }
            atts.add(new JewelSizeAttribute(String.valueOf(Integer.valueOf((int) getModifierValue(getDisplay(implicits.get(0),data, VaultGearModifier.AffixType.IMPLICIT, itemStack,true).toString())))));
        }
         return atts;
