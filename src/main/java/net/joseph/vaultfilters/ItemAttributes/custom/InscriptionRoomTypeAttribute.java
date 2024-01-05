@@ -30,7 +30,7 @@ public class InscriptionRoomTypeAttribute implements ItemAttribute {
         if (color.equals("16777215")) {
             return "Common";
         }
-        if (color.equals("5635925")) {
+        if (color.equals("7012096")) {
             return "Omega";
         }
         return color;
@@ -81,6 +81,9 @@ public class InscriptionRoomTypeAttribute implements ItemAttribute {
 
     @Override
     public ItemAttribute readNBT(CompoundTag nbt) {
+        if (nbt.getString("RoomType").equals("7012096")) {
+            return new InscriptionRoomTypeAttribute("Omega");
+        }
         return new InscriptionRoomTypeAttribute(nbt.getString("roomType"));
     }
 }
