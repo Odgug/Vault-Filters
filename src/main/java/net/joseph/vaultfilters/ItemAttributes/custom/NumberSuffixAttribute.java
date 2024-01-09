@@ -50,10 +50,12 @@ public class NumberSuffixAttribute implements ItemAttribute {
         return VaultGearData.read(itemStack).getModifiers(VaultGearModifier.AffixType.SUFFIX).size();
     }
     public static boolean isNumber(String num) {
-        if (Character.isAlphabetic(num.charAt(0)) || num.equals("+") || num.equals("%") || num.equals("[") || num.equals("]")) {
-            return false;
+        char c = num.charAt(0);
+        int ascii = c;
+        if (ascii >= 48 && ascii <= 57) {
+            return true;
         }
-        return true;
+        return false;
     }
     public static double getModifierValue(String modifier) {
         boolean flag = false;
