@@ -103,8 +103,8 @@ public class JewelSizeAttribute implements ItemAttribute {
             }
         });
     }
-    public final double getModifierValue(String modifier) {
-        return Double.valueOf(modifier.substring(0,2));
+    public final int getModifierValue(String modifier) {
+        return Integer.valueOf(modifier.substring(0,2));
         }
     public static boolean isNumber(String num) {
         if (num == null) {
