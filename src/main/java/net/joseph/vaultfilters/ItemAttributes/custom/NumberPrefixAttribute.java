@@ -51,15 +51,10 @@ public class NumberPrefixAttribute implements ItemAttribute {
         return VaultGearData.read(itemStack).getModifiers(VaultGearModifier.AffixType.PREFIX).size();
     }
     public static boolean isNumber(String num) {
-        if (num == null) {
-            return false;
-        }
-        try {
-            double d = Double.parseDouble(num);
-        } catch (NumberFormatException nfe) {
-            return false;
-        }
-        return true;
+       if (Character.isAlphabetic(num.charAt(0)) || num.equals("+") || num.equals("%")) {
+           return false;
+       }
+       return true;
     }
     public static double getModifierValue(String modifier) {
         boolean flag = false;

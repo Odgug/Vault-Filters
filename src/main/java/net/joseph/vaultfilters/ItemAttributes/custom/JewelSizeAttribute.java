@@ -104,30 +104,8 @@ public class JewelSizeAttribute implements ItemAttribute {
         });
     }
     public final double getModifierValue(String modifier) {
-        boolean flag = false;
-        int flagint = 0;
-        for (int i = 0; i < modifier.length(); i++) {
-            if (isNumber(String.valueOf(modifier.charAt(i)))) {
-                flag = true;
-                flagint = i;
-                i = 100000;
-            }
+        return Double.valueOf(modifier.substring(0,2));
         }
-
-        if (!flag) {
-            return 1;
-        }
-        String tempnum = String.valueOf(modifier.charAt(flagint));
-        for (int i = flagint+1; i < modifier.length(); i++) {
-            if (isNumber(String.valueOf(modifier.charAt(i)))) {
-                tempnum = tempnum + (String.valueOf(modifier.charAt(i)));
-            } else {
-                i = 100000;
-            }
-        }
-        return Integer.parseInt(tempnum);
-
-    }
     public static boolean isNumber(String num) {
         if (num == null) {
             return false;
