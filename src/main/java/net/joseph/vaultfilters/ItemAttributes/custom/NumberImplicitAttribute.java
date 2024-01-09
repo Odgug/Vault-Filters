@@ -51,7 +51,7 @@ public class NumberImplicitAttribute implements ItemAttribute {
         return VaultGearData.read(itemStack).getModifiers(VaultGearModifier.AffixType.IMPLICIT).size();
     }
     public static boolean isNumber(String num) {
-        if (Character.isAlphabetic(num.charAt(0)) || num.equals("+") || num.equals("%")) {
+        if (Character.isAlphabetic(num.charAt(0)) || num.equals("+") || num.equals("%") || num.equals("[") || num.equals("]")) {
             return false;
         }
         return true;
