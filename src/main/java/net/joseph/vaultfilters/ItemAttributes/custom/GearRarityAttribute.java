@@ -18,6 +18,7 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static net.joseph.vaultfilters.ItemAttributes.custom.IsUnidentifiedAttribute.isUnidentified;
 
@@ -41,7 +42,11 @@ public class GearRarityAttribute implements ItemAttribute {
             return "NULL";
         }
         if (isUnidentified(itemStack)) {
-            String rolltype = AttributeGearData.read(itemStack).getFirstValue(ModGearAttributes.GEAR_ROLL_TYPE).get();
+            Optional<String> optRoll = AttributeGearData.read(itemStack).getFirstValue(ModGearAttributes.GEAR_ROLL_TYPE);
+            if (optRoll.isEmpty()) {
+                return "NULL";
+            }
+            String rolltype = optRoll.get();
             return rolltype.substring(0, rolltype.length() - 1);
         }
         VaultGearData data = VaultGearData.read(itemStack);
@@ -65,8 +70,11 @@ public class GearRarityAttribute implements ItemAttribute {
 
         List<ItemAttribute> atts = new ArrayList<>();
        if (itemStack.getItem() instanceof VaultGearItem && !(itemStack.getItem() instanceof JewelItem)) {
-
-               atts.add(new GearRarityAttribute(getGearRarity(itemStack)));
+                String rarity = getGearRarity(itemStack);
+                if (rarity.equals("NULL")) {
+                    return atts;
+                }
+               atts.add(new GearRarityAttribute(rarity));
 
        }
         return atts;
