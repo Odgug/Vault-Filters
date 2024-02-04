@@ -10,7 +10,8 @@
     "MixinRSItemMatcher",
     "MixinRSDiskMatcher",
     "ExporterNetworkNodeMixin",
-    "MixinSophItemMatcher"
+    "MixinSophItemMatcher",
+    "MixinFilterGridFilter"
   ],
   "injectors": {
     "defaultRequire": 1
