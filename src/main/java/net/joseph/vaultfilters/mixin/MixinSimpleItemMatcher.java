@@ -22,7 +22,7 @@ public class MixinSimpleItemMatcher {
     @Inject(method = "matchItem", at = @At("HEAD"), cancellable = true)
     public void createFilterMatcher(ItemStack stack, Filter.Flags flags, CallbackInfoReturnable<Boolean> cir) {
         if (filterStack.getItem() instanceof FilterItem) {
-            cir.setReturnValue(FilterItem.test(null, stack, this.filterStack, !flags.isIgnoreNBT()));
+            cir.setReturnValue(FilterItem.testDirect(this.filterStack, stack, !flags.isIgnoreNBT()));
         }
     }
 }

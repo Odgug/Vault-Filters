@@ -14,7 +14,7 @@ public class MixinRSItemMatcher {
     @Inject(method = "isEqual(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;I)Z", at = @At("HEAD"), cancellable = true)
     public void checkFilter(ItemStack left, ItemStack right, int flags, CallbackInfoReturnable<Boolean> cir) {
         if (flags == vaultfilters.CHECK_FILTER_FLAG && right.getItem() instanceof FilterItem) {
-            cir.setReturnValue(FilterItem.test(null, left, right));
+            cir.setReturnValue(FilterItem.testDirect(right, left, false));
         }
     }
 

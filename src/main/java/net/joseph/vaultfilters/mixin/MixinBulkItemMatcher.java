@@ -23,7 +23,7 @@ public class MixinBulkItemMatcher {
     public void createItemMatcher(ItemStack stack, Filter.Flags flags, CallbackInfoReturnable<Boolean> cir){
         for (var filter : this.stacks) {
             if (filter.getItem() instanceof FilterItem) {
-                if (FilterItem.test(null, stack, filter, !flags.isIgnoreNBT())) {
+                if (FilterItem.testDirect(filter, stack,  !flags.isIgnoreNBT())) {
                     cir.setReturnValue(true);
                 }
             }
