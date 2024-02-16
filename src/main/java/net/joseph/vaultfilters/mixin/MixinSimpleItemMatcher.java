@@ -1,6 +1,7 @@
 package net.joseph.vaultfilters.mixin;
 
 import com.simibubi.create.content.logistics.filter.FilterItem;
+import com.simibubi.create.content.logistics.filter.FilterItemStack;
 import me.desht.modularrouters.logic.filter.Filter;
 import me.desht.modularrouters.logic.filter.matchers.SimpleItemMatcher;
 import net.minecraft.world.item.ItemStack;
@@ -22,7 +23,7 @@ public class MixinSimpleItemMatcher {
     @Inject(method = "matchItem", at = @At("HEAD"), cancellable = true)
     public void createFilterMatcher(ItemStack stack, Filter.Flags flags, CallbackInfoReturnable<Boolean> cir) {
         if (filterStack.getItem() instanceof FilterItem) {
-            cir.setReturnValue(FilterItem.testDirect(this.filterStack, stack, !flags.isIgnoreNBT()));
+            cir.setReturnValue(FilterItemStack.of(filterStack).test(null, stack));
         }
     }
 }
