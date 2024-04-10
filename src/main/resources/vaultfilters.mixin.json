@@ -4,6 +4,9 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "InscriptionDataAccessor",
+    "EffectCloudAttributeAccessor",
+    "EffectCloudAttributeReaderAccessor",
+    "EffectCloudAccessor",
     "MixinBulkItemMatcher",
     "MixinAttributeResearchBypass",
     "MixinSimpleItemMatcher",

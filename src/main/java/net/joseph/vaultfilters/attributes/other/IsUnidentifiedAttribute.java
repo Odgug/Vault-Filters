@@ -1,0 +1,42 @@
+package net.joseph.vaultfilters.attributes.other;
+
+import iskallia.vault.gear.VaultGearState;
+import iskallia.vault.gear.data.VaultGearData;
+import iskallia.vault.gear.item.VaultGearItem;
+import iskallia.vault.item.gear.CharmItem;
+import iskallia.vault.item.gear.TrinketItem;
+import net.joseph.vaultfilters.attributes.abstracts.BooleanAttribute;
+import net.minecraft.world.item.ItemStack;
+
+public class IsUnidentifiedAttribute extends BooleanAttribute {
+    public IsUnidentifiedAttribute(Boolean value) {
+        super(true);
+    }
+
+    @Override
+    public Boolean getValue(ItemStack stack) {
+        return isUnidentified(stack);
+    }
+
+    public static Boolean isUnidentified(ItemStack stack) {
+        boolean unidentified = true;
+        if (stack.getItem() instanceof VaultGearItem) {
+            unidentified = VaultGearData.read(stack).getState() == VaultGearState.UNIDENTIFIED;
+        } else if (stack.getItem() instanceof TrinketItem) {
+            unidentified = !TrinketItem.isIdentified(stack);
+        } else if (stack.getItem() instanceof CharmItem) {
+            unidentified = !CharmItem.isIdentified(stack);
+        }
+        return unidentified ? true : null;
+    }
+
+    @Override
+    public String getTranslationKey() {
+        return "is_unidentified";
+    }
+
+    @Override
+    public String getSubNBTKey() {
+        return "unidentified";
+    }
+}
