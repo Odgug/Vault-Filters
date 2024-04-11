@@ -21,6 +21,6 @@ public class SuffixAttribute extends AffixAttribute {
 
     @Override
     public String getTranslationKey() {
-        return "prefix";
+        return "suffix";
     }
 }

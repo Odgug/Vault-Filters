@@ -3,6 +3,7 @@ package net.joseph.vaultfilters.attributes.abstracts;
 import com.simibubi.create.content.logistics.filter.ItemAttribute;
 import iskallia.vault.gear.attribute.VaultGearModifier;
 import iskallia.vault.gear.attribute.ability.AbilityLevelAttribute;
+import iskallia.vault.gear.attribute.custom.EffectAvoidanceGearAttribute;
 import iskallia.vault.gear.attribute.custom.EffectCloudAttribute;
 import iskallia.vault.gear.data.VaultGearData;
 import iskallia.vault.gear.item.VaultGearItem;
@@ -15,10 +16,12 @@ import net.joseph.vaultfilters.mixin.EffectCloudAttributeAccessor;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AffixAttribute extends StringAttribute {
+    private static final DecimalFormat FORMAT = new DecimalFormat("0.##");
     protected final Float level;
     protected final String basicName;
 
@@ -54,10 +57,10 @@ public abstract class AffixAttribute extends StringAttribute {
             EffectCloudAttribute.EffectCloud cloud = ((EffectCloudAttributeAccessor) cloudAttribute).getEffectCloud();
             boolean whenHit = modifier.getAttribute().getReader().getModifierName().contains("Hit");
             String tooltip = ((EffectCloudAccessor) cloud).getTooltip();
-            String cloudType = tooltip.substring(0, tooltip.lastIndexOf(' '));
+            String cloudType = tooltip.substring(0, tooltip.lastIndexOf(' ')) + " Cloud";
             String level = tooltip.substring(tooltip.lastIndexOf(' ') + 1);
             level = level.isBlank() ? "I" : level;
-            return cloudType + (includeLevel ? level : "") + (whenHit ? " when Hit" : "");
+            return cloudType + (includeLevel ? "+" + level : "") + (whenHit ? " when Hit" : "");
         }
 
         if (modifier.getValue() instanceof AbilityLevelAttribute levelAttribute) {
@@ -66,6 +69,11 @@ public abstract class AffixAttribute extends StringAttribute {
                     : ModConfigs.ABILITIES.getAbilityById(levelAttribute.getAbility()).map(Skill::getName).orElse("");
             int levelChange = levelAttribute.getLevelChange();
             return (includeLevel ? "+" + levelChange : "Adds") + " to level of " + ability;
+        }
+
+        if (modifier.getValue() instanceof EffectAvoidanceGearAttribute avoidanceAttribute) {
+            String avoidanceType = avoidanceAttribute.getEffect().getDisplayName().getString() + " Avoidance";
+            return (includeLevel ? "+" + FORMAT.format(avoidanceAttribute.getChance() * 100) : "") + avoidanceType;
         }
 
         VaultGearModifierReader<T> reader = modifier.getAttribute().getReader();
@@ -85,7 +93,7 @@ public abstract class AffixAttribute extends StringAttribute {
                 if (startIndex == -1) {
                     startIndex = i;
                 }
-                endIndex = i;
+                endIndex = i + 1;
             } else if (character == ' ') {
                 break;
             }
