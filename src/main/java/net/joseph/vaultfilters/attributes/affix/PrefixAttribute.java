@@ -1,22 +1,22 @@
-package net.joseph.vaultfilters.attributes.other;
+package net.joseph.vaultfilters.attributes.affix;
 
 import iskallia.vault.gear.attribute.VaultGearModifier;
-import net.joseph.vaultfilters.attributes.abstracts.GearAttribute;
+import net.joseph.vaultfilters.attributes.abstracts.AffixAttribute;
 import net.minecraft.world.item.ItemStack;
 
-public class GearSuffixAttribute extends GearAttribute {
-    public GearSuffixAttribute(String value) {
+public class PrefixAttribute extends AffixAttribute {
+    public PrefixAttribute(String value) {
         super(value);
     }
 
     @Override
     public boolean shouldList(VaultGearModifier.AffixType type, VaultGearModifier<?> modifier, boolean includeLevel) {
-        return !includeLevel && type == VaultGearModifier.AffixType.SUFFIX;
+        return !includeLevel && type == VaultGearModifier.AffixType.PREFIX;
     }
 
     @Override
     public boolean appliesTo(ItemStack stack) {
-        return appliesTo(stack, VaultGearModifier.AffixType.SUFFIX, false);
+        return appliesTo(stack, VaultGearModifier.AffixType.PREFIX, false);
     }
 
     @Override

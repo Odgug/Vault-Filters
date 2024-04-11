@@ -18,11 +18,11 @@ import net.minecraft.world.item.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class GearAttribute extends StringAttribute {
+public abstract class AffixAttribute extends StringAttribute {
     protected final Float level;
     protected final String basicName;
 
-    protected GearAttribute(String value) {
+    protected AffixAttribute(String value) {
         super(value);
 
         Pair<String, Float> pieces = separateName(value);

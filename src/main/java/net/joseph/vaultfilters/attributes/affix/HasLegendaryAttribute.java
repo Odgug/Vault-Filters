@@ -1,4 +1,4 @@
-package net.joseph.vaultfilters.attributes.other;
+package net.joseph.vaultfilters.attributes.affix;
 
 import iskallia.vault.gear.attribute.VaultGearModifier;
 import iskallia.vault.gear.data.VaultGearData;

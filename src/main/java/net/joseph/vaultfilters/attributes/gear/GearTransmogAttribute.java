@@ -1,4 +1,4 @@
-package net.joseph.vaultfilters.attributes.other;
+package net.joseph.vaultfilters.attributes.gear;
 
 import iskallia.vault.dynamodel.DynamicModel;
 import iskallia.vault.dynamodel.model.armor.ArmorPieceModel;

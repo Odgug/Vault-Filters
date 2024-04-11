@@ -1,10 +1,10 @@
-package net.joseph.vaultfilters.attributes.other;
+package net.joseph.vaultfilters.attributes.affix;
 
 import iskallia.vault.gear.attribute.VaultGearModifier;
-import net.joseph.vaultfilters.attributes.abstracts.GearAttribute;
+import net.joseph.vaultfilters.attributes.abstracts.AffixAttribute;
 import net.minecraft.world.item.ItemStack;
 
-public class NumberSuffixAttribute extends GearAttribute {
+public class NumberSuffixAttribute extends AffixAttribute {
     public NumberSuffixAttribute(String value) {
         super(value);
     }

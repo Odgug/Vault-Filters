@@ -1,9 +1,9 @@
-package net.joseph.vaultfilters.attributes.other;
+package net.joseph.vaultfilters.attributes.affix;
 
 import iskallia.vault.gear.attribute.VaultGearModifier;
-import net.joseph.vaultfilters.attributes.abstracts.GearAttribute;
+import net.joseph.vaultfilters.attributes.abstracts.AffixAttribute;
 
-public class LegendaryPrefixAttribute extends GearAttribute {
+public class LegendaryPrefixAttribute extends AffixAttribute {
     public LegendaryPrefixAttribute(String value) {
         super(value);
     }

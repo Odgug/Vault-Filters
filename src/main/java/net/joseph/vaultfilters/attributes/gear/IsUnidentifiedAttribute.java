@@ -1,4 +1,4 @@
-package net.joseph.vaultfilters.attributes.other;
+package net.joseph.vaultfilters.attributes.gear;
 
 import iskallia.vault.gear.VaultGearState;
 import iskallia.vault.gear.data.VaultGearData;
