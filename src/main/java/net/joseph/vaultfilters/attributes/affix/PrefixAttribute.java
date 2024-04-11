@@ -10,13 +10,13 @@ public class PrefixAttribute extends AffixAttribute {
     }
 
     @Override
-    public boolean shouldList(VaultGearModifier.AffixType type, VaultGearModifier<?> modifier, boolean includeLevel) {
-        return !includeLevel && type == VaultGearModifier.AffixType.PREFIX;
+    public boolean shouldList(VaultGearModifier.AffixType type, VaultGearModifier<?> modifier) {
+        return type == VaultGearModifier.AffixType.PREFIX;
     }
 
     @Override
     public boolean appliesTo(ItemStack stack) {
-        return appliesTo(stack, VaultGearModifier.AffixType.PREFIX, false);
+        return appliesTo(VaultGearModifier.AffixType.PREFIX, stack);
     }
 
     @Override

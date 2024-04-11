@@ -1,22 +1,22 @@
 package net.joseph.vaultfilters.attributes.affix;
 
 import iskallia.vault.gear.attribute.VaultGearModifier;
-import net.joseph.vaultfilters.attributes.abstracts.AffixAttribute;
+import net.joseph.vaultfilters.attributes.abstracts.NumberAffixAttribute;
 import net.minecraft.world.item.ItemStack;
 
-public class NumberPrefixAttribute extends AffixAttribute {
-    public NumberPrefixAttribute(String value) {
-        super(value);
+public class NumberPrefixAttribute extends NumberAffixAttribute {
+    public NumberPrefixAttribute(String value, Number level) {
+        super(value, level);
     }
 
     @Override
-    public boolean shouldList(VaultGearModifier.AffixType type, VaultGearModifier<?> modifier, boolean includeLevel) {
-        return includeLevel && type == VaultGearModifier.AffixType.PREFIX;
+    public boolean shouldList(VaultGearModifier.AffixType type, VaultGearModifier<?> modifier) {
+        return type == VaultGearModifier.AffixType.PREFIX;
     }
 
     @Override
     public boolean appliesTo(ItemStack stack) {
-        return appliesTo(stack, VaultGearModifier.AffixType.PREFIX, true);
+        return appliesTo(VaultGearModifier.AffixType.PREFIX, stack);
     }
 
     @Override

@@ -10,13 +10,13 @@ public class SuffixAttribute extends AffixAttribute {
     }
 
     @Override
-    public boolean shouldList(VaultGearModifier.AffixType type, VaultGearModifier<?> modifier, boolean includeLevel) {
-        return !includeLevel && type == VaultGearModifier.AffixType.SUFFIX;
+    public boolean shouldList(VaultGearModifier.AffixType type, VaultGearModifier<?> modifier) {
+        return type == VaultGearModifier.AffixType.SUFFIX;
     }
 
     @Override
     public boolean appliesTo(ItemStack stack) {
-        return appliesTo(stack, VaultGearModifier.AffixType.SUFFIX, false);
+        return appliesTo(VaultGearModifier.AffixType.SUFFIX, stack);
     }
 
     @Override

@@ -10,13 +10,13 @@ public class ImplicitAttribute extends AffixAttribute {
     }
 
     @Override
-    public boolean shouldList(VaultGearModifier.AffixType type, VaultGearModifier<?> modifier, boolean includeLevel) {
-        return !includeLevel && type == VaultGearModifier.AffixType.IMPLICIT;
+    public boolean shouldList(VaultGearModifier.AffixType type, VaultGearModifier<?> modifier) {
+        return type == VaultGearModifier.AffixType.IMPLICIT;
     }
 
     @Override
     public boolean appliesTo(ItemStack stack) {
-        return appliesTo(stack, VaultGearModifier.AffixType.IMPLICIT, false);
+        return appliesTo(VaultGearModifier.AffixType.IMPLICIT, stack);
     }
 
     @Override

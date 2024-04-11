@@ -10,7 +10,6 @@ import iskallia.vault.gear.item.VaultGearItem;
 import iskallia.vault.gear.reader.VaultGearModifierReader;
 import iskallia.vault.init.ModConfigs;
 import iskallia.vault.skill.base.Skill;
-import it.unimi.dsi.fastutil.Pair;
 import net.joseph.vaultfilters.mixin.EffectCloudAccessor;
 import net.joseph.vaultfilters.mixin.EffectCloudAttributeAccessor;
 import net.minecraft.network.chat.MutableComponent;
@@ -22,31 +21,22 @@ import java.util.List;
 
 public abstract class AffixAttribute extends StringAttribute {
     private static final DecimalFormat FORMAT = new DecimalFormat("0.##");
-    protected final Float level;
-    protected final String basicName;
 
     protected AffixAttribute(String value) {
         super(value);
-
-        Pair<String, Float> pieces = separateName(value);
-        this.basicName = pieces.left();
-        this.level = pieces.right();
     }
 
-    public abstract boolean shouldList(VaultGearModifier.AffixType type, VaultGearModifier<?> modifier, boolean includeLevel);
+    public abstract boolean shouldList(VaultGearModifier.AffixType type, VaultGearModifier<?> modifier);
 
-    public boolean appliesTo(ItemStack itemStack, VaultGearModifier.AffixType type, boolean includeLevel) {
-        return hasModifier(itemStack, type, includeLevel);
+    public boolean appliesTo(VaultGearModifier.AffixType type, ItemStack itemStack) {
+        return hasModifier(type, itemStack);
     }
 
-    public boolean hasModifier(ItemStack itemStack, VaultGearModifier.AffixType type, boolean includeLevel) {
+    public boolean hasModifier(VaultGearModifier.AffixType type, ItemStack itemStack) {
         if (itemStack.getItem() instanceof VaultGearItem) {
             for (VaultGearModifier<?> modifier : VaultGearData.read(itemStack).getModifiers(type)) {
-                String name = getName(type, modifier, includeLevel);
-                Pair<String, Float> pieces = separateName(name);
-                return includeLevel
-                    ? this.basicName.equals(pieces.left()) && this.level <= pieces.right()
-                    : this.value.equals(name);
+                String name = getName(type, modifier, false);
+                return this.value.equals(name);
             }
         }
         return false;
@@ -83,32 +73,6 @@ public abstract class AffixAttribute extends StringAttribute {
                 : reader.getModifierName();
     }
 
-    public static Pair<String, Float> separateName(String name) {
-        int startIndex = -1;
-        int endIndex = 0;
-
-        int i = 0;
-        for (char character : name.toCharArray()) {
-            if (Character.isDigit(character)) {
-                if (startIndex == -1) {
-                    startIndex = i;
-                }
-                endIndex = i + 1;
-            } else if (character == ' ') {
-                break;
-            }
-            i++;
-        }
-
-        if (startIndex == -1) {
-            return Pair.of(name, 0F);
-        }
-
-        String basicName = name.substring(0, startIndex) + name.substring(endIndex + 1);
-        float level = Float.parseFloat(name.substring(startIndex, endIndex));
-        return Pair.of(basicName, level);
-    }
-
     public List<VaultGearModifier<?>> getModifiers(ItemStack itemStack, VaultGearModifier.AffixType type) {
         if (itemStack.getItem() instanceof VaultGearItem) {
             return new ArrayList<>(VaultGearData.read(itemStack).getModifiers(type));
@@ -126,11 +90,7 @@ public abstract class AffixAttribute extends StringAttribute {
         List<ItemAttribute> attributes = new ArrayList<>();
         for (VaultGearModifier.AffixType type : VaultGearModifier.AffixType.values()) {
             for (VaultGearModifier<?> modifier : getModifiers(itemStack, type)) {
-                if (shouldList(type, modifier, true)) {
-                    attributes.add(withValue(getName(type, modifier, true)));
-                }
-
-                if (shouldList(type, modifier, false)) {
+                if (shouldList(type, modifier)) {
                     attributes.add(withValue(getName(type, modifier, false)));
                 }
             }
