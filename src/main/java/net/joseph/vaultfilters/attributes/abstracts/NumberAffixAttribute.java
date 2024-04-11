@@ -58,7 +58,7 @@ public abstract class NumberAffixAttribute extends AffixAttribute {
         } else if (value instanceof AbilityLevelAttribute levelAttribute) {
             return levelAttribute.getLevelChange();
         } else if (value instanceof EffectAvoidanceGearAttribute avoidanceAttribute) {
-            return avoidanceAttribute.getChance() * 100;
+            return avoidanceAttribute.getChance();
         } else if (value instanceof Number number) {
             return number;
         }
