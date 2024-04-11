@@ -57,39 +57,43 @@ public class VaultFilters {
         new ExactSoulAttribute(0).register(ExactSoulAttribute::new);
         new AtleastSoulAttribute(0).register(AtleastSoulAttribute::new);
         // Common
-        new ItemTypeAttribute("").register(ItemTypeAttribute::new);
+        new ItemTypeAttribute("Jewel").register(ItemTypeAttribute::new);
         new IsUnidentifiedAttribute(true).register(IsUnidentifiedAttribute::new);
         // Rarities
-        new GearRarityAttribute("").register(GearRarityAttribute::new);
-        new JewelRarityAttribute("").register(JewelRarityAttribute::new);
-        new CharmRarityAttribute("").register(CharmRarityAttribute::new);
+        new GearRarityAttribute("Omega").register(GearRarityAttribute::new);
+        new JewelRarityAttribute("Chipped").register(JewelRarityAttribute::new);
+        new CharmRarityAttribute("Regal").register(CharmRarityAttribute::new);
         // Inscription Attributes
-        new InscriptionRoomTypeAttribute("").register(InscriptionRoomTypeAttribute::new);
-        new InscriptionRoomAttribute("").register(InscriptionRoomAttribute::new);
+        new InscriptionRoomTypeAttribute("Challenge").register(InscriptionRoomTypeAttribute::new);
+        new InscriptionRoomAttribute("Wild West").register(InscriptionRoomAttribute::new);
         new InscriptionTimeAttribute(0).register(InscriptionTimeAttribute::new);
         new InscriptionCompletionAttribute(0).register(InscriptionCompletionAttribute::new);
         new InscriptionInstabilityAttribute(0D).register(InscriptionInstabilityAttribute::new);
-        // More Common
+        // Gear
         new GearLevelAttribute(0).register(GearLevelAttribute::new);
-        new GearTransmogAttribute("").register(GearTransmogAttribute::new);
-        // Affixes (Legendary, Jewel Specific, All Gear)
-        new HasLegendaryAttribute(true).register(HasLegendaryAttribute::new);
-        new LegendaryPrefixAttribute("").register(LegendaryPrefixAttribute::new);
-        new LegendarySuffixAttribute("").register(LegendarySuffixAttribute::new);
+        new GearTransmogAttribute("Sword_4").register(GearTransmogAttribute::new);
+        new GearRepairSlotAttribute(0).register(GearRepairSlotAttribute::new);
+        // Jewels
         new JewelSizeAttribute(0).register(JewelSizeAttribute::new);
         new JewelCutsAttribute(0).register(JewelCutsAttribute::new);
-        new GearRepairSlotAttribute(0).register(GearRepairSlotAttribute::new);
-        new ImplicitAttribute("").register(ImplicitAttribute::new);
+        // Affixes
+        new HasLegendaryAttribute(true).register(HasLegendaryAttribute::new);
+        new LegendaryPrefixAttribute("Attack Damage").register(LegendaryPrefixAttribute::new);
+        new LegendarySuffixAttribute("Trap Disarm").register(LegendarySuffixAttribute::new);
+
+        new ImplicitAttribute("Armor").register(ImplicitAttribute::new);
+        new PrefixAttribute("Durability").register(PrefixAttribute::new);
+        new SuffixAttribute("Poison Cloud").register(SuffixAttribute::new);
+
         new NumberImplicitAttribute("").register(NumberImplicitAttribute::new);
-        new PrefixAttribute("").register(PrefixAttribute::new);
         new NumberPrefixAttribute("").register(NumberPrefixAttribute::new);
-        new SuffixAttribute("").register(SuffixAttribute::new);
         new NumberSuffixAttribute("").register(NumberSuffixAttribute::new);
-        // Charm & Trinkets
+        // Charms
         new CharmUsesAttribute(0).register(CharmUsesAttribute::new);
-        new TrinketUsesAttribute(0).register(TrinketUsesAttribute::new);
         new CharmAffinityAttribute(0).register(CharmAffinityAttribute::new);
         new CharmGodAttribute("").register(CharmGodAttribute::new);
+        // Trinkets
+        new TrinketUsesAttribute(0).register(TrinketUsesAttribute::new);
         new TrinketNameAttribute("").register(TrinketNameAttribute::new);
         new TrinketColorAttribute("").register(TrinketColorAttribute::new);
     }
