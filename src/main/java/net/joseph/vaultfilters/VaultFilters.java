@@ -51,45 +51,46 @@ public class VaultFilters {
     }
 
     private void setup(FMLCommonSetupEvent event) {
-        // Charm Attributes
-        new CharmAffinityAttribute(0).register(CharmAffinityAttribute::new);
-        new CharmGodAttribute("").register(CharmGodAttribute::new);
+        // This has a specific order as this controls the order displayed in the filters
+        // Soul Attributes
+        new HasSoulValueAttribute(true).register(HasSoulValueAttribute::new);
+        new ExactSoulAttribute(0).register(ExactSoulAttribute::new);
+        new AtleastSoulAttribute(0).register(AtleastSoulAttribute::new);
+        // Common
+        new ItemTypeAttribute("").register(ItemTypeAttribute::new);
+        new IsUnidentifiedAttribute(true).register(IsUnidentifiedAttribute::new);
+        // Rarities
+        new GearRarityAttribute("").register(GearRarityAttribute::new);
+        new JewelRarityAttribute("").register(JewelRarityAttribute::new);
         new CharmRarityAttribute("").register(CharmRarityAttribute::new);
-        new CharmUsesAttribute(0).register(CharmUsesAttribute::new);
         // Inscription Attributes
+        new InscriptionRoomTypeAttribute("").register(InscriptionRoomTypeAttribute::new);
+        new InscriptionRoomAttribute("").register(InscriptionRoomAttribute::new);
+        new InscriptionTimeAttribute(0).register(InscriptionTimeAttribute::new);
         new InscriptionCompletionAttribute(0).register(InscriptionCompletionAttribute::new);
         new InscriptionInstabilityAttribute(0D).register(InscriptionInstabilityAttribute::new);
-        new InscriptionRoomAttribute("").register(InscriptionRoomAttribute::new);
-        new InscriptionRoomTypeAttribute("").register(InscriptionRoomTypeAttribute::new);
-        new InscriptionTimeAttribute(0).register(InscriptionTimeAttribute::new);
-        // Jewel Attributes
-        new JewelCutsAttribute(0).register(JewelCutsAttribute::new);
-        new JewelRarityAttribute("").register(JewelRarityAttribute::new);
-        new JewelSizeAttribute(0).register(JewelSizeAttribute::new);
-        // Soul Attributes
-        new AtleastSoulAttribute(0).register(AtleastSoulAttribute::new);
-        new ExactSoulAttribute(0).register(ExactSoulAttribute::new);
-        new HasSoulValueAttribute(true).register(HasSoulValueAttribute::new);
-        // Trinket Attributes
-        new TrinketColorAttribute("").register(TrinketColorAttribute::new);
-        new TrinketNameAttribute("").register(TrinketNameAttribute::new);
-        new TrinketUsesAttribute(0).register(TrinketUsesAttribute::new);
-        // Affix Attributes
-        new ImplicitAttribute("").register(ImplicitAttribute::new);
-        new PrefixAttribute("").register(PrefixAttribute::new);
-        new SuffixAttribute("").register(SuffixAttribute::new);
+        // More Common
+        new GearLevelAttribute(0).register(GearLevelAttribute::new);
+        new GearTransmogAttribute("").register(GearTransmogAttribute::new);
+        // Affixes (Legendary, Jewel Specific, All Gear)
+        new HasLegendaryAttribute(true).register(HasLegendaryAttribute::new);
         new LegendaryPrefixAttribute("").register(LegendaryPrefixAttribute::new);
         new LegendarySuffixAttribute("").register(LegendarySuffixAttribute::new);
-        new HasLegendaryAttribute(true).register(HasLegendaryAttribute::new);
-        new NumberImplicitAttribute("").register(NumberImplicitAttribute::new);
-        new NumberPrefixAttribute("").register(NumberPrefixAttribute::new);
-        new NumberSuffixAttribute("").register(NumberSuffixAttribute::new);
-        // Gear Attributes
-        new GearLevelAttribute(0).register(GearLevelAttribute::new);
-        new GearRarityAttribute("").register(GearRarityAttribute::new);
+        new JewelSizeAttribute(0).register(JewelSizeAttribute::new);
+        new JewelCutsAttribute(0).register(JewelCutsAttribute::new);
         new GearRepairSlotAttribute(0).register(GearRepairSlotAttribute::new);
-        new GearTransmogAttribute("").register(GearTransmogAttribute::new);
-        new IsUnidentifiedAttribute(true).register(IsUnidentifiedAttribute::new);
-        new ItemTypeAttribute("").register(ItemTypeAttribute::new);
+        new ImplicitAttribute("").register(ImplicitAttribute::new);
+        new NumberImplicitAttribute("").register(NumberImplicitAttribute::new);
+        new PrefixAttribute("").register(PrefixAttribute::new);
+        new NumberPrefixAttribute("").register(NumberPrefixAttribute::new);
+        new SuffixAttribute("").register(SuffixAttribute::new);
+        new NumberSuffixAttribute("").register(NumberSuffixAttribute::new);
+        // Charm & Trinkets
+        new CharmUsesAttribute(0).register(CharmUsesAttribute::new);
+        new TrinketUsesAttribute(0).register(TrinketUsesAttribute::new);
+        new CharmAffinityAttribute(0).register(CharmAffinityAttribute::new);
+        new CharmGodAttribute("").register(CharmGodAttribute::new);
+        new TrinketNameAttribute("").register(TrinketNameAttribute::new);
+        new TrinketColorAttribute("").register(TrinketColorAttribute::new);
     }
 }
