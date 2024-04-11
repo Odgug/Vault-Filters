@@ -12,7 +12,6 @@ import iskallia.vault.skill.base.Skill;
 import it.unimi.dsi.fastutil.Pair;
 import net.joseph.vaultfilters.mixin.EffectCloudAccessor;
 import net.joseph.vaultfilters.mixin.EffectCloudAttributeAccessor;
-import net.joseph.vaultfilters.mixin.EffectCloudAttributeReaderAccessor;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
 
@@ -53,7 +52,7 @@ public abstract class GearAttribute extends StringAttribute {
     public static <T> String getName(VaultGearModifier.AffixType type,  VaultGearModifier<T> modifier, boolean includeLevel) {
         if (modifier.getValue() instanceof EffectCloudAttribute cloudAttribute) {
             EffectCloudAttribute.EffectCloud cloud = ((EffectCloudAttributeAccessor) cloudAttribute).getEffectCloud();
-            boolean whenHit = ((EffectCloudAttributeReaderAccessor) modifier.getAttribute().getReader()).getIsWhenHit();
+            boolean whenHit = modifier.getAttribute().getReader().getModifierName().contains("Hit");
             String tooltip = ((EffectCloudAccessor) cloud).getTooltip();
             String cloudType = tooltip.substring(0, tooltip.lastIndexOf(' '));
             String level = tooltip.substring(tooltip.lastIndexOf(' ') + 1);

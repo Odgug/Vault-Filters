@@ -5,7 +5,6 @@
   "mixins": [
     "InscriptionDataAccessor",
     "EffectCloudAttributeAccessor",
-    "EffectCloudAttributeReaderAccessor",
     "EffectCloudAccessor",
     "MixinBulkItemMatcher",
     "MixinAttributeResearchBypass",

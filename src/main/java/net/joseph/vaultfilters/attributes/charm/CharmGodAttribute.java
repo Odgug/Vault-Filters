@@ -31,7 +31,7 @@ public class CharmGodAttribute extends StringAttribute {
     }
 
     @Override
-    public String getSubNBTKey() {
+    public String getTranslationKey() {
         return "charm_god";
     }
 }
