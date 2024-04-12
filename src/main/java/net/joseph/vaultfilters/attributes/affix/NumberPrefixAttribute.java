@@ -5,8 +5,8 @@ import net.joseph.vaultfilters.attributes.abstracts.NumberAffixAttribute;
 import net.minecraft.world.item.ItemStack;
 
 public class NumberPrefixAttribute extends NumberAffixAttribute {
-    public NumberPrefixAttribute(String value, Number level) {
-        super(value, level);
+    public NumberPrefixAttribute(String value, String simpleName, Number level) {
+        super(value, simpleName, level);
     }
 
     @Override

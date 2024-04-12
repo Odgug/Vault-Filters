@@ -11,29 +11,31 @@ import net.joseph.vaultfilters.mixin.EffectCloudAccessor;
 import net.joseph.vaultfilters.mixin.EffectCloudAttributeAccessor;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
+import org.apache.commons.lang3.function.TriFunction;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.BiFunction;
 
 public abstract class NumberAffixAttribute extends AffixAttribute {
-    private static final Map<Class<?>, BiFunction<String, Number, ItemAttribute>> factories = new HashMap<>();
+    private static final Map<Class<?>, TriFunction<String, String, Number, ItemAttribute>> factories = new HashMap<>();
+    protected final String simpleName;
     protected final Number level;
 
-    protected NumberAffixAttribute(String value, Number level) {
+    protected NumberAffixAttribute(String value, String simpleName, Number level) {
         super(value);
+        this.simpleName = simpleName;
         this.level = level;
     }
 
-    public void register(BiFunction<String, Number, ItemAttribute> factory) {
+    public void register(TriFunction<String, String, Number, ItemAttribute> factory) {
         factories.put(getClass(), factory);
         super.register();
     }
 
-    public ItemAttribute withValue(String value, Number level) {
-        return factories.getOrDefault(getClass(), (o1, o2) -> null).apply(value, level);
+    public ItemAttribute withValue(String value, String simpleName, Number level) {
+        return factories.getOrDefault(getClass(), (o1, o2, o3) -> null).apply(value, simpleName, level);
     }
 
     @Override
@@ -41,7 +43,7 @@ public abstract class NumberAffixAttribute extends AffixAttribute {
         if (itemStack.getItem() instanceof VaultGearItem) {
             for (VaultGearModifier<?> modifier : VaultGearData.read(itemStack).getModifiers(type)) {
                 Number level = getLevel(modifier);
-                return level != null && level.floatValue() >= this.level.floatValue();
+                return level != null && level.floatValue() >= this.level.floatValue() && this.simpleName.equals(getName(type, modifier, false));
             }
         }
         return false;
@@ -81,8 +83,9 @@ public abstract class NumberAffixAttribute extends AffixAttribute {
                 }
 
                 String name = getName(type, modifier, true);
-                if (name != null) {
-                    attributes.add(withValue(name, level));
+                String simpleName = name == null ? null : getName(type, modifier, false);
+                if (simpleName != null) {
+                    attributes.add(withValue(name, simpleName, level));
                 }
             }
         }
@@ -92,29 +95,32 @@ public abstract class NumberAffixAttribute extends AffixAttribute {
     @Override
     public void writeNBT(CompoundTag compoundTag) {
         super.writeNBT(compoundTag);
-        String key = getSubNBTKey() + "_level";
+        String simpleKey = getSubNBTKey() + "_simple";
+        String levelKey = getSubNBTKey() + "_level";
         if (this.level instanceof Float f) {
-            compoundTag.putFloat(key, f);
+            compoundTag.putFloat(levelKey, f);
         } else if (this.level instanceof Double d) {
-            compoundTag.putDouble(key, d);
+            compoundTag.putDouble(levelKey, d);
         } else if (this.level instanceof Integer i) {
-            compoundTag.putFloat(key, i);
+            compoundTag.putFloat(levelKey, i);
         }
+        compoundTag.putString(simpleKey, this.simpleName);
     }
 
     @Override
     public ItemAttribute readNBT(CompoundTag compoundTag) {
-        String key = getSubNBTKey() + "_level";
+        String simpleKey = getSubNBTKey() + "_simple";
+        String levelKey = getSubNBTKey() + "_level";
         Number level = null;
 
-        if (compoundTag.contains(key, CompoundTag.TAG_FLOAT)) {
-            level = compoundTag.getFloat(key);
-        } else if (compoundTag.contains(key, CompoundTag.TAG_DOUBLE)) {
-            level = compoundTag.getDouble(key);
-        } else if (compoundTag.contains(key, CompoundTag.TAG_INT)) {
-            level = compoundTag.getInt(key);
+        if (compoundTag.contains(levelKey, CompoundTag.TAG_FLOAT)) {
+            level = compoundTag.getFloat(levelKey);
+        } else if (compoundTag.contains(levelKey, CompoundTag.TAG_DOUBLE)) {
+            level = compoundTag.getDouble(levelKey);
+        } else if (compoundTag.contains(levelKey, CompoundTag.TAG_INT)) {
+            level = compoundTag.getInt(levelKey);
         }
 
-        return withValue(compoundTag.getString(getSubNBTKey()), level);
+        return withValue(compoundTag.getString(getSubNBTKey()), compoundTag.getString(simpleKey), level);
     }
 }

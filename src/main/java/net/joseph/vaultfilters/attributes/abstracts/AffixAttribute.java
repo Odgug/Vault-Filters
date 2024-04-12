@@ -50,7 +50,7 @@ public abstract class AffixAttribute extends StringAttribute {
             String cloudType = tooltip.substring(0, tooltip.lastIndexOf(' ')) + " Cloud";
             String level = tooltip.substring(tooltip.lastIndexOf(' ') + 1);
             level = level.isBlank() ? "I" : level;
-            return cloudType + (includeLevel ? "+" + level : "") + (whenHit ? " when Hit" : "");
+            return cloudType + (includeLevel ? level : "") + (whenHit ? " when Hit" : "");
         }
 
         if (modifier.getValue() instanceof AbilityLevelAttribute levelAttribute) {

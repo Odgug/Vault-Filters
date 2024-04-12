@@ -85,9 +85,9 @@ public class VaultFilters {
         new PrefixAttribute("Durability").register(PrefixAttribute::new);
         new SuffixAttribute("Poison Cloud").register(SuffixAttribute::new);
 
-        new NumberImplicitAttribute("", 0).register(NumberImplicitAttribute::new);
-        new NumberPrefixAttribute("", 0).register(NumberPrefixAttribute::new);
-        new NumberSuffixAttribute("", 0).register(NumberSuffixAttribute::new);
+        new NumberImplicitAttribute("", "", 0).register(NumberImplicitAttribute::new);
+        new NumberPrefixAttribute("", "", 0).register(NumberPrefixAttribute::new);
+        new NumberSuffixAttribute("", "", 0).register(NumberSuffixAttribute::new);
         // Charms
         new CharmUsesAttribute(0).register(CharmUsesAttribute::new);
         new CharmAffinityAttribute(0).register(CharmAffinityAttribute::new);
