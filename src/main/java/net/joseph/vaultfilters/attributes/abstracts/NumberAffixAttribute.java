@@ -102,7 +102,7 @@ public abstract class NumberAffixAttribute extends AffixAttribute {
         } else if (this.level instanceof Double d) {
             compoundTag.putDouble(levelKey, d);
         } else if (this.level instanceof Integer i) {
-            compoundTag.putFloat(levelKey, i);
+            compoundTag.putInt(levelKey, i);
         }
         compoundTag.putString(simpleKey, this.simpleName);
     }
