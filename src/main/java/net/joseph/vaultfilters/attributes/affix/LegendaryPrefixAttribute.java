@@ -25,7 +25,7 @@ public class LegendaryPrefixAttribute extends AffixAttribute {
     }
 
     @Override
-    public String getSubNBTKey() {
+    public String getLegacyKey() {
         return "legendaryPrefix";
     }
 }

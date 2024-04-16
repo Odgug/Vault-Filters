@@ -25,7 +25,7 @@ public class NumberImplicitAttribute extends NumberAffixAttribute {
     }
 
     @Override
-    public String getSubNBTKey() {
+    public String getLegacyKey() {
         return "implicitNumber";
     }
 }

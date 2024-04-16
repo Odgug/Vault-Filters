@@ -33,7 +33,7 @@ public class CharmRarityAttribute extends StringAttribute {
     }
 
     @Override
-    public String getSubNBTKey() {
+    public String getLegacyKey() {
         return "charmRarity";
     }
 }

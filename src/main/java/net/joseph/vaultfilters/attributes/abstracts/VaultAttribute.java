@@ -26,7 +26,7 @@ public abstract class VaultAttribute<V> implements ItemAttribute {
         return Objects.equals(this.value, getValue(stack));
     }
 
-    public String getSubNBTKey() {
+    public String getLegacyKey() {
         return getTranslationKey();
     };
 

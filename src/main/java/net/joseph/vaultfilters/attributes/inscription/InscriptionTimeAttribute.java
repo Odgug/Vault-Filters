@@ -26,7 +26,7 @@ public class InscriptionTimeAttribute extends IntAttribute {
     }
 
     @Override
-    public String getSubNBTKey() {
+    public String getLegacyKey() {
         return "time";
     }
 }

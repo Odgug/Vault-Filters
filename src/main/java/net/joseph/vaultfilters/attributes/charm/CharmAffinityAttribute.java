@@ -24,7 +24,7 @@ public class CharmAffinityAttribute extends IntAttribute {
     }
 
     @Override
-    public String getSubNBTKey() {
+    public String getLegacyKey() {
         return "charmAffinity";
     }
 

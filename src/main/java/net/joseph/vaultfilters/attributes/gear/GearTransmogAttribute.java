@@ -48,7 +48,7 @@ public class GearTransmogAttribute extends StringAttribute {
     }
 
     @Override
-    public String getSubNBTKey() {
+    public String getLegacyKey() {
         return "transmog";
     }
 }

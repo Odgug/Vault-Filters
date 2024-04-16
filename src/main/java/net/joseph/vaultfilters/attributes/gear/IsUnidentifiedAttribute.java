@@ -36,7 +36,7 @@ public class IsUnidentifiedAttribute extends BooleanAttribute {
     }
 
     @Override
-    public String getSubNBTKey() {
+    public String getLegacyKey() {
         return "unidentified";
     }
 }

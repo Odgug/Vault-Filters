@@ -25,7 +25,7 @@ public class LegendarySuffixAttribute extends AffixAttribute {
     }
 
     @Override
-    public String getSubNBTKey() {
+    public String getLegacyKey() {
         return "legendarySuffix";
     }
 }

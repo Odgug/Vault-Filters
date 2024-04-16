@@ -33,7 +33,7 @@ public class InscriptionInstabilityAttribute extends DoubleAttribute {
     }
 
     @Override
-    public String getSubNBTKey() {
+    public String getLegacyKey() {
         return "instab";
     }
 

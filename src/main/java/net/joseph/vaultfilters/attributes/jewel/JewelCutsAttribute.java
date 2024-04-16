@@ -28,7 +28,7 @@ public class JewelCutsAttribute extends IntAttribute {
     }
 
     @Override
-    public String getSubNBTKey() {
+    public String getLegacyKey() {
         return "cuts";
     }
 }

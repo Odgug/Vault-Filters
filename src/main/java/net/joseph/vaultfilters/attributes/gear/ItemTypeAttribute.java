@@ -36,7 +36,7 @@ public class ItemTypeAttribute extends StringAttribute {
     }
 
     @Override
-    public String getSubNBTKey() {
+    public String getLegacyKey() {
         return "itemType";
     }
 }

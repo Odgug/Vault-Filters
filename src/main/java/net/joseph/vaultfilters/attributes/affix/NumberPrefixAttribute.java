@@ -25,7 +25,7 @@ public class NumberPrefixAttribute extends NumberAffixAttribute {
     }
 
     @Override
-    public String getSubNBTKey() {
+    public String getLegacyKey() {
         return "prefixNumber";
     }
 }

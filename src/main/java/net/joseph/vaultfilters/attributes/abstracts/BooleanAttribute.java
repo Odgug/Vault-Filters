@@ -27,11 +27,19 @@ public abstract class BooleanAttribute extends VaultAttribute<Boolean> {
 
     @Override
     public void writeNBT(CompoundTag compoundTag) {
-        compoundTag.putString(getSubNBTKey(), String.valueOf(this.value));
+        compoundTag.putBoolean(getTranslationKey(), this.value);
     }
 
     @Override
     public ItemAttribute readNBT(CompoundTag compoundTag) {
-        return withValue(Boolean.parseBoolean(compoundTag.getString(getSubNBTKey())));
+        String key = getTranslationKey();
+        byte type = compoundTag.getTagType(key);
+        if (type == CompoundTag.TAG_BYTE) {
+            return withValue(compoundTag.getBoolean(key));
+        } else if (type == CompoundTag.TAG_STRING) {
+            return withValue(Boolean.parseBoolean(compoundTag.getString(key)));
+        } else {
+            return withValue(Boolean.parseBoolean(compoundTag.getString(getLegacyKey())));
+        }
     }
 }

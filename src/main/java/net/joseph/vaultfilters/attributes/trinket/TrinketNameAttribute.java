@@ -35,7 +35,7 @@ public class TrinketNameAttribute extends StringAttribute {
     }
 
     @Override
-    public String getSubNBTKey() {
+    public String getLegacyKey() {
         return "trinketName";
     }
 }

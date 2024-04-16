@@ -28,7 +28,7 @@ public class InscriptionRoomAttribute extends StringAttribute {
     }
 
     @Override
-    public String getSubNBTKey() {
+    public String getLegacyKey() {
         return "room";
     }
 }

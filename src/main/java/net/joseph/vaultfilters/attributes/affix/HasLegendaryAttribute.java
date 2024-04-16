@@ -33,7 +33,7 @@ public class HasLegendaryAttribute extends BooleanAttribute {
     }
 
     @Override
-    public String getSubNBTKey() {
+    public String getLegacyKey() {
         return "legendary";
     }
 }

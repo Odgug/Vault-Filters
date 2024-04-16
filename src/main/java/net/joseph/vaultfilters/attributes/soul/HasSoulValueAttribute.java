@@ -20,7 +20,7 @@ public class HasSoulValueAttribute extends BooleanAttribute {
     }
 
     @Override
-    public String getSubNBTKey() {
+    public String getLegacyKey() {
         return "soulValue";
     }
 }

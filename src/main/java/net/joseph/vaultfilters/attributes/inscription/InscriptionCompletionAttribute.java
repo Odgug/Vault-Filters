@@ -26,7 +26,7 @@ public class InscriptionCompletionAttribute extends IntAttribute {
     }
 
     @Override
-    public String getSubNBTKey() {
+    public String getLegacyKey() {
         return "comp";
     }
 
