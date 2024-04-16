@@ -13,7 +13,6 @@ import iskallia.vault.skill.base.Skill;
 import net.joseph.vaultfilters.mixin.EffectCloudAccessor;
 import net.joseph.vaultfilters.mixin.EffectCloudAttributeAccessor;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
 
 import java.text.DecimalFormat;
@@ -51,16 +50,18 @@ public abstract class AffixAttribute extends StringAttribute {
             String cloudType = (tooltip.contains(" ") ? tooltip.substring(0, tooltip.lastIndexOf(' ')) : tooltip) + " Cloud";
             return cloudType + (whenHit ? " when Hit" : "");
         }
+
         if (modifier.getValue() instanceof AbilityLevelAttribute levelAttribute) {
             String ability = levelAttribute.getAbility().equals("all_abilities")
                     ? "All Abilities"
                     : ModConfigs.ABILITIES.getAbilityById(levelAttribute.getAbility()).map(Skill::getName).orElse("");
             return  "level of "+ ability;
         }
+
         if (modifier.getValue() instanceof EffectAvoidanceGearAttribute avoidanceAttribute) {
-            String avoidanceType = avoidanceAttribute.getEffect().getDisplayName().getString() + " Avoidance";
-            return  avoidanceType;
+            return avoidanceAttribute.getEffect().getDisplayName().getString() + " Avoidance";
         }
+
         VaultGearModifierReader<T> reader = modifier.getAttribute().getReader();
         return reader.getModifierName();
     }

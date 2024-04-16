@@ -22,12 +22,12 @@ import java.util.Map;
 
 public abstract class NumberAffixAttribute extends AffixAttribute {
     private static final Map<Class<?>, TriFunction<String, String, Number, ItemAttribute>> factories = new HashMap<>();
-    protected final String simpleName;
+    protected final String name;
     protected final Number level;
 
-    protected NumberAffixAttribute(String value, String simpleName, Number level) {
+    protected NumberAffixAttribute(String value, String name, Number level) {
         super(value);
-        this.simpleName = simpleName;
+        this.name = name;
         this.level = level;
     }
 
@@ -36,8 +36,8 @@ public abstract class NumberAffixAttribute extends AffixAttribute {
         super.register();
     }
 
-    public ItemAttribute withValue(String value, String simpleName, Number level) {
-        return factories.getOrDefault(getClass(), (o1, o2, o3) -> null).apply(value, simpleName, level);
+    public ItemAttribute withValue(String displayName, String name, Number level) {
+        return factories.getOrDefault(getClass(), (o1, o2, o3) -> null).apply(displayName, name, level);
     }
 
     @Override
@@ -45,7 +45,7 @@ public abstract class NumberAffixAttribute extends AffixAttribute {
         if (itemStack.getItem() instanceof VaultGearItem) {
             for (VaultGearModifier<?> modifier : VaultGearData.read(itemStack).getModifiers(type)) {
                 Number level = getLevel(modifier);
-                return level != null && level.floatValue() >= this.level.floatValue() && this.simpleName.equals(getName(modifier));
+                return level != null && level.floatValue() >= this.level.floatValue() && this.name.equals(getName(modifier));
             }
         }
         return false;
@@ -90,11 +90,9 @@ public abstract class NumberAffixAttribute extends AffixAttribute {
                     continue;
                 }
 
-                String name = getDisplayName(modifier, type);
-                String simpleName = name == null ? null : getName(modifier);
-                if (simpleName != null) {
-                    attributes.add(withValue(name, simpleName, level));
-                }
+                String name = getName(modifier);
+                String displayName = getDisplayName(modifier, type);
+                attributes.add(withValue(displayName, name, level));
             }
         }
         return attributes;
@@ -112,7 +110,7 @@ public abstract class NumberAffixAttribute extends AffixAttribute {
         } else if (this.level instanceof Integer i) {
             compoundTag.putInt(levelKey, i);
         }
-        compoundTag.putString(simpleKey, this.simpleName);
+        compoundTag.putString(simpleKey, this.name);
     }
 
     @Override
