@@ -8,8 +8,6 @@ import iskallia.vault.gear.attribute.custom.EffectCloudAttribute;
 import iskallia.vault.gear.data.VaultGearData;
 import iskallia.vault.gear.item.VaultGearItem;
 import iskallia.vault.gear.reader.VaultGearModifierReader;
-import iskallia.vault.init.ModGearAttributes;
-import iskallia.vault.util.RomanNumber;
 import net.joseph.vaultfilters.mixin.EffectCloudAccessor;
 import net.joseph.vaultfilters.mixin.EffectCloudAttributeAccessor;
 import net.minecraft.nbt.CompoundTag;
@@ -144,6 +142,6 @@ public abstract class NumberAffixAttribute extends AffixAttribute {
             level = compoundTag.getInt(levelKey);
         }
 
-        return withValue(compoundTag.getString(getLegacyKey()), compoundTag.getString(simpleKey), level);
+        return withValue(compoundTag.getString(key), compoundTag.getString(simpleKey), level);
     }
 }
