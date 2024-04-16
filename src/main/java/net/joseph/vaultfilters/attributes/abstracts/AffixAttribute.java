@@ -48,7 +48,7 @@ public abstract class AffixAttribute extends StringAttribute {
             EffectCloudAttribute.EffectCloud cloud = ((EffectCloudAttributeAccessor) cloudAttribute).getEffectCloud();
             boolean whenHit = modifier.getAttribute().getReader().getModifierName().contains("Hit");
             String tooltip = ((EffectCloudAccessor) cloud).getTooltip();
-            String cloudType = (tooltip.contains(' ') ? tooltip.substring(0, tooltip.lastIndexOf(' ')) : tooltip) + " Cloud";
+            String cloudType = (tooltip.contains(" ") ? tooltip.substring(0, tooltip.lastIndexOf(' ')) : tooltip) + " Cloud";
             String level = tooltip.substring(tooltip.lastIndexOf(' ') + 1);
             level = level.isBlank() ? "I" : level;
             return cloudType + (includeLevel ? level : "") + (whenHit ? " when Hit" : "");
