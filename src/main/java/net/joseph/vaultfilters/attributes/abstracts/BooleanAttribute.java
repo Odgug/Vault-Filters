@@ -8,20 +8,20 @@ import java.util.Map;
 import java.util.function.Function;
 
 public abstract class BooleanAttribute extends VaultAttribute<Boolean> {
-    private static final Map<Class<?>, Function<Boolean, ItemAttribute>> factories = new HashMap<>();
+    private static final Map<Class<?>, Function<Boolean, BooleanAttribute>> factories = new HashMap<>();
 
     protected BooleanAttribute(Boolean value) {
         super(value);
     }
 
-    public void register(Function<Boolean, ItemAttribute> factory) {
+    public void register(Function<Boolean, BooleanAttribute> factory) {
         factories.put(getClass(), factory);
         super.register();
 
     }
 
     @Override
-    public ItemAttribute withValue(Boolean value) {
+    public BooleanAttribute withValue(Boolean value) {
         return factories.getOrDefault(getClass(), ignored -> null).apply(value);
     }
 
@@ -35,11 +35,14 @@ public abstract class BooleanAttribute extends VaultAttribute<Boolean> {
         String key = getTranslationKey();
         byte type = compoundTag.getTagType(key);
         if (type == CompoundTag.TAG_BYTE) {
-            return withValue(compoundTag.getBoolean(key));
+            return withValue(true);
         } else if (type == CompoundTag.TAG_STRING) {
-            return withValue(Boolean.parseBoolean(compoundTag.getString(key)));
+            compoundTag.putBoolean(key, true);
+            return withValue(true);
         } else {
-            return withValue(Boolean.parseBoolean(compoundTag.getString(getLegacyKey())));
+            compoundTag.putBoolean(key, true);
+            compoundTag.remove(getLegacyKey());
+            return withValue(true);
         }
     }
 }

@@ -9,13 +9,13 @@ import java.util.Map;
 import java.util.function.Function;
 
 public abstract class IntAttribute extends VaultAttribute<Integer> {
-    private static final Map<Class<?>, Function<Integer, ItemAttribute>> factories = new HashMap<>();
+    private static final Map<Class<?>, Function<Integer, IntAttribute>> factories = new HashMap<>();
 
     protected IntAttribute(Integer value) {
         super(value);
     }
 
-    public void register(Function<Integer, ItemAttribute> factory) {
+    public void register(Function<Integer, IntAttribute> factory) {
         factories.put(getClass(), factory);
         super.register();
     }
@@ -27,7 +27,7 @@ public abstract class IntAttribute extends VaultAttribute<Integer> {
     }
 
     @Override
-    public ItemAttribute withValue(Integer value) {
+    public IntAttribute withValue(Integer value) {
         return factories.getOrDefault(getClass(), ignored -> null).apply(value);
     }
 
@@ -43,9 +43,14 @@ public abstract class IntAttribute extends VaultAttribute<Integer> {
         if (type == CompoundTag.TAG_INT) {
             return withValue(compoundTag.getInt(key));
         } else if (type == CompoundTag.TAG_STRING) {
-            return withValue(Integer.parseInt(compoundTag.getString(key)));
+            IntAttribute attribute = withValue(Integer.parseInt(compoundTag.getString(key)));
+            compoundTag.putInt(key, attribute.value);
+            return attribute;
         } else {
-            return withValue(Integer.parseInt(compoundTag.getString(getLegacyKey())));
+            IntAttribute attribute = withValue(Integer.parseInt(compoundTag.getString(getLegacyKey())));
+            compoundTag.putInt(key, attribute.value);
+            compoundTag.remove(getLegacyKey());
+            return attribute;
         }
     }
 }

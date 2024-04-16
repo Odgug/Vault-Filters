@@ -95,8 +95,8 @@ public abstract class NumberAffixAttribute extends AffixAttribute {
     @Override
     public void writeNBT(CompoundTag compoundTag) {
         super.writeNBT(compoundTag);
-        String simpleKey = getLegacyKey() + "_simple";
-        String levelKey = getLegacyKey() + "_level";
+        String simpleKey = getTranslationKey() + "_simple";
+        String levelKey = getTranslationKey() + "_level";
         if (this.level instanceof Float f) {
             compoundTag.putFloat(levelKey, f);
         } else if (this.level instanceof Double d) {
@@ -109,16 +109,21 @@ public abstract class NumberAffixAttribute extends AffixAttribute {
 
     @Override
     public ItemAttribute readNBT(CompoundTag compoundTag) {
+        // If it's legacy data
+        if (compoundTag.contains(getLegacyKey(), CompoundTag.TAG_STRING) && !compoundTag.contains(getTranslationKey())) {
+
+        }
+
         String key = getTranslationKey();
         String simpleKey = key + "_simple";
         String levelKey = key + "_level";
         Number level = null;
-        Byte levelType = compoundTag.getTagType(levelKey);
-        if (compoundTag.contains(levelKey, CompoundTag.TAG_FLOAT)) {
+        byte levelType = compoundTag.getTagType(levelKey);
+        if (levelType == CompoundTag.TAG_FLOAT) {
             level = compoundTag.getFloat(levelKey);
-        } else if (compoundTag.contains(levelKey, CompoundTag.TAG_DOUBLE)) {
+        } else if (levelType == CompoundTag.TAG_DOUBLE) {
             level = compoundTag.getDouble(levelKey);
-        } else if (compoundTag.contains(levelKey, CompoundTag.TAG_INT)) {
+        } else if (levelType == CompoundTag.TAG_INT) {
             level = compoundTag.getInt(levelKey);
         }
 

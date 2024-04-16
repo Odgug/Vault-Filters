@@ -12,6 +12,7 @@ import iskallia.vault.init.ModConfigs;
 import iskallia.vault.skill.base.Skill;
 import net.joseph.vaultfilters.mixin.EffectCloudAccessor;
 import net.joseph.vaultfilters.mixin.EffectCloudAttributeAccessor;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
 
@@ -96,5 +97,24 @@ public abstract class AffixAttribute extends StringAttribute {
             }
         }
         return attributes;
+    }
+
+    @Override
+    public ItemAttribute readNBT(CompoundTag compoundTag) {
+        String key = getTranslationKey();
+        byte type = compoundTag.getTagType(key);
+        if (type == CompoundTag.TAG_STRING) {
+            return withValue(compoundTag.getString(key));
+        } else {
+            String legacy = compoundTag.getString(getLegacyKey());
+            if (legacy.contains("Cloud")) {
+
+            } else if (legacy.contains("level")) {
+
+            } else if (legacy.isBlank()) {
+
+            }
+            return withValue("Can't load attribute");
+        }
     }
 }

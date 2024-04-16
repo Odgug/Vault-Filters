@@ -8,20 +8,20 @@ import java.util.Map;
 import java.util.function.Function;
 
 public abstract class StringAttribute extends VaultAttribute<String> {
-    private static final Map<Class<?>, Function<String, ItemAttribute>> factories = new HashMap<>();
+    private static final Map<Class<?>, Function<String, StringAttribute>> factories = new HashMap<>();
 
     protected StringAttribute(String value) {
         super(value);
     }
 
-    public void register(Function<String, ItemAttribute> factory) {
+    public void register(Function<String, StringAttribute> factory) {
         factories.put(getClass(), factory);
         super.register();
 
     }
 
     @Override
-    public ItemAttribute withValue(String value) {
+    public StringAttribute withValue(String value) {
         return factories.getOrDefault(getClass(), ignored -> null).apply(value);
     }
 
@@ -37,7 +37,10 @@ public abstract class StringAttribute extends VaultAttribute<String> {
         if (type == CompoundTag.TAG_STRING) {
             return withValue(compoundTag.getString(key));
         } else {
-            return withValue(compoundTag.getString(getLegacyKey()));
+            StringAttribute attribute = withValue(compoundTag.getString(getLegacyKey()));
+            compoundTag.putString(key, attribute.value);
+            compoundTag.remove(getLegacyKey());
+            return attribute;
         }
     }
 }

@@ -9,13 +9,13 @@ import java.util.Map;
 import java.util.function.Function;
 
 public abstract class DoubleAttribute extends VaultAttribute<Double> {
-    private static final Map<Class<?>, Function<Double, ItemAttribute>> factories = new HashMap<>();
+    private static final Map<Class<?>, Function<Double, DoubleAttribute>> factories = new HashMap<>();
 
     protected DoubleAttribute(Double value) {
         super(value);
     }
 
-    public void register(Function<Double, ItemAttribute> factory) {
+    public void register(Function<Double, DoubleAttribute> factory) {
         factories.put(getClass(), factory);
         super.register();
     }
@@ -27,7 +27,7 @@ public abstract class DoubleAttribute extends VaultAttribute<Double> {
     }
 
     @Override
-    public ItemAttribute withValue(Double value) {
+    public DoubleAttribute withValue(Double value) {
         return factories.getOrDefault(getClass(), ignored -> null).apply(value);
     }
 
@@ -43,9 +43,14 @@ public abstract class DoubleAttribute extends VaultAttribute<Double> {
         if (type == CompoundTag.TAG_DOUBLE) {
             return withValue(compoundTag.getDouble(key));
         } else if (type == CompoundTag.TAG_STRING) {
-            return withValue(Double.parseDouble(compoundTag.getString(key)));
+            DoubleAttribute attribute = withValue(Double.parseDouble(compoundTag.getString(key)));
+            compoundTag.putDouble(key, attribute.value);
+            return attribute;
         } else {
-            return withValue(Double.parseDouble(compoundTag.getString(getLegacyKey())));
+            DoubleAttribute attribute = withValue(Double.parseDouble(compoundTag.getString(getLegacyKey())));
+            compoundTag.putDouble(key, attribute.value);
+            compoundTag.remove(getLegacyKey());
+            return attribute;
         }
     }
 }
