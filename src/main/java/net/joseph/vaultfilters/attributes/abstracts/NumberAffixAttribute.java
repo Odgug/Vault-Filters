@@ -47,7 +47,7 @@ public abstract class NumberAffixAttribute extends AffixAttribute {
         if (itemStack.getItem() instanceof VaultGearItem) {
             for (VaultGearModifier<?> modifier : VaultGearData.read(itemStack).getModifiers(type)) {
                 Number level = getLevel(modifier);
-                return level != null && level.floatValue() >= this.level.floatValue() && this.name.equals(getName(modifier));
+                return this.level.getClass().isInstance(level) && level.floatValue() >= this.level.floatValue() && this.name.equals(getName(modifier));
             }
         }
         return false;
