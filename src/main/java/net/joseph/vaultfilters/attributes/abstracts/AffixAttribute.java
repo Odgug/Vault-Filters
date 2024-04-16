@@ -112,7 +112,7 @@ public abstract class AffixAttribute extends StringAttribute {
             
             compoundTag.putString(key, affix);
             compoundTag.remove(getLegacyKey());
-            return withValue(legacy);
+            return withValue(affix);
         }
     }
 }
