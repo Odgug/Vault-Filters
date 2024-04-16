@@ -36,42 +36,33 @@ public abstract class AffixAttribute extends StringAttribute {
     public boolean hasModifier(VaultGearModifier.AffixType type, ItemStack itemStack) {
         if (itemStack.getItem() instanceof VaultGearItem) {
             for (VaultGearModifier<?> modifier : VaultGearData.read(itemStack).getModifiers(type)) {
-                String name = getName(type, modifier, false);
+                String name = getName(modifier);
                 return this.value.equals(name);
             }
         }
         return false;
     }
 
-    public static <T> String getName(VaultGearModifier.AffixType type,  VaultGearModifier<T> modifier, boolean includeLevel) {
+    public static <T> String getName(VaultGearModifier<T> modifier) {
         if (modifier.getValue() instanceof EffectCloudAttribute cloudAttribute) {
             EffectCloudAttribute.EffectCloud cloud = ((EffectCloudAttributeAccessor) cloudAttribute).getEffectCloud();
             boolean whenHit = modifier.getAttribute().getReader().getModifierName().contains("Hit");
             String tooltip = ((EffectCloudAccessor) cloud).getTooltip();
             String cloudType = (tooltip.contains(" ") ? tooltip.substring(0, tooltip.lastIndexOf(' ')) : tooltip) + " Cloud";
-            String level = tooltip.substring(tooltip.lastIndexOf(' ') + 1);
-            level = level.isBlank() ? "I" : level;
-            return cloudType + (includeLevel ? level : "") + (whenHit ? " when Hit" : "");
+            return cloudType + (whenHit ? " when Hit" : "");
         }
-
         if (modifier.getValue() instanceof AbilityLevelAttribute levelAttribute) {
             String ability = levelAttribute.getAbility().equals("all_abilities")
                     ? "All Abilities"
                     : ModConfigs.ABILITIES.getAbilityById(levelAttribute.getAbility()).map(Skill::getName).orElse("");
-            int levelChange = levelAttribute.getLevelChange();
-            return (includeLevel ? "+" + levelChange + " to ":"") + "level of "+ ability;
+            return  "level of "+ ability;
         }
-
         if (modifier.getValue() instanceof EffectAvoidanceGearAttribute avoidanceAttribute) {
             String avoidanceType = avoidanceAttribute.getEffect().getDisplayName().getString() + " Avoidance";
-            return (includeLevel ? "+" + FORMAT.format(avoidanceAttribute.getChance() * 100) : "") + avoidanceType;
+            return  avoidanceType;
         }
-
         VaultGearModifierReader<T> reader = modifier.getAttribute().getReader();
-        MutableComponent levelDisplay = reader.getDisplay(modifier, type);
-        return includeLevel && levelDisplay != null
-                ? levelDisplay.getString()
-                : reader.getModifierName();
+        return reader.getModifierName();
     }
 
     public List<VaultGearModifier<?>> getModifiers(ItemStack itemStack, VaultGearModifier.AffixType type) {
@@ -92,7 +83,7 @@ public abstract class AffixAttribute extends StringAttribute {
         for (VaultGearModifier.AffixType type : VaultGearModifier.AffixType.values()) {
             for (VaultGearModifier<?> modifier : getModifiers(itemStack, type)) {
                 if (shouldList(type, modifier)) {
-                    attributes.add(withValue(getName(type, modifier, false)));
+                    attributes.add(withValue(getName(modifier)));
                 }
             }
         }
