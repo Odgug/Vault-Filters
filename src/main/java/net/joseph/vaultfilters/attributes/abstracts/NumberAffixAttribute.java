@@ -11,6 +11,7 @@ import iskallia.vault.gear.reader.VaultGearModifierReader;
 import net.joseph.vaultfilters.mixin.EffectCloudAccessor;
 import net.joseph.vaultfilters.mixin.EffectCloudAttributeAccessor;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
 import org.apache.commons.lang3.function.TriFunction;
 
@@ -68,11 +69,13 @@ public abstract class NumberAffixAttribute extends AffixAttribute {
 
         return null;
     }
+
     public static <T> String getDisplayName(VaultGearModifier<T> modifier, VaultGearModifier.AffixType type) {
         VaultGearModifierReader<T> reader = modifier.getAttribute().getReader();
-        String displayName = reader.getDisplay(modifier, type).getString();
-        return displayName.isBlank() ? getName(modifier) : displayName;
+        MutableComponent displayName = reader.getDisplay(modifier, type);
+        return displayName == null ? getName(modifier) : displayName.getString();
     }
+
     @Override
     public List<ItemAttribute> listAttributesOf(ItemStack itemStack) {
         List<ItemAttribute> attributes = new ArrayList<>();
