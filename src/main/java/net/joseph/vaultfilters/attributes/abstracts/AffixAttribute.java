@@ -102,17 +102,16 @@ public abstract class AffixAttribute extends StringAttribute {
     @Override
     public ItemAttribute readNBT(CompoundTag compoundTag) {
         String key = getTranslationKey();
-        byte type = compoundTag.getTagType(key);
-        if (type == CompoundTag.TAG_STRING) {
+        if (compoundTag.contains(key, CompoundTag.TAG_STRING)) {
             return withValue(compoundTag.getString(key));
         } else {
-            String legacy = compoundTag.getString(getLegacyKey());
-
-           if (legacy.contains("level")) {
-                legacy = legacy.substring(6);
-           }
-           compoundTag.putString(key,legacy);
-           compoundTag.remove(getLegacyKey());
+            String affix = compoundTag.getString(getLegacyKey());
+            if (affix.contains("level")) {
+                affix = affix.substring(6);
+            }
+            
+            compoundTag.putString(key, affix);
+            compoundTag.remove(getLegacyKey());
             return withValue(legacy);
         }
     }
