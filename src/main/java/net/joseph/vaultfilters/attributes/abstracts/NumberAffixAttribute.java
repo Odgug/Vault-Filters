@@ -8,6 +8,8 @@ import iskallia.vault.gear.attribute.custom.EffectCloudAttribute;
 import iskallia.vault.gear.data.VaultGearData;
 import iskallia.vault.gear.item.VaultGearItem;
 import iskallia.vault.gear.reader.VaultGearModifierReader;
+import iskallia.vault.init.ModGearAttributes;
+import iskallia.vault.util.RomanNumber;
 import net.joseph.vaultfilters.mixin.EffectCloudAccessor;
 import net.joseph.vaultfilters.mixin.EffectCloudAttributeAccessor;
 import net.minecraft.nbt.CompoundTag;
@@ -56,9 +58,18 @@ public abstract class NumberAffixAttribute extends AffixAttribute {
         if (value instanceof EffectCloudAttribute cloudAttribute) {
             EffectCloudAttribute.EffectCloud cloud = ((EffectCloudAttributeAccessor) cloudAttribute).getEffectCloud();
             String tooltip = ((EffectCloudAccessor) cloud).getTooltip();
-            String level = tooltip.substring(tooltip.lastIndexOf(' ') + 1);
-            level = level.isBlank() ? "I" : level;
-            return level.length();
+            int index = tooltip.lastIndexOf(' ');
+            if (index == -1) {
+                return 1;
+            }
+
+            return switch (tooltip.substring(index + 1)) {
+                case "II" -> 2;
+                case "III" -> 3;
+                case "IV" -> 4;
+                case "V" -> 5;
+                default -> 1;
+            };
         } else if (value instanceof AbilityLevelAttribute levelAttribute) {
             return levelAttribute.getLevelChange();
         } else if (value instanceof EffectAvoidanceGearAttribute avoidanceAttribute) {
