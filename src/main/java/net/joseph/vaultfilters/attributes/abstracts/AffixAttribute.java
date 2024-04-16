@@ -59,7 +59,7 @@ public abstract class AffixAttribute extends StringAttribute {
                     ? "All Abilities"
                     : ModConfigs.ABILITIES.getAbilityById(levelAttribute.getAbility()).map(Skill::getName).orElse("");
             int levelChange = levelAttribute.getLevelChange();
-            return (includeLevel ? "+" + levelChange : "Adds") + " to level of " + ability;
+            return (includeLevel ? "+" + levelChange + " to ":"") + "level of "+ ability;
         }
 
         if (modifier.getValue() instanceof EffectAvoidanceGearAttribute avoidanceAttribute) {
@@ -107,14 +107,13 @@ public abstract class AffixAttribute extends StringAttribute {
             return withValue(compoundTag.getString(key));
         } else {
             String legacy = compoundTag.getString(getLegacyKey());
-            if (legacy.contains("Cloud")) {
 
-            } else if (legacy.contains("level")) {
-
-            } else if (legacy.isBlank()) {
-
-            }
-            return withValue("Can't load attribute");
+           if (legacy.contains("level")) {
+                legacy = legacy.substring(6);
+           }
+           compoundTag.putString(key,legacy);
+           compoundTag.remove(getLegacyKey());
+            return withValue(legacy);
         }
     }
 }
