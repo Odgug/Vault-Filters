@@ -58,7 +58,8 @@ public class DataFixerParsers {
             return 1;
         }
 
-        return getLevelType(modifierName, isPercent).apply(numberString);
+
+        return !isPercent && modifier.contains("Attack Speed") ? (double)getLevelType(modifierName, isPercent).apply(numberString)-4 : getLevelType(modifierName, isPercent).apply(numberString);
     }
 
     /**
@@ -73,8 +74,10 @@ public class DataFixerParsers {
                     -> isPercent ? DataFixerParsers::parseFloatPercent : Integer::parseInt;
             case "Armor", "Durability", "Chaining Attack", "Size", "Hammer Size"
                     -> isPercent ? DataFixerParsers::parseIntPercent : Integer::parseInt;
-            case "Attack Damage", "Attack Speed", "Reach", "Attack Range"
+            case "Attack Damage", "Reach", "Attack Range"
                     -> isPercent ? DataFixerParsers::parseDoublePercent : Double::parseDouble;
+            case "Attack Speed"
+                -> isPercent ? DataFixerParsers::parseDoublePercent : Double::parseDouble;
             default -> {
                 if (modifierName.contains("level of")) {
                     yield Integer::parseInt;
