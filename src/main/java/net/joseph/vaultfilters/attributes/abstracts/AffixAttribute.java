@@ -7,6 +7,7 @@ import iskallia.vault.gear.attribute.custom.EffectAvoidanceGearAttribute;
 import iskallia.vault.gear.attribute.custom.EffectCloudAttribute;
 import iskallia.vault.gear.data.VaultGearData;
 import iskallia.vault.gear.item.VaultGearItem;
+import iskallia.vault.gear.reader.IncreasedPercentageReader;
 import iskallia.vault.gear.reader.VaultGearModifierReader;
 import iskallia.vault.init.ModConfigs;
 import iskallia.vault.skill.base.Skill;
@@ -63,6 +64,9 @@ public abstract class AffixAttribute extends StringAttribute {
         }
 
         VaultGearModifierReader<T> reader = modifier.getAttribute().getReader();
+        if (reader instanceof IncreasedPercentageReader) {
+            return "Increased " + reader.getModifierName();
+        }
         return reader.getModifierName();
     }
 
