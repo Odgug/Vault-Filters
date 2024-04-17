@@ -112,7 +112,7 @@ public abstract class NumberAffixAttribute extends AffixAttribute {
 
     @Override
     public ItemAttribute readNBT(CompoundTag compoundTag) {
-        // If it's legacy data
+        // If it's legacy data, data fixer
         String key = getTranslationKey();
         if (compoundTag.contains(getLegacyKey(), CompoundTag.TAG_STRING) && !compoundTag.contains(key)) {
             return readLegacyNBT(compoundTag);

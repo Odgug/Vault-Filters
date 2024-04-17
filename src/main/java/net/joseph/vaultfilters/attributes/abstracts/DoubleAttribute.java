@@ -42,7 +42,9 @@ public abstract class DoubleAttribute extends VaultAttribute<Double> {
         byte type = compoundTag.getTagType(key);
         if (type == CompoundTag.TAG_DOUBLE) {
             return withValue(compoundTag.getDouble(key));
-        } else if (type == CompoundTag.TAG_STRING) {
+        }
+        // Data Fixer
+        else if (type == CompoundTag.TAG_STRING) {
             DoubleAttribute attribute = withValue(Double.parseDouble(compoundTag.getString(key)));
             compoundTag.putDouble(key, attribute.value);
             return attribute;

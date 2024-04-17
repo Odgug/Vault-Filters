@@ -23,10 +23,25 @@ public abstract class AffixAttribute extends StringAttribute {
     protected AffixAttribute(String value) {
         super(value);
     }
+
+    /**
+     * @return the {@link VaultGearModifier.AffixType} that should be gone over
+     * input null to go over everything
+     */
     public abstract VaultGearModifier.AffixType getAffixType();
+
+    /**
+     * runs once for every {@link VaultGearModifier<?>}
+     * @return if an attribute should be made for it
+     */
     public boolean shouldList(VaultGearModifier<?> modifier) {
         return true;
     }
+
+    /**
+     * runs once for every {@link VaultGearModifier<?>} that should have an affix based on it
+     * @return an attribute based on the affix
+     */
     public ItemAttribute withValue(VaultGearModifier<?> modifier) {
         return withValue(getName(modifier));
     }
@@ -36,6 +51,10 @@ public abstract class AffixAttribute extends StringAttribute {
         return hasModifier(getAffixType(), itemStack);
     }
 
+    /**
+     * runs once for every modifier
+     * @return if the current attribute applies to it
+     */
     public boolean checkModifier(VaultGearModifier<?> modifier) {
         return this.value.equals(getName(modifier));
     }
@@ -52,6 +71,11 @@ public abstract class AffixAttribute extends StringAttribute {
         return false;
     }
 
+
+
+    /**
+    * @return simple name, not including number
+    */
     public static <T> String getName(VaultGearModifier<T> modifier) {
         // Cloud Attributes do not return the type of cloud with getName
         if (modifier.getValue() instanceof EffectCloudAttribute cloudAttribute) {
@@ -83,6 +107,10 @@ public abstract class AffixAttribute extends StringAttribute {
         return reader.getModifierName();
     }
 
+    /**
+     * @return {@link Iterable<VaultGearModifier<?>>} with all item modifiers with the specified type
+     * null will return all types
+     */
     public Iterable<VaultGearModifier<?>> getModifiers(ItemStack itemStack, VaultGearModifier.AffixType type) {
         if (itemStack.getItem() instanceof VaultGearItem) {
             return type == null
@@ -116,7 +144,9 @@ public abstract class AffixAttribute extends StringAttribute {
         String key = getTranslationKey();
         if (compoundTag.contains(key, CompoundTag.TAG_STRING)) {
             return withValue(compoundTag.getString(key));
-        } else {
+        }
+        // Data Fixer
+        else {
             String affix = compoundTag.getString(getLegacyKey());
             if (affix.contains("level")) {
                 affix = affix.substring(6);

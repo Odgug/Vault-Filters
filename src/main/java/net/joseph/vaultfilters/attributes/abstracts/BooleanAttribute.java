@@ -42,7 +42,9 @@ public abstract class BooleanAttribute extends VaultAttribute<Boolean> {
         byte type = compoundTag.getTagType(key);
         if (type == CompoundTag.TAG_BYTE) {
             return withValue(true);
-        } else if (type == CompoundTag.TAG_STRING) {
+        }
+        // Data Fixer
+        else if (type == CompoundTag.TAG_STRING) {
             compoundTag.putBoolean(key, true);
             return withValue(true);
         } else {

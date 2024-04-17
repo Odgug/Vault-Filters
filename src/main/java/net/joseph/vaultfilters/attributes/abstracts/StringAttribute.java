@@ -36,7 +36,9 @@ public abstract class StringAttribute extends VaultAttribute<String> {
         byte type = compoundTag.getTagType(key);
         if (type == CompoundTag.TAG_STRING) {
             return withValue(compoundTag.getString(key));
-        } else {
+        }
+        // Data Fixer
+        else {
             StringAttribute attribute = withValue(compoundTag.getString(getLegacyKey()));
             compoundTag.putString(key, attribute.value);
             compoundTag.remove(getLegacyKey());
