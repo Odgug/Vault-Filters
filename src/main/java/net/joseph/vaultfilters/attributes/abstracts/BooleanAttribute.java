@@ -2,6 +2,7 @@ package net.joseph.vaultfilters.attributes.abstracts;
 
 import com.simibubi.create.content.logistics.filter.ItemAttribute;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,6 +24,11 @@ public abstract class BooleanAttribute extends VaultAttribute<Boolean> {
     @Override
     public BooleanAttribute withValue(Boolean value) {
         return factories.getOrDefault(getClass(), ignored -> null).apply(value);
+    }
+
+    @Override
+    public ItemAttribute getAttribute(ItemStack itemStack) {
+        return Boolean.TRUE.equals(getValue(itemStack)) ? withValue(true) : null;
     }
 
     @Override

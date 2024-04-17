@@ -11,12 +11,9 @@ import net.joseph.vaultfilters.mixin.EffectCloudAccessor;
 import net.joseph.vaultfilters.mixin.EffectCloudAttributeAccessor;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.world.item.ItemStack;
 import org.apache.commons.lang3.function.TriFunction;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public abstract class NumberAffixAttribute extends AffixAttribute {
@@ -30,17 +27,16 @@ public abstract class NumberAffixAttribute extends AffixAttribute {
         this.level = level;
     }
 
-
     @Override
     public boolean shouldList(VaultGearModifier<?> modifier) {
-        return !(getLevel(modifier) == null);
+        return getLevel(modifier) != null;
     }
+
     @Override
     public ItemAttribute withValue(VaultGearModifier<?> modifier) {
-
-        Number level = getLevel(modifier);
-        String name = getName(modifier);
         String displayName = getDisplayName(modifier, getAffixType());
+        String name = getName(modifier);
+        Number level = getLevel(modifier);
         return withValue(displayName, name, level);
     }
 
