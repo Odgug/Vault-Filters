@@ -52,6 +52,12 @@ public abstract class NumberAffixAttribute extends AffixAttribute {
         return false;
     }
 
+    public static <T> String getDisplayName(VaultGearModifier<T> modifier, VaultGearModifier.AffixType type) {
+        VaultGearModifierReader<T> reader = modifier.getAttribute().getReader();
+        MutableComponent displayName = reader.getDisplay(modifier, type);
+        return displayName == null ? getName(modifier) : displayName.getString();
+    }
+
     public static <T> Number getLevel(VaultGearModifier<T> modifier) {
         T value = modifier.getValue();
         if (value instanceof EffectCloudAttribute cloudAttribute) {
@@ -80,12 +86,6 @@ public abstract class NumberAffixAttribute extends AffixAttribute {
         return null;
     }
 
-    public static <T> String getDisplayName(VaultGearModifier<T> modifier, VaultGearModifier.AffixType type) {
-        VaultGearModifierReader<T> reader = modifier.getAttribute().getReader();
-        MutableComponent displayName = reader.getDisplay(modifier, type);
-        return displayName == null ? getName(modifier) : displayName.getString();
-    }
-
     @Override
     public List<ItemAttribute> listAttributesOf(ItemStack itemStack) {
         List<ItemAttribute> attributes = new ArrayList<>();
@@ -111,53 +111,33 @@ public abstract class NumberAffixAttribute extends AffixAttribute {
     @Override
     public void writeNBT(CompoundTag compoundTag) {
         super.writeNBT(compoundTag);
-        String simpleKey = getTranslationKey() + "_simple";
+        writeLevel(compoundTag, this.level);
+        compoundTag.putString(getTranslationKey() + "_simple", this.name);
+    }
+
+    public void writeLevel(CompoundTag compoundTag, Number level) {
         String levelKey = getTranslationKey() + "_level";
-        if (this.level instanceof Float f) {
+        if (level instanceof Float f) {
             compoundTag.putFloat(levelKey, f);
-        } else if (this.level instanceof Double d) {
+        } else if (level instanceof Double d) {
             compoundTag.putDouble(levelKey, d);
-        } else if (this.level instanceof Integer i) {
+        } else if (level instanceof Integer i) {
             compoundTag.putInt(levelKey, i);
         }
-        compoundTag.putString(simpleKey, this.name);
     }
 
     @Override
     public ItemAttribute readNBT(CompoundTag compoundTag) {
-        String key = getTranslationKey();
-        String simpleKey = key + "_simple";
-        String levelKey = key + "_level";
         // If it's legacy data
+        String key = getTranslationKey();
         if (compoundTag.contains(getLegacyKey(), CompoundTag.TAG_STRING) && !compoundTag.contains(key)) {
-            String modifierName = compoundTag.getString(getLegacyKey());
-            String name = DataFixerParsers.getNameFromString(modifierName);
-            byte dataType = DataFixerParsers.getTypeFromName(name);
-            if (dataType == CompoundTag.TAG_BYTE) {
-                dataType = modifierName.contains("%") ? CompoundTag.TAG_FLOAT : CompoundTag.TAG_INT;
-            }
-            double doubleValue = DataFixerParsers.getDoubleValue(modifierName);
-            compoundTag.remove(getLegacyKey());
-            compoundTag.putString(key,modifierName);
-            compoundTag.putString(simpleKey,name);
-            if (dataType == CompoundTag.TAG_INT) {
-                int val = (int) Math.floor(doubleValue);
-                compoundTag.putInt(levelKey, val );
-                return withValue(modifierName,name,val );
-            }
-            if (dataType == CompoundTag.TAG_FLOAT) {
-                float val = (float)doubleValue;
-                compoundTag.putFloat(levelKey, val);
-                return withValue(modifierName,name,val );
-            }
-            if (dataType == CompoundTag.TAG_DOUBLE) {
-                compoundTag.putDouble(levelKey, doubleValue);
-                return withValue(modifierName,name, doubleValue );
-            }
+            return readLegacyNBT(compoundTag);
         }
 
-
+        String simpleKey = key + "_simple";
+        String levelKey = key + "_level";
         Number level = null;
+
         byte levelType = compoundTag.getTagType(levelKey);
         if (levelType == CompoundTag.TAG_FLOAT) {
             level = compoundTag.getFloat(levelKey);
@@ -168,5 +148,21 @@ public abstract class NumberAffixAttribute extends AffixAttribute {
         }
 
         return withValue(compoundTag.getString(key), compoundTag.getString(simpleKey), level);
+    }
+
+    public ItemAttribute readLegacyNBT(CompoundTag compoundTag) {
+        String key = getTranslationKey();
+        String simpleKey = key + "_simple";
+
+        String displayName = compoundTag.getString(getLegacyKey());
+        String name = DataFixerParsers.getModifierName(displayName);
+        Number level = DataFixerParsers.parseLevel(name, displayName);
+
+        compoundTag.remove(getLegacyKey());
+        compoundTag.putString(key, displayName);
+        compoundTag.putString(simpleKey, name);
+        writeLevel(compoundTag, level);
+
+        return withValue(displayName, name, level);
     }
 }
