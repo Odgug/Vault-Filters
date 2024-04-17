@@ -40,4 +40,22 @@ public class DataFixerParsers {
         }
         return containsPrecentage ? Double.parseDouble(number) / 100 : Double.parseDouble(number);
     }
+    public static String getNameFromString(String modifier) {
+
+        int firstSpace = modifier.indexOf(' ');
+        if (modifier.contains("Cloud")) {
+            int lastSpace = modifier.lastIndexOf(' ');
+
+            if (firstSpace == lastSpace) {
+                return (modifier.substring(1));
+            }
+            return modifier.substring(1,firstSpace) + modifier.substring(lastSpace);
+        }
+        String name = modifier.substring(firstSpace+1);
+
+        if (name.substring(0,3).equals("to ")) {
+            return name.substring(3);
+        }
+        return name;
+    }
 }
