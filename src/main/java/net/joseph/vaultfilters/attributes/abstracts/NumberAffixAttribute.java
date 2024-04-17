@@ -40,20 +40,12 @@ public abstract class NumberAffixAttribute extends AffixAttribute {
     public ItemAttribute withValue(String displayName, String name, Number level) {
         return factories.getOrDefault(getClass(), (o1, o2, o3) -> null).apply(displayName, name, level);
     }
-
     @Override
-    public boolean hasModifier(VaultGearModifier.AffixType type, ItemStack itemStack) {
-        if (itemStack.getItem() instanceof VaultGearItem) {
-            for (VaultGearModifier<?> modifier : VaultGearData.read(itemStack).getModifiers(type)) {
-                Number level = getLevel(modifier);
-                if (this.level.getClass().isInstance(level) 
-                        && level.floatValue() >= this.level.floatValue() 
-                        && this.name.equals(getName(modifier))) {
-                    return true;
-                }
-            }
-        }
-        return false;
+    public boolean checkModifier(VaultGearModifier<?> modifier) {
+        Number level = getLevel(modifier);
+        return(this.level.getClass().isInstance(level)
+        && level.floatValue() >= this.level.floatValue()
+        && this.name.equals(getName(modifier)));
     }
 
     public static <T> String getDisplayName(VaultGearModifier<T> modifier, VaultGearModifier.AffixType type) {

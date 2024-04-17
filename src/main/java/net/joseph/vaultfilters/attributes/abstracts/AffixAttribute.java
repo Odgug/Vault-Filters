@@ -32,11 +32,13 @@ public abstract class AffixAttribute extends StringAttribute {
     public boolean appliesTo(VaultGearModifier.AffixType type, ItemStack itemStack) {
         return hasModifier(type, itemStack);
     }
-
+    public boolean checkModifier(VaultGearModifier<?> modifier) {
+        return this.value.equals(getName(modifier));
+    }
     public boolean hasModifier(VaultGearModifier.AffixType type, ItemStack itemStack) {
         if (itemStack.getItem() instanceof VaultGearItem) {
             for (VaultGearModifier<?> modifier : VaultGearData.read(itemStack).getModifiers(type)) {
-                if (this.value.equals(getName(modifier))) {
+                if (checkModifier(modifier)) {
                     return true;
                 }
             }
