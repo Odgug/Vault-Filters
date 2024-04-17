@@ -36,8 +36,9 @@ public abstract class AffixAttribute extends StringAttribute {
     public boolean hasModifier(VaultGearModifier.AffixType type, ItemStack itemStack) {
         if (itemStack.getItem() instanceof VaultGearItem) {
             for (VaultGearModifier<?> modifier : VaultGearData.read(itemStack).getModifiers(type)) {
-                String name = getName(modifier);
-                return this.value.equals(name);
+                if (this.value.equals(getName(modifier)) {
+                    return true;
+                }
             }
         }
         return false;
