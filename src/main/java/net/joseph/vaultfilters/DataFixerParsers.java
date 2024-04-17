@@ -69,7 +69,7 @@ public class DataFixerParsers {
             case "Mana" -> isPercent ? Float::parseFloat : Integer::parseInt;
             case "Armor", "Durability", "Chaining Attack", "Size", "Hammer Size" -> Integer::parseInt;
             case "Attack Damage", "Attack Speed", "Reach", "Attack Range" -> Double::parseDouble;
-            default -> modifierName.contains("level to") ? Integer::parseInt : Float::parseFloat;
+            default -> modifierName.contains("to level") ? Integer::parseInt : Float::parseFloat;
         };
     }
 }
