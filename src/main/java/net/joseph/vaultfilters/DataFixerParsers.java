@@ -66,10 +66,30 @@ public class DataFixerParsers {
      */
     private static Function<String, ? extends Number> getLevelType(String modifierName, boolean isPercent) {
         return switch (modifierName) {
-            case "Mana" -> isPercent ? Float::parseFloat : Integer::parseInt;
-            case "Armor", "Durability", "Chaining Attack", "Size", "Hammer Size" -> Integer::parseInt;
-            case "Attack Damage", "Attack Speed", "Reach", "Attack Range" -> Double::parseDouble;
-            default -> modifierName.contains("level of") ? Integer::parseInt : Float::parseFloat;
+            case "Mana"
+                    -> isPercent ? DataFixerParsers::parseFloatPercent : Integer::parseInt;
+            case "Armor", "Durability", "Chaining Attack", "Size", "Hammer Size"
+                    -> isPercent ? DataFixerParsers::parseIntPercent : Integer::parseInt;
+            case "Attack Damage", "Attack Speed", "Reach", "Attack Range"
+                    -> isPercent ? DataFixerParsers::parseDoublePercent : Double::parseDouble;
+            default -> {
+                if (modifierName.contains("level of")) {
+                    yield Integer::parseInt;
+                }
+                yield  isPercent ? DataFixerParsers::parseDoublePercent : Float::parseFloat;
+            }
         };
+    }
+
+    private static Integer parseIntPercent(String string) {
+        return Integer.parseInt(string) / 100;
+    }
+
+    private static Double parseDoublePercent(String string) {
+        return Double.parseDouble(string) / 100;
+    }
+
+    private static Float parseFloatPercent(String string) {
+        return Float.parseFloat(string) / 100;
     }
 }
