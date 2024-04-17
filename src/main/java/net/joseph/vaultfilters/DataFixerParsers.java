@@ -60,8 +60,7 @@ public class DataFixerParsers {
 
     /**
      * Utility method for {@link DataFixerParsers#parseLevel(String, String) parseLevel}
-     * Does not account for Clouds or the differences between int and % modifiers with the same name
-     *      as that is handled in {@link DataFixerParsers#parseLevel(String, String) parseLevel} already.
+     * Does not account for Clouds as that is handled in {@link DataFixerParsers#parseLevel(String, String) parseLevel} already.
      *
      * @return Returns the parseMethod for the number type associated with the modifierName
      */
