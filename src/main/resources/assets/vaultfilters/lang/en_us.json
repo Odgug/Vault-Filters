@@ -1,4 +1,8 @@
 {
+
+  "create.item_attributes.item_name": "is of item ID \"%1$s\"",
+  "create.item_attributes.item_name.inverted": "is not of item ID \"%1$s\"",
+
   "create.item_attributes.item_type": "is a \"%1$s\" item",
   "create.item_attributes.item_type.inverted": "is not a \"%1$s\" item",
 

@@ -27,6 +27,7 @@ import net.joseph.vaultfilters.attributes.affix.LegendarySuffixAttribute;
 import net.joseph.vaultfilters.attributes.affix.NumberImplicitAttribute;
 import net.joseph.vaultfilters.attributes.affix.NumberPrefixAttribute;
 import net.joseph.vaultfilters.attributes.affix.NumberSuffixAttribute;
+import net.joseph.vaultfilters.attributes.other.ItemNameAttribute;
 import net.joseph.vaultfilters.attributes.soul.AtleastSoulAttribute;
 import net.joseph.vaultfilters.attributes.soul.ExactSoulAttribute;
 import net.joseph.vaultfilters.attributes.soul.HasSoulValueAttribute;
@@ -53,6 +54,7 @@ public class VaultFilters {
     private void setup(FMLCommonSetupEvent event) {
         // This has a specific order as this controls the order displayed in the filters
         // Soul Attributes
+        new ItemNameAttribute(("the_vault:chestplate")).register(ItemNameAttribute::new);
         new HasSoulValueAttribute(true).register(HasSoulValueAttribute::new);
         new ExactSoulAttribute(0).register(ExactSoulAttribute::new);
         new AtleastSoulAttribute(0).register(AtleastSoulAttribute::new);
