@@ -1,5 +1,7 @@
 package net.joseph.vaultfilters;
 
+import net.minecraft.nbt.CompoundTag;
+
 public class DataFixerParsers {
     public static boolean isNumber(String num) {
         char c = num.charAt(0);
@@ -58,42 +60,35 @@ public class DataFixerParsers {
         }
         return name;
     }
-    public static dataSave getTypeFromName(String name) {
+    public static byte getTypeFromName(String name) {
        switch (name) {
            case "Armor":
-               return dataSave.integerVal;
+               return CompoundTag.TAG_INT;
            case "Mana":
-               return dataSave.undecided;
+               return CompoundTag.TAG_BYTE;
            case "Durability":
-               return dataSave.integerVal;
+               return CompoundTag.TAG_INT;
            case "Chaining Attack":
-               return dataSave.integerVal;
+               return CompoundTag.TAG_INT;
            case "Size":
-               return dataSave.integerVal;
+               return CompoundTag.TAG_INT;
            case "Hammer Size":
-               return dataSave.integerVal;
+               return CompoundTag.TAG_INT;
            case "Attack Damage":
-               return dataSave.doubleVal;
+               return CompoundTag.TAG_DOUBLE;
            case "Attack Speed":
-               return dataSave.doubleVal;
+               return CompoundTag.TAG_DOUBLE;
            case "Reach":
-               return dataSave.doubleVal;
+               return CompoundTag.TAG_DOUBLE;
            case "Attack Range":
-               return dataSave.doubleVal;
+               return CompoundTag.TAG_DOUBLE;
            default:
                if (name.contains("Cloud") || name.contains("level to")) {
-                   return dataSave.integerVal;
+                   return CompoundTag.TAG_INT;
                }
-               return dataSave.floatVal;
+               return CompoundTag.TAG_FLOAT;
 
        }
     }
-    enum dataSave{
-        integerVal,
-        floatVal,
-        doubleVal,
-        //for stuff like mana which has the same name for % and +
-        undecided
-
-    }
+   
 }

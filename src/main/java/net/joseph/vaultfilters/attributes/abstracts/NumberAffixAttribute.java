@@ -8,6 +8,7 @@ import iskallia.vault.gear.attribute.custom.EffectCloudAttribute;
 import iskallia.vault.gear.data.VaultGearData;
 import iskallia.vault.gear.item.VaultGearItem;
 import iskallia.vault.gear.reader.VaultGearModifierReader;
+import net.joseph.vaultfilters.DataFixerParsers;
 import net.joseph.vaultfilters.mixin.EffectCloudAccessor;
 import net.joseph.vaultfilters.mixin.EffectCloudAttributeAccessor;
 import net.minecraft.nbt.CompoundTag;
@@ -124,14 +125,38 @@ public abstract class NumberAffixAttribute extends AffixAttribute {
 
     @Override
     public ItemAttribute readNBT(CompoundTag compoundTag) {
-        // If it's legacy data
-        if (compoundTag.contains(getLegacyKey(), CompoundTag.TAG_STRING) && !compoundTag.contains(getTranslationKey())) {
-
-        }
-
         String key = getTranslationKey();
         String simpleKey = key + "_simple";
         String levelKey = key + "_level";
+        // If it's legacy data
+        if (compoundTag.contains(getLegacyKey(), CompoundTag.TAG_STRING) && !compoundTag.contains(key)) {
+            String modifierName = compoundTag.getString(getLegacyKey());
+            String name = DataFixerParsers.getNameFromString(modifierName);
+            byte dataType = DataFixerParsers.getTypeFromName(name);
+            if (dataType == CompoundTag.TAG_BYTE) {
+                dataType = modifierName.contains("%") ? CompoundTag.TAG_FLOAT : CompoundTag.TAG_INT;
+            }
+            double doubleValue = DataFixerParsers.getDoubleValue(modifierName);
+            compoundTag.remove(getLegacyKey());
+            compoundTag.putString(key,modifierName);
+            compoundTag.putString(simpleKey,name);
+            if (dataType == CompoundTag.TAG_INT) {
+                int val = (int) Math.floor(doubleValue);
+                compoundTag.putInt(levelKey, val );
+                return withValue(modifierName,name,val );
+            }
+            if (dataType == CompoundTag.TAG_FLOAT) {
+                float val = (float)doubleValue;
+                compoundTag.putFloat(levelKey, val);
+                return withValue(modifierName,name,val );
+            }
+            if (dataType == CompoundTag.TAG_DOUBLE) {
+                compoundTag.putDouble(levelKey, doubleValue);
+                return withValue(modifierName,name, doubleValue );
+            }
+        }
+
+
         Number level = null;
         byte levelType = compoundTag.getTagType(levelKey);
         if (levelType == CompoundTag.TAG_FLOAT) {
