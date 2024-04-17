@@ -17,6 +17,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public abstract class AffixAttribute extends StringAttribute {
@@ -36,9 +37,7 @@ public abstract class AffixAttribute extends StringAttribute {
 
     public boolean hasModifier(VaultGearModifier.AffixType type, ItemStack itemStack) {
         if (itemStack.getItem() instanceof VaultGearItem) {
-            Iterable<VaultGearModifier<?>> modifiers = type == null
-                    ? VaultGearData.read(itemStack).getAllModifierAffixes()
-                    : VaultGearData.read(itemStack).getModifiers(type);
+            Iterable<VaultGearModifier<?>> modifiers = getModifiers(itemStack,type);
 
             for (VaultGearModifier<?> modifier : modifiers) {
                 if (checkModifier(modifier)) {
@@ -78,7 +77,7 @@ public abstract class AffixAttribute extends StringAttribute {
 
     public List<VaultGearModifier<?>> getModifiers(ItemStack itemStack, VaultGearModifier.AffixType type) {
         if (itemStack.getItem() instanceof VaultGearItem) {
-            return new ArrayList<>(VaultGearData.read(itemStack).getModifiers(type));
+            return type == null ? new ArrayList<>((Collection) VaultGearData.read(itemStack).getAllModifierAffixes()) : new ArrayList<>(VaultGearData.read(itemStack).getModifiers(type));
         }
         return new ArrayList<>();
     }

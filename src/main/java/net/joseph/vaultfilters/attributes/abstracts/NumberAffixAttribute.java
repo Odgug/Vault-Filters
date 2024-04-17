@@ -94,7 +94,6 @@ public abstract class NumberAffixAttribute extends AffixAttribute {
                 if (level == null) {
                     continue;
                 }
-
                 String name = getName(modifier);
                 String displayName = getDisplayName(modifier, type);
                 attributes.add(withValue(displayName, name, level));
