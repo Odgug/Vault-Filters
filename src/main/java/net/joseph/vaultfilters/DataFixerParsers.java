@@ -79,7 +79,7 @@ public class DataFixerParsers {
                 if (modifierName.contains("level of")) {
                     yield Integer::parseInt;
                 }
-                yield  isPercent ? DataFixerParsers::parseDoublePercent : Float::parseFloat;
+                yield  isPercent ? DataFixerParsers::parseFloatPercent : Float::parseFloat;
             }
         };
     }
