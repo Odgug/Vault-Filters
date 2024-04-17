@@ -19,15 +19,14 @@ public class IsUnidentifiedAttribute extends BooleanAttribute {
     }
 
     public static Boolean isUnidentified(ItemStack stack) {
-        boolean unidentified = true;
         if (stack.getItem() instanceof VaultGearItem) {
-            unidentified = VaultGearData.read(stack).getState() == VaultGearState.UNIDENTIFIED;
+            return VaultGearData.read(stack).getState() == VaultGearState.UNIDENTIFIED;
         } else if (stack.getItem() instanceof TrinketItem) {
-            unidentified = !TrinketItem.isIdentified(stack);
+            return !TrinketItem.isIdentified(stack);
         } else if (stack.getItem() instanceof CharmItem) {
-            unidentified = !CharmItem.isIdentified(stack);
+            return !CharmItem.isIdentified(stack);
         }
-        return unidentified ? true : null;
+        return false;
     }
 
     @Override

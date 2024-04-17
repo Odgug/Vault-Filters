@@ -24,7 +24,7 @@ public class HasLegendaryAttribute extends BooleanAttribute {
             }
         }
 
-        return null;
+        return false;
     }
 
     @Override
