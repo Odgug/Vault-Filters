@@ -1,9 +1,7 @@
 package net.joseph.vaultfilters.attributes.affix;
 
-import com.simibubi.create.content.logistics.filter.ItemAttribute;
 import iskallia.vault.gear.attribute.VaultGearModifier;
 import net.joseph.vaultfilters.attributes.abstracts.AffixAttribute;
-import net.minecraft.world.item.ItemStack;
 
 public class LegendarySuffixAttribute extends AffixAttribute {
     public LegendarySuffixAttribute(String value) {
@@ -12,19 +10,12 @@ public class LegendarySuffixAttribute extends AffixAttribute {
 
     @Override
     public VaultGearModifier.AffixType getAffixType() {
-        return VaultGearModifier.AffixType.IMPLICIT;
-    }
-    @Override
-    public ItemAttribute attFromModifier(VaultGearModifier<?> modifier) {
-        if (modifier.getCategory() == VaultGearModifier.AffixCategory.LEGENDARY) {
-            return withValue(getName(modifier));
-        }
-        return null;
+        return VaultGearModifier.AffixType.SUFFIX;
     }
 
     @Override
-    public boolean appliesTo(ItemStack stack) {
-        return appliesTo(VaultGearModifier.AffixType.SUFFIX, stack);
+    public boolean shouldList(VaultGearModifier<?> modifier) {
+        return modifier.getCategory() == VaultGearModifier.AffixCategory.LEGENDARY;
     }
 
     @Override

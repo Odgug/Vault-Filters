@@ -17,7 +17,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public abstract class AffixAttribute extends StringAttribute {
@@ -25,12 +24,16 @@ public abstract class AffixAttribute extends StringAttribute {
         super(value);
     }
     public abstract VaultGearModifier.AffixType getAffixType();
-    public ItemAttribute attFromModifier(VaultGearModifier<?> modifier) {
+    public boolean shouldList(VaultGearModifier<?> modifier) {
+        return true;
+    }
+    public ItemAttribute withValue(VaultGearModifier<?> modifier) {
         return withValue(getName(modifier));
     }
 
-    public boolean appliesTo(VaultGearModifier.AffixType type, ItemStack itemStack) {
-        return hasModifier(type, itemStack);
+    @Override
+    public boolean appliesTo(ItemStack itemStack) {
+        return hasModifier(getAffixType(), itemStack);
     }
 
     public boolean checkModifier(VaultGearModifier<?> modifier) {
@@ -40,7 +43,6 @@ public abstract class AffixAttribute extends StringAttribute {
     public boolean hasModifier(VaultGearModifier.AffixType type, ItemStack itemStack) {
         if (itemStack.getItem() instanceof VaultGearItem) {
             Iterable<VaultGearModifier<?>> modifiers = getModifiers(itemStack,type);
-
             for (VaultGearModifier<?> modifier : modifiers) {
                 if (checkModifier(modifier)) {
                     return true;
@@ -77,9 +79,11 @@ public abstract class AffixAttribute extends StringAttribute {
         return reader.getModifierName();
     }
 
-    public List<VaultGearModifier<?>> getModifiers(ItemStack itemStack, VaultGearModifier.AffixType type) {
+    public Iterable<VaultGearModifier<?>> getModifiers(ItemStack itemStack, VaultGearModifier.AffixType type) {
         if (itemStack.getItem() instanceof VaultGearItem) {
-            return type == null ? new ArrayList<>((Collection) VaultGearData.read(itemStack).getAllModifierAffixes()) : new ArrayList<>(VaultGearData.read(itemStack).getModifiers(type));
+            return type == null
+                    ? VaultGearData.read(itemStack).getAllModifierAffixes()
+                    : VaultGearData.read(itemStack).getModifiers(type);
         }
         return new ArrayList<>();
     }
@@ -95,11 +99,11 @@ public abstract class AffixAttribute extends StringAttribute {
     @Override
     public List<ItemAttribute> listAttributesOf(ItemStack itemStack) {
         List<ItemAttribute> attributes = new ArrayList<>();
-            for (VaultGearModifier<?> modifier : getModifiers(itemStack, getAffixType())) {
-               ItemAttribute attrib = attFromModifier(modifier);
-               if (attrib == null){continue;}
-               attributes.add(attrib);
+        for (VaultGearModifier<?> modifier : getModifiers(itemStack, getAffixType())) {
+            if (shouldList(modifier)) {
+                attributes.add(withValue(modifier));
             }
+        }
         return attributes;
     }
 

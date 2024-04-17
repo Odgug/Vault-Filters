@@ -29,7 +29,7 @@ public abstract class NumberAffixAttribute extends AffixAttribute {
         this.name = name;
         this.level = level;
     }
-    public ItemAttribute attFromModifier(VaultGearModifier<?> modifier) {
+    public ItemAttribute withValue(VaultGearModifier<?> modifier) {
 
         Number level = getLevel(modifier);
         if (level == null) {
