@@ -10,8 +10,8 @@ public class PrefixAttribute extends AffixAttribute {
     }
 
     @Override
-    public boolean shouldList(VaultGearModifier.AffixType type, VaultGearModifier<?> modifier) {
-        return type == VaultGearModifier.AffixType.PREFIX;
+    public VaultGearModifier.AffixType getAffixType() {
+        return VaultGearModifier.AffixType.PREFIX;
     }
 
     @Override

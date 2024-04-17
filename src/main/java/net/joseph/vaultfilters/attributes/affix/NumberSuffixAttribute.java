@@ -10,10 +10,9 @@ public class NumberSuffixAttribute extends NumberAffixAttribute {
     }
 
     @Override
-    public boolean shouldList(VaultGearModifier.AffixType type, VaultGearModifier<?> modifier) {
-        return type == VaultGearModifier.AffixType.SUFFIX;
+    public VaultGearModifier.AffixType getAffixType() {
+        return VaultGearModifier.AffixType.SUFFIX;
     }
-
     @Override
     public boolean appliesTo(ItemStack stack) {
         return appliesTo(VaultGearModifier.AffixType.SUFFIX, stack);

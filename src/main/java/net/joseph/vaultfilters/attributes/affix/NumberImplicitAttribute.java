@@ -10,8 +10,8 @@ public class NumberImplicitAttribute extends NumberAffixAttribute {
     }
 
     @Override
-    public boolean shouldList(VaultGearModifier.AffixType type, VaultGearModifier<?> modifier) {
-        return type == VaultGearModifier.AffixType.IMPLICIT;
+    public VaultGearModifier.AffixType getAffixType() {
+        return VaultGearModifier.AffixType.IMPLICIT;
     }
 
     @Override

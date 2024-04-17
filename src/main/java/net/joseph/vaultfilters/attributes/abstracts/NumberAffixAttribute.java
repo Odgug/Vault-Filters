@@ -29,6 +29,16 @@ public abstract class NumberAffixAttribute extends AffixAttribute {
         this.name = name;
         this.level = level;
     }
+    public ItemAttribute attFromModifier(VaultGearModifier<?> modifier) {
+
+        Number level = getLevel(modifier);
+        if (level == null) {
+            return null;
+        }
+        String name = getName(modifier);
+        String displayName = getDisplayName(modifier, getAffixType());
+        return withValue(displayName, name, level);
+    }
 
     public void register(TriFunction<String, String, Number, ItemAttribute> factory) {
         factories.put(getClass(), factory);
@@ -81,26 +91,6 @@ public abstract class NumberAffixAttribute extends AffixAttribute {
         return null;
     }
 
-    @Override
-    public List<ItemAttribute> listAttributesOf(ItemStack itemStack) {
-        List<ItemAttribute> attributes = new ArrayList<>();
-        for (VaultGearModifier.AffixType type : VaultGearModifier.AffixType.values()) {
-            for (VaultGearModifier<?> modifier : getModifiers(itemStack, type)) {
-                if (!shouldList(type, modifier)) {
-                    continue;
-                }
-
-                Number level = getLevel(modifier);
-                if (level == null) {
-                    continue;
-                }
-                String name = getName(modifier);
-                String displayName = getDisplayName(modifier, type);
-                attributes.add(withValue(displayName, name, level));
-            }
-        }
-        return attributes;
-    }
 
     @Override
     public void writeNBT(CompoundTag compoundTag) {

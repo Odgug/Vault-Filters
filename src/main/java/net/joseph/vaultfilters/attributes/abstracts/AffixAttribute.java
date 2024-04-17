@@ -24,8 +24,10 @@ public abstract class AffixAttribute extends StringAttribute {
     protected AffixAttribute(String value) {
         super(value);
     }
-
-    public abstract boolean shouldList(VaultGearModifier.AffixType type, VaultGearModifier<?> modifier);
+    public abstract VaultGearModifier.AffixType getAffixType();
+    public ItemAttribute attFromModifier(VaultGearModifier<?> modifier) {
+        return withValue(getName(modifier));
+    }
 
     public boolean appliesTo(VaultGearModifier.AffixType type, ItemStack itemStack) {
         return hasModifier(type, itemStack);
@@ -93,13 +95,11 @@ public abstract class AffixAttribute extends StringAttribute {
     @Override
     public List<ItemAttribute> listAttributesOf(ItemStack itemStack) {
         List<ItemAttribute> attributes = new ArrayList<>();
-        for (VaultGearModifier.AffixType type : VaultGearModifier.AffixType.values()) {
-            for (VaultGearModifier<?> modifier : getModifiers(itemStack, type)) {
-                if (shouldList(type, modifier)) {
-                    attributes.add(withValue(getName(modifier)));
-                }
+            for (VaultGearModifier<?> modifier : getModifiers(itemStack, getAffixType())) {
+               ItemAttribute attrib = attFromModifier(modifier);
+               if (attrib == null){continue;}
+               attributes.add(attrib);
             }
-        }
         return attributes;
     }
 
