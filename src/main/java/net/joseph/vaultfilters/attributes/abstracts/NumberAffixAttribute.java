@@ -5,8 +5,6 @@ import iskallia.vault.gear.attribute.VaultGearModifier;
 import iskallia.vault.gear.attribute.ability.AbilityLevelAttribute;
 import iskallia.vault.gear.attribute.custom.EffectAvoidanceGearAttribute;
 import iskallia.vault.gear.attribute.custom.EffectCloudAttribute;
-import iskallia.vault.gear.data.VaultGearData;
-import iskallia.vault.gear.item.VaultGearItem;
 import iskallia.vault.gear.reader.VaultGearModifierReader;
 import net.joseph.vaultfilters.DataFixerParsers;
 import net.joseph.vaultfilters.mixin.EffectCloudAccessor;
@@ -40,12 +38,13 @@ public abstract class NumberAffixAttribute extends AffixAttribute {
     public ItemAttribute withValue(String displayName, String name, Number level) {
         return factories.getOrDefault(getClass(), (o1, o2, o3) -> null).apply(displayName, name, level);
     }
+
     @Override
     public boolean checkModifier(VaultGearModifier<?> modifier) {
         Number level = getLevel(modifier);
-        return(this.level.getClass().isInstance(level)
-        && level.floatValue() >= this.level.floatValue()
-        && this.name.equals(getName(modifier)));
+        return this.level.getClass().isInstance(level)
+            && level.floatValue() >= this.level.floatValue()
+            && this.name.equals(getName(modifier));
     }
 
     public static <T> String getDisplayName(VaultGearModifier<T> modifier, VaultGearModifier.AffixType type) {

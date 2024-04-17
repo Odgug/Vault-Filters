@@ -16,13 +16,10 @@ import net.joseph.vaultfilters.mixin.EffectCloudAttributeAccessor;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AffixAttribute extends StringAttribute {
-    private static final DecimalFormat FORMAT = new DecimalFormat("0.##");
-
     protected AffixAttribute(String value) {
         super(value);
     }
@@ -32,12 +29,18 @@ public abstract class AffixAttribute extends StringAttribute {
     public boolean appliesTo(VaultGearModifier.AffixType type, ItemStack itemStack) {
         return hasModifier(type, itemStack);
     }
+
     public boolean checkModifier(VaultGearModifier<?> modifier) {
         return this.value.equals(getName(modifier));
     }
+
     public boolean hasModifier(VaultGearModifier.AffixType type, ItemStack itemStack) {
         if (itemStack.getItem() instanceof VaultGearItem) {
-            for (VaultGearModifier<?> modifier : type == null ? VaultGearData.read(itemStack).getAllModifierAffixes() : VaultGearData.read(itemStack).getModifiers(type)) {
+            Iterable<VaultGearModifier<?>> modifiers = type == null
+                    ? VaultGearData.read(itemStack).getAllModifierAffixes()
+                    : VaultGearData.read(itemStack).getModifiers(type);
+
+            for (VaultGearModifier<?> modifier : modifiers) {
                 if (checkModifier(modifier)) {
                     return true;
                 }
@@ -82,6 +85,9 @@ public abstract class AffixAttribute extends StringAttribute {
 
     @Override
     public String getValue(ItemStack itemStack) {
+        // Affix attributes can have multiple instances per item
+        // So we override this here and return null as extending
+        // classes do not need to implement it
         return null;
     }
 
