@@ -59,7 +59,7 @@ public class DataFixerParsers {
 
         // Some Modifier types have special cases for the number itself (e.g. as Attack Speed)
         Number level = getLevelType(modifierName, isPercent).apply(numberString);
-        if (modifierName.equals("Attack Speed")) {
+        if (!isPercent && modifier.contains("Attack Speed")) {
             return (double) level - 4;
         } else {
             return level;
