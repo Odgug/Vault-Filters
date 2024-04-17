@@ -53,14 +53,17 @@ public abstract class AffixAttribute extends StringAttribute {
     }
 
     public static <T> String getName(VaultGearModifier<T> modifier) {
+        // Cloud Attributes do not return the type of cloud with getName
         if (modifier.getValue() instanceof EffectCloudAttribute cloudAttribute) {
             EffectCloudAttribute.EffectCloud cloud = ((EffectCloudAttributeAccessor) cloudAttribute).getEffectCloud();
             boolean whenHit = modifier.getAttribute().getReader().getModifierName().contains("Hit");
             String tooltip = ((EffectCloudAccessor) cloud).getTooltip();
+            // Clouds can be formatted like "Fear Cloud" or "Fear II Cloud", this ensures that the level is **not** included
             String cloudType = (tooltip.contains(" ") ? tooltip.substring(0, tooltip.lastIndexOf(' ')) : tooltip) + " Cloud";
             return cloudType + (whenHit ? " when Hit" : "");
         }
 
+        // Get name returns blank for Ability Level Attributes
         if (modifier.getValue() instanceof AbilityLevelAttribute levelAttribute) {
             String ability = levelAttribute.getAbility().equals("all_abilities")
                     ? "All Abilities"
@@ -68,6 +71,7 @@ public abstract class AffixAttribute extends StringAttribute {
             return  "level of "+ ability;
         }
 
+        // Get name returns blank for Effect Avoidance Attributes as well
         if (modifier.getValue() instanceof EffectAvoidanceGearAttribute avoidanceAttribute) {
             return avoidanceAttribute.getEffect().getDisplayName().getString() + " Avoidance";
         }

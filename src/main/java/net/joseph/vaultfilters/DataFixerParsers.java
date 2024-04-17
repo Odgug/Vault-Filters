@@ -7,9 +7,8 @@ public class DataFixerParsers {
         int firstSpace = modifier.indexOf(' ');
         if (modifier.contains("Cloud")) {
             int lastSpace = modifier.lastIndexOf(' ');
-
             if (firstSpace == lastSpace) {
-                return (modifier.substring(1));
+                return modifier.substring(1);
             }
             return modifier.substring(1, firstSpace) + modifier.substring(lastSpace);
         }
@@ -58,8 +57,13 @@ public class DataFixerParsers {
             return 1;
         }
 
-
-        return !isPercent && modifier.contains("Attack Speed") ? (double)getLevelType(modifierName, isPercent).apply(numberString)-4 : getLevelType(modifierName, isPercent).apply(numberString);
+        // Some Modifier types have special cases for the number itself (e.g. as Attack Speed)
+        Number level = getLevelType(modifierName, isPercent).apply(numberString);
+        if (modifierName.equals("Attack Speed")) {
+            return (double) level - 4;
+        } else {
+            return level;
+        }
     }
 
     /**
@@ -74,10 +78,8 @@ public class DataFixerParsers {
                     -> isPercent ? DataFixerParsers::parseFloatPercent : Integer::parseInt;
             case "Armor", "Durability", "Chaining Attack", "Size", "Hammer Size"
                     -> isPercent ? DataFixerParsers::parseIntPercent : Integer::parseInt;
-            case "Attack Damage", "Reach", "Attack Range"
+            case "Attack Damage", "Reach", "Attack Range", "Attack Speed"
                     -> isPercent ? DataFixerParsers::parseDoublePercent : Double::parseDouble;
-            case "Attack Speed"
-                -> isPercent ? DataFixerParsers::parseDoublePercent : Double::parseDouble;
             default -> {
                 if (modifierName.contains("level of")) {
                     yield Integer::parseInt;
