@@ -29,12 +29,16 @@ public abstract class NumberAffixAttribute extends AffixAttribute {
         this.name = name;
         this.level = level;
     }
+
+
+    @Override
+    public boolean shouldList(VaultGearModifier<?> modifier) {
+        return !(getLevel(modifier) == null);
+    }
+    @Override
     public ItemAttribute withValue(VaultGearModifier<?> modifier) {
 
         Number level = getLevel(modifier);
-        if (level == null) {
-            return null;
-        }
         String name = getName(modifier);
         String displayName = getDisplayName(modifier, getAffixType());
         return withValue(displayName, name, level);
