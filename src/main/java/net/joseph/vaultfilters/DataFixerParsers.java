@@ -20,14 +20,17 @@ public class DataFixerParsers {
 
     public static Number parseLevel(String modifierName, String modifier) {
         int firstSpace = modifier.indexOf(' ');
-        int lastSpace = modifier.lastIndexOf(' ');
-        if (firstSpace == lastSpace) {
-            return 1;
-        }
-
         int startIndex = 0;
+
+        // Clouds are a special case
         if (modifier.contains("Cloud")) {
-            // Cloud Modifiers are formatted as "Fear III Cloud", to get III, we need the first and last space
+            // The first tier of a cloud is formatted as "Fear Cloud" no I
+            int lastSpace = modifier.lastIndexOf(' ');
+            if (firstSpace == lastSpace) {
+                return 1;
+            }
+
+            // Cloud Modifiers 2+ are formatted as "Fear II Cloud", to get II, we need the first and last space
             String cloudNumber = modifier.substring(firstSpace + 1, lastSpace);
             return switch (cloudNumber) {
                 case "II" -> 2;
