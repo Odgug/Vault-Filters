@@ -58,4 +58,42 @@ public class DataFixerParsers {
         }
         return name;
     }
+    public static dataSave getTypeFromName(String name) {
+       switch (name) {
+           case "Armor":
+               return dataSave.integerVal;
+           case "Mana":
+               return dataSave.undecided;
+           case "Durability":
+               return dataSave.integerVal;
+           case "Chaining Attack":
+               return dataSave.integerVal;
+           case "Size":
+               return dataSave.integerVal;
+           case "Hammer Size":
+               return dataSave.integerVal;
+           case "Attack Damage":
+               return dataSave.doubleVal;
+           case "Attack Speed":
+               return dataSave.doubleVal;
+           case "Reach":
+               return dataSave.doubleVal;
+           case "Attack Range":
+               return dataSave.doubleVal;
+           default:
+               if (name.contains("Cloud") || name.contains("level to")) {
+                   return dataSave.integerVal;
+               }
+               return dataSave.floatVal;
+
+       }
+    }
+    enum dataSave{
+        integerVal,
+        floatVal,
+        doubleVal,
+        //for stuff like mana which has the same name for % and +
+        undecided
+
+    }
 }
