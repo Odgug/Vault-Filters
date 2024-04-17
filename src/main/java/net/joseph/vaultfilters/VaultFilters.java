@@ -1,5 +1,6 @@
 package net.joseph.vaultfilters;
 
+import net.joseph.vaultfilters.attributes.affix.*;
 import net.joseph.vaultfilters.attributes.charm.CharmAffinityAttribute;
 import net.joseph.vaultfilters.attributes.charm.CharmGodAttribute;
 import net.joseph.vaultfilters.attributes.charm.CharmRarityAttribute;
@@ -12,21 +13,12 @@ import net.joseph.vaultfilters.attributes.inscription.InscriptionTimeAttribute;
 import net.joseph.vaultfilters.attributes.jewel.JewelCutsAttribute;
 import net.joseph.vaultfilters.attributes.jewel.JewelRarityAttribute;
 import net.joseph.vaultfilters.attributes.jewel.JewelSizeAttribute;
-import net.joseph.vaultfilters.attributes.affix.ImplicitAttribute;
 import net.joseph.vaultfilters.attributes.gear.GearLevelAttribute;
-import net.joseph.vaultfilters.attributes.affix.PrefixAttribute;
 import net.joseph.vaultfilters.attributes.gear.GearRarityAttribute;
 import net.joseph.vaultfilters.attributes.gear.GearRepairSlotAttribute;
-import net.joseph.vaultfilters.attributes.affix.SuffixAttribute;
 import net.joseph.vaultfilters.attributes.gear.GearTransmogAttribute;
-import net.joseph.vaultfilters.attributes.affix.HasLegendaryAttribute;
 import net.joseph.vaultfilters.attributes.gear.IsUnidentifiedAttribute;
 import net.joseph.vaultfilters.attributes.gear.ItemTypeAttribute;
-import net.joseph.vaultfilters.attributes.affix.LegendaryPrefixAttribute;
-import net.joseph.vaultfilters.attributes.affix.LegendarySuffixAttribute;
-import net.joseph.vaultfilters.attributes.affix.NumberImplicitAttribute;
-import net.joseph.vaultfilters.attributes.affix.NumberPrefixAttribute;
-import net.joseph.vaultfilters.attributes.affix.NumberSuffixAttribute;
 import net.joseph.vaultfilters.attributes.other.ItemNameAttribute;
 import net.joseph.vaultfilters.attributes.soul.AtleastSoulAttribute;
 import net.joseph.vaultfilters.attributes.soul.ExactSoulAttribute;
@@ -53,8 +45,8 @@ public class VaultFilters {
 
     private void setup(FMLCommonSetupEvent event) {
         // This has a specific order as this controls the order displayed in the filters
-        // Soul Attributes
         new ItemNameAttribute(("the_vault:chestplate")).register(ItemNameAttribute::new);
+        // Soul Attributes
         new HasSoulValueAttribute(true).register(HasSoulValueAttribute::new);
         new ExactSoulAttribute(0).register(ExactSoulAttribute::new);
         new AtleastSoulAttribute(0).register(AtleastSoulAttribute::new);
@@ -90,6 +82,8 @@ public class VaultFilters {
         new NumberImplicitAttribute("", "", 0).register(NumberImplicitAttribute::new);
         new NumberPrefixAttribute("", "", 0).register(NumberPrefixAttribute::new);
         new NumberSuffixAttribute("", "", 0).register(NumberSuffixAttribute::new);
+
+        new ModifierGroupAttribute("test").register(ModifierGroupAttribute::new);
         // Charms
         new CharmUsesAttribute(0).register(CharmUsesAttribute::new);
         new CharmAffinityAttribute(0).register(CharmAffinityAttribute::new);
