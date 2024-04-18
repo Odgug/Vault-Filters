@@ -31,7 +31,7 @@ public abstract class AffixAttribute extends StringAttribute {
     public abstract VaultGearModifier.AffixType getAffixType();
 
     /**
-     * runs once for every {@link VaultGearModifier<?>}
+     * runs once for every {@link VaultGearModifier}
      * @return if an attribute should be made for it
      */
     public boolean shouldList(VaultGearModifier<?> modifier) {
@@ -39,7 +39,7 @@ public abstract class AffixAttribute extends StringAttribute {
     }
 
     /**
-     * runs once for every {@link VaultGearModifier<?>} that should have an affix based on it
+     * runs once for every {@link VaultGearModifier} that should have an affix based on it
      * @return an attribute based on the affix
      */
     public ItemAttribute withValue(VaultGearModifier<?> modifier) {
@@ -70,8 +70,6 @@ public abstract class AffixAttribute extends StringAttribute {
         }
         return false;
     }
-
-
 
     /**
     * @return simple name, not including number
@@ -108,7 +106,7 @@ public abstract class AffixAttribute extends StringAttribute {
     }
 
     /**
-     * @return {@link Iterable<VaultGearModifier<?>>} with all item modifiers with the specified type
+     * @return {@link Iterable<VaultGearModifier>} with all item modifiers with the specified type
      * null will return all types
      */
     public Iterable<VaultGearModifier<?>> getModifiers(ItemStack itemStack, VaultGearModifier.AffixType type) {
