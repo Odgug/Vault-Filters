@@ -5,7 +5,7 @@ issueTrackerURL="https://github.com/Odgug/Vault-Filters/issues"
 
 [[mods]]
 modId="vaultfilters"
-version="${file.jarVersion}
+version="${file.jarVersion}"
 displayName="Vault Filters"
 logoFile="vaultfilters.png"
 description='''
@@ -18,7 +18,7 @@ Wanna filter omega gear pieces? Put an omega item in the attribute filter and se
 simple as that!
 '''
 displayURL="https://github.com/Odgug/Vault-Filters"
-credits=""
+credits="radimous and JustAHuman-xD"
 authors="Joseph Franci"
 
 [[dependencies.vaultfilters]]
