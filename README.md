@@ -124,7 +124,7 @@ Mod Compatibilities (Click to Collapse/Expand)
 - Vault Filters is a Vault Hunters 3rd edition addon, intended for use alongside the modpack.
 
 ## Licenses
-Vault Filters falls under the MIT license. See [Vault Filter's license]() for more information.
+Vault Filters falls under the MIT license. See [Vault Filter's license](https://github.com/Odgug/Vault-Filters/blob/master/LICENSE) for more information.
 Certain sections of the code are from the Create mod, which is licensed under the MIT license. See [Create's license](https://github.com/Creators-of-Create/Create/blob/mc1.18/dev/LICENSE) for more information.
 
 ![JewelExample](assets/JewelExample.png?raw=true "Jewel Attributes")
