@@ -20,6 +20,11 @@ public class ModifierGroupAttribute extends AffixAttribute {
     }
 
     @Override
+    public Object[] getTranslationParameters() {
+        String parsedValue = this.value.substring(0,3).equals("Mod") ? this.value.substring(3) : this.value;
+        return new Object[]{parsedValue};
+    }
+    @Override
     public String getTranslationKey() {
         return "modifier_group";
     }
