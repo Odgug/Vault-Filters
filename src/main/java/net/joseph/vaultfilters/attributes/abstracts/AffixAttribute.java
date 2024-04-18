@@ -131,7 +131,8 @@ public abstract class AffixAttribute extends StringAttribute {
         List<ItemAttribute> attributes = new ArrayList<>();
         for (VaultGearModifier<?> modifier : getModifiers(itemStack, getAffixType())) {
             if (shouldList(modifier)) {
-                attributes.add(withValue(modifier));
+                ItemAttribute itemAtt = withValue(modifier);
+                if (itemAtt != null) {attributes.add(itemAtt);}
             }
         }
         return attributes;
