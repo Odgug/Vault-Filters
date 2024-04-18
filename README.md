@@ -7,7 +7,15 @@ research requirement for the filters allowing the mod to be used independently o
 Wanna filter omega gear pieces? Put an omega item in the attribute filter and select the new "is of rarity: OMEGA" filter,
 simple as that! The mod of course provides more than just rarity filtering, it provides many filter attributes!
 
-<details>
+## Credits
+Huge thanks to the people here for making this mod possible
+- Author: Joseph Franci
+- Contributor: [JustAHuman-xD](https://github.com/JustAHuman-xD)
+Rewrite with both code and performance optimizations and a ton of polishing
+- Contributor: [radimous](https://github.com/radimous)
+Added a ton of mod compatibility and huge technical help
+
+<details open>
 <summary style="font-size: 1.75em; font-weight: bold">
 New Item Attributes (Click to Expand)
 </summary>
@@ -19,6 +27,7 @@ But you can of course choose different parameters during selection in the filter
 - Is a {Trinket/Charm/Gear Piece/Inscription/Jewel} Item
 - Is unidentified
 - Is at least level {32}
+- Is of item ID {item.the_vault.helmet}
 
 ### Soul value
 - Has soul value
@@ -38,7 +47,9 @@ But you can of course choose different parameters during selection in the filter
 - Has an implicit that adds at least {+5% Movement Speed}
 - Has a prefix that adds at least {+10 Armor}
 - Has a suffix that adds at least {+5% Item Quantity}
-
+####
+- Has an affix in group {OnHitEffect}
+- 
 ### Gear Pieces
 - Is a {Rare} gear piece
 - Has at least {2} Unused repair slots
@@ -77,8 +88,11 @@ But you can of course choose different parameters during selection in the filter
 
 Due to these changes and the compatibility additions, create is no longer a requirement to use this mod.
 
+<details open>
+<summary style="font-size: 1.75em; font-weight: bold">
+Mod Compatibilities (Click to Expand)
+</summary>
 ## Compatibility
-Thanks to [radimous](https://github.com/radimous) (rizek_ on discord), for the huge help with these
 
 (Filters = List & Attribute Filters)
 
@@ -94,6 +108,7 @@ Thanks to [radimous](https://github.com/radimous) (rizek_ on discord), for the h
 - When pulling out of items stored in external storages, everything functions normally.
 - For performance reasons, when pulling out of a disk, only items matching the filters will be pulled out.
 - It is recommended to not make extensive use filters with exporters to avoid possible lag.
+</details>
 
 ## Server / Client Requirements
 - The mod functions when only on the server, allowing players without it to join. 
@@ -104,5 +119,6 @@ Thanks to [radimous](https://github.com/radimous) (rizek_ on discord), for the h
 - This mod is not a Create addon but a gear sorting addon that utilizes the existing attribute filter.
 - Vault Filters is a Vault Hunters 3rd edition addon, intended for use alongside the modpack.
 
-## Credits
+## Licenses
+Vault Filters falls under the MIT license. See [Vault Filter's license]() for more information.
 Certain sections of the code are from the Create mod, which is licensed under the MIT license. See [Create's license](https://github.com/Creators-of-Create/Create/blob/mc1.18/dev/LICENSE) for more information.
