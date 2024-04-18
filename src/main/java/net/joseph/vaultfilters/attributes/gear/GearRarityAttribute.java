@@ -29,7 +29,8 @@ public class GearRarityAttribute extends StringAttribute {
                 return null;
             }
             String rollType = roll.get();
-            return rollType.substring(0, rollType.length() - 1);
+            int rollLength = rollType.length();
+            return rollType.charAt(rollLength-1) == '+' ? rollType.substring(0,rollLength-1) : rollType;
         }
 
         VaultGearData data = VaultGearData.read(itemStack);
