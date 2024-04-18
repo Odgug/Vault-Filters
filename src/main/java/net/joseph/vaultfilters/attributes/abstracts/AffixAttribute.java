@@ -43,7 +43,8 @@ public abstract class AffixAttribute extends StringAttribute {
      * @return an attribute based on the affix
      */
     public ItemAttribute withValue(VaultGearModifier<?> modifier) {
-        return withValue(getName(modifier));
+        String name = getName(modifier);
+        return name.isBlank() ? null : withValue(name);
     }
 
     @Override
