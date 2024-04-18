@@ -7,10 +7,13 @@ research requirement for the filters allowing the mod to be used independently o
 Wanna filter omega gear pieces? Put an omega item in the attribute filter and select the new "is of rarity: OMEGA" filter,
 simple as that! The mod of course provides more than just rarity filtering, it provides many filter attributes!
 
-## New Item Attributes
+<details>
+<summary style="font-size: 1.75em; font-weight: bold">
+New Item Attributes (Click to Expand)
+</summary>
+
 (Everything inside {} is the parameter of the attribute, with the contents being an example parameter.
 But you can of course choose different parameters during selection in the filter menu.)
-
 
 ### General
 - Is a {Trinket/Charm/Gear Piece/Inscription/Jewel} Item
@@ -66,6 +69,7 @@ But you can of course choose different parameters during selection in the filter
 - Is a {The Frog} trinket
 - Is a {Blue/Red} colored trinket
 - Is a trinket with at least {25} uses left
+</details>
 
 ## Extra features
 - The attribute and list filters from the Create mod no longer require the Create mod to be researched for crafting and use.
