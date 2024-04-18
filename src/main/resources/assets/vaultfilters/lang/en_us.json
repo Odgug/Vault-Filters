@@ -26,6 +26,9 @@
   "create.item_attributes.gear_transmog": "uses the \"%1$s\" transmog",
   "create.item_attributes.gear_transmog.inverted": "doesn't use the \"%1$s\" transmog",
 
+  "create.item_attributes.tool_material": "is a \"%1$s\" vault tool",
+  "create.item_attributes.tool_material.inverted": "is not a \"%1$s\" vault tool",
+
   "create.item_attributes.repair": "has at least \"%1$s\" unused repair slots",
   "create.item_attributes.repair.inverted": "doesn't have at least \"%1$s\" unused repair slots",
 

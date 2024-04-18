@@ -7,6 +7,7 @@ import net.joseph.vaultfilters.attributes.jewel.*;
 import net.joseph.vaultfilters.attributes.gear.*;
 import net.joseph.vaultfilters.attributes.other.*;
 import net.joseph.vaultfilters.attributes.soul.*;
+import net.joseph.vaultfilters.attributes.tool.ToolMaterialAttribute;
 import net.joseph.vaultfilters.attributes.trinket.*;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -52,6 +53,8 @@ public class VaultFilters {
         // Jewels
         new JewelSizeAttribute(0).register(JewelSizeAttribute::new);
         new JewelCutsAttribute(0).register(JewelCutsAttribute::new);
+        //Tools
+        new ToolMaterialAttribute("Chromatic Steel").register(ToolMaterialAttribute::new);
         // Affixes
         new HasLegendaryAttribute(true).register(HasLegendaryAttribute::new);
         new LegendaryPrefixAttribute("Attack Damage").register(LegendaryPrefixAttribute::new);
@@ -65,7 +68,7 @@ public class VaultFilters {
         new NumberPrefixAttribute("", "", 0).register(NumberPrefixAttribute::new);
         new NumberSuffixAttribute("", "", 0).register(NumberSuffixAttribute::new);
 
-        new ModifierGroupAttribute("test").register(ModifierGroupAttribute::new);
+        new ModifierGroupAttribute("ModAbility").register(ModifierGroupAttribute::new);
         // Charms
         new CharmUsesAttribute(0).register(CharmUsesAttribute::new);
         new CharmAffinityAttribute(0).register(CharmAffinityAttribute::new);
