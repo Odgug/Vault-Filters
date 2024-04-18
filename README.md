@@ -49,7 +49,6 @@ But you can of course choose different parameters during selection in the filter
 - Has a suffix that adds at least {+5% Item Quantity}
 ####
 - Has an affix in group {OnHitEffect}
-- 
 ### Gear Pieces
 - Is a {Rare} gear piece
 - Has at least {2} Unused repair slots
