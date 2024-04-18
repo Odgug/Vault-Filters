@@ -5,18 +5,11 @@ issueTrackerURL="https://github.com/Odgug/Vault-Filters/issues"
 
 [[mods]]
 modId="vaultfilters"
-version="${file.jarVersion}"
+version="1.7.0-3.13.1"
 displayName="Vault Filters"
 logoFile="vaultfilters.png"
 description='''
-Getting tired of sorting gear manually? This simple but powerful mod allows you to filter and sort data heavy vault gear,
-trinkets, charms, inscriptions and jewels according to your needs and preferences by adding vault related attributes to
-the already existing attribute filter from the Create mod. The mod adds compatibility for the list and attribute filters
-with several mods including modular routers, refined storage and sophisticated backpacks. It also removes Create as a
-research requirement for the filters allowing the mod to be used independently of Create using the compatibility features.
-Wanna filter omega gear pieces? Put an omega item in the attribute filter and select the new "is of rarity: OMEGA" filter,
-simple as that!
-'''
+Getting tired of sorting gear manually? This simple but powerful mod allows you to filter and sort data heavy vault gear, trinkets, charms, inscriptions and jewels according to your needs and preferences by adding vault related attributes to the already existing attribute filter from the Create mod. The mod adds compatibility for the list and attribute filters with several mods including modular routers, refined storage and sophisticated backpacks. It also removes Create as a research requirement for the filters allowing the mod to be used independently of Create using the compatibility features. Wanna filter omega gear pieces? Put an omega item in the attribute filter and select the new "is of rarity: OMEGA" filter, simple as that!'''
 displayURL="https://github.com/Odgug/Vault-Filters"
 credits="radimous and JustAHuman-xD"
 authors="Joseph Franci"

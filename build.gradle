@@ -22,7 +22,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'org.spongepowered.mixin'
 
-version = '1.7.0-3.13.1'
+version = mod_version
 group = 'net.joseph.vaultfilters'
 archivesBaseName = 'vaultfilters'
 
