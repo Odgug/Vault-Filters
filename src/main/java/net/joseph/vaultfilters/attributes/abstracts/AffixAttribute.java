@@ -41,6 +41,7 @@ public abstract class AffixAttribute extends StringAttribute {
     /**
      * runs once for every {@link VaultGearModifier} that should have an affix based on it
      * @return an attribute based on the affix
+     * doesn't add anything if the result is null
      */
     public ItemAttribute withValue(VaultGearModifier<?> modifier) {
         String name = getName(modifier);
