@@ -17,7 +17,7 @@ Added a ton of mod compatibility and huge technical help
 
 <details open>
 <summary style="font-size: 1.75em; font-weight: bold">
-New Item Attributes (Click to Expand)
+New Item Attributes (Click to Collapse/Expand)
 </summary>
 
 (Everything inside {} is the parameter of the attribute, with the contents being an example parameter.
@@ -90,8 +90,9 @@ Due to these changes and the compatibility additions, create is no longer a requ
 
 <details open>
 <summary style="font-size: 1.75em; font-weight: bold">
-Mod Compatibilities (Click to Expand)
+Mod Compatibilities (Click to Collapse/Expand)
 </summary>
+
 ## Compatibility
 
 (Filters = List & Attribute Filters)
