@@ -20,68 +20,68 @@ Added a ton of mod compatibility and huge technical help
 New Item Attributes (Click to Collapse/Expand)
 </summary>
 
-(Everything inside {} is the parameter of the attribute, with the contents being an example parameter.
+(Everything inside "" is the parameter of the attribute, with the contents being an example parameter.
 But you can of course choose different parameters during selection in the filter menu.)
 
 ### General
-- Is a {Trinket/Charm/Gear Piece/Inscription/Jewel} Item
+- Is a "Trinket/Charm/Gear Piece/Inscription/Jewel" Item
 - Is unidentified
-- Is at least level {32}
-- Is of item ID {item.the_vault.helmet}
+- Is at least level "32"
+- Is of item ID "Vault Helmet"
 
 ### Soul value
 - Has soul value
-- Has exactly {256} soul value
-- Has at least {128} soul value
+- Has exactly "256" soul value
+- Has at least "128" soul value
 
 ### Affix Attributes
 (Compatible with Gear Pieces, Vault Tools and Jewels)
 - Has a legendary modifier
-- Has a legendary {Resistance} prefix
-- Has a legendary {Trap Disarm} suffix
+- Has a legendary "Resistance" prefix
+- Has a legendary "Trap Disarm" suffix
 ####
-- Has a {Block Chance} implicit
-- Has a {Health} prefix
-- Has a {Mana Regen} suffix
+- Has a "Block Chance" implicit
+- Has a "Health" prefix
+- Has a "Mana Regen" suffix
 ####
-- Has an implicit that adds at least {+5% Movement Speed}
-- Has a prefix that adds at least {+10 Armor}
-- Has a suffix that adds at least {+5% Item Quantity}
+- Has an implicit that adds at least "+5% Movement Speed"
+- Has a prefix that adds at least "+10 Armor"
+- Has a suffix that adds at least "+5% Item Quantity"
 ####
-- Has an affix in group {OnHitEffect}
+- Has an affix in group "OnHitEffect"
 ### Gear Pieces
-- Is a {Rare} gear piece
-- Has at least {2} Unused repair slots
-- Uses the {Rusty Warrior} transmog
+- Is a "Rare" gear piece
+- Has at least "2" Unused repair slots
+- Uses the "Rusty Warrior" transmog
 
 ### Jewels
-- Is a {Flawed} jewel
-- Is a jewel with up to {22} size
-- Has been free cut {2} times
+- Is a "Flawed" jewel
+- Is a jewel with up to "22" size
+- Has been free cut "2" times
 
 ### Vault Tools
-- Is a {Chromatic Iron} vault tool
+- Is a "Chromatic Iron" vault tool
 
 ### Inscriptions:
-- Adds a {Wild West} room
-- Adds a {Challenge} type room
+- Adds a "Wild West" room
+- Adds a "Challenge" type room
 ####
-- Adds at least {0:21}
-- Adds at least {7%} completion
-- Adds up to {1.1%} instability
+- Adds at least "0:21"
+- Adds at least "7%" completion
+- Adds up to "1.1%" instability
 
 
 ### Charms
-- Is a {Regal} charm
-- Adds affinity for {Velara}
+- Is a "Regal" charm
+- Adds affinity for "Velara"
 ####
-- Adds at least {20%} affinity
-- Is a charm with at least {7} uses left
+- Adds at least "20%" affinity
+- Is a charm with at least "7" uses left
 
 ### Trinkets
-- Is a {The Frog} trinket
-- Is a {Blue/Red} colored trinket
-- Is a trinket with at least {25} uses left
+- Is a "The Frog" trinket
+- Is a "Blue/Red" colored trinket
+- Is a trinket with at least "25" uses left
 </details>
 
 ## Extra features
