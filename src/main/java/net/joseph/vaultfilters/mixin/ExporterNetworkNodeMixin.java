@@ -4,7 +4,6 @@ import com.refinedmods.refinedstorage.api.util.Action;
 import com.refinedmods.refinedstorage.api.util.IComparer;
 import com.refinedmods.refinedstorage.apiimpl.network.node.ExporterNetworkNode;
 import com.simibubi.create.content.logistics.filter.FilterItem;
-import com.simibubi.create.content.logistics.filter.FilterItemStack;
 import net.joseph.vaultfilters.VaultFilters;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -33,7 +32,7 @@ public class ExporterNetworkNodeMixin {
     @Redirect(method = "update", at = @At(value = "INVOKE", target = "Lcom/refinedmods/refinedstorage/api/util/IComparer;isEqualNoQuantity(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;)Z"))
     private boolean EqualsNoQty(IComparer instance, ItemStack left, ItemStack right){
         if (right.getItem() instanceof FilterItem){
-            return FilterItemStack.of(right).test(null, left);
+            return FilterItem.test(null, left, right);
         }
         return instance.isEqualNoQuantity(left, right);
     }

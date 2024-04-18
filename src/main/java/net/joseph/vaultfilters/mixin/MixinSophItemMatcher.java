@@ -1,7 +1,6 @@
 package net.joseph.vaultfilters.mixin;
 
 import com.simibubi.create.content.logistics.filter.FilterItem;
-import com.simibubi.create.content.logistics.filter.FilterItemStack;
 import net.minecraft.world.item.ItemStack;
 import net.p3pp3rf1y.sophisticatedcore.upgrades.FilterLogicBase;
 import org.spongepowered.asm.mixin.Mixin;
@@ -14,7 +13,7 @@ public class MixinSophItemMatcher {
     @Inject(method = "stackMatchesFilter", at = @At("HEAD"), cancellable = true)
     public void sophFilterMatcher(ItemStack stack, ItemStack filterStack, CallbackInfoReturnable<Boolean> cir) {
         if (filterStack.getItem() instanceof FilterItem) {
-            cir.setReturnValue(FilterItemStack.of(filterStack).test(null, stack));
+            cir.setReturnValue(FilterItem.test(null,stack, filterStack));
         }
     }
 }

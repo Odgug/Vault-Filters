@@ -55,7 +55,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis lacinia magn
 [[dependencies.vaultfilters]]
     modId="create"
     mandatory=true
-    versionRange="[0.5.1.c,)"
+    versionRange="[0.5.1.b,)"
     ordering="AFTER"
     side="BOTH"
 # Here's another dependency
