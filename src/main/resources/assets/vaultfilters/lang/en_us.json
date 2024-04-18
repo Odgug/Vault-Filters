@@ -1,5 +1,4 @@
 {
-
   "create.item_attributes.item_name": "is of item ID \"%1$s\"",
   "create.item_attributes.item_name.inverted": "is not of item ID \"%1$s\"",
 
