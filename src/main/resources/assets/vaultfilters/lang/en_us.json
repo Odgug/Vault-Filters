@@ -1,4 +1,7 @@
 {
+  "create.item_attributes.item_name": "is of item ID \"%1$s\"",
+  "create.item_attributes.item_name.inverted": "is not of item ID \"%1$s\"",
+
   "create.item_attributes.item_type": "is a \"%1$s\" item",
   "create.item_attributes.item_type.inverted": "is not a \"%1$s\" item",
 
@@ -22,6 +25,9 @@
 
   "create.item_attributes.gear_transmog": "uses the \"%1$s\" transmog",
   "create.item_attributes.gear_transmog.inverted": "doesn't use the \"%1$s\" transmog",
+
+  "create.item_attributes.tool_material": "is a \"%1$s\" vault tool",
+  "create.item_attributes.tool_material.inverted": "is not a \"%1$s\" vault tool",
 
   "create.item_attributes.repair": "has at least \"%1$s\" unused repair slots",
   "create.item_attributes.repair.inverted": "doesn't have at least \"%1$s\" unused repair slots",
@@ -86,6 +92,9 @@
   "create.item_attributes.suffix_number": "has a suffix that adds at least \"%1$s\"",
   "create.item_attributes.suffix_number.inverted": "doesn't have a suffix that adds at least \"%1$s\"",
 
+
+  "create.item_attributes.modifier_group": "has an affix in group \"%1$s\"",
+  "create.item_attributes.modifier_group.inverted": "doesn't have an affix in group \"%1$s\"",
 
   "create.item_attributes.charm_affinity": "adds at least \"%1$s\" affinity",
   "create.item_attributes.charm_affinity.inverted": "doesn't add at least \"%1$s\" affinity",
