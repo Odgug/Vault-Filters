@@ -16,7 +16,8 @@ public class ModifierGroupAttribute extends AffixAttribute {
 
     @Override
     public ItemAttribute withValue(VaultGearModifier<?> modifier) {
-        return withValue(modifier.getModifierGroup());
+        String group = modifier.getModifierGroup();
+        return group == null ? null : withValue(group);
     }
 
     @Override
