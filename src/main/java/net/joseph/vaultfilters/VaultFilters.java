@@ -28,7 +28,7 @@ public class VaultFilters {
 
     private void setup(FMLCommonSetupEvent event) {
         // This has a specific order as this controls the order displayed in the filters
-        new ItemNameAttribute(("the_vault:chestplate")).register(ItemNameAttribute::new);
+        new ItemNameAttribute(("Vault Helmet")).register(ItemNameAttribute::new);
         // Soul Attributes
         new HasSoulValueAttribute(true).register(HasSoulValueAttribute::new);
         new ExactSoulAttribute(0).register(ExactSoulAttribute::new);

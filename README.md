@@ -35,7 +35,7 @@ But you can of course choose different parameters during selection in the filter
 - Has at least {128} soul value
 
 ### Affix Attributes
-(Compatible with Gear Pieces and Jewels)
+(Compatible with Gear Pieces, Vault Tools and Jewels)
 - Has a legendary modifier
 - Has a legendary {Resistance} prefix
 - Has a legendary {Trap Disarm} suffix
@@ -59,6 +59,9 @@ But you can of course choose different parameters during selection in the filter
 - Is a {Flawed} jewel
 - Is a jewel with up to {22} size
 - Has been free cut {2} times
+
+### Vault Tools
+- Is a {Chromatic Iron} vault tool
 
 ### Inscriptions:
 - Adds a {Wild West} room
