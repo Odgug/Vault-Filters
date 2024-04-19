@@ -100,16 +100,15 @@ Mod Compatibilities (Click to Collapse/Expand)
 (Filters = List & Attribute Filters)
 
 ### Modular routers
-- Filters now work properly inside modules. Note: Only one of each filter type can be placed, but multiple attribute filters can be placed inside a single list filter.
+- Filters now work properly as filter items inside modules. Note: Only one of each filter type can be placed, but multiple attribute filters can be placed inside a single list filter.
 
 ### Sophisticated backpacks
-- Filters now function correctly as upgrades like the pickup upgrade and void upgrade.
+- Filters now function correctly inside the filter slots of upgrades like the pickup upgrade and void upgrade.
 
 ### Refined storage
 - RS filter item compatibility: Attribute filters can now be placed inside the "Filter" item.
 - Filters work properly inside exporters.
-- When pulling out of items stored in external storages, everything functions normally.
-- For performance reasons, when pulling out of a disk, only items matching the filters will be pulled out.
+- For performance reasons, when pulling out of a disk, only gear-like items matching the filters will be pulled out, When pulling out of items stored in external storages, everything functions normally.
 - It is recommended to not make extensive use filters with exporters to avoid possible lag.
 </details>
 
