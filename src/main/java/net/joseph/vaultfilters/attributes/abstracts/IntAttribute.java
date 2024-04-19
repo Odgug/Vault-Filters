@@ -33,7 +33,7 @@ public abstract class IntAttribute extends VaultAttribute<Integer> {
 
     @Override
     public void writeNBT(CompoundTag compoundTag) {
-        compoundTag.putInt(getLegacyKey(), this.value);
+        compoundTag.putInt(getTranslationKey(), this.value);
     }
 
     @Override
