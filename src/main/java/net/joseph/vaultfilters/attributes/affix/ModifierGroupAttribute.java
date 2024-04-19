@@ -20,6 +20,11 @@ public class ModifierGroupAttribute extends AffixAttribute {
         return group.isEmpty() ? null : withValue(group);
     }
 
+
+    @Override
+    public boolean checkModifier(VaultGearModifier<?> modifier) {
+        return this.value.equals(modifier.getModifierGroup());
+    }
     @Override
     public Object[] getTranslationParameters() {
         String parsedValue = this.value.substring(0,3).equals("Mod") ? this.value.substring(3) : this.value;
