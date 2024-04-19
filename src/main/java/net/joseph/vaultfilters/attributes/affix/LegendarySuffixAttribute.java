@@ -19,6 +19,10 @@ public class LegendarySuffixAttribute extends AffixAttribute {
     }
 
     @Override
+    public boolean checkModifier(VaultGearModifier<?> modifier) {
+        return modifier.getCategory() == VaultGearModifier.AffixCategory.LEGENDARY && this.value.equals(getName(modifier));
+    }
+    @Override
     public String getTranslationKey() {
         return "legendary_suffix";
     }
