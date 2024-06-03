@@ -7,10 +7,13 @@ import net.joseph.vaultfilters.attributes.abstracts.OldAttribute;
 import net.minecraft.world.item.ItemStack;
 
 public class InscriptionInstabilityAttribute extends OldAttribute {
-    //used to be DoubleAttribute
-    public InscriptionInstabilityAttribute(Double value) {
+    public InscriptionInstabilityAttribute(Object value) {
         super(value);
     }
+    //used to be DoubleAttribute
+//    public InscriptionInstabilityAttribute(Double value) {
+//        super(value);
+//    }
     
 //    @Override
 //    public Double getValue(ItemStack itemStack) {

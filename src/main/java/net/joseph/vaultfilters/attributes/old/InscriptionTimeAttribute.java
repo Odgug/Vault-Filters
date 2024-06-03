@@ -7,10 +7,13 @@ import net.joseph.vaultfilters.attributes.abstracts.OldAttribute;
 import net.minecraft.world.item.ItemStack;
 
 public class InscriptionTimeAttribute extends OldAttribute {
-    //used to be IntAttribute
-    public InscriptionTimeAttribute(Integer value) {
+    public InscriptionTimeAttribute(Object value) {
         super(value);
     }
+    //used to be IntAttribute
+//    public InscriptionTimeAttribute(Integer value) {
+//        super(value);
+//    }
 
     //@Override
 //    public Integer getValue(ItemStack itemStack) {

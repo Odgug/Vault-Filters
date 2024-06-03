@@ -25,9 +25,9 @@ public class InscriptionRoomTypeAttribute extends StringAttribute {
         ArchitectRoomEntry entry = data.getEntries().get(0).toRoomEntry();
         String color = String.valueOf(entry.getName().getStyle().getColor().getValue());
         return switch (color) {
-            case "15769088" -> "Challenge";
+            case "15769088", "16733695" -> "Challenge";
             case "16777215" -> "Common";
-            case "7012096" -> "Omega";
+            case "7012096", "5635925" -> "Omega";
             default -> color;
         };
     }

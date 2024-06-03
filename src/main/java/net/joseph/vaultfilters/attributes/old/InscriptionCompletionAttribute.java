@@ -7,10 +7,13 @@ import net.joseph.vaultfilters.attributes.abstracts.OldAttribute;
 import net.minecraft.world.item.ItemStack;
 
 public class InscriptionCompletionAttribute extends OldAttribute {
-    //used to be intAttribute
-    public InscriptionCompletionAttribute(Integer value) {
+    public InscriptionCompletionAttribute(Object value) {
         super(value);
     }
+    //used to be intAttribute
+//    public InscriptionCompletionAttribute(Integer value) {
+//        super(value);
+//    }
 
 //    @Override
 //    public Integer getValue(ItemStack itemStack) {
