@@ -1,4 +1,4 @@
-package net.joseph.vaultfilters.attributes.gear;
+package net.joseph.vaultfilters.attributes.other;
 
 import iskallia.vault.gear.item.VaultGearItem;
 import iskallia.vault.item.InscriptionItem;
