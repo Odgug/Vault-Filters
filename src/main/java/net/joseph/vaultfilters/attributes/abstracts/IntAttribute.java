@@ -3,6 +3,7 @@ package net.joseph.vaultfilters.attributes.abstracts;
 import com.simibubi.create.content.logistics.filter.ItemAttribute;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
+import org.lwjgl.system.CallbackI;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -49,10 +50,19 @@ public abstract class IntAttribute extends VaultAttribute<Integer> {
             compoundTag.putInt(key, attribute.value);
             return attribute;
         } else {
-            IntAttribute attribute = withValue(Integer.parseInt(compoundTag.getString(getLegacyKey())));
-            compoundTag.putInt(key, attribute.value);
-            compoundTag.remove(getLegacyKey());
-            return attribute;
+            byte legacyType = compoundTag.getTagType(getLegacyKey());
+            if (legacyType == CompoundTag.TAG_STRING) {
+                IntAttribute attribute = withValue(Integer.parseInt(compoundTag.getString(getLegacyKey())));
+                compoundTag.putInt(key, attribute.value);
+                compoundTag.remove(getLegacyKey());
+                return attribute;
+            } else {
+                IntAttribute attribute = withValue(compoundTag.getInt(getLegacyKey()));
+                compoundTag.putInt(key, attribute.value);
+                compoundTag.remove(getLegacyKey());
+                return attribute;
+            }
+
         }
     }
 }

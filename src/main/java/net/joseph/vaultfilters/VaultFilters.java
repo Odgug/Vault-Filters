@@ -3,6 +3,7 @@ package net.joseph.vaultfilters;
 import net.joseph.vaultfilters.attributes.affix.*;
 import net.joseph.vaultfilters.attributes.catalysts.CatalystHasModifierAttribute;
 import net.joseph.vaultfilters.attributes.catalysts.CatalystModifierCategoryAttribute;
+import net.joseph.vaultfilters.attributes.catalysts.CatalystSizeAttribute;
 import net.joseph.vaultfilters.attributes.charm.*;
 import net.joseph.vaultfilters.attributes.inscription.*;
 import net.joseph.vaultfilters.attributes.jewel.*;
@@ -46,9 +47,10 @@ public class VaultFilters {
         new JewelRarityAttribute("Chipped").register(JewelRarityAttribute::new);
         new CharmRarityAttribute("Regal").register(CharmRarityAttribute::new);
         // Inscription Attributes
+        new InscriptionSizeAttribute(10).register(InscriptionSizeAttribute::new);
         new InscriptionRoomTypeAttribute("Challenge").register(InscriptionRoomTypeAttribute::new);
         new InscriptionRoomAttribute("Wild West").register(InscriptionRoomAttribute::new);
-        new InscriptionSizeAttribute(10).register(InscriptionSizeAttribute::new);
+
         // Old (register anyway for data fixing purposes)
         new InscriptionTimeAttribute(0).register(InscriptionTimeAttribute::new);
         new InscriptionCompletionAttribute(0).register(InscriptionCompletionAttribute::new);
@@ -86,6 +88,7 @@ public class VaultFilters {
         new TrinketColorAttribute("").register(TrinketColorAttribute::new);
 
         // Catalysts
+        new CatalystSizeAttribute(10).register(CatalystSizeAttribute::new);
         new CatalystHasModifierAttribute("Ornate").register(CatalystHasModifierAttribute::new);
         new CatalystModifierCategoryAttribute("Bonus Chests").register(CatalystModifierCategoryAttribute::new);
     }
