@@ -2,6 +2,7 @@ package net.joseph.vaultfilters.attributes.other;
 
 import iskallia.vault.block.TreasureDoorBlock;
 import iskallia.vault.gear.item.VaultGearItem;
+import iskallia.vault.item.InfusedCatalystItem;
 import iskallia.vault.item.InscriptionItem;
 import iskallia.vault.item.VaultCatalystItem;
 import iskallia.vault.item.gear.CharmItem;
@@ -27,7 +28,7 @@ public class ItemTypeAttribute extends StringAttribute {
             return "Inscription";
         } else if (itemStack.getItem() instanceof VaultGearItem) {
             return "Gear Piece";
-        } else if (itemStack.getItem() instanceof VaultCatalystItem) {
+        } else if (itemStack.getItem() instanceof InfusedCatalystItem) {
             return "Catalyst";
         } else if (isTreasureDoor(itemStack)) {
             return "Treasure Key";

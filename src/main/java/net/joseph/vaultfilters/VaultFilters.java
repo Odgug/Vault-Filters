@@ -1,6 +1,7 @@
 package net.joseph.vaultfilters;
 
 import net.joseph.vaultfilters.attributes.affix.*;
+import net.joseph.vaultfilters.attributes.catalysts.CatalystHasModifierAttribute;
 import net.joseph.vaultfilters.attributes.charm.*;
 import net.joseph.vaultfilters.attributes.inscription.*;
 import net.joseph.vaultfilters.attributes.jewel.*;
@@ -82,5 +83,8 @@ public class VaultFilters {
         new TrinketUsesAttribute(0).register(TrinketUsesAttribute::new);
         new TrinketNameAttribute("").register(TrinketNameAttribute::new);
         new TrinketColorAttribute("").register(TrinketColorAttribute::new);
+
+        // Catalysts
+        new CatalystHasModifierAttribute("Ornate").register(CatalystHasModifierAttribute::new);
     }
 }

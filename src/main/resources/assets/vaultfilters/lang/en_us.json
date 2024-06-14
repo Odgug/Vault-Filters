@@ -118,5 +118,8 @@
   "create.item_attributes.trinket_name.inverted": "is not a \"%1$s\" trinket",
 
   "create.item_attributes.catalyst_size": "is a catalyst with up to \"%1$s\" size",
-  "create.item_attributes.catalyst_size.inverted": "is not a catalyst with up to \"%1$s\""
+  "create.item_attributes.catalyst_size.inverted": "is not a catalyst with up to \"%1$s\"",
+
+  "create.item_attributes.catalyst_modifier": "is a catalyst with a \"%1$s\" modifier",
+  "create.item_attributes.catalyst_modifier.inverted": "is not a catalyst with a \"%1$s\" modifier"
 }
