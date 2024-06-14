@@ -71,6 +71,9 @@
   "create.item_attributes.inscription_time": "adds at least \"%1$s\" seconds",
   "create.item_attributes.inscription_time.inverted": "doesn't add at least \"%1$s\" seconds",
 
+  "create.item_attributes.inscription_size": "is an inscription with up to \"%1$s\" size",
+  "create.item_attributes.inscription_size.inverted": "is not an inscription with up to \"%1$s\"",
+
   "create.item_attributes.inscription_completion": "adds at least \"%1$s\" completion",
   "create.item_attributes.inscription_completion.inverted": "doesn't add at least \"%1$s\" completion",
 
