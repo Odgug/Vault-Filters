@@ -23,6 +23,10 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
+
+//import com.simibubi.create.content.logistics.filter.FilterItemStack;
+
+
 @Mod(VaultFilters.MOD_ID)
 public class VaultFilters {
     public static final String MOD_ID = "vaultfilters";
@@ -95,6 +99,7 @@ public class VaultFilters {
         new CatalystModifierCategoryAttribute("Bonus Chests").register(CatalystModifierCategoryAttribute::new);
     }
     public static boolean checkFilter(ItemStack stack, ItemStack filterStack) {
+        //return FilterItemStack.of(filterStack).test(null, stack);
         return FilterItem.test(null,stack, filterStack);
     }
 }
