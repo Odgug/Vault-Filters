@@ -1,6 +1,7 @@
 package net.joseph.vaultfilters.attributes.abstracts;
 
 import com.simibubi.create.content.logistics.filter.ItemAttribute;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
@@ -86,4 +87,16 @@ public abstract class VaultAttribute<V> implements ItemAttribute {
         }
         return attributes;
     }
+    public boolean nestedLegacyKey() {return false;
+    }
+   @Override
+   public boolean canRead(CompoundTag nbt) {
+        if (nestedLegacyKey()) {
+            if (nbt.contains(getLegacyKey())) {
+                nbt.put(getNBTKey(), nbt.getCompound(getLegacyKey()));
+                nbt.remove(getLegacyKey());
+            }
+        }
+        return nbt.contains(getNBTKey());
+   }
 }

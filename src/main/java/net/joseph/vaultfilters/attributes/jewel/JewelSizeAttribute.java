@@ -27,7 +27,16 @@ public class JewelSizeAttribute extends IntAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public boolean nestedLegacyKey() {
+        return true;
+    }
+    @Override
+    public String getLegacyKey() {
         return "size";
+    }
+
+    @Override
+    public String getTranslationKey() {
+        return "jewel_size";
     }
 }

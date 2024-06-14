@@ -35,8 +35,8 @@
   "create.item_attributes.level": "is at least level \"%1$s\"",
   "create.item_attributes.level.inverted": "is not at least level \"%1$s\"",
 
-  "create.item_attributes.size": "is a jewel with up to \"%1$s\" size",
-  "create.item_attributes.size.inverted": "is not a jewel with up to \"%1$s\"",
+  "create.item_attributes.jewel_size": "is a jewel with up to \"%1$s\" size",
+  "create.item_attributes.jewel_size.inverted": "is not a jewel with up to \"%1$s\"",
 
 
   "create.item_attributes.implicit": "has a \"%1$s\" implicit",
