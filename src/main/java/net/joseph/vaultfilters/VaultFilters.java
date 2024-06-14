@@ -2,6 +2,7 @@ package net.joseph.vaultfilters;
 
 import net.joseph.vaultfilters.attributes.affix.*;
 import net.joseph.vaultfilters.attributes.catalysts.CatalystHasModifierAttribute;
+import net.joseph.vaultfilters.attributes.catalysts.CatalystModifierCategoryAttribute;
 import net.joseph.vaultfilters.attributes.charm.*;
 import net.joseph.vaultfilters.attributes.inscription.*;
 import net.joseph.vaultfilters.attributes.jewel.*;
@@ -86,5 +87,6 @@ public class VaultFilters {
 
         // Catalysts
         new CatalystHasModifierAttribute("Ornate").register(CatalystHasModifierAttribute::new);
+        new CatalystModifierCategoryAttribute("Bonus Chests").register(CatalystModifierCategoryAttribute::new);
     }
 }
