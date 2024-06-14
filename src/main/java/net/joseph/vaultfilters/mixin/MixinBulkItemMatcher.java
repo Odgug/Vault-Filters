@@ -4,6 +4,7 @@ import com.simibubi.create.content.logistics.filter.FilterItem;
 import me.desht.modularrouters.logic.filter.Filter;
 import me.desht.modularrouters.logic.filter.matchers.BulkItemMatcher;
 import me.desht.modularrouters.util.SetofItemStack;
+import net.joseph.vaultfilters.VaultFilters;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -22,7 +23,7 @@ public class MixinBulkItemMatcher {
     @Inject(method = "matchItem", at = @At("HEAD"), cancellable = true)
     public void createItemMatcher(ItemStack stack, Filter.Flags flags, CallbackInfoReturnable<Boolean> cir){
         for (ItemStack filter : this.stacks) {
-            if (FilterItem.test(null, stack, filter, !flags.isIgnoreNBT())) {
+            if (VaultFilters.checkFilter(stack, filter)) {
                 cir.setReturnValue(true);
             }
         }

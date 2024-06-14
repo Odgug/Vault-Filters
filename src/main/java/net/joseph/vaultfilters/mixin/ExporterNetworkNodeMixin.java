@@ -32,7 +32,7 @@ public class ExporterNetworkNodeMixin {
     @Redirect(method = "update", at = @At(value = "INVOKE", target = "Lcom/refinedmods/refinedstorage/api/util/IComparer;isEqualNoQuantity(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;)Z"))
     private boolean EqualsNoQty(IComparer instance, ItemStack left, ItemStack right){
         if (right.getItem() instanceof FilterItem){
-            return FilterItem.test(null, left, right);
+            return VaultFilters.checkFilter(left, right);
         }
         return instance.isEqualNoQuantity(left, right);
     }

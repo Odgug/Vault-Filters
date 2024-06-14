@@ -1,5 +1,6 @@
 package net.joseph.vaultfilters;
 
+import com.simibubi.create.content.logistics.filter.FilterItem;
 import net.joseph.vaultfilters.attributes.affix.*;
 import net.joseph.vaultfilters.attributes.catalysts.CatalystHasModifierAttribute;
 import net.joseph.vaultfilters.attributes.catalysts.CatalystModifierCategoryAttribute;
@@ -15,6 +16,7 @@ import net.joseph.vaultfilters.attributes.other.*;
 import net.joseph.vaultfilters.attributes.soul.*;
 import net.joseph.vaultfilters.attributes.tool.ToolMaterialAttribute;
 import net.joseph.vaultfilters.attributes.trinket.*;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -91,5 +93,8 @@ public class VaultFilters {
         new CatalystSizeAttribute(10).register(CatalystSizeAttribute::new);
         new CatalystHasModifierAttribute("Ornate").register(CatalystHasModifierAttribute::new);
         new CatalystModifierCategoryAttribute("Bonus Chests").register(CatalystModifierCategoryAttribute::new);
+    }
+    public static boolean checkFilter(ItemStack stack, ItemStack filterStack) {
+        return FilterItem.test(null,stack, filterStack);
     }
 }

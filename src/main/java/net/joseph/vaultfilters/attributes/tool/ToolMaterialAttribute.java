@@ -28,6 +28,7 @@ public class ToolMaterialAttribute extends StringAttribute {
 
         return new Object[]{new TranslatableComponent(this.value).getString()};
     }
+
     @Override
     public String getTranslationKey() {
         return "tool_material";
