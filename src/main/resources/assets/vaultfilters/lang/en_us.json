@@ -115,5 +115,8 @@
   "create.item_attributes.charm_god.inverted": "doesn't add affinity for \"%1$s\"",
 
   "create.item_attributes.trinket_name": "is a \"%1$s\" trinket",
-  "create.item_attributes.trinket_name.inverted": "is not a \"%1$s\" trinket"
+  "create.item_attributes.trinket_name.inverted": "is not a \"%1$s\" trinket",
+
+  "create.item_attributes.catalyst_size": "is a catalyst with up to \"%1$s\" size",
+  "create.item_attributes.catalyst_size.inverted": "is not a catalyst with up to \"%1$s\""
 }

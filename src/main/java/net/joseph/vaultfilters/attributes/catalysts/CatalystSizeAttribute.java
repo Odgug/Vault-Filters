@@ -14,7 +14,8 @@ public class CatalystSizeAttribute extends IntAttribute {
     @Override
     public Integer getValue(ItemStack itemStack) {
         if (itemStack.getItem() instanceof InscriptionItem) {
-            return (Integer) InfusedCatalystItem.getSize(itemStack).get();
+
+            return (Integer) InfusedCatalystItem.getSize(itemStack).orElse(null);
         }
         return null;
     }
