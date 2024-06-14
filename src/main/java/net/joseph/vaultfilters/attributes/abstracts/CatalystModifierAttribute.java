@@ -65,7 +65,7 @@ public abstract class CatalystModifierAttribute extends StringAttribute {
     /**
      * @return returns the name
      */
-    public static <T> String getName(VaultModifier modifier) {
+    public <T> String getName(VaultModifier modifier) {
         return modifier.getDisplayName();
     }
 

@@ -76,7 +76,7 @@ public abstract class AffixAttribute extends StringAttribute {
     /**
     * @return simple name, not including number
     */
-    public static <T> String getName(VaultGearModifier<T> modifier) {
+    public  static <T> String getName(VaultGearModifier<T> modifier) {
         // Cloud Attributes do not return the type of cloud with getName
         if (modifier.getValue() instanceof EffectCloudAttribute cloudAttribute) {
             EffectCloudAttribute.EffectCloud cloud = ((EffectCloudAttributeAccessor) cloudAttribute).getEffectCloud();
