@@ -102,7 +102,7 @@ repositories {
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.18.2-40.2.9'
-    implementation fg.deobf("curse.maven:vault-hunters-official-mod-458203:5394784")
+    implementation fg.deobf("curse.maven:vault-hunters-official-mod-458203:5413414")
 
     implementation fg.deobf("com.simibubi.create:create-${create_minecraft_version}:${create_version}:slim") { transitive = false }
     implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}")
