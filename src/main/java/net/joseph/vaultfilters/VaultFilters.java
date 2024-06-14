@@ -46,6 +46,8 @@ public class VaultFilters {
         // Inscription Attributes
         new InscriptionRoomTypeAttribute("Challenge").register(InscriptionRoomTypeAttribute::new);
         new InscriptionRoomAttribute("Wild West").register(InscriptionRoomAttribute::new);
+        new InscriptionSizeAttribute(10).register(InscriptionSizeAttribute::new);
+        // Old (register anyway for data fixing purposes)
         new InscriptionTimeAttribute(0).register(InscriptionTimeAttribute::new);
         new InscriptionCompletionAttribute(0).register(InscriptionCompletionAttribute::new);
         new InscriptionInstabilityAttribute(0D).register(InscriptionInstabilityAttribute::new);
