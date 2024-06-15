@@ -25,6 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
+import static net.joseph.vaultfilters.caching.FilterCacheValue.maxHashes;
+
 @Mixin(value = GearDataCache.class, remap = false)
 public class MixinGearDataCache implements IVFGearDataCache {
     @Shadow @Final private ItemStack stack;
@@ -56,35 +58,55 @@ public class MixinGearDataCache implements IVFGearDataCache {
         // Define the hash of the filterStack
         int filterStackHash = filterStack.hashCode();
 
-        // Define a function to compute the FilterCacheValue based on filterStack.test
-        Function<ItemStack, FilterCacheValue> computeFunction = stack -> {
-            boolean testResult = VaultFilters.checkFilter(stack, filterStack, false);
-            return new FilterCacheValue(filterStackHash, testResult ? (byte) 1 : (byte) 0);
-        };
-
-        // Call callQueryCache to get or compute the cache value
+        // Retrieve or compute the cache value
         FilterCacheValue cacheValue = cache.callQueryCache(
                 cacheKey,
                 FilterCacheValue::fromTag, // Conversion function from Tag to FilterCacheValue
                 FilterCacheValue::toTag,   // Conversion function from FilterCacheValue to Tag
                 null,                      // Default value is null
                 Function.identity(),       // Identity function
-                stack -> {
-                    // Compute new value if the tag is null or its hash doesn't match
-                    return computeFunction.apply(stack);
-                }
+                stack -> new FilterCacheValue(new ArrayList<>()) // Initialize with empty list
         );
 
-        // Check if cacheValue is null
         if (cacheValue == null) {
-            // Handle the case where the cache does not contain an entry
-            // Typically you might log an error, or compute the value again
-            // In this case, assuming false as a default behavior
-            return false;
+            cacheValue = new FilterCacheValue(new ArrayList<>());
         }
 
-        // Return true if the cached value is 1, false otherwise
-        return cacheValue.getValue() == 1;
+        List<FilterCacheValue.HashEntry> hashEntries = cacheValue.getHashEntries();
+
+        for (FilterCacheValue.HashEntry entry : hashEntries) {
+            if (entry.getHash() == filterStackHash) {
+                return entry.getValue() == 1;
+            }
+        }
+
+        boolean testResult = VaultFilters.checkFilter(filterStack, filterStack, false);
+        byte value = testResult ? (byte) 1 : (byte) 0;
+
+        // Update the cache size if maxHashes has changed
+        if (hashEntries.size() > maxHashes) {
+            hashEntries.subList(0, hashEntries.size() - maxHashes).clear();
+        }
+
+        if (maxHashes > 0) {
+            if (hashEntries.size() >= maxHashes) {
+                hashEntries.remove(0); // Remove the oldest entry
+            }
+            hashEntries.add(new FilterCacheValue.HashEntry(filterStackHash, value));
+        }
+
+        // Update the cache
+        FilterCacheValue updatedCacheValue = new FilterCacheValue(hashEntries);
+        cache.callQueryCache(
+                cacheKey,
+                FilterCacheValue::fromTag,
+                FilterCacheValue::toTag,
+                null,
+                Function.identity(),
+                stack -> updatedCacheValue
+        );
+
+        return testResult;
     }
 
 
