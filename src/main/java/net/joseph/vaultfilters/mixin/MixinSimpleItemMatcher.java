@@ -25,7 +25,7 @@ public class MixinSimpleItemMatcher {
     @Inject(method = "matchItem", at = @At("HEAD"), cancellable = true)
     public void createFilterMatcher(ItemStack stack, Filter.Flags flags, CallbackInfoReturnable<Boolean> cir) {
         if (filterStack.getItem() instanceof FilterItem) {
-            cir.setReturnValue(VaultFilters.checkFilter(stack, this.filterStack));
+            cir.setReturnValue(VaultFilters.checkFilter(stack, this.filterStack,true));
         }
     }
 }

@@ -1,6 +1,8 @@
 package net.joseph.vaultfilters;
 
 import com.simibubi.create.content.logistics.filter.FilterItem;
+import iskallia.vault.gear.data.GearDataCache;
+import iskallia.vault.gear.item.VaultGearItem;
 import net.joseph.vaultfilters.attributes.affix.*;
 import net.joseph.vaultfilters.attributes.catalysts.CatalystHasModifierAttribute;
 import net.joseph.vaultfilters.attributes.catalysts.CatalystModifierCategoryAttribute;
@@ -16,6 +18,10 @@ import net.joseph.vaultfilters.attributes.other.*;
 import net.joseph.vaultfilters.attributes.soul.*;
 import net.joseph.vaultfilters.attributes.tool.ToolMaterialAttribute;
 import net.joseph.vaultfilters.attributes.trinket.*;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.IntTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -31,7 +37,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 public class VaultFilters {
     public static final String MOD_ID = "vaultfilters";
     public static final int CHECK_FILTER_FLAG = 456;
-
+    public static final int NO_CACHE_FLAG = 457;
     public VaultFilters() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         eventBus.addListener(this::setup);
@@ -98,8 +104,78 @@ public class VaultFilters {
         new CatalystHasModifierAttribute("Ornate").register(CatalystHasModifierAttribute::new);
         new CatalystModifierCategoryAttribute("Bonus Chests").register(CatalystModifierCategoryAttribute::new);
     }
-    public static boolean checkFilter(ItemStack stack, ItemStack filterStack) {
+    public static boolean checkFilter(ItemStack stack, ItemStack filterStack, boolean useCache) {
+        if (!useCache) {
+            return FilterItem.test(null,stack, filterStack);
+        }
+        if (!(stack.getItem() instanceof VaultGearItem)) {
+            return FilterItem.test(null,stack, filterStack);
+        }
         //return FilterItemStack.of(filterStack).test(null, stack);
-        return FilterItem.test(null,stack, filterStack);
+        return cacheTest(stack, filterStack, 2);
+    }
+    public static String passedName = "passedHashes";
+    public static String failedName = "failedHashes";
+    public static boolean cacheTest(ItemStack stack, ItemStack filterStack, int maxHashes) {
+        CompoundTag tag = stack.getOrCreateTag();
+        if (!(stack.getOrCreateTag().contains("clientCache"))) {
+            GearDataCache.createCache(stack);
+        }
+        tag = (CompoundTag) tag.get("clientCache");
+        ListTag passedHashes = tag.contains(passedName) ?
+                tag.getList(passedName, Tag.TAG_INT) :
+                new ListTag();
+
+        ListTag failedHashes = tag.contains(failedName) ?
+                tag.getList(failedName, Tag.TAG_INT) :
+                new ListTag();
+        int hashCount = failedHashes.size() + passedHashes.size();
+        while (hashCount > maxHashes) {
+            if ( !(passedHashes.isEmpty())) {
+                passedHashes.remove(0);
+                hashCount--;
+            }
+            if (hashCount > maxHashes && !(failedHashes.isEmpty())) {
+                failedHashes.remove(0);
+                hashCount--;
+            }
+            tag.put(passedName, passedHashes);
+            tag.put(failedName, failedHashes);
+        }
+
+        int filterHash = filterStack.hashCode();
+
+        if (failedHashes.contains(filterHash)) {
+            return false;
+        } else if (passedHashes.contains(filterHash)) {
+            return true;
+        }
+        boolean passedChanged = false;
+        boolean failedChanged = false;
+        if (hashCount == maxHashes) {
+            if (!(passedHashes.isEmpty())) {
+                passedHashes.remove(0);
+                passedChanged = true;
+            } else if (!(failedHashes.isEmpty())){
+                failedHashes.remove(0);
+                failedChanged = true;
+            }
+        }
+        boolean result = VaultFilters.checkFilter(stack,filterStack,false);
+        if (result) {
+            passedHashes.add(IntTag.valueOf(filterHash));
+            passedChanged = true;
+        } else {
+            failedHashes.add(IntTag.valueOf(filterHash));
+            failedChanged = true;
+        }
+        if (passedChanged) {
+            tag.put(passedName,passedHashes);
+        }
+        if (failedChanged) {
+            tag.put(failedName, failedHashes);
+        }
+        return result;
+
     }
 }

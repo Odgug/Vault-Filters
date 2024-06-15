@@ -13,7 +13,7 @@ public class MixinFilterGridFilter {
     @ModifyArg(method = "test(Lcom/refinedmods/refinedstorage/screen/grid/stack/IGridStack;)Z", at = @At(value = "INVOKE", target = "Lcom/refinedmods/refinedstorage/api/util/IComparer;isEqual(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;I)Z"))
     private int modifyCompareFlag(ItemStack itemStack, ItemStack filterItemStack, int compare) {
         if (filterItemStack.getItem() instanceof FilterItem) {
-            return VaultFilters.CHECK_FILTER_FLAG;
+            return VaultFilters.NO_CACHE_FLAG;
         }
         return compare;
     }
