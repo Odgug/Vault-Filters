@@ -1,6 +1,7 @@
 package net.joseph.vaultfilters;
 
 import com.simibubi.create.content.logistics.filter.FilterItem;
+import iskallia.vault.gear.data.GearDataCache;
 import net.joseph.vaultfilters.attributes.affix.*;
 import net.joseph.vaultfilters.attributes.catalysts.CatalystHasModifierAttribute;
 import net.joseph.vaultfilters.attributes.catalysts.CatalystModifierCategoryAttribute;
@@ -16,6 +17,7 @@ import net.joseph.vaultfilters.attributes.other.*;
 import net.joseph.vaultfilters.attributes.soul.*;
 import net.joseph.vaultfilters.attributes.tool.ToolMaterialAttribute;
 import net.joseph.vaultfilters.attributes.trinket.*;
+import net.joseph.vaultfilters.caching.IVFGearDataCache;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -98,8 +100,11 @@ public class VaultFilters {
         new CatalystHasModifierAttribute("Ornate").register(CatalystHasModifierAttribute::new);
         new CatalystModifierCategoryAttribute("Bonus Chests").register(CatalystModifierCategoryAttribute::new);
     }
-    public static boolean checkFilter(ItemStack stack, ItemStack filterStack) {
+    public static boolean checkFilter(ItemStack stack, ItemStack filterStack, boolean useCache) {
         //return FilterItemStack.of(filterStack).test(null, stack);
-        return FilterItem.test(null,stack, filterStack);
+        if (!useCache) {
+            return FilterItem.test(null,stack, filterStack);
+        }
+        return ((IVFGearDataCache)GearDataCache.of(stack)).vaultfilters$testFilter(filterStack);
     }
 }

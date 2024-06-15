@@ -11,8 +11,8 @@ import iskallia.vault.gear.reader.IncreasedPercentageReader;
 import iskallia.vault.gear.reader.VaultGearModifierReader;
 import iskallia.vault.init.ModConfigs;
 import iskallia.vault.skill.base.Skill;
-import net.joseph.vaultfilters.mixin.EffectCloudAccessor;
-import net.joseph.vaultfilters.mixin.EffectCloudAttributeAccessor;
+import net.joseph.vaultfilters.mixin.data.EffectCloudAccessor;
+import net.joseph.vaultfilters.mixin.data.EffectCloudAttributeAccessor;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 

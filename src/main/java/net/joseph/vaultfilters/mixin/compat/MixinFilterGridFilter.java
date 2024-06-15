@@ -1,4 +1,4 @@
-package net.joseph.vaultfilters.mixin;
+package net.joseph.vaultfilters.mixin.compat;
 
 import com.refinedmods.refinedstorage.screen.grid.filtering.FilterGridFilter;
 import com.simibubi.create.content.logistics.filter.FilterItem;

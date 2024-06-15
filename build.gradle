@@ -124,6 +124,7 @@ dependencies {
     implementation fg.deobf("curse.maven:sophisticated-core-618298:4665730")
     implementation fg.deobf("curse.maven:sophisticated-backpacks-422301:4637292")
     implementation fg.deobf("curse.maven:storage-drawers-223852:3807626")
+    implementation fg.deobf("curse.maven:lazy-dfu-forge-460819:3544496")
 }
 
 jar {
