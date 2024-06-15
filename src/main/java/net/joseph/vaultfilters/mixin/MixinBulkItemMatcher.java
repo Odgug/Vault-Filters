@@ -1,6 +1,6 @@
-package net.joseph.vaultfilters.mixin.compat;
+package net.joseph.vaultfilters.mixin;
 
-//import com.simibubi.create.content.logistics.filter.FilterItem;
+import com.simibubi.create.content.logistics.filter.FilterItem;
 import me.desht.modularrouters.logic.filter.Filter;
 import me.desht.modularrouters.logic.filter.matchers.BulkItemMatcher;
 import me.desht.modularrouters.util.SetofItemStack;
@@ -23,7 +23,7 @@ public class MixinBulkItemMatcher {
     @Inject(method = "matchItem", at = @At("HEAD"), cancellable = true)
     public void createItemMatcher(ItemStack stack, Filter.Flags flags, CallbackInfoReturnable<Boolean> cir){
         for (ItemStack filter : this.stacks) {
-            if (VaultFilters.checkFilter(stack, filter,true)) {
+            if (VaultFilters.checkFilter(stack, filter)) {
                 cir.setReturnValue(true);
             }
         }
