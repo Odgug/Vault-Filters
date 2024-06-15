@@ -24,7 +24,7 @@ New Item Attributes (Click to Collapse/Expand)
 But you can of course choose different parameters during selection in the filter menu.)
 
 ### General
-- Is a "Trinket/Charm/Gear Piece/Inscription/Jewel" Item
+- Is a "Trinket/Charm/Gear Piece/Inscription/Jewel/Treasure Key/Catalyst" Item
 - Is unidentified
 - Is at least level "32"
 - Is of item ID "Vault Helmet"
@@ -66,10 +66,13 @@ But you can of course choose different parameters during selection in the filter
 - Adds a "Wild West" room
 - Adds a "Challenge" type room
 ####
-- Adds at least "0:21"
-- Adds at least "7%" completion
-- Adds up to "1.1%" instability
+- Is an inscription with up to "10" size
 
+### Catalysts:
+- Is a catalyst with up to "10" size
+####
+- Is a catalyst with a "Plentiful" modifier
+- Is a catalyst with a "Bonus Chests/Cascading" category modifier
 
 ### Charms
 - Is a "Regal" charm
