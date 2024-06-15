@@ -18,6 +18,9 @@ public class MixinRSItemMatcher {
         if (flags == VaultFilters.CHECK_FILTER_FLAG && right.getItem() instanceof FilterItem) {
             cir.setReturnValue(VaultFilters.checkFilter(left, right,true));
         }
+        if (flags == VaultFilters.CHECK_UNCACHED_FLAG && right.getItem() instanceof  FilterItem) {
+            cir.setReturnValue(VaultFilters.checkFilter(left, right,false));
+        }
     }
 
 }

@@ -2,6 +2,7 @@ package net.joseph.vaultfilters;
 
 import com.simibubi.create.content.logistics.filter.FilterItem;
 import iskallia.vault.gear.data.GearDataCache;
+import iskallia.vault.gear.item.VaultGearItem;
 import net.joseph.vaultfilters.attributes.affix.*;
 import net.joseph.vaultfilters.attributes.catalysts.CatalystHasModifierAttribute;
 import net.joseph.vaultfilters.attributes.catalysts.CatalystModifierCategoryAttribute;
@@ -33,6 +34,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 public class VaultFilters {
     public static final String MOD_ID = "vaultfilters";
     public static final int CHECK_FILTER_FLAG = 456;
+    public static final int CHECK_UNCACHED_FLAG = 457;
 
     public VaultFilters() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -103,6 +105,9 @@ public class VaultFilters {
     public static boolean checkFilter(ItemStack stack, ItemStack filterStack, boolean useCache) {
         //return FilterItemStack.of(filterStack).test(null, stack);
         if (!useCache) {
+            return FilterItem.test(null,stack, filterStack);
+        }
+        if (!(stack.getItem() instanceof VaultGearItem)) {
             return FilterItem.test(null,stack, filterStack);
         }
         return ((IVFGearDataCache)GearDataCache.of(stack)).vaultfilters$testFilter(filterStack);
