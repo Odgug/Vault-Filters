@@ -150,7 +150,9 @@ public class VaultFilters {
                 hashCount--;
             }
         }
-
+        if (maxHashes == 0) {
+            return VaultFilters.checkFilter(stack,filterStack,false);
+        }
         IntTag filterHash = IntTag.valueOf(filterStack.hashCode());
         if (failedHashes.contains(filterHash)) {
             return false;
@@ -167,6 +169,7 @@ public class VaultFilters {
         }
 
         boolean result = VaultFilters.checkFilter(stack,filterStack,false);
+
         if (result) {
             passedHashes.add(filterHash);
         } else {
