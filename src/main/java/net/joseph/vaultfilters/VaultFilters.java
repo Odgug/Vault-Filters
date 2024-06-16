@@ -114,66 +114,48 @@ public class VaultFilters {
         //return FilterItemStack.of(filterStack).test(null, stack);
         return cacheTest(stack, filterStack, 2);
     }
-    public static String passedName = "passedHashes";
-    public static String failedName = "failedHashes";
+    public static String filterKey = "hashes";
     public static boolean cacheTest(ItemStack stack, ItemStack filterStack, int maxHashes) {
         CompoundTag tag = stack.getOrCreateTag();
         if (!(stack.getOrCreateTag().contains("clientCache"))) {
             GearDataCache.createCache(stack);
         }
 
-        tag = tag.getCompound("clientCache");
-        ListTag passedHashes;
-        if (tag.contains(passedName)) {
-            passedHashes = tag.getList(passedName, Tag.TAG_INT);
-        } else {
-            passedHashes = new ListTag();
-            tag.put(passedName,passedHashes);
+        tag = (CompoundTag) tag.get("clientCache");
+        ListTag filterHashes = tag.get(filterKey) instanceof ListTag listTag ? listTag : new ListTag();
+        if (!tag.contains(filterKey)) {
+            tag.put(filterKey,filterHashes);
         }
 
-        ListTag failedHashes;
-        if (tag.contains(failedName)) {
-            failedHashes = tag.getList(failedName, Tag.TAG_INT);
-        } else {
-            failedHashes = new ListTag();
-            tag.put(failedName,failedHashes);
-        }
-
-        int hashCount = failedHashes.size() + passedHashes.size();
+        int hashCount = filterHashes.size();
         while (hashCount > maxHashes) {
-            if (!(passedHashes.isEmpty())) {
-                passedHashes.remove(0);
-                hashCount--;
-            }
-            if (hashCount > maxHashes && !(failedHashes.isEmpty())) {
-                failedHashes.remove(0);
-                hashCount--;
-            }
+            filterHashes.remove(0);
+            hashCount--;
         }
+
         if (maxHashes == 0) {
             return VaultFilters.checkFilter(stack,filterStack,false);
         }
-        IntTag filterHash = IntTag.valueOf(filterStack.hashCode());
-        if (failedHashes.contains(filterHash)) {
+
+        int hash = filterStack.hashCode();
+        IntTag passedHash = IntTag.valueOf(hash);
+        IntTag failedHash = IntTag.valueOf(-hash);
+        if (filterHashes.contains(failedHash)) {
             return false;
-        } else if (passedHashes.contains(filterHash)) {
+        } else if (filterHashes.contains(passedHash)) {
             return true;
         }
 
         if (hashCount == maxHashes) {
-            if (!(passedHashes.isEmpty())) {
-                passedHashes.remove(0);
-            } else if (!(failedHashes.isEmpty())){
-                failedHashes.remove(0);
-            }
+            filterHashes.remove(0);
         }
 
         boolean result = VaultFilters.checkFilter(stack,filterStack,false);
 
         if (result) {
-            passedHashes.add(filterHash);
+            filterHashes.add(passedHash);
         } else {
-            failedHashes.add(filterHash);
+            filterHashes.add(failedHash);
         }
 
         return result;
