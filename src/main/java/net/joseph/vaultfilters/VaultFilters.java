@@ -136,7 +136,7 @@ public class VaultFilters {
             failedHashes = tag.getList(failedName, Tag.TAG_INT);
         } else {
             failedHashes = new ListTag();
-            tag.put(failedName,passedHashes);
+            tag.put(failedName,failedHashes);
         }
 
         int hashCount = failedHashes.size() + passedHashes.size();
