@@ -112,7 +112,7 @@ public class VaultFilters {
             return FilterItem.test(null,stack, filterStack);
         }
         //return FilterItemStack.of(filterStack).test(null, stack);
-        return cacheTest(stack, filterStack, 2);
+        return cacheTest(stack, filterStack, 4);
     }
     public static String filterKey = "hashes";
     public static boolean cacheTest(ItemStack stack, ItemStack filterStack, int maxHashes) {
