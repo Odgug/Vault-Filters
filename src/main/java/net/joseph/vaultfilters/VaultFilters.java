@@ -18,6 +18,7 @@ import net.joseph.vaultfilters.attributes.other.*;
 import net.joseph.vaultfilters.attributes.soul.*;
 import net.joseph.vaultfilters.attributes.tool.ToolMaterialAttribute;
 import net.joseph.vaultfilters.attributes.trinket.*;
+import net.joseph.vaultfilters.configs.VFServerConfig;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.IntTag;
 import net.minecraft.nbt.ListTag;
@@ -25,7 +26,9 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
@@ -45,6 +48,7 @@ public class VaultFilters {
     }
 
     private void setup(FMLCommonSetupEvent event) {
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, VFServerConfig.SPEC, "vaultfilters-server.toml");
         // This has a specific order as this controls the order displayed in the filters
         new ItemNameAttribute(("Vault Helmet")).register(ItemNameAttribute::new);
         // Soul Attributes
@@ -112,7 +116,7 @@ public class VaultFilters {
             return FilterItem.test(null,stack, filterStack);
         }
         //return FilterItemStack.of(filterStack).test(null, stack);
-        return cacheTest(stack, filterStack, 4);
+        return cacheTest(stack, filterStack, VFServerConfig.MAX_CACHES.get());
     }
     public static String filterKey = "hashes";
     public static boolean cacheTest(ItemStack stack, ItemStack filterStack, int maxHashes) {

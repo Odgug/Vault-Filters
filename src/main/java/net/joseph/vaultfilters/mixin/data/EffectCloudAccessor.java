@@ -1,4 +1,4 @@
-package net.joseph.vaultfilters.mixin;
+package net.joseph.vaultfilters.mixin.data;
 
 import iskallia.vault.gear.attribute.custom.EffectCloudAttribute;
 import org.spongepowered.asm.mixin.Mixin;

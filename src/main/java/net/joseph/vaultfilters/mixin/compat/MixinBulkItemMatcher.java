@@ -1,6 +1,5 @@
-package net.joseph.vaultfilters.mixin;
+package net.joseph.vaultfilters.mixin.compat;
 
-import com.simibubi.create.content.logistics.filter.FilterItem;
 import me.desht.modularrouters.logic.filter.Filter;
 import me.desht.modularrouters.logic.filter.matchers.BulkItemMatcher;
 import me.desht.modularrouters.util.SetofItemStack;

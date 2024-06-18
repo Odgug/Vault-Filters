@@ -1,4 +1,4 @@
-package net.joseph.vaultfilters.mixin;
+package net.joseph.vaultfilters.mixin.other;
 
 import com.simibubi.create.content.logistics.filter.FilterItem;
 import iskallia.vault.research.ResearchTree;
