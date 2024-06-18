@@ -15,16 +15,17 @@ public class VFServerConfig {
     static {
         BUILDER.push("Vault Filters Server Config");
 
-        MAX_CACHES = BUILDER.comment("Maximum amount of filters that can be cached on an item" +
+        MAX_CACHES = BUILDER.comment("\nMaximum amount of filters that can be cached on an item" +
                 "\nNone: 0" +
                 "\nDefault: 4").defineInRange("Max Filter Caches",4,0,20);
 
-        MR_COMPAT = BUILDER.comment("Enable compatibility for list and attribute filters inside Modular Router modules" +
-                "\nDefault:true").define("Routers Compatibility",true);
-        RS_COMPAT = BUILDER.comment("Enable compatibility for list and attribute filters inside RS exporters and grid filters" +
-                "\nDefault:true").define("RS Compatibility", true);
+        MR_COMPAT = BUILDER.comment("\nEnable compatibility for list and attribute filters inside Modular Router modules" +
+                "\nDefault:true").define("Modular Routers Compatibility",true);
 
-        BACKPACKS_COMPAT = BUILDER.comment("Enable compatibility for list and attribute filters inside sophisticated backpacks upgrades" +
+        RS_COMPAT = BUILDER.comment("\nEnable compatibility for list and attribute filters inside Refined Storage exporters and grid filters" +
+                "\nDefault:true").define("Refined Storage Compatibility", true);
+
+        BACKPACKS_COMPAT = BUILDER.comment("\nEnable compatibility for list and attribute filters inside sophisticated backpacks upgrades" +
                 "\nDefault:true").define("Backpacks Compatibility",true);
 
         BUILDER.pop();
