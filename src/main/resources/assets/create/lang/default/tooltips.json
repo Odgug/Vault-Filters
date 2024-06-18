@@ -1,0 +1,9 @@
+{
+"item.create.filter.tooltip.summary": "_Matches items_ against a collection of _items_ or _other filters_ (Attribute and List filters), combining filters together into a list filter is recommended wherever possible for better performance. Can be used in _Filter Slots_ of some mods (Create, RS, MR and Backpacks by default)",
+"item.create.filter.tooltip.condition1": "When R-Clicked",
+"item.create.filter.tooltip.behaviour1": "Opens the _configuration interface_.",
+
+"item.create.attribute_filter.tooltip.summary": "_Matches items_ against a set of _attributes_ or _categories_, contains _Vault Hunters_ related attributes for sorting gear, jewels and more. Can be used in _Filter Slots_ some mods (Create, RS, MR and Backpacks by default). Multiple of these can be placed inside a _List Filter_, combining filters together into a list filter is recommended wherever possible for better performance",
+"item.create.attribute_filter.tooltip.condition1": "When R-Clicked",
+"item.create.attribute_filter.tooltip.behaviour1": "Opens the _configuration interface_."
+}
