@@ -116,6 +116,9 @@ public class VaultFilters {
         if (!(stack.getItem() instanceof VaultGearItem)) {
             return filterTest(stack,filterStack);
         }
+        if (filterStack.getDisplayName().getString().equals("Ignore Caching")) {
+            return filterTest(stack,filterStack);
+        }
         //return FilterItemStack.of(filterStack).test(null, stack);
         return cacheTest(stack, filterStack, VFServerConfig.MAX_CACHES.get());
     }
