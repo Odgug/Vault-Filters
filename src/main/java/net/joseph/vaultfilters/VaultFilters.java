@@ -23,6 +23,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.IntTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -110,15 +111,18 @@ public class VaultFilters {
     }
     public static boolean checkFilter(ItemStack stack, ItemStack filterStack, boolean useCache) {
         if (!useCache) {
-            return FilterItem.test(null,stack, filterStack);
+            return filterTest(stack,filterStack);
         }
         if (!(stack.getItem() instanceof VaultGearItem)) {
-            return FilterItem.test(null,stack, filterStack);
+            return filterTest(stack,filterStack);
         }
         //return FilterItemStack.of(filterStack).test(null, stack);
         return cacheTest(stack, filterStack, VFServerConfig.MAX_CACHES.get());
     }
     public static String filterKey = "hashes";
+    public static boolean filterTest(ItemStack stack, ItemStack filterStack) {
+        return FilterItem.test(null,stack, filterStack);
+    }
     public static boolean cacheTest(ItemStack stack, ItemStack filterStack, int maxHashes) {
         CompoundTag tag = stack.getOrCreateTag();
         if (!(stack.getOrCreateTag().contains("clientCache"))) {
