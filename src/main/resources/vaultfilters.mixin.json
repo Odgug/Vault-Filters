@@ -13,7 +13,8 @@
     "compat.MixinRSDiskMatcher",
     "compat.ExporterNetworkNodeMixin",
     "compat.MixinSophItemMatcher",
-    "compat.MixinFilterGridFilter"
+    "compat.MixinFilterGridFilter",
+    "compat.MixinCreateFilteringBehaviour"
   ],
   "injectors": {
     "defaultRequire": 1
