@@ -122,7 +122,11 @@ public class VaultFilters {
         //return FilterItemStack.of(filterStack).test(null, stack);
         return cacheTest(stack, filterStack, VFServerConfig.MAX_CACHES.get());
     }
+
+
     public static String filterKey = "hashes";
+
+
     public static boolean filterTest(ItemStack stack, ItemStack filterStack) {
         return FilterItem.test(null,stack, filterStack);
     }
@@ -145,7 +149,7 @@ public class VaultFilters {
         }
 
         if (maxHashes == 0) {
-            return VaultFilters.checkFilter(stack,filterStack,false);
+            return VaultFilters.filterTest(stack,filterStack);
         }
 
         int hash = filterStack.hashCode();
@@ -161,7 +165,7 @@ public class VaultFilters {
             filterHashes.remove(0);
         }
 
-        boolean result = VaultFilters.checkFilter(stack,filterStack,false);
+        boolean result = VaultFilters.filterTest(stack,filterStack);
 
         if (result) {
             filterHashes.add(passedHash);
