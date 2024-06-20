@@ -15,10 +15,10 @@ public class MixinRSItemMatcher {
     @Inject(method = "isEqual(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;I)Z", at = @At("HEAD"), cancellable = true)
     public void checkFilter(ItemStack left, ItemStack right, int flags, CallbackInfoReturnable<Boolean> cir) {
         if (VFServerConfig.RS_COMPAT.get() && flags == VaultFilters.CHECK_FILTER_FLAG && right.getItem() instanceof FilterItem) {
-            cir.setReturnValue(VaultFilters.checkFilter(left, right,true));
+            cir.setReturnValue(VaultFilters.checkFilter(left, right,true,null));
         }
         if (VFServerConfig.RS_COMPAT.get() && flags == VaultFilters.NO_CACHE_FLAG && right.getItem() instanceof FilterItem) {
-            cir.setReturnValue(VaultFilters.checkFilter(left, right,true));
+            cir.setReturnValue(VaultFilters.checkFilter(left, right,false,null));
         }
     }
 

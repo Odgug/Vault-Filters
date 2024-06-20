@@ -15,7 +15,7 @@ public class MixinSophItemMatcher {
     @Inject(method = "stackMatchesFilter", at = @At("HEAD"), cancellable = true)
     public void sophFilterMatcher(ItemStack stack, ItemStack filterStack, CallbackInfoReturnable<Boolean> cir) {
         if (VFServerConfig.BACKPACKS_COMPAT.get() && filterStack.getItem() instanceof FilterItem) {
-            cir.setReturnValue(VaultFilters.checkFilter(stack, filterStack,true));
+            cir.setReturnValue(VaultFilters.checkFilter(stack, filterStack,true,null));
         }
     }
 }

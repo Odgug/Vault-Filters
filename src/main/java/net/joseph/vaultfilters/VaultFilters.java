@@ -1,6 +1,7 @@
 package net.joseph.vaultfilters;
 
 import com.simibubi.create.content.logistics.filter.FilterItem;
+import com.simibubi.create.foundation.utility.worldWrappers.WrappedWorld;
 import iskallia.vault.gear.data.GearDataCache;
 import iskallia.vault.gear.item.VaultGearItem;
 import net.joseph.vaultfilters.attributes.affix.*;
@@ -23,8 +24,11 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.IntTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -32,6 +36,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.server.ServerLifecycleHooks;
 
 
 //import com.simibubi.create.content.logistics.filter.FilterItemStack;
@@ -108,29 +113,29 @@ public class VaultFilters {
         new CatalystSizeAttribute(10).register(CatalystSizeAttribute::new);
         new CatalystHasModifierAttribute("Ornate").register(CatalystHasModifierAttribute::new);
         new CatalystModifierCategoryAttribute("Bonus Chests").register(CatalystModifierCategoryAttribute::new);
+
+
     }
-    public static boolean checkFilter(ItemStack stack, ItemStack filterStack, boolean useCache) {
+    public static boolean checkFilter(ItemStack stack, ItemStack filterStack, boolean useCache, Level level) {
         if (!useCache) {
-            return filterTest(stack,filterStack);
+            return filterTest(stack,filterStack,level);
         }
         if (!(stack.getItem() instanceof VaultGearItem)) {
-            return filterTest(stack,filterStack);
+            return filterTest(stack,filterStack,level);
         }
         if (filterStack.getDisplayName().getString().equals("Ignore Caching")) {
-            return filterTest(stack,filterStack);
+            return filterTest(stack,filterStack,level);
         }
         //return FilterItemStack.of(filterStack).test(null, stack);
-        return cacheTest(stack, filterStack, VFServerConfig.MAX_CACHES.get());
+        return cacheTest(stack, filterStack, VFServerConfig.MAX_CACHES.get(),level);
     }
 
 
     public static String filterKey = "hashes";
-
-
-    public static boolean filterTest(ItemStack stack, ItemStack filterStack) {
-        return FilterItem.test(null,stack, filterStack);
+    public static boolean filterTest(ItemStack stack, ItemStack filterStack, Level level) {
+        return FilterItem.test(level,stack, filterStack);
     }
-    public static boolean cacheTest(ItemStack stack, ItemStack filterStack, int maxHashes) {
+    public static boolean cacheTest(ItemStack stack, ItemStack filterStack, int maxHashes, Level level) {
         CompoundTag tag = stack.getOrCreateTag();
         if (!(stack.getOrCreateTag().contains("clientCache"))) {
             GearDataCache.createCache(stack);
@@ -149,7 +154,7 @@ public class VaultFilters {
         }
 
         if (maxHashes == 0) {
-            return VaultFilters.filterTest(stack,filterStack);
+            return VaultFilters.filterTest(stack,filterStack,level);
         }
 
         int hash = filterStack.hashCode();
@@ -165,7 +170,7 @@ public class VaultFilters {
             filterHashes.remove(0);
         }
 
-        boolean result = VaultFilters.filterTest(stack,filterStack);
+        boolean result = VaultFilters.filterTest(stack,filterStack,level);
 
         if (result) {
             filterHashes.add(passedHash);

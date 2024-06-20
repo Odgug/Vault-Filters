@@ -22,7 +22,7 @@ public class MixinBulkItemMatcher {
     @Inject(method = "matchItem", at = @At("HEAD"), cancellable = true)
     public void createItemMatcher(ItemStack stack, Filter.Flags flags, CallbackInfoReturnable<Boolean> cir){
         for (ItemStack filter : this.stacks) {
-            if (VaultFilters.checkFilter(stack, filter,true)) {
+            if (VaultFilters.checkFilter(stack, filter,true,null)) {
                 cir.setReturnValue(true);
             }
         }

@@ -1,5 +1,6 @@
 package net.joseph.vaultfilters.mixin.compat;
 
+import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.filtering.FilteringBehaviour;
 import net.joseph.vaultfilters.VaultFilters;
 import net.minecraft.world.item.ItemStack;
@@ -17,11 +18,14 @@ public class MixinCreateFilteringBehaviour {
     @Shadow
     private ItemStack filter;
 
+    @Shadow
+    public SmartBlockEntity blockEntity;
+
 
 
     @Inject(method = "test(Lnet/minecraft/world/item/ItemStack;)Z", at = @At("HEAD"), cancellable = true)
     public void checkFilter(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
-        cir.setReturnValue(!isActive() || this.filter.isEmpty() || VaultFilters.checkFilter(stack,this.filter,true));
+        cir.setReturnValue(!isActive() || this.filter.isEmpty() || VaultFilters.checkFilter(stack,this.filter,true,null));
     }
 
 }
