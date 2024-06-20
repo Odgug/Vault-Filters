@@ -18,8 +18,7 @@ public class MixinCreateFilteringBehaviour {
     @Shadow
     private ItemStack filter;
 
-    @Shadow
-    public SmartBlockEntity blockEntity;
+
 
 
 
