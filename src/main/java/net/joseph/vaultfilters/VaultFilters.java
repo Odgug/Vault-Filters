@@ -30,13 +30,17 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.server.ServerLifecycleHooks;
+
+import java.lang.ref.WeakReference;
 
 
 //import com.simibubi.create.content.logistics.filter.FilterItemStack;
@@ -50,9 +54,20 @@ public class VaultFilters {
     public VaultFilters() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         eventBus.addListener(this::setup);
+        //eventBus.addListener(this::onWorldLoad);
         MinecraftForge.EVENT_BUS.register(this);
     }
 
+    public static final ThreadLocal<WeakReference<Level>> LEVEL_REF = new ThreadLocal<>();
+
+
+    @SubscribeEvent
+    public void onWorldLoad(WorldEvent.Load event) {
+        MinecraftServer server = event.getWorld().getServer();
+        if (server != null) {
+            LEVEL_REF.set(new WeakReference<>(server.getLevel(Level.OVERWORLD)));
+        }
+    }
     private void setup(FMLCommonSetupEvent event) {
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, VFServerConfig.SPEC, "vaultfilters-server.toml");
         // This has a specific order as this controls the order displayed in the filters
@@ -131,8 +146,13 @@ public class VaultFilters {
     }
 
 
+
     public static String filterKey = "hashes";
     public static boolean filterTest(ItemStack stack, ItemStack filterStack, Level level) {
+
+        if (level == null) {
+            level = LEVEL_REF.get().get();
+        }
         return FilterItem.test(level,stack, filterStack);
     }
     public static boolean cacheTest(ItemStack stack, ItemStack filterStack, int maxHashes, Level level) {
