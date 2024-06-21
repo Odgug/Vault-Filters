@@ -20,6 +20,7 @@ import net.joseph.vaultfilters.attributes.soul.*;
 import net.joseph.vaultfilters.attributes.tool.ToolMaterialAttribute;
 import net.joseph.vaultfilters.attributes.trinket.*;
 import net.joseph.vaultfilters.configs.VFServerConfig;
+import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.IntTag;
 import net.minecraft.nbt.ListTag;
@@ -33,9 +34,11 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.server.ServerLifecycleHooks;
@@ -68,6 +71,7 @@ public class VaultFilters {
             LEVEL_REF.set(new WeakReference<>(server.getLevel(Level.OVERWORLD)));
         }
     }
+
     private void setup(FMLCommonSetupEvent event) {
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, VFServerConfig.SPEC, "vaultfilters-server.toml");
         // This has a specific order as this controls the order displayed in the filters
@@ -151,7 +155,11 @@ public class VaultFilters {
     public static boolean filterTest(ItemStack stack, ItemStack filterStack, Level level) {
 
         if (level == null) {
-            level = LEVEL_REF.get().get();
+            level = DistExecutor.safeRunForDist(
+                    () -> () -> (Level) Minecraft.getInstance().level,
+                    () -> () -> LEVEL_REF.get().get()
+            );
+
         }
         return FilterItem.test(level,stack, filterStack);
     }
