@@ -155,7 +155,7 @@ public class VaultFilters {
     public static boolean filterTest(ItemStack stack, ItemStack filterStack, Level level) {
 
         if (level == null) {
-            level = DistExecutor.safeRunForDist(
+            level = DistExecutor.unsafeRunForDist(
                     () -> () -> (Level) Minecraft.getInstance().level,
                     () -> () -> LEVEL_REF.get().get()
             );
