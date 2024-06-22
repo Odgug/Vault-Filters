@@ -1,7 +1,6 @@
 package net.joseph.vaultfilters;
 
 import com.simibubi.create.content.logistics.filter.FilterItem;
-import com.simibubi.create.foundation.utility.worldWrappers.WrappedWorld;
 import iskallia.vault.gear.data.GearDataCache;
 import iskallia.vault.gear.item.VaultGearItem;
 import net.joseph.vaultfilters.attributes.affix.*;
@@ -20,16 +19,14 @@ import net.joseph.vaultfilters.attributes.soul.*;
 import net.joseph.vaultfilters.attributes.tool.ToolMaterialAttribute;
 import net.joseph.vaultfilters.attributes.trinket.*;
 import net.joseph.vaultfilters.configs.VFServerConfig;
-import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.IntTag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -38,12 +35,12 @@ import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.server.ServerLifecycleHooks;
 
 import java.lang.ref.WeakReference;
+
+import static net.minecraftforge.forgespi.Environment.Keys.DIST;
 
 
 //import com.simibubi.create.content.logistics.filter.FilterItemStack;
@@ -149,17 +146,21 @@ public class VaultFilters {
         return cacheTest(stack, filterStack, VFServerConfig.MAX_CACHES.get(),level);
     }
 
+    @OnlyIn(Dist.CLIENT)
+    public static Level getClientLevel() {
+        return net.minecraft.client.Minecraft.getInstance().level;
+    };
 
 
     public static String filterKey = "hashes";
     public static boolean filterTest(ItemStack stack, ItemStack filterStack, Level level) {
 
+
         if (level == null) {
-            level = DistExecutor.unsafeRunForDist(
-                    () -> () -> (Level) Minecraft.getInstance().level,
+            level = DistExecutor.safeRunForDist(
+                    () -> VaultFilters::getClientLevel,
                     () -> () -> LEVEL_REF.get().get()
             );
-
         }
         return FilterItem.test(level,stack, filterStack);
     }
