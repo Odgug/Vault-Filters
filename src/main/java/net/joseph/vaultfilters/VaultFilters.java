@@ -1,5 +1,6 @@
 package net.joseph.vaultfilters;
 
+import com.mojang.logging.LogUtils;
 import com.simibubi.create.content.logistics.filter.FilterItem;
 import iskallia.vault.core.vault.Vault;
 import iskallia.vault.gear.data.GearDataCache;
@@ -39,6 +40,7 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
+import org.slf4j.Logger;
 
 
 //import com.simibubi.create.content.logistics.filter.FilterItemStack;
@@ -49,6 +51,7 @@ public class VaultFilters {
     public static final String MOD_ID = "vaultfilters";
     public static final int CHECK_FILTER_FLAG = 456;
     public static final int NO_CACHE_FLAG = 457;
+    public static final Logger LOGGER = LogUtils.getLogger();
     public VaultFilters() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         eventBus.addListener(this::setup);

@@ -3,18 +3,19 @@
   "package": "net.joseph.vaultfilters.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "data.EffectCloudAttributeAccessor",
-    "data.EffectCloudAccessor",
-    "compat.MixinBulkItemMatcher",
-    "compat.MixinItemGridHandler",
-    "other.MixinAttributeResearchBypass",
-    "compat.MixinSimpleItemMatcher",
-    "compat.MixinRSItemMatcher",
-    "compat.MixinRSDiskMatcher",
     "compat.ExporterNetworkNodeMixin",
-    "compat.MixinSophItemMatcher",
+    "compat.MixinBulkItemMatcher",
+    "compat.MixinCreateFilteringBehaviour",
     "compat.MixinFilterGridFilter",
-    "compat.MixinCreateFilteringBehaviour"
+    "compat.MixinItemGridHandler",
+    "compat.MixinItemStackHashingStrategy",
+    "compat.MixinRSDiskMatcher",
+    "compat.MixinRSItemMatcher",
+    "compat.MixinSimpleItemMatcher",
+    "compat.MixinSophItemMatcher",
+    "data.EffectCloudAccessor",
+    "data.EffectCloudAttributeAccessor",
+    "other.MixinAttributeResearchBypass"
   ],
   "injectors": {
     "defaultRequire": 1
