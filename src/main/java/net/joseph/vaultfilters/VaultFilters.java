@@ -1,6 +1,7 @@
 package net.joseph.vaultfilters;
 
 import com.simibubi.create.content.logistics.filter.FilterItem;
+import iskallia.vault.core.vault.Vault;
 import iskallia.vault.gear.data.GearDataCache;
 import iskallia.vault.gear.item.VaultGearItem;
 import net.joseph.vaultfilters.attributes.affix.*;
@@ -37,10 +38,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-
-import java.lang.ref.WeakReference;
-
-import static net.minecraftforge.forgespi.Environment.Keys.DIST;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 
 
 //import com.simibubi.create.content.logistics.filter.FilterItemStack;
@@ -58,14 +56,14 @@ public class VaultFilters {
         MinecraftForge.EVENT_BUS.register(this);
     }
 
-    public static final ThreadLocal<WeakReference<Level>> LEVEL_REF = new ThreadLocal<>();
+    public static Level LEVEL_REF;
 
 
     @SubscribeEvent
     public void onWorldLoad(WorldEvent.Load event) {
         MinecraftServer server = event.getWorld().getServer();
         if (server != null) {
-            LEVEL_REF.set(new WeakReference<>(server.getLevel(Level.OVERWORLD)));
+            LEVEL_REF = server.getLevel(Level.OVERWORLD);
         }
     }
 
@@ -148,8 +146,10 @@ public class VaultFilters {
 
     @OnlyIn(Dist.CLIENT)
     public static Level getClientLevel() {
-        return net.minecraft.client.Minecraft.getInstance().level;
+        return (Level) net.minecraft.client.Minecraft.getInstance().level;
     };
+
+
 
 
     public static String filterKey = "hashes";
@@ -157,10 +157,11 @@ public class VaultFilters {
 
 
         if (level == null) {
-            level = DistExecutor.safeRunForDist(
-                    () -> VaultFilters::getClientLevel,
-                    () -> () -> LEVEL_REF.get().get()
-            );
+            level = LEVEL_REF;
+            if (FMLEnvironment.dist.isClient()) {
+                DistExecutor.unsafeCallWhenOn(Dist.CLIENT, () -> VaultFilters::getClientLevel);
+            }
+
         }
         return FilterItem.test(level,stack, filterStack);
     }
