@@ -149,16 +149,8 @@ public class VaultFilters {
     @OnlyIn(Dist.CLIENT)
     public static Level getClientLevel() {
         return net.minecraft.client.Minecraft.getInstance().level;
-    }
-    public static Level getServerLevel() {
-        if (LEVEL_REF == null) {
-            return null;
-        }
-        if (LEVEL_REF.get() == null) {
-            return null;
-        }
-        return LEVEL_REF.get().get();
-    }
+    };
+
 
     public static String filterKey = "hashes";
     public static boolean filterTest(ItemStack stack, ItemStack filterStack, Level level) {
@@ -167,7 +159,7 @@ public class VaultFilters {
         if (level == null) {
             level = DistExecutor.safeRunForDist(
                     () -> VaultFilters::getClientLevel,
-                    () -> VaultFilters::getServerLevel
+                    () -> () -> LEVEL_REF.get().get()
             );
         }
         return FilterItem.test(level,stack, filterStack);
