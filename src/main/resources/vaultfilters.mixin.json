@@ -5,6 +5,7 @@
   "mixins": [
     "compat.ExporterNetworkNodeMixin",
     "compat.MixinBulkItemMatcher",
+    "compat.MixinContainerModule",
     "compat.MixinCreateFilteringBehaviour",
     "compat.MixinFilterGridFilter",
     "compat.MixinItemGridHandler",

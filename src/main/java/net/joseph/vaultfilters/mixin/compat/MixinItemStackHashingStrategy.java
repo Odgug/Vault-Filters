@@ -14,7 +14,7 @@ public class MixinItemStackHashingStrategy {
 
     @Inject(method = "hashCode(Lnet/minecraft/world/item/ItemStack;)I", at = @At("HEAD"), cancellable = true)
     public void filterHash(ItemStack object, CallbackInfoReturnable<Integer> cir){
-        VaultFilters.LOGGER.info("HashFunc " + object.getItem().getClass().getSimpleName() );
+        //VaultFilters.LOGGER.info("HashFunc " + object.getItem().getClass().getSimpleName() );
         if (object.getItem() instanceof FilterItem) {
             cir.setReturnValue(object.hashCode());
         }
@@ -23,7 +23,7 @@ public class MixinItemStackHashingStrategy {
     public void filterEquals(ItemStack o1, ItemStack o2,CallbackInfoReturnable<Boolean> cir) {
 
         if (o1 != null && o2 != null) {
-            VaultFilters.LOGGER.info("O1: " + o1.getItem().getClass().getSimpleName() + " O2: " + o2.getItem().getClass().getSimpleName());
+            //VaultFilters.LOGGER.info("O1: " + o1.getItem().getClass().getSimpleName() + " O2: " + o2.getItem().getClass().getSimpleName());
            if (o1.getItem() instanceof FilterItem && o2.getItem() instanceof FilterItem) {
                 cir.setReturnValue(o1.hashCode() == o2.hashCode());
             }
