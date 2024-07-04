@@ -168,7 +168,7 @@ public class VaultFilters {
         }
         return FilterItem.test(level,stack, filterStack);
     }
-    public static boolean cacheTest(ItemStack stack, ItemStack filterStack, int maxHashes, Level level) {
+    private static boolean cacheTest(ItemStack stack, ItemStack filterStack, int maxHashes, Level level) {
         CompoundTag tag = stack.getOrCreateTag();
         if (!(stack.getOrCreateTag().contains("clientCache"))) {
             GearDataCache.createCache(stack);
