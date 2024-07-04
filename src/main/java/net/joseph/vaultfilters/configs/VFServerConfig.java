@@ -11,6 +11,7 @@ public class VFServerConfig {
     public static final ForgeConfigSpec.ConfigValue<Boolean> MR_COMPAT;
     public static final ForgeConfigSpec.ConfigValue<Boolean> RS_COMPAT;
     public static final ForgeConfigSpec.ConfigValue<Boolean> BACKPACKS_COMPAT;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> AE2_COMPAT;
 
     static {
         BUILDER.push("Vault Filters Server Config");
@@ -28,6 +29,8 @@ public class VFServerConfig {
         BACKPACKS_COMPAT = BUILDER.comment("\nEnable compatibility for list and attribute filters inside sophisticated backpacks upgrades" +
                 "\nDefault:true").define("Backpacks Compatibility",true);
 
+        AE2_COMPAT = BUILDER.comment("\nEnable compatibility for list and attribute filters inside AE2 exporter buses and terminal filters" +
+                "\nDefault:true").define("Refined Storage Compatibility", true);
         BUILDER.pop();
         SPEC = BUILDER.build();
     }

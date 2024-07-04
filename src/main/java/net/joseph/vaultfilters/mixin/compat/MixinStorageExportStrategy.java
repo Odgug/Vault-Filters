@@ -11,6 +11,7 @@ import appeng.util.BlockApiCache;
 import com.simibubi.create.content.logistics.filter.FilterItem;
 import it.unimi.dsi.fastutil.objects.Object2LongMap;
 import net.joseph.vaultfilters.VaultFilters;
+import net.joseph.vaultfilters.configs.VFServerConfig;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import org.lwjgl.system.CallbackI;
@@ -57,7 +58,7 @@ public class MixinStorageExportStrategy<C> {
 
         if (what instanceof AEItemKey filterItemKey) {
 
-            if (filterItemKey.getItem() instanceof FilterItem) {
+            if (VFServerConfig.AE2_COMPAT.get() && filterItemKey.getItem() instanceof FilterItem) {
                 ItemStack filterStack = filterItemKey.toStack();
                 Iterable<Object2LongMap.Entry<AEKey>> invitems = inv.getInventory().getAvailableStacks();
                 for (Object2LongMap.Entry<AEKey> key : invitems) {
