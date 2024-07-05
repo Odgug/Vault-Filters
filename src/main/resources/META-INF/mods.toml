@@ -5,7 +5,7 @@ issueTrackerURL="https://github.com/Odgug/Vault-Filters/issues"
 
 [[mods]]
 modId="vaultfilters"
-version="1.9.4-3.14"
+version="1.2.0-3.14"
 displayName="Vault Filters"
 logoFile="vaultfilters.png"
 description='''
