@@ -143,9 +143,9 @@ public class VaultFilters {
         if (VFServerConfig.CACHE_DATAFIX.get()) {
             DataFixers.clearNBTCache(stack);
         }
-        if (filterStack.getDisplayName().getString().equals("Ignore Caching")) {
-            return basicFilterTest(stack,filterStack,level);
-        }
+        //if (filterStack.getDisplayName().getString().equals("Ignore Caching")) {
+            //return basicFilterTest(stack,filterStack,level);
+        //}
 
         //return FilterItemStack.of(filterStack).test(null, stack);
         //return cacheTest(stack, filterStack, VFServerConfig.MAX_CACHES.get(),level);
