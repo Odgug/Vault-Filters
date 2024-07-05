@@ -30,6 +30,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -67,6 +68,24 @@ public class VaultFilters {
         MinecraftServer server = event.getWorld().getServer();
         if (server != null) {
             LEVEL_REF = server.getLevel(Level.OVERWORLD);
+        }
+    }
+
+    private static int ticks = 0;
+    @SubscribeEvent
+    public static void onServerTick(TickEvent.ServerTickEvent event) {
+        if (event.phase == TickEvent.Phase.END) {
+            ticks++;
+            if (ticks >= 60*20) { //60 seconds * 20 tps
+                ticks = 0;
+                VaultFilters.LOGGER.info("cleared");
+                VFCache.cacheMap.forEach((key, value) -> {
+                    if (value.TTK == 0) {
+                        VFCache.cacheMap.remove(key);
+                    }
+                    value.TTK--;
+                });
+            }
         }
     }
 

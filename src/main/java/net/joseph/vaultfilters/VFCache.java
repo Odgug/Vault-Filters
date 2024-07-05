@@ -48,20 +48,5 @@ public class VFCache {
         this.TTK = VFServerConfig.CACHE_TTK.get();
     }
 
-    private static int ticks = 0;
-    @SubscribeEvent
-    public static void onServerTick(TickEvent.ServerTickEvent event) {
-        if (event.phase == TickEvent.Phase.END) {
-            ticks++;
-            if (ticks >= 60*20) { // 1200 ticks is approximately 1 minute (20 ticks per second)
-                ticks = 0;
-                cacheMap.forEach((key, value) -> {
-                    if (value.TTK == 0) {
-                        cacheMap.remove(key);
-                    }
-                    value.TTK--;
-                });
-            }
-        }
-    }
+
 }
