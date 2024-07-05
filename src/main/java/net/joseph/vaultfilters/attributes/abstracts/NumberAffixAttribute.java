@@ -6,7 +6,7 @@ import iskallia.vault.gear.attribute.ability.AbilityLevelAttribute;
 import iskallia.vault.gear.attribute.custom.EffectAvoidanceGearAttribute;
 import iskallia.vault.gear.attribute.custom.EffectCloudAttribute;
 import iskallia.vault.gear.reader.VaultGearModifierReader;
-import net.joseph.vaultfilters.DataFixerParsers;
+import net.joseph.vaultfilters.DataFixers;
 import net.joseph.vaultfilters.mixin.data.EffectCloudAccessor;
 import net.joseph.vaultfilters.mixin.data.EffectCloudAttributeAccessor;
 import net.minecraft.nbt.CompoundTag;
@@ -139,8 +139,8 @@ public abstract class NumberAffixAttribute extends AffixAttribute {
         String simpleKey = key + "_simple";
 
         String displayName = compoundTag.getString(getLegacyKey());
-        String name = DataFixerParsers.getModifierName(displayName);
-        Number level = DataFixerParsers.parseLevel(name, displayName);
+        String name = DataFixers.getModifierName(displayName);
+        Number level = DataFixers.parseLevel(name, displayName);
 
         compoundTag.remove(getLegacyKey());
         compoundTag.putString(key, displayName);

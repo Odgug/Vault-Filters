@@ -1,8 +1,12 @@
 package net.joseph.vaultfilters;
 
+import iskallia.vault.gear.item.VaultGearItem;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.ItemStack;
+
 import java.util.function.Function;
 
-public class DataFixerParsers {
+public class DataFixers {
     public static String getModifierName(String modifier) {
         int firstSpace = modifier.indexOf(' ');
         if (modifier.contains("Cloud")) {
@@ -67,24 +71,24 @@ public class DataFixerParsers {
     }
 
     /**
-     * Utility method for {@link DataFixerParsers#parseLevel(String, String) parseLevel}
-     * Does not account for Clouds as that is handled in {@link DataFixerParsers#parseLevel(String, String) parseLevel} already.
+     * Utility method for {@link DataFixers#parseLevel(String, String) parseLevel}
+     * Does not account for Clouds as that is handled in {@link DataFixers#parseLevel(String, String) parseLevel} already.
      *
      * @return Returns the parseMethod for the number type associated with the modifierName
      */
     private static Function<String, ? extends Number> getLevelType(String modifierName, boolean isPercent) {
         return switch (modifierName) {
             case "Mana"
-                    -> isPercent ? DataFixerParsers::parseFloatPercent : Integer::parseInt;
+                    -> isPercent ? DataFixers::parseFloatPercent : Integer::parseInt;
             case "Armor", "Durability", "Chaining Attack", "Size", "Hammer Size"
-                    -> isPercent ? DataFixerParsers::parseIntPercent : Integer::parseInt;
+                    -> isPercent ? DataFixers::parseIntPercent : Integer::parseInt;
             case "Attack Damage", "Reach", "Attack Range", "Attack Speed"
-                    -> isPercent ? DataFixerParsers::parseDoublePercent : Double::parseDouble;
+                    -> isPercent ? DataFixers::parseDoublePercent : Double::parseDouble;
             default -> {
                 if (modifierName.contains("level of")) {
                     yield Integer::parseInt;
                 }
-                yield  isPercent ? DataFixerParsers::parseFloatPercent : Float::parseFloat;
+                yield  isPercent ? DataFixers::parseFloatPercent : Float::parseFloat;
             }
         };
     }
@@ -99,5 +103,20 @@ public class DataFixerParsers {
 
     private static Float parseFloatPercent(String string) {
         return Float.parseFloat(string) / 100;
+    }
+
+    public static void clearNBTCache(ItemStack itemStack) {
+        if (!(itemStack.getItem() instanceof VaultGearItem)) {
+            return;
+        }
+        CompoundTag tag = itemStack.getOrCreateTag();
+        if (!(tag.contains("clientCache"))) {
+            return;
+        }
+        tag = tag.getCompound("clientCache");
+        if (!((tag.contains(VaultFilters.filterKey)))) {
+            return;
+        }
+        tag.remove(VaultFilters.filterKey);
     }
 }

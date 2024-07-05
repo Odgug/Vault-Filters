@@ -135,16 +135,21 @@ public class VaultFilters {
     }
     public static boolean checkFilter(ItemStack stack, ItemStack filterStack, boolean useCache, Level level) {
         if (!useCache) {
-            return filterTest(stack,filterStack,level);
+            return basicFilterTest(stack,filterStack,level);
         }
         if (!(stack.getItem() instanceof VaultGearItem)) {
-            return filterTest(stack,filterStack,level);
+            return basicFilterTest(stack,filterStack,level);
+        }
+        if (VFServerConfig.CACHE_DATAFIX.get()) {
+            DataFixers.clearNBTCache(stack);
         }
         if (filterStack.getDisplayName().getString().equals("Ignore Caching")) {
-            return filterTest(stack,filterStack,level);
+            return basicFilterTest(stack,filterStack,level);
         }
+
         //return FilterItemStack.of(filterStack).test(null, stack);
-        return cacheTest(stack, filterStack, VFServerConfig.MAX_CACHES.get(),level);
+        //return cacheTest(stack, filterStack, VFServerConfig.MAX_CACHES.get(),level);
+        return VFCache.getOrCreateFilter(stack,filterStack,level);
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -153,10 +158,8 @@ public class VaultFilters {
     };
 
 
-
-
     public static String filterKey = "hashes";
-    public static boolean filterTest(ItemStack stack, ItemStack filterStack, Level level) {
+    public static boolean basicFilterTest(ItemStack stack, ItemStack filterStack, Level level) {
 
 
         if (level == null) {
@@ -187,7 +190,7 @@ public class VaultFilters {
         }
 
         if (maxHashes == 0) {
-            return VaultFilters.filterTest(stack,filterStack,level);
+            return VaultFilters.basicFilterTest(stack,filterStack,level);
         }
 
         int hash = filterStack.hashCode();
@@ -203,7 +206,7 @@ public class VaultFilters {
             filterHashes.remove(0);
         }
 
-        boolean result = VaultFilters.filterTest(stack,filterStack,level);
+        boolean result = VaultFilters.basicFilterTest(stack,filterStack,level);
 
         if (result) {
             filterHashes.add(passedHash);

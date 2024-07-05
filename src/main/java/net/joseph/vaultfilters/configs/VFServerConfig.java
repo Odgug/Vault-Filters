@@ -7,18 +7,20 @@ public class VFServerConfig {
     public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
     public static final ForgeConfigSpec SPEC;
 
-    public static final ForgeConfigSpec.ConfigValue<Integer> MAX_CACHES;
+    public static final ForgeConfigSpec.ConfigValue<Integer> CACHE_TTK;
     public static final ForgeConfigSpec.ConfigValue<Boolean> MR_COMPAT;
     public static final ForgeConfigSpec.ConfigValue<Boolean> RS_COMPAT;
     public static final ForgeConfigSpec.ConfigValue<Boolean> BACKPACKS_COMPAT;
     public static final ForgeConfigSpec.ConfigValue<Boolean> AE2_COMPAT;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> CACHE_DATAFIX;
 
     static {
         BUILDER.push("Vault Filters Server Config");
 
-        MAX_CACHES = BUILDER.comment("\nMaximum amount of filters that can be cached on an item" +
-                "\nNone: 0" +
-                "\nDefault: 4").defineInRange("Max Filter Caches",4,0,20);
+        CACHE_TTK = BUILDER.comment("\nHow long till an unused cache entry gets cleared" +
+                "\nin minutes" +
+                "\nMinimum 2" +
+                "\nDefault: 5").defineInRange("Cache time to kill",5,2,100);
 
         MR_COMPAT = BUILDER.comment("\nEnable compatibility for list and attribute filters inside Modular Router modules" +
                 "\nDefault:true").define("Modular Routers Compatibility",true);
@@ -30,7 +32,10 @@ public class VFServerConfig {
                 "\nDefault:true").define("Backpacks Compatibility",true);
 
         AE2_COMPAT = BUILDER.comment("\nEnable compatibility for list and attribute filters inside AE2 exporter buses and terminal filters" +
-                "\nDefault:true").define("Refined Storage Compatibility", true);
+                "\nDefault:true").define("AE2 Compatibility", true);
+
+        CACHE_DATAFIX = BUILDER.comment("\nDelete old cache entries from items when they're filtered through" +
+                "\nDefault:false").define("Old cache data fixer", false);
         BUILDER.pop();
         SPEC = BUILDER.build();
     }
