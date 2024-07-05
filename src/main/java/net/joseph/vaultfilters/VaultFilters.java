@@ -73,12 +73,12 @@ public class VaultFilters {
 
     private static int ticks = 0;
     @SubscribeEvent
-    public static void onServerTick(TickEvent.ServerTickEvent event) {
+    public void onServerTick(TickEvent.ServerTickEvent event) {
         if (event.phase == TickEvent.Phase.END) {
             ticks++;
             if (ticks >= 60*20) { //60 seconds * 20 tps
                 ticks = 0;
-                VaultFilters.LOGGER.info("cleared");
+                //VaultFilters.LOGGER.info("cleared");
                 VFCache.cacheMap.forEach((key, value) -> {
                     if (value.TTK == 0) {
                         VFCache.cacheMap.remove(key);
