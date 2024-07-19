@@ -4,6 +4,7 @@ import com.refinedmods.refinedstorage.apiimpl.API;
 import com.refinedmods.refinedstorage.blockentity.config.IWhitelistBlacklist;
 import com.simibubi.create.content.logistics.filter.FilterItem;
 import net.joseph.vaultfilters.VaultFilters;
+import net.joseph.vaultfilters.configs.VFServerConfig;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import org.spongepowered.asm.mixin.Mixin;
@@ -26,7 +27,7 @@ public interface MixinIWhiteListBlackList {
         if (mode == 0) {
             for (i = 0; i < filters.getSlots(); ++i) {
                 slot = filters.getStackInSlot(i);
-                if(slot.getItem() instanceof FilterItem) {
+                if(slot.getItem() instanceof FilterItem && VFServerConfig.AE2_COMPAT.get()) {
                     return VaultFilters.checkFilter(stack, slot, true, null);
                 }
                 if (API.instance().getComparer().isEqual(slot, stack, compare)) {
@@ -38,7 +39,7 @@ public interface MixinIWhiteListBlackList {
         } else if (mode == 1) {
             for (i = 0; i < filters.getSlots(); ++i) {
                 slot = filters.getStackInSlot(i);
-                if(slot.getItem() instanceof FilterItem) {
+                if(slot.getItem() instanceof FilterItem && VFServerConfig.AE2_COMPAT.get()) {
                     return !VaultFilters.checkFilter(stack, slot, true, null);
                 }
                 if (API.instance().getComparer().isEqual(slot, stack, compare)) {
