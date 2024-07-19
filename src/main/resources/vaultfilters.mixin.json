@@ -11,12 +11,12 @@
     "compat.MixinFuzzyPriorityList",
     "compat.MixinItemGridHandler",
     "compat.MixinItemStackHashingStrategy",
+    "compat.MixinIWhiteListBlackList",
     "compat.MixinPrecisePriorityList",
     "compat.MixinRSDiskMatcher",
     "compat.MixinRSItemMatcher",
     "compat.MixinSimpleItemMatcher",
     "compat.MixinSophItemMatcher",
-    "compat.MixinStorageExportStrategy",
     "data.EffectCloudAccessor",
     "data.EffectCloudAttributeAccessor",
     "other.MixinAttributeResearchBypass"
