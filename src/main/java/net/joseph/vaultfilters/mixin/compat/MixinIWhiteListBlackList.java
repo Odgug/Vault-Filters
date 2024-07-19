@@ -27,7 +27,7 @@ public interface MixinIWhiteListBlackList {
         if (mode == 0) {
             for (i = 0; i < filters.getSlots(); ++i) {
                 slot = filters.getStackInSlot(i);
-                if(slot.getItem() instanceof FilterItem && VFServerConfig.AE2_COMPAT.get()) {
+                if(slot.getItem() instanceof FilterItem && VFServerConfig.RS_COMPAT.get()) {
                     return VaultFilters.checkFilter(stack, slot, true, null);
                 }
                 if (API.instance().getComparer().isEqual(slot, stack, compare)) {
@@ -39,7 +39,7 @@ public interface MixinIWhiteListBlackList {
         } else if (mode == 1) {
             for (i = 0; i < filters.getSlots(); ++i) {
                 slot = filters.getStackInSlot(i);
-                if(slot.getItem() instanceof FilterItem && VFServerConfig.AE2_COMPAT.get()) {
+                if(slot.getItem() instanceof FilterItem && VFServerConfig.RS_COMPAT.get()) {
                     return !VaultFilters.checkFilter(stack, slot, true, null);
                 }
                 if (API.instance().getComparer().isEqual(slot, stack, compare)) {
