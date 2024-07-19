@@ -17,6 +17,7 @@
     "compat.MixinRSItemMatcher",
     "compat.MixinSimpleItemMatcher",
     "compat.MixinSophItemMatcher",
+    "compat.MixinStorageExportStrategy",
     "data.EffectCloudAccessor",
     "data.EffectCloudAttributeAccessor",
     "other.MixinAttributeResearchBypass"
