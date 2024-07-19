@@ -11,6 +11,7 @@
     "compat.MixinFuzzyPriorityList",
     "compat.MixinItemGridHandler",
     "compat.MixinItemStackHashingStrategy",
+    "compat.MixinIWhiteListBlackList",
     "compat.MixinPrecisePriorityList",
     "compat.MixinRSDiskMatcher",
     "compat.MixinRSItemMatcher",

@@ -14,6 +14,8 @@ Huge thanks to the people here for making this mod possible
 Rewrite with both code and performance optimizations and a ton of polishing
 - Contributor: [radimous](https://github.com/radimous)
 Added a ton of mod compatibility and huge technical help
+- Contributor: [iwolfking](https://github.com/iwolfking)
+Added additional support to Refined Storage and Applied Energistics, provided technical help.
 
 <details open>
 <summary style="font-size: 1.75em; font-weight: bold">
@@ -102,17 +104,19 @@ Mod Compatibilities (Click to Collapse/Expand)
 
 (Filters = List & Attribute Filters)
 
-### Modular routers
+### Modular Routers
 - Filters now work properly as filter items inside modules. Note: Only one of each filter type can be placed, but multiple attribute filters can be placed inside a single list filter.
 
-### Sophisticated backpacks
+### Sophisticated Backpacks
 - Filters now function correctly inside the filter slots of upgrades like the pickup upgrade and void upgrade.
 
-### Refined storage
+### Refined Storage
 - RS filter item compatibility: Attribute filters can now be placed inside the "Filter" item.
-- Filters work properly inside exporters.
+- Filters work properly inside Exporters, Importers, Destructors, and External Storage.
 - For performance reasons, when pulling out of a disk, only gear-like items matching the filters will be pulled out, When pulling out of items stored in external storages, everything functions normally.
-- It is recommended to not make extensive use filters with exporters to avoid possible lag.
+
+### Applied Energistics
+- Filters work properly inside of View Cells, Import Bus, Export Bus, Storage Bus, and Formation Planes. Supports normal and Fuzzy card operation.
 </details>
 
 ## Server / Client Requirements
