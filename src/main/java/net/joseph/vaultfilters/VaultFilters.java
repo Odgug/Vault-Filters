@@ -6,6 +6,10 @@ import com.simibubi.create.content.logistics.filter.FilterItemStack;
 import iskallia.vault.core.vault.Vault;
 import iskallia.vault.gear.data.GearDataCache;
 import iskallia.vault.gear.item.VaultGearItem;
+import iskallia.vault.item.InfusedCatalystItem;
+import iskallia.vault.item.InscriptionItem;
+import iskallia.vault.item.gear.CharmItem;
+import iskallia.vault.item.gear.TrinketItem;
 import net.joseph.vaultfilters.attributes.affix.*;
 import net.joseph.vaultfilters.attributes.catalysts.CatalystHasModifierAttribute;
 import net.joseph.vaultfilters.attributes.catalysts.CatalystModifierCategoryAttribute;
@@ -26,6 +30,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.IntTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
@@ -157,7 +162,10 @@ public class VaultFilters {
         if (!useCache) {
             return basicFilterTest(stack,filterStack,level);
         }
-        if (!(stack.getItem() instanceof VaultGearItem)) {
+        Item stackItem = stack.getItem();
+        if (! (stackItem instanceof VaultGearItem || stackItem instanceof InscriptionItem ||
+                stackItem instanceof InfusedCatalystItem ||stackItem instanceof CharmItem ||
+                stackItem instanceof TrinketItem)) {
             return basicFilterTest(stack,filterStack,level);
         }
         if (VFServerConfig.CACHE_DATAFIX.get() && filterStack instanceof ItemStack) {
