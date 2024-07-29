@@ -8,7 +8,9 @@ import iskallia.vault.item.VaultCatalystItem;
 import iskallia.vault.item.gear.CharmItem;
 import iskallia.vault.item.gear.TrinketItem;
 import iskallia.vault.item.tool.JewelItem;
+import iskallia.vault.item.tool.ToolItem;
 import net.joseph.vaultfilters.attributes.abstracts.StringAttribute;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 public class ItemTypeAttribute extends StringAttribute {
@@ -18,17 +20,20 @@ public class ItemTypeAttribute extends StringAttribute {
 
     @Override
     public String getValue(ItemStack itemStack) {
-        if (itemStack.getItem() instanceof CharmItem) {
+        Item item = itemStack.getItem();
+        if (item instanceof CharmItem) {
             return "Charm";
-        } else if (itemStack.getItem() instanceof TrinketItem) {
+        } else if (item instanceof TrinketItem) {
             return "Trinket";
-        } else if (itemStack.getItem() instanceof JewelItem) {
+        } else if (item instanceof JewelItem) {
             return "Jewel";
-        } else if (itemStack.getItem() instanceof InscriptionItem) {
+        } else if (item instanceof InscriptionItem) {
             return "Inscription";
-        } else if (itemStack.getItem() instanceof VaultGearItem) {
+        } else if (item instanceof ToolItem) {
+            return "Vault Tool";
+        } else if (item instanceof VaultGearItem) {
             return "Gear Piece";
-        } else if (itemStack.getItem() instanceof InfusedCatalystItem) {
+        } else if (item instanceof InfusedCatalystItem) {
             return "Catalyst";
         } else if (isTreasureDoor(itemStack)) {
             return "Treasure Key";
