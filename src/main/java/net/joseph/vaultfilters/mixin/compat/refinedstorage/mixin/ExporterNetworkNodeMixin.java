@@ -1,4 +1,4 @@
-package net.joseph.vaultfilters.mixin.compat;
+package net.joseph.vaultfilters.mixin.compat.refinedstorage.mixin;
 
 import com.refinedmods.refinedstorage.api.util.Action;
 import com.refinedmods.refinedstorage.api.util.IComparer;

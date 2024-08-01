@@ -1,4 +1,4 @@
-package net.joseph.vaultfilters.mixin.compat;
+package net.joseph.vaultfilters.mixin.compat.create;
 
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;

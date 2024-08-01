@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "net.joseph.vaultfilters.mixin.compat.modularrouters.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "plugin": "net.joseph.vaultfilters.mixin.compat.modularrouters.ModularRoutersMixinPlugin",
+  "mixins": [
+    "MixinBulkItemMatcher",
+    "MixinContainerModule",
+    "MixinItemStackHashingStrategy"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "vaultfilters.mixin-refmap.json"
+}

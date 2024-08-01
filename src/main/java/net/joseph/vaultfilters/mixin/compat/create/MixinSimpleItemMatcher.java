@@ -1,4 +1,4 @@
-package net.joseph.vaultfilters.mixin.compat;
+package net.joseph.vaultfilters.mixin.compat.create;
 
 import com.simibubi.create.content.logistics.filter.FilterItem;
 import me.desht.modularrouters.logic.filter.Filter;

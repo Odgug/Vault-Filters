@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "net.joseph.vaultfilters.mixin.compat.sophisticatedcore.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "plugin": "net.joseph.vaultfilters.mixin.compat.sophisticatedcore.SophisticatedCoreMixinPlugin",
+  "mixins": [
+    "MixinSophItemMatcher"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "vaultfilters.mixin-refmap.json"
+}

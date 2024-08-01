@@ -89,6 +89,16 @@ minecraft {
     }
 }
 
+mixin {
+    add sourceSets.main, "mixins.${mod_id}.refmap.json"
+    config "mixins.${mod_id}.ae2.json"
+    config "mixins.${mod_id}.rs.json"
+    config "mixins.${mod_id}.sophisticatedcore.json"
+    config "mixins.${mod_id}.modularrouters.json"
+    config "mixins.${mod_id}.tomsstorage.json"
+    config "mixins.${mod_id}.core.json"
+}
+
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
@@ -142,10 +152,8 @@ jar {
                 "Implementation-Vendor"   : "vaultfilterssareus",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
                 "TweakClass" : "org.spongepowered.asm.launch.MixinTweaker",
-                "TweakOrder": 0,
-                "MixinConfigs" : "vaultfilters.mixin.json"
+                "TweakOrder": 0
         ])
-        rename 'mixin.refmap.json', 'ccvault.mixin-refmap.json'
     }
 }
 

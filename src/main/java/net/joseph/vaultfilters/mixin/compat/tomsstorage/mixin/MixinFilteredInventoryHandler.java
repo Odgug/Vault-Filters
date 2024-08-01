@@ -1,4 +1,4 @@
-package net.joseph.vaultfilters.mixin.compat;
+package net.joseph.vaultfilters.mixin.compat.tomsstorage.mixin;
 
 import com.simibubi.create.content.logistics.filter.FilterItem;
 import com.tom.storagemod.util.FilteredInventoryHandler;

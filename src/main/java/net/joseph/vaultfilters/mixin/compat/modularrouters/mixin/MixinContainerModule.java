@@ -1,4 +1,4 @@
-package net.joseph.vaultfilters.mixin.compat;
+package net.joseph.vaultfilters.mixin.compat.modularrouters.mixin;
 
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;

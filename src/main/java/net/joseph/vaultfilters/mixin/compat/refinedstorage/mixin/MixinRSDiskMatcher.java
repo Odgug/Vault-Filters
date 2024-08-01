@@ -1,4 +1,4 @@
-package net.joseph.vaultfilters.mixin.compat;
+package net.joseph.vaultfilters.mixin.compat.refinedstorage.mixin;
 
 import com.google.common.collect.Multimap;
 import com.refinedmods.refinedstorage.apiimpl.storage.disk.ItemStorageDisk;

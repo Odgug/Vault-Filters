@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "net.joseph.vaultfilters.mixin.compat.ae2.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "plugin": "net.joseph.vaultfilters.mixin.compat.ae2.AppliedEnergisticsMixinPlugin",
+  "mixins": [
+    "MixinFuzzyPriorityList",
+    "MixinStorageExportStrategy",
+    "MixinPrecisePriorityList"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "vaultfilters.mixin-refmap.json"
+}

@@ -1,4 +1,4 @@
-package net.joseph.vaultfilters.mixin.compat;
+package net.joseph.vaultfilters.mixin.compat.ae2.mixin;
 
 import appeng.api.config.FuzzyMode;
 import appeng.api.stacks.AEItemKey;

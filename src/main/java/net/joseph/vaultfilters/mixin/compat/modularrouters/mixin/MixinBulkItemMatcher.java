@@ -1,4 +1,4 @@
-package net.joseph.vaultfilters.mixin.compat;
+package net.joseph.vaultfilters.mixin.compat.modularrouters.mixin;
 
 import me.desht.modularrouters.logic.filter.Filter;
 import me.desht.modularrouters.logic.filter.matchers.BulkItemMatcher;
