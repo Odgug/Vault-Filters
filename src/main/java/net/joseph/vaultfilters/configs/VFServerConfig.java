@@ -12,6 +12,7 @@ public class VFServerConfig {
     public static final ForgeConfigSpec.ConfigValue<Boolean> RS_COMPAT;
     public static final ForgeConfigSpec.ConfigValue<Boolean> BACKPACKS_COMPAT;
     public static final ForgeConfigSpec.ConfigValue<Boolean> AE2_COMPAT;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> TOMS_COMPAT;
     public static final ForgeConfigSpec.ConfigValue<Boolean> CACHE_DATAFIX;
 
     static {
@@ -33,6 +34,9 @@ public class VFServerConfig {
 
         AE2_COMPAT = BUILDER.comment("\nEnable compatibility for list and attribute filters inside AE2 exporter buses and terminal filters" +
                 "\nDefault:true").define("AE2 Compatibility", true);
+
+        TOMS_COMPAT = BUILDER.comment("\nEnable compatibility for list and attribute filters inside Tom's filtered inventory connector" +
+                "\nDefault:true").define("Tom's Simple Storage Compatibility", true);
 
         CACHE_DATAFIX = BUILDER.comment("\nDelete old cache entries from items when they're filtered through" +
                 "\nDefault:false").define("Old cache data fixer", false);
