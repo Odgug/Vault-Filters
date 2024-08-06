@@ -11,6 +11,7 @@ import iskallia.vault.item.gear.TrinketItem;
 import net.joseph.vaultfilters.attributes.affix.*;
 import net.joseph.vaultfilters.attributes.card.CardTypeAttribute;
 import net.joseph.vaultfilters.attributes.card.CardColorAttribute;
+import net.joseph.vaultfilters.attributes.card.CardUpgradableAttribute;
 import net.joseph.vaultfilters.attributes.catalysts.CatalystHasModifierAttribute;
 import net.joseph.vaultfilters.attributes.catalysts.CatalystModifierCategoryAttribute;
 import net.joseph.vaultfilters.attributes.catalysts.CatalystSizeAttribute;
@@ -146,7 +147,7 @@ public class VaultFilters {
         // Cards
         new CardColorAttribute("Red").register(CardColorAttribute::new);
         new CardTypeAttribute("Foil").register(CardTypeAttribute::new);
-
+        new CardUpgradableAttribute(true).register(CardUpgradableAttribute::new);
         // Charms
         new CharmUsesAttribute(0).register(CharmUsesAttribute::new);
         new CharmAffinityAttribute(0).register(CharmAffinityAttribute::new);
