@@ -123,6 +123,10 @@
   "create.item_attributes.catalyst_modifier": "is a catalyst with a \"%1$s\" modifier",
   "create.item_attributes.catalyst_modifier.inverted": "is not a catalyst with a \"%1$s\" modifier",
 
+  "create.item_attributes.card_tier": "is a card that is at least tier \"%1$s\"",
+  "create.item_attributes.card_tier.inverted": "is not a card that is at least \"%1$s\"",
+
+
   "create.item_attributes.card_color": "is a \"%1$s\" colored card",
   "create.item_attributes.card_color.inverted": "is not a \"%1$s\" colored card",
 

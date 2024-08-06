@@ -9,6 +9,7 @@ import iskallia.vault.item.InscriptionItem;
 import iskallia.vault.item.gear.CharmItem;
 import iskallia.vault.item.gear.TrinketItem;
 import net.joseph.vaultfilters.attributes.affix.*;
+import net.joseph.vaultfilters.attributes.card.CardAtleastTierAttribute;
 import net.joseph.vaultfilters.attributes.card.CardTypeAttribute;
 import net.joseph.vaultfilters.attributes.card.CardColorAttribute;
 import net.joseph.vaultfilters.attributes.card.CardUpgradableAttribute;
@@ -145,6 +146,7 @@ public class VaultFilters {
         new ModifierGroupAttribute("ModAbility").register(ModifierGroupAttribute::new);
 
         // Cards
+        new CardAtleastTierAttribute(2).register(CardAtleastTierAttribute::new);
         new CardColorAttribute("Red").register(CardColorAttribute::new);
         new CardTypeAttribute("Foil").register(CardTypeAttribute::new);
         new CardUpgradableAttribute(true).register(CardUpgradableAttribute::new);
