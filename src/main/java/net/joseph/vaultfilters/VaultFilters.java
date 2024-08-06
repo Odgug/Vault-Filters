@@ -10,6 +10,7 @@ import iskallia.vault.item.InscriptionItem;
 import iskallia.vault.item.gear.CharmItem;
 import iskallia.vault.item.gear.TrinketItem;
 import net.joseph.vaultfilters.attributes.affix.*;
+import net.joseph.vaultfilters.attributes.card.CardColorAttribute;
 import net.joseph.vaultfilters.attributes.catalysts.CatalystHasModifierAttribute;
 import net.joseph.vaultfilters.attributes.catalysts.CatalystModifierCategoryAttribute;
 import net.joseph.vaultfilters.attributes.catalysts.CatalystSizeAttribute;
@@ -141,6 +142,10 @@ public class VaultFilters {
         new NumberSuffixAttribute("", "", 0).register(NumberSuffixAttribute::new);
 
         new ModifierGroupAttribute("ModAbility").register(ModifierGroupAttribute::new);
+
+        // Cards
+        new CardColorAttribute("Red").register(CardColorAttribute::new);
+
         // Charms
         new CharmUsesAttribute(0).register(CharmUsesAttribute::new);
         new CharmAffinityAttribute(0).register(CharmAffinityAttribute::new);
