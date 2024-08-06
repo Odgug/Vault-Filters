@@ -126,6 +126,9 @@
   "create.item_attributes.card_color": "is a \"%1$s\" colored card",
   "create.item_attributes.card_color.inverted": "is not a \"%1$s\" colored card",
 
+  "create.item_attributes.card_type": "is a \"%1$s\" type card",
+  "create.item_attributes.card_type.inverted": "is not a \"%1$s\" type card",
+
   "create.item_attributes.catalyst_category": "is a catalyst with a \"%1$s\" category modifier",
   "create.item_attributes.catalyst_category.inverted": "is not a catalyst with a \"%1$s\"  category modifier",
 

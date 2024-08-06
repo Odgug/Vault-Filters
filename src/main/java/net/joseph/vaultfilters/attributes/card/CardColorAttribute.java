@@ -32,10 +32,13 @@ public class CardColorAttribute extends StringListAttribute {
             return null;
         }
         Card card = getCard(itemStack);
+
         Set<CardEntry.Color> colors = card.getColors();
         ArrayList<String> colorStrings = new ArrayList<String>();
         for (CardEntry.Color color : colors) {
-            colorStrings.add(color.name());
+            if (color != null) {
+                colorStrings.add(color.name());
+            }
         }
         return colorStrings;
     }

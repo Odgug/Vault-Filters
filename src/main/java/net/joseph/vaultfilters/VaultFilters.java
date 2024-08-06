@@ -2,7 +2,6 @@ package net.joseph.vaultfilters;
 
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.content.logistics.filter.FilterItem;
-import iskallia.vault.core.vault.Vault;
 import iskallia.vault.gear.data.GearDataCache;
 import iskallia.vault.gear.item.VaultGearItem;
 import iskallia.vault.item.InfusedCatalystItem;
@@ -10,6 +9,7 @@ import iskallia.vault.item.InscriptionItem;
 import iskallia.vault.item.gear.CharmItem;
 import iskallia.vault.item.gear.TrinketItem;
 import net.joseph.vaultfilters.attributes.affix.*;
+import net.joseph.vaultfilters.attributes.card.CardTypeAttribute;
 import net.joseph.vaultfilters.attributes.card.CardColorAttribute;
 import net.joseph.vaultfilters.attributes.catalysts.CatalystHasModifierAttribute;
 import net.joseph.vaultfilters.attributes.catalysts.CatalystModifierCategoryAttribute;
@@ -145,6 +145,7 @@ public class VaultFilters {
 
         // Cards
         new CardColorAttribute("Red").register(CardColorAttribute::new);
+        new CardTypeAttribute("Foil").register(CardTypeAttribute::new);
 
         // Charms
         new CharmUsesAttribute(0).register(CharmUsesAttribute::new);
