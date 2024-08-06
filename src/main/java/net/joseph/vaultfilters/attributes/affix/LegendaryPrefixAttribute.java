@@ -15,13 +15,13 @@ public class LegendaryPrefixAttribute extends AffixAttribute {
 
     @Override
     public boolean shouldList(VaultGearModifier<?> modifier) {
-        return modifier.getCategory() == VaultGearModifier.AffixCategory.LEGENDARY;
+        return modifier.hasCategory(VaultGearModifier.AffixCategory.LEGENDARY);
     }
 
 
     @Override
     public boolean checkModifier(VaultGearModifier<?> modifier) {
-        return modifier.getCategory() == VaultGearModifier.AffixCategory.LEGENDARY && this.value.equals(getName(modifier));
+        return modifier.hasCategory(VaultGearModifier.AffixCategory.LEGENDARY) && this.value.equals(getName(modifier));
     }
     @Override
     public String getTranslationKey() {
