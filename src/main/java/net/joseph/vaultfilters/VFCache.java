@@ -11,14 +11,13 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class VFCache {
     public static ConcurrentHashMap<Integer,VFCache> cacheMap = new ConcurrentHashMap<Integer, VFCache>();
-    public static boolean getOrCreateFilter(ItemStack stack, Object filterStack, Level level) {
+    public static boolean getOrCreateFilter(ItemStack stack, ItemStack filterStack, Level level) {
         int itemHash = stack.hashCode();
         if (!(cacheMap.containsKey(itemHash))) {
             boolean testResult = VaultFilters.basicFilterTest(stack,filterStack,level);
             cacheMap.put(itemHash, new VFCache(filterStack, testResult));
             return testResult;
         }
-
         VFCache cache = cacheMap.get(itemHash);
         int filterHash = filterStack.hashCode();
         ConcurrentHashMap<Integer, Boolean> innerMap = cache.filterMap;
@@ -33,7 +32,7 @@ public class VFCache {
     }
     public int TTK = VFServerConfig.CACHE_TTK.get();
     public ConcurrentHashMap<Integer, Boolean> filterMap = new ConcurrentHashMap<Integer,Boolean>();
-    public VFCache(Object filterStack, boolean result) {
+    public VFCache(ItemStack filterStack, boolean result) {
         int filterHash = filterStack.hashCode();
         if (!(filterMap.containsKey(filterHash))) {
             filterMap.put(filterHash,result);
