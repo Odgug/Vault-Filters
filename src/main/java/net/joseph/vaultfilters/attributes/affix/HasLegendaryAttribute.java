@@ -19,7 +19,7 @@ public class HasLegendaryAttribute extends BooleanAttribute {
 
         VaultGearData data = VaultGearData.read(itemStack);
         for (VaultGearModifier<?> modifier : data.getAllModifierAffixes()) {
-            if (modifier.getCategory() == VaultGearModifier.AffixCategory.LEGENDARY) {
+            if (modifier.hasCategory(VaultGearModifier.AffixCategory.LEGENDARY)) {
                 return true;
             }
         }
