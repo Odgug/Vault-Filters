@@ -35,11 +35,11 @@
   "create.item_attributes.level": "is at least level \"%1$s\"",
   "create.item_attributes.level.inverted": "is not at least level \"%1$s\"",
 
-  "create.item_attributes.jewel_size": "is a jewel with up to \"%1$s\" size",
-  "create.item_attributes.jewel_size.inverted": "is not a jewel with up to \"%1$s\"",
+  "create.item_attributes.jewel_size": "is a jewel with at most \"%1$s\" size",
+  "create.item_attributes.jewel_size.inverted": "is not a jewel with at most \"%1$s\"",
 
-  "create.item_attributes.size": "is a jewel with up to \"%1$s\" size",
-  "create.item_attributes.size.inverted": "is not a jewel with up to \"%1$s\"",
+  "create.item_attributes.size": "is a jewel with at most \"%1$s\" size",
+  "create.item_attributes.size.inverted": "is not a jewel with at most \"%1$s\"",
 
 
   "create.item_attributes.implicit": "has a \"%1$s\" implicit",
@@ -74,14 +74,14 @@
   "create.item_attributes.inscription_time": "adds at least \"%1$s\" seconds",
   "create.item_attributes.inscription_time.inverted": "doesn't add at least \"%1$s\" seconds",
 
-  "create.item_attributes.inscription_size": "is an inscription with up to \"%1$s\" size",
-  "create.item_attributes.inscription_size.inverted": "is not an inscription with up to \"%1$s\"",
+  "create.item_attributes.inscription_size": "is an inscription with at most \"%1$s\" size",
+  "create.item_attributes.inscription_size.inverted": "is not an inscription with at most \"%1$s\"",
 
   "create.item_attributes.inscription_completion": "adds at least \"%1$s\" completion",
   "create.item_attributes.inscription_completion.inverted": "doesn't add at least \"%1$s\" completion",
 
-  "create.item_attributes.inscription_instability": "adds up to \"%1$s\" instability",
-  "create.item_attributes.inscription_instability.inverted": "doesn't add up to \"%1$s\" instability",
+  "create.item_attributes.inscription_instability": "adds at most \"%1$s\" instability",
+  "create.item_attributes.inscription_instability.inverted": "doesn't add at most \"%1$s\" instability",
 
   "create.item_attributes.cut_count": "has been free cut \"%1$s\" times",
   "create.item_attributes.cut_count.inverted": "has not been free cut \"%1$s\" times",
@@ -117,8 +117,8 @@
   "create.item_attributes.trinket_name": "is a \"%1$s\" trinket",
   "create.item_attributes.trinket_name.inverted": "is not a \"%1$s\" trinket",
 
-  "create.item_attributes.catalyst_size": "is a catalyst with up to \"%1$s\" size",
-  "create.item_attributes.catalyst_size.inverted": "is not a catalyst with up to \"%1$s\"",
+  "create.item_attributes.catalyst_size": "is a catalyst with at most \"%1$s\" size",
+  "create.item_attributes.catalyst_size.inverted": "is not a catalyst with at most \"%1$s\"",
 
   "create.item_attributes.catalyst_modifier": "is a catalyst with a \"%1$s\" modifier",
   "create.item_attributes.catalyst_modifier.inverted": "is not a catalyst with a \"%1$s\" modifier",
