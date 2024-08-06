@@ -2,6 +2,7 @@ package net.joseph.vaultfilters;
 
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.content.logistics.filter.FilterItem;
+import com.simibubi.create.content.logistics.filter.FilterItemStack;
 import iskallia.vault.core.vault.Vault;
 import iskallia.vault.gear.data.GearDataCache;
 import iskallia.vault.gear.item.VaultGearItem;
@@ -157,7 +158,7 @@ public class VaultFilters {
 
 
     }
-    public static boolean checkFilter(ItemStack stack, ItemStack filterStack, boolean useCache, Level level) {
+    public static boolean checkFilter(ItemStack stack, Object filterStack, boolean useCache, Level level) {
         if (!useCache) {
             return basicFilterTest(stack,filterStack,level);
         }
@@ -167,7 +168,7 @@ public class VaultFilters {
                 stackItem instanceof TrinketItem)) {
             return basicFilterTest(stack,filterStack,level);
         }
-        if (VFServerConfig.CACHE_DATAFIX.get()) {
+        if (VFServerConfig.CACHE_DATAFIX.get() && filterStack instanceof ItemStack) {
             DataFixers.clearNBTCache(stack);
         }
         //if (filterStack.getDisplayName().getString().equals("Ignore Caching")) {
@@ -186,7 +187,7 @@ public class VaultFilters {
 
 
     public static String filterKey = "hashes";
-    public static boolean basicFilterTest(ItemStack stack, ItemStack filterStack, Level level) {
+    public static boolean basicFilterTest(ItemStack stack, Object filterStack, Level level) {
 
 
         if (level == null) {
@@ -196,7 +197,15 @@ public class VaultFilters {
             }
 
         }
-        return FilterItem.test(level,stack, filterStack);
+        if (filterStack instanceof ItemStack stackFilter) {
+            return FilterItemStack.of(stackFilter).test(level,stack);
+        }
+        if (filterStack instanceof FilterItemStack filterItemStack) {
+            return filterItemStack.test(level,stack);
+        }
+        VaultFilters.LOGGER.debug("invalid filter entered");
+        return false;
+
     }
     private static boolean cacheTest(ItemStack stack, ItemStack filterStack, int maxHashes, Level level) {
         CompoundTag tag = stack.getOrCreateTag();
