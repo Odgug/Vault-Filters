@@ -20,6 +20,8 @@
     "compat.MixinStorageExportStrategy",
     "data.EffectCloudAccessor",
     "data.EffectCloudAttributeAccessor",
+    "data.ScalerFilterAccessor",
+    "data.FilterAccessor",
     "other.MixinAttributeResearchBypass"
   ],
   "injectors": {
