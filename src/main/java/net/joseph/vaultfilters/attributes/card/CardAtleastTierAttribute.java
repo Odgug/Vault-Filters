@@ -18,10 +18,14 @@ public class CardAtleastTierAttribute extends IntAttribute {
 
     @Override
     public Integer getValue(ItemStack itemStack) {
-        if (!(itemStack.getItem() instanceof CardItem)) {
-            return null;
-        }
-        return getCard(itemStack).getTier();
+        return null;
+    }
+
+
+    @Override
+    public boolean appliesTo(ItemStack itemStack) {
+        final Integer value = getValue(itemStack);
+        return value != null && value >= this.value;
     }
 
 
