@@ -1,4 +1,4 @@
-package net.joseph.vaultfilters.mixin.compat;
+package net.joseph.vaultfilters.mixin.compat.modularrouters.mixin;
 
 import com.simibubi.create.content.logistics.filter.FilterItem;
 import iskallia.vault.core.vault.Vault;

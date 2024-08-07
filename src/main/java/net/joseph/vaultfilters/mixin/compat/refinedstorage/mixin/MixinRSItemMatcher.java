@@ -1,4 +1,4 @@
-package net.joseph.vaultfilters.mixin.compat;
+package net.joseph.vaultfilters.mixin.compat.refinedstorage.mixin;
 
 import com.refinedmods.refinedstorage.apiimpl.util.Comparer;
 import com.simibubi.create.content.logistics.filter.FilterItem;
