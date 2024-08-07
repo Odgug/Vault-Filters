@@ -44,41 +44,42 @@ public class CardScaleTypesAttribute extends StringListAttribute {
         if (entries.isEmpty()) {
             return null;
         }
-        CardEntry entry = entries.get(0);
-        CardScaler scaler = entry.getScaler();
-        if (scaler == null) {
-            return null;
-        }
-        Map<Integer, List<CardScaler.Filter>> filters = ((ScalerFilterAccessor)scaler).getFilters();
-        if (filters == null) {
-            return null;
-        }
         ArrayList<String> categoryList = new ArrayList<String>();
-        for (int key : filters.keySet()) {
-            VaultFilters.LOGGER.debug(String.valueOf(key));
-            for (CardScaler.Filter filter : filters.get(key)) {
-                Set<CardNeighborType> neighborFilter = ((FilterAccessor)filter).getNeighborFilter();
-                if (neighborFilter != null) {
-                    for (CardNeighborType neighbor : neighborFilter) {
-                        categoryList.add(neighbor.name());
+        for (CardEntry entry : entries) {
+            CardScaler scaler = entry.getScaler();
+            if (scaler == null) {
+                continue;
+            }
+            Map<Integer, List<CardScaler.Filter>> filters = ((ScalerFilterAccessor) scaler).getFilters();
+            if (filters == null) {
+                continue;
+            }
+            for (int key : filters.keySet()) {
+                VaultFilters.LOGGER.debug(String.valueOf(key));
+                for (CardScaler.Filter filter : filters.get(key)) {
+                    Set<CardNeighborType> neighborFilter = ((FilterAccessor) filter).getNeighborFilter();
+                    if (neighborFilter != null) {
+                        for (CardNeighborType neighbor : neighborFilter) {
+                            categoryList.add(neighbor.name());
+                        }
                     }
-                }
-                Set<Integer> tierFilter = ((FilterAccessor)filter).getTierFilter();
-                if (tierFilter != null) {
-                    for (Integer tier : tierFilter) {
-                        categoryList.add("Tier " + String.valueOf(tier));
+                    Set<Integer> tierFilter = ((FilterAccessor) filter).getTierFilter();
+                    if (tierFilter != null) {
+                        for (Integer tier : tierFilter) {
+                            categoryList.add("Tier " + String.valueOf(tier));
+                        }
                     }
-                }
-                Set<CardEntry.Color> colorFilter = ((FilterAccessor)filter).getColorFilter();
-                if (colorFilter != null) {
-                    for (CardEntry.Color color : colorFilter) {
-                        categoryList.add(color.name());
+                    Set<CardEntry.Color> colorFilter = ((FilterAccessor) filter).getColorFilter();
+                    if (colorFilter != null) {
+                        for (CardEntry.Color color : colorFilter) {
+                            categoryList.add(color.name());
+                        }
                     }
-                }
-                Set<String> groupFilter = ((FilterAccessor)filter).getGroupFilter();
-                if (groupFilter != null) {
-                    for (String group : groupFilter) {
-                        categoryList.add(group);
+                    Set<String> groupFilter = ((FilterAccessor) filter).getGroupFilter();
+                    if (groupFilter != null) {
+                        for (String group : groupFilter) {
+                            categoryList.add(group);
+                        }
                     }
                 }
             }
