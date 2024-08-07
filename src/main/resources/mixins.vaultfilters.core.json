@@ -13,6 +13,7 @@
     "data.CardScaleAccessor",
     "data.ConditionFilterAccessor",
     "data.GearCardModifierAccesor",
+    "data.LootCardModifierConfigAccessor",
     "other.MixinAttributeResearchBypass"
   ],
   "injectors": {

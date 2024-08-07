@@ -1,8 +1,11 @@
 package net.joseph.vaultfilters.attributes.card;
 
 import iskallia.vault.core.card.*;
+import iskallia.vault.core.random.JavaRandom;
 import iskallia.vault.core.vault.modifier.registry.VaultModifierRegistry;
 import iskallia.vault.core.vault.modifier.spi.VaultModifier;
+import iskallia.vault.core.world.loot.LootPool;
+import iskallia.vault.core.world.loot.entry.LootEntry;
 import iskallia.vault.gear.attribute.VaultGearAttribute;
 import iskallia.vault.gear.attribute.VaultGearAttributeInstance;
 import iskallia.vault.gear.attribute.VaultGearModifier;
@@ -20,11 +23,15 @@ import iskallia.vault.init.ModGearAttributes;
 import iskallia.vault.item.CardItem;
 import iskallia.vault.item.tool.JewelItem;
 import iskallia.vault.skill.base.Skill;
+import iskallia.vault.task.KillEntityTask;
+import iskallia.vault.task.Task;
 import net.joseph.vaultfilters.attributes.abstracts.StringAttribute;
 import net.joseph.vaultfilters.attributes.gear.IsUnidentifiedAttribute;
 import net.joseph.vaultfilters.mixin.data.EffectCloudAccessor;
 import net.joseph.vaultfilters.mixin.data.EffectCloudAttributeAccessor;
 import net.joseph.vaultfilters.mixin.data.GearCardModifierAccesor;
+import net.joseph.vaultfilters.mixin.data.LootCardModifierConfigAccessor;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import org.apache.commons.lang3.StringUtils;
@@ -70,9 +77,33 @@ public class CardModifierAttribute extends StringAttribute {
             return getName(gearModifier);
         }
         if (modifier instanceof TaskLootCardModifier lootModifier) {
-            return lootModifier.task.getId();
+            return getName(lootModifier);
         }
         return null;
+    }
+    public static <T> String getName(TaskLootCardModifier lootModifier) {
+        TaskLootCardModifier.Config config = lootModifier.getConfig();
+        if (config == null) {
+            return null;
+        }
+        LootPool lootPool = ((LootCardModifierConfigAccessor)config).getLoot();
+        if (lootPool == null) {
+            return null;
+        }
+        Optional<LootEntry> optLootEntry = lootPool.getRandom();
+        if (optLootEntry.isEmpty()) {
+            return null;
+        }
+        LootEntry lootEntry = optLootEntry.get();
+        List<ItemStack> itemStacks = lootEntry.getStack(JavaRandom.ofNanoTime());
+        if (itemStacks == null) {
+            return null;
+        }
+        if (itemStacks.isEmpty()) {
+            return null;
+        }
+        ItemStack itemStack = itemStacks.get(0);
+        return (new TranslatableComponent(itemStack.getItem().getDescriptionId())).getString();
     }
     public static <T> String getName(GearCardModifier<T> cardModifier) {
         Optional<Object> valueOpt = CardEntry.getForTier(((GearCardModifierAccesor) cardModifier).getValues(), 1);
