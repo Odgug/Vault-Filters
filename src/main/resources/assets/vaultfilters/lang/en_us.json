@@ -126,6 +126,9 @@
   "create.item_attributes.card_tier": "is a card that is at least tier \"%1$s\"",
   "create.item_attributes.card_tier.inverted": "is not a card that is at least \"%1$s\"",
 
+  "create.item_attributes.card_has_condition": "is a card with a condition",
+  "create.item_attributes.card_has_condition.inverted": "is not a card with a condition",
+
   "create.item_attributes.card_scales": "is a scaling card",
   "create.item_attributes.card_scales.inverted": "is not a scaling card",
 

@@ -148,6 +148,7 @@ public class VaultFilters {
         new CardTypeAttribute("Foil").register(CardTypeAttribute::new);
         new CardUpgradableAttribute(true).register(CardUpgradableAttribute::new);
         new CardIsScalingAttribute(true).register(CardIsScalingAttribute::new);
+        new CardHasConditionAttribute(true).register(CardHasConditionAttribute::new);
         new CardScaleTypesAttribute("Diagonal").register(CardScaleTypesAttribute::new);
 
         // Charms
