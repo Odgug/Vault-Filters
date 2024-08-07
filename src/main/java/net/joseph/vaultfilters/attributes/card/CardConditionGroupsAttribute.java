@@ -2,12 +2,10 @@ package net.joseph.vaultfilters.attributes.card;
 
 import iskallia.vault.core.card.*;
 import iskallia.vault.item.CardItem;
-import net.joseph.vaultfilters.VaultFilters;
 import net.joseph.vaultfilters.attributes.abstracts.StringListAttribute;
 import net.joseph.vaultfilters.mixin.data.CardEntryAccessor;
+import net.joseph.vaultfilters.mixin.data.CardConditionAccessor;
 import net.joseph.vaultfilters.mixin.data.ConditionFilterAccessor;
-import net.joseph.vaultfilters.mixin.data.FilterAccessor;
-import net.joseph.vaultfilters.mixin.data.ScalerFilterAccessor;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
@@ -48,32 +46,32 @@ public class CardConditionGroupsAttribute extends StringListAttribute {
         if (condition == null) {
             return null;
         }
-        Map<Integer, List<CardScaler.Filter>> filters = ((ConditionFilterAccessor)condition).getFilters();
+        Map<Integer, List<CardCondition.Filter>> filters = ((CardConditionAccessor)condition).getFilters();
         if (filters == null) {
             return null;
         }
         ArrayList<String> categoryList = new ArrayList<String>();
         for (int key : filters.keySet()) {
-            for (CardScaler.Filter filter : filters.get(key)) {
-                Set<CardNeighborType> neighborFilter = ((FilterAccessor)filter).getNeighborFilter();
+            for (CardCondition.Filter filter : filters.get(key)) {
+                Set<CardNeighborType> neighborFilter = ((ConditionFilterAccessor)filter).getNeighborFilter();
                 if (neighborFilter != null) {
                     for (CardNeighborType neighbor : neighborFilter) {
                         categoryList.add(neighbor.name());
                     }
                 }
-                Set<Integer> tierFilter = ((FilterAccessor)filter).getTierFilter();
+                Set<Integer> tierFilter = ((ConditionFilterAccessor)filter).getTierFilter();
                 if (tierFilter != null) {
                     for (Integer tier : tierFilter) {
                         categoryList.add("Tier " + String.valueOf(tier));
                     }
                 }
-                Set<CardEntry.Color> colorFilter = ((FilterAccessor)filter).getColorFilter();
+                Set<CardEntry.Color> colorFilter = ((ConditionFilterAccessor)filter).getColorFilter();
                 if (colorFilter != null) {
                     for (CardEntry.Color color : colorFilter) {
                         categoryList.add(color.name());
                     }
                 }
-                Set<String> groupFilter = ((FilterAccessor)filter).getGroupFilter();
+                Set<String> groupFilter = ((ConditionFilterAccessor)filter).getGroupFilter();
                 if (groupFilter != null) {
                     for (String group : groupFilter) {
                         categoryList.add(group);

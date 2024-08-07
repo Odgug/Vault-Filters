@@ -8,9 +8,10 @@
     "data.EffectCloudAccessor",
     "data.EffectCloudAttributeAccessor",
     "data.CardEntryAccessor",
-    "data.ConditionFilterAccessor",
-    "data.FilterAccessor",
+    "data.CardConditionAccessor",
     "data.ScalerFilterAccessor",
+    "data.CardScaleAccessor",
+    "data.ConditionFilterAccessor",
     "other.MixinAttributeResearchBypass"
   ],
   "injectors": {
