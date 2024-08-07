@@ -150,6 +150,7 @@ public class VaultFilters {
         new CardIsScalingAttribute(true).register(CardIsScalingAttribute::new);
         new CardHasConditionAttribute(true).register(CardHasConditionAttribute::new);
         new CardScaleTypesAttribute("Diagonal").register(CardScaleTypesAttribute::new);
+        new CardConditionGroupsAttribute("Blue").register(CardConditionGroupsAttribute::new);
 
         // Charms
         new CharmUsesAttribute(0).register(CharmUsesAttribute::new);

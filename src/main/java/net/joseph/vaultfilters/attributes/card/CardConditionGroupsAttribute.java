@@ -1,12 +1,11 @@
 package net.joseph.vaultfilters.attributes.card;
 
-import iskallia.vault.core.card.Card;
-import iskallia.vault.core.card.CardEntry;
-import iskallia.vault.core.card.CardNeighborType;
-import iskallia.vault.core.card.CardScaler;
+import iskallia.vault.core.card.*;
 import iskallia.vault.item.CardItem;
 import net.joseph.vaultfilters.VaultFilters;
 import net.joseph.vaultfilters.attributes.abstracts.StringListAttribute;
+import net.joseph.vaultfilters.mixin.data.CardEntryAccessor;
+import net.joseph.vaultfilters.mixin.data.ConditionFilterAccessor;
 import net.joseph.vaultfilters.mixin.data.FilterAccessor;
 import net.joseph.vaultfilters.mixin.data.ScalerFilterAccessor;
 import net.minecraft.world.item.ItemStack;
@@ -18,8 +17,8 @@ import java.util.Set;
 
 import static iskallia.vault.item.CardItem.getCard;
 
-public class CardScaleTypesAttribute extends StringListAttribute {
-    public CardScaleTypesAttribute(String value) {
+public class CardConditionGroupsAttribute extends StringListAttribute {
+    public CardConditionGroupsAttribute(String value) {
         super(value);
     }
 
@@ -45,11 +44,11 @@ public class CardScaleTypesAttribute extends StringListAttribute {
             return null;
         }
         CardEntry entry = entries.get(0);
-        CardScaler scaler = entry.getScaler();
-        if (scaler == null) {
+        CardCondition condition = ((CardEntryAccessor)entry).getCondition();
+        if (condition == null) {
             return null;
         }
-        Map<Integer, List<CardScaler.Filter>> filters = ((ScalerFilterAccessor)scaler).getFilters();
+        Map<Integer, List<CardScaler.Filter>> filters = ((ConditionFilterAccessor)condition).getFilters();
         if (filters == null) {
             return null;
         }
@@ -94,6 +93,6 @@ public class CardScaleTypesAttribute extends StringListAttribute {
 
     @Override
     public String getTranslationKey() {
-        return "card_scale_type";
+        return "card_condition_group";
     }
 }
