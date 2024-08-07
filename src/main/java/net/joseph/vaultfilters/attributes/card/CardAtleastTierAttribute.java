@@ -26,12 +26,6 @@ public class CardAtleastTierAttribute extends IntAttribute {
 
 
     @Override
-    public boolean appliesTo(ItemStack itemStack) {
-        final Integer value = getValue(itemStack);
-        return value != null && value >= this.value;
-    }
-
-    @Override
     public String getTranslationKey() {
         return "card_tier";
     }
