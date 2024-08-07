@@ -147,6 +147,7 @@ public class VaultFilters {
         new CardColorAttribute("Red").register(CardColorAttribute::new);
         new CardTypeAttribute("Foil").register(CardTypeAttribute::new);
         new CardUpgradableAttribute(true).register(CardUpgradableAttribute::new);
+        new CardIsScalingAttribute(true).register(CardIsScalingAttribute::new);
         new CardScaleTypesAttribute("Diagonal").register(CardScaleTypesAttribute::new);
 
         // Charms
