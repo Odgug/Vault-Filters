@@ -147,6 +147,7 @@ public class VaultFilters {
         new CardColorAttribute("Red").register(CardColorAttribute::new);
         new CardTypeAttribute("Foil").register(CardTypeAttribute::new);
         new CardUpgradableAttribute(true).register(CardUpgradableAttribute::new);
+        new CardModifierAttribute("Lucky Hit").register(CardModifierAttribute::new);
         new CardIsScalingAttribute(true).register(CardIsScalingAttribute::new);
         new CardHasConditionAttribute(true).register(CardHasConditionAttribute::new);
         new CardScaleTypesAttribute("Diagonal").register(CardScaleTypesAttribute::new);

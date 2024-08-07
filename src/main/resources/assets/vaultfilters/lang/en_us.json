@@ -144,6 +144,9 @@
   "create.item_attributes.card_condition_num": "is a card with a condition that will allow \"%1$s\" matching cards",
   "create.item_attributes.card_condition_num.inverted": "is not a a card with a condition that will allow \"%1$s\" matching cards",
 
+  "create.item_attributes.card_modifier": "is a card with a \"%1$s\" modifier",
+  "create.item_attributes.card_modifier.inverted": "is not a a card with a \"%1$s\" modifier",
+
 
   "create.item_attributes.card_color": "is a \"%1$s\" colored card",
   "create.item_attributes.card_color.inverted": "is not a \"%1$s\" colored card",

@@ -12,6 +12,7 @@
     "data.ScalerFilterAccessor",
     "data.CardScaleAccessor",
     "data.ConditionFilterAccessor",
+    "data.GearCardModifierAccesor",
     "other.MixinAttributeResearchBypass"
   ],
   "injectors": {

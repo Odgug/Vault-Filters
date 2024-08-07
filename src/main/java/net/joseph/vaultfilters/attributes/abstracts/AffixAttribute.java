@@ -5,6 +5,7 @@ import iskallia.vault.gear.attribute.VaultGearModifier;
 import iskallia.vault.gear.attribute.ability.AbilityLevelAttribute;
 import iskallia.vault.gear.attribute.custom.EffectAvoidanceGearAttribute;
 import iskallia.vault.gear.attribute.custom.EffectCloudAttribute;
+import iskallia.vault.gear.attribute.talent.RandomVaultModifierAttribute;
 import iskallia.vault.gear.data.VaultGearData;
 import iskallia.vault.gear.item.VaultGearItem;
 import iskallia.vault.gear.reader.IncreasedPercentageReader;
@@ -87,6 +88,11 @@ public abstract class AffixAttribute extends StringAttribute {
             return cloudType + (whenHit ? " when Hit" : "");
         }
 
+
+        // Temporal card usage
+        if (modifier.getValue() instanceof RandomVaultModifierAttribute modifierAttribute) {
+            return modifierAttribute.getModifier().toString();
+        }
         // Get name returns blank for Ability Level Attributes
         if (modifier.getValue() instanceof AbilityLevelAttribute levelAttribute) {
             String ability = levelAttribute.getAbility().equals("all_abilities")
