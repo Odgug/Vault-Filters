@@ -37,7 +37,7 @@ minecraft {
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             property 'forge.logging.markers', 'REGISTRIES'
-            arg "-mixin.config=vaultfilters.mixin.json"
+            arg "-mixin.config=mixins.vaultfilters.core.json"
             property 'forge.logging.console.level', 'debug'
             property 'forge.enabledGameTestNamespaces', 'vaultfilters'
 
