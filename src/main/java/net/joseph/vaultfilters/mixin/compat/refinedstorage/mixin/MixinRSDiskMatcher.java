@@ -47,7 +47,7 @@ public class MixinRSDiskMatcher {
         if (item instanceof FilterItem filterItem) {
             // Need to get the filter item itself too, otherwise you won't be able to pick it up
             ArrayList<ItemStack> stacks = new ArrayList<>(instance.get(filterItem));
-            for (Item gearPiece: instance.keys()) {
+            for (Item gearPiece: instance.keySet()) {
                 stacks.addAll(instance.get(gearPiece));
             }
             return stacks;
