@@ -155,6 +155,7 @@ public class VaultFilters {
         new CardConditionGroupsAttribute("Blue").register(CardConditionGroupsAttribute::new);
         new CardConditionNumAttribute(5).register(CardConditionNumAttribute::new);
         new CardTaskAttribute("Wooden Chests").register(CardTaskAttribute::new);
+        new CardTaskNumberAttribute(5).register(CardTaskNumberAttribute::new);
 
         // Charms
         new CharmUsesAttribute(0).register(CharmUsesAttribute::new);
