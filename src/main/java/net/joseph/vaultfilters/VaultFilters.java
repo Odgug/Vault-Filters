@@ -2,15 +2,15 @@ package net.joseph.vaultfilters;
 
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.content.logistics.filter.FilterItem;
+import com.simibubi.create.content.logistics.filter.FilterItemStack;
+import iskallia.vault.core.vault.Vault;
 import iskallia.vault.gear.data.GearDataCache;
 import iskallia.vault.gear.item.VaultGearItem;
 import iskallia.vault.item.InfusedCatalystItem;
 import iskallia.vault.item.InscriptionItem;
 import iskallia.vault.item.gear.CharmItem;
 import iskallia.vault.item.gear.TrinketItem;
-import net.joseph.vaultfilters.attributes.abstracts.Objects.Modifier;
 import net.joseph.vaultfilters.attributes.affix.*;
-import net.joseph.vaultfilters.attributes.card.*;
 import net.joseph.vaultfilters.attributes.catalysts.CatalystHasModifierAttribute;
 import net.joseph.vaultfilters.attributes.catalysts.CatalystModifierCategoryAttribute;
 import net.joseph.vaultfilters.attributes.catalysts.CatalystSizeAttribute;
@@ -142,22 +142,6 @@ public class VaultFilters {
         new NumberSuffixAttribute("", "", 0).register(NumberSuffixAttribute::new);
 
         new ModifierGroupAttribute("ModAbility").register(ModifierGroupAttribute::new);
-
-        // Cards
-        new CardAtleastTierAttribute(2).register(CardAtleastTierAttribute::new);
-        new CardColorAttribute("Red").register(CardColorAttribute::new);
-        new CardTypeAttribute("Foil").register(CardTypeAttribute::new);
-        new CardUpgradableAttribute(true).register(CardUpgradableAttribute::new);
-        new CardModifierAttribute("Lucky Hit").register(CardModifierAttribute::new);
-        new CardIsScalingAttribute(true).register(CardIsScalingAttribute::new);
-        new CardHasConditionAttribute(true).register(CardHasConditionAttribute::new);
-        new CardScaleTypesAttribute("Diagonal").register(CardScaleTypesAttribute::new);
-        new CardConditionCompAttribute("At Least").register(CardConditionCompAttribute::new);
-        new CardConditionGroupsAttribute("Blue").register(CardConditionGroupsAttribute::new);
-        new CardConditionNumAttribute(5).register(CardConditionNumAttribute::new);
-        new CardTaskAttribute("Wooden Chests").register(CardTaskAttribute::new);
-        new CardTaskNumberAttribute(5).register(CardTaskNumberAttribute::new);
-        new CardModifierNumberAttribute(new Modifier("+1 Attack Damage", "Attack Damage",1)).register(CardModifierNumberAttribute::new);
         // Charms
         new CharmUsesAttribute(0).register(CharmUsesAttribute::new);
         new CharmAffinityAttribute(0).register(CharmAffinityAttribute::new);
@@ -174,7 +158,7 @@ public class VaultFilters {
 
 
     }
-    public static boolean checkFilter(ItemStack stack, ItemStack filterStack, boolean useCache, Level level) {
+    public static boolean checkFilter(ItemStack stack, Object filterStack, boolean useCache, Level level) {
         if (!useCache) {
             return basicFilterTest(stack,filterStack,level);
         }
@@ -184,7 +168,7 @@ public class VaultFilters {
                 stackItem instanceof TrinketItem)) {
             return basicFilterTest(stack,filterStack,level);
         }
-        if (VFServerConfig.CACHE_DATAFIX.get()) {
+        if (VFServerConfig.CACHE_DATAFIX.get() && filterStack instanceof ItemStack) {
             DataFixers.clearNBTCache(stack);
         }
         //if (filterStack.getDisplayName().getString().equals("Ignore Caching")) {
@@ -203,7 +187,7 @@ public class VaultFilters {
 
 
     public static String filterKey = "hashes";
-    public static boolean basicFilterTest(ItemStack stack, ItemStack filterStack, Level level) {
+    public static boolean basicFilterTest(ItemStack stack, Object filterStack, Level level) {
 
 
         if (level == null) {
@@ -213,7 +197,15 @@ public class VaultFilters {
             }
 
         }
-        return FilterItem.test(level,stack, filterStack);
+        if (filterStack instanceof ItemStack stackFilter) {
+            return FilterItemStack.of(stackFilter).test(level,stack);
+        }
+        if (filterStack instanceof FilterItemStack filterItemStack) {
+            return filterItemStack.test(level,stack);
+        }
+        VaultFilters.LOGGER.debug("invalid filter entered");
+        return false;
+
     }
     private static boolean cacheTest(ItemStack stack, ItemStack filterStack, int maxHashes, Level level) {
         CompoundTag tag = stack.getOrCreateTag();
