@@ -81,7 +81,8 @@ public class CardModifierAttribute extends StringAttribute {
         }
         return null;
     }
-    public static <T> String getName(TaskLootCardModifier lootModifier) {
+
+    public static <T> List<ItemStack> getItemStacks(TaskLootCardModifier lootModifier) {
         TaskLootCardModifier.Config config = lootModifier.getConfig();
         if (config == null) {
             return null;
@@ -95,7 +96,11 @@ public class CardModifierAttribute extends StringAttribute {
             return null;
         }
         LootEntry lootEntry = optLootEntry.get();
-        List<ItemStack> itemStacks = lootEntry.getStack(JavaRandom.ofNanoTime());
+        return lootEntry.getStack(JavaRandom.ofNanoTime());
+
+    }
+    public static <T> String getName(TaskLootCardModifier lootModifier) {
+        List<ItemStack> itemStacks = getItemStacks(lootModifier);
         if (itemStacks == null) {
             return null;
         }

@@ -8,6 +8,7 @@ import iskallia.vault.item.InfusedCatalystItem;
 import iskallia.vault.item.InscriptionItem;
 import iskallia.vault.item.gear.CharmItem;
 import iskallia.vault.item.gear.TrinketItem;
+import net.joseph.vaultfilters.attributes.abstracts.Objects.Modifier;
 import net.joseph.vaultfilters.attributes.affix.*;
 import net.joseph.vaultfilters.attributes.card.*;
 import net.joseph.vaultfilters.attributes.catalysts.CatalystHasModifierAttribute;
@@ -156,7 +157,7 @@ public class VaultFilters {
         new CardConditionNumAttribute(5).register(CardConditionNumAttribute::new);
         new CardTaskAttribute("Wooden Chests").register(CardTaskAttribute::new);
         new CardTaskNumberAttribute(5).register(CardTaskNumberAttribute::new);
-
+        new CardModifierNumberAttribute(new Modifier("+1 Attack Damage", "Attack Damage",1)).register(CardModifierNumberAttribute::new);
         // Charms
         new CharmUsesAttribute(0).register(CharmUsesAttribute::new);
         new CharmAffinityAttribute(0).register(CharmAffinityAttribute::new);

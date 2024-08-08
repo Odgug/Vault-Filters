@@ -147,6 +147,9 @@
   "create.item_attributes.card_modifier": "is a card with a \"%1$s\" modifier",
   "create.item_attributes.card_modifier.inverted": "is not a a card with a \"%1$s\" modifier",
 
+  "create.item_attributes.card_modifier_number": "is a card with at least \"%1$s\" base modifier",
+  "create.item_attributes.card_modifier_number.inverted": "is not a a card with at least \"%1$s\" base modifier",
+
   "create.item_attributes.card_task": "is a resource card that adds rewards based on \"%1$s\"",
   "create.item_attributes.card_task.inverted": "is not a resource card that adds rewards based on \"%1$s\"",
 

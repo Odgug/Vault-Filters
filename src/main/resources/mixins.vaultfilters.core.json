@@ -14,6 +14,7 @@
     "data.ConditionFilterAccessor",
     "data.GearCardModifierAccesor",
     "data.LootCardModifierConfigAccessor",
+    "data.TaskLootCardModifierAccessor",
     "other.MixinAttributeResearchBypass"
   ],
   "injectors": {
