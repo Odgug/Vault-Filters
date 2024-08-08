@@ -95,7 +95,7 @@ public class CardTaskAttribute extends StringAttribute {
 
     @Override
     public Object[] getTranslationParameters() {
-        String visual;
+        String visual = null;
         switch (this.value) {
             case "@the_vault:mobs":
                 visual = "Mobs killed";
@@ -118,8 +118,9 @@ public class CardTaskAttribute extends StringAttribute {
                 visual = "Ornate Chests looted";
             case "@the_vault:living":
                 visual = "Living Chests looted";
-            default:
-                visual = this.value;
+        }
+        if (visual == null) {
+            visual = this.value;
         }
         return new Object[]{visual};
     }
