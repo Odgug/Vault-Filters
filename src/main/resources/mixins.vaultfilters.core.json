@@ -1,0 +1,24 @@
+{
+  "required": true,
+  "package": "net.joseph.vaultfilters.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "compat.create.MixinCreateFilteringBehaviour",
+    "compat.create.MixinSimpleItemMatcher",
+    "data.EffectCloudAccessor",
+    "data.EffectCloudAttributeAccessor",
+    "data.CardEntryAccessor",
+    "data.CardConditionAccessor",
+    "data.ScalerFilterAccessor",
+    "data.CardScaleAccessor",
+    "data.ConditionFilterAccessor",
+    "data.GearCardModifierAccesor",
+    "data.LootCardModifierConfigAccessor",
+    "data.TaskLootCardModifierAccessor",
+    "other.MixinAttributeResearchBypass"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "vaultfilters.mixin-refmap.json"
+}

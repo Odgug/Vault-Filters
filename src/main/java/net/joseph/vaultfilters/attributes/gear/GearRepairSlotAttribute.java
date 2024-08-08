@@ -20,6 +20,7 @@ public class GearRepairSlotAttribute extends IntAttribute {
         return null;
     }
 
+
     @Override
     public String getTranslationKey() {
         return "repair";
