@@ -89,10 +89,6 @@ public abstract class AffixAttribute extends StringAttribute {
         }
 
 
-        // Temporal card usage
-        if (modifier.getValue() instanceof RandomVaultModifierAttribute modifierAttribute) {
-            return modifierAttribute.getModifier().toString();
-        }
         // Get name returns blank for Ability Level Attributes
         if (modifier.getValue() instanceof AbilityLevelAttribute levelAttribute) {
             String ability = levelAttribute.getAbility().equals("all_abilities")
