@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import com.simibubi.create.content.logistics.filter.FilterItem;
 import iskallia.vault.gear.data.GearDataCache;
 import iskallia.vault.gear.item.VaultGearItem;
+import iskallia.vault.item.CardItem;
 import iskallia.vault.item.InfusedCatalystItem;
 import iskallia.vault.item.InscriptionItem;
 import iskallia.vault.item.gear.CharmItem;
@@ -181,7 +182,7 @@ public class VaultFilters {
         Item stackItem = stack.getItem();
         if (! (stackItem instanceof VaultGearItem || stackItem instanceof InscriptionItem ||
                 stackItem instanceof InfusedCatalystItem ||stackItem instanceof CharmItem ||
-                stackItem instanceof TrinketItem)) {
+                stackItem instanceof TrinketItem || stackItem instanceof CardItem)) {
             return basicFilterTest(stack,filterStack,level);
         }
         if (VFServerConfig.CACHE_DATAFIX.get()) {
