@@ -90,9 +90,39 @@ public class CardTaskAttribute extends StringAttribute {
             }
             return filter.toString();
         }
-        return "send to joseph " + task.getClass().getName();
+        return null;
     }
 
+    @Override
+    public Object[] getTranslationParameters() {
+        String visual;
+        switch (this.value) {
+            case "@the_vault:mobs":
+                visual = "Mobs killed";
+            case "@the_vault:fighter":
+                visual = "Dwellers killed";
+            case "@the_vault:horde":
+                visual = "Horde Mobs killed";
+            case "@the_vault:tank":
+                visual = "Tanks killed";
+            case "@the_vault:assassin":
+                //not sure this one exists
+                visual = "Assassins killed";
+            case "@the_vault:chest":
+                visual = "chests looted";
+            case "@the_vault:wooden":
+                visual = "Wooden Chests looted";
+            case "@the_vault:gilded":
+                visual = "Gilded Chests looted";
+            case "@the_vault:ornate":
+                visual = "Ornate Chests looted";
+            case "@the_vault:living":
+                visual = "Living Chests looted";
+            default:
+                visual = this.value;
+        }
+        return new Object[]{visual};
+    }
 
 
     @Override
