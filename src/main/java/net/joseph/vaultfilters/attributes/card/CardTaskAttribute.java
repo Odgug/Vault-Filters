@@ -95,34 +95,34 @@ public class CardTaskAttribute extends StringAttribute {
 
     @Override
     public Object[] getTranslationParameters() {
-        String visual = null;
-        switch (this.value) {
+
+        return new Object[]{nameFromRawPredicate(this.value)};
+    }
+    public static String nameFromRawPredicate(String val) {
+        switch (val) {
             case "@the_vault:mobs":
-                visual = "Mobs killed";
+                return  "Mobs killed";
             case "@the_vault:fighter":
-                visual = "Dwellers killed";
+                return  "Dwellers killed";
             case "@the_vault:horde":
-                visual = "Horde Mobs killed";
+                return  "Horde Mobs killed";
             case "@the_vault:tank":
-                visual = "Tanks killed";
+                return  "Tanks killed";
             case "@the_vault:assassin":
                 //not sure this one exists
-                visual = "Assassins killed";
+                return  "Assassins killed";
             case "@the_vault:chest":
-                visual = "chests looted";
+                return  "chests looted";
             case "@the_vault:wooden":
-                visual = "Wooden Chests looted";
+                return  "Wooden Chests looted";
             case "@the_vault:gilded":
-                visual = "Gilded Chests looted";
+                return  "Gilded Chests looted";
             case "@the_vault:ornate":
-                visual = "Ornate Chests looted";
+                return  "Ornate Chests looted";
             case "@the_vault:living":
-                visual = "Living Chests looted";
+                return  "Living Chests looted";
         }
-        if (visual == null) {
-            visual = this.value;
-        }
-        return new Object[]{visual};
+        return val;
     }
 
 
