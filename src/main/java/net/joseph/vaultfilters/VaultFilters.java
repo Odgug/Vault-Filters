@@ -6,11 +6,14 @@ import com.simibubi.create.content.logistics.filter.FilterItemStack;
 import iskallia.vault.core.vault.Vault;
 import iskallia.vault.gear.data.GearDataCache;
 import iskallia.vault.gear.item.VaultGearItem;
+import iskallia.vault.item.CardItem;
 import iskallia.vault.item.InfusedCatalystItem;
 import iskallia.vault.item.InscriptionItem;
 import iskallia.vault.item.gear.CharmItem;
 import iskallia.vault.item.gear.TrinketItem;
+import net.joseph.vaultfilters.attributes.abstracts.Objects.Modifier;
 import net.joseph.vaultfilters.attributes.affix.*;
+import net.joseph.vaultfilters.attributes.card.*;
 import net.joseph.vaultfilters.attributes.catalysts.CatalystHasModifierAttribute;
 import net.joseph.vaultfilters.attributes.catalysts.CatalystModifierCategoryAttribute;
 import net.joseph.vaultfilters.attributes.catalysts.CatalystSizeAttribute;
@@ -142,6 +145,22 @@ public class VaultFilters {
         new NumberSuffixAttribute("", "", 0).register(NumberSuffixAttribute::new);
 
         new ModifierGroupAttribute("ModAbility").register(ModifierGroupAttribute::new);
+
+        // Cards
+        new CardAtleastTierAttribute(2).register(CardAtleastTierAttribute::new);
+        new CardColorAttribute("Red").register(CardColorAttribute::new);
+        new CardTypeAttribute("Foil").register(CardTypeAttribute::new);
+        new CardUpgradableAttribute(true).register(CardUpgradableAttribute::new);
+        new CardModifierAttribute("Lucky Hit").register(CardModifierAttribute::new);
+        new CardIsScalingAttribute(true).register(CardIsScalingAttribute::new);
+        new CardHasConditionAttribute(true).register(CardHasConditionAttribute::new);
+        new CardScaleTypesAttribute("Diagonal").register(CardScaleTypesAttribute::new);
+        new CardConditionCompAttribute("At Least").register(CardConditionCompAttribute::new);
+        new CardConditionGroupsAttribute("Blue").register(CardConditionGroupsAttribute::new);
+        new CardConditionNumAttribute(5).register(CardConditionNumAttribute::new);
+        new CardTaskAttribute("Wooden Chests").register(CardTaskAttribute::new);
+        new CardTaskNumberAttribute(5).register(CardTaskNumberAttribute::new);
+        new CardModifierNumberAttribute(new Modifier("+1 Attack Damage", "Attack Damage",1)).register(CardModifierNumberAttribute::new);
         // Charms
         new CharmUsesAttribute(0).register(CharmUsesAttribute::new);
         new CharmAffinityAttribute(0).register(CharmAffinityAttribute::new);
@@ -165,7 +184,7 @@ public class VaultFilters {
         Item stackItem = stack.getItem();
         if (! (stackItem instanceof VaultGearItem || stackItem instanceof InscriptionItem ||
                 stackItem instanceof InfusedCatalystItem ||stackItem instanceof CharmItem ||
-                stackItem instanceof TrinketItem)) {
+                stackItem instanceof TrinketItem || stackItem instanceof CardItem)) {
             return basicFilterTest(stack,filterStack,level);
         }
         if (VFServerConfig.CACHE_DATAFIX.get() && filterStack instanceof ItemStack) {
