@@ -1,5 +1,6 @@
 package net.joseph.vaultfilters.attributes.card;
 
+import iskallia.vault.core.card.Card;
 import iskallia.vault.gear.data.VaultGearData;
 import iskallia.vault.gear.item.VaultGearItem;
 import iskallia.vault.item.CardItem;
@@ -18,7 +19,11 @@ public class CardAtleastTierAttribute extends IntAttribute {
 
     @Override
     public Integer getValue(ItemStack itemStack) {
-        return null;
+        if (!(itemStack.getItem() instanceof CardItem)) {
+            return null;
+        }
+        Card card = getCard(itemStack);
+        return card.getTier();
     }
 
 
