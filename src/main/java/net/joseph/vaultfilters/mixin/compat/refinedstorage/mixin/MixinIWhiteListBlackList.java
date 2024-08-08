@@ -28,7 +28,9 @@ public interface MixinIWhiteListBlackList {
             for (i = 0; i < filters.getSlots(); ++i) {
                 slot = filters.getStackInSlot(i);
                 if(slot.getItem() instanceof FilterItem && VFServerConfig.RS_COMPAT.get() ) {
-                    return VaultFilters.checkFilter(stack, slot, true, null);
+                    if (VaultFilters.checkFilter(stack, slot, true, null)) {
+                        return true;
+                    }
                 }
                 if (API.instance().getComparer().isEqual(slot, stack, compare)) {
                     return true;
