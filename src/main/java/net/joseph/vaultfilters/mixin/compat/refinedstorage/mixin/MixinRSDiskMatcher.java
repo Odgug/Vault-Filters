@@ -40,6 +40,8 @@ public class MixinRSDiskMatcher {
             ModItems.MAJESTIC_CHARM,
             ModItems.TRINKET,
             ModItems.INSCRIPTION,
+            ModItems.CARD,
+            ModItems.VAULT_CATALYST_INFUSED
     };
 
     @Redirect(method = "extract(Lnet/minecraft/world/item/ItemStack;IILcom/refinedmods/refinedstorage/api/util/Action;)Lnet/minecraft/world/item/ItemStack;", at = @At(value = "INVOKE", target = "Lcom/google/common/collect/Multimap;get(Ljava/lang/Object;)Ljava/util/Collection;"))
@@ -47,7 +49,7 @@ public class MixinRSDiskMatcher {
         if (item instanceof FilterItem filterItem) {
             // Need to get the filter item itself too, otherwise you won't be able to pick it up
             ArrayList<ItemStack> stacks = new ArrayList<>(instance.get(filterItem));
-            for (Item gearPiece: instance.keys()) {
+            for (Item gearPiece: instance.keySet()) {
                 stacks.addAll(instance.get(gearPiece));
             }
             return stacks;
