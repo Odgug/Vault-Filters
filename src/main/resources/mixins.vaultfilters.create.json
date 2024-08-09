@@ -4,8 +4,8 @@
   "compatibilityLevel": "JAVA_17",
   "plugin": "net.joseph.vaultfilters.mixin.compat.create.CreateMixinPlugin",
   "mixins": [
-    "MixinCreateFilteringBehaviourCreate051b",
-    "MixinCreateFilteringBehaviourCreate051f",
+    "MixinCreateFilteringBehaviour",
+    "MixinCreateFilteringBehaviourLegacy",
     "MixinSimpleItemMatcher"
   ],
   "injectors": {

@@ -1,5 +1,6 @@
 package net.joseph.vaultfilters.mixin.compat.create;
 
+import com.simibubi.create.content.logistics.filter.FilterItemStack;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.filtering.FilteringBehaviour;
@@ -12,8 +13,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value = FilteringBehaviour.class, remap = false)
-public abstract class MixinCreateFilteringBehaviourCreate051b extends BlockEntityBehaviour {
-    public MixinCreateFilteringBehaviourCreate051b(SmartBlockEntity be) {
+public abstract class MixinCreateFilteringBehaviour extends BlockEntityBehaviour {
+    public MixinCreateFilteringBehaviour(SmartBlockEntity be) {
         super(be);
     }
 
@@ -21,7 +22,7 @@ public abstract class MixinCreateFilteringBehaviourCreate051b extends BlockEntit
     public boolean isActive() {return true;}
 
     @Shadow
-    private ItemStack filter;
+    private FilterItemStack filter;
 
 
 

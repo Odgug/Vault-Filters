@@ -5,7 +5,7 @@ import net.minecraftforge.fml.loading.moddiscovery.ModFileInfo;
 
 public enum CreateVersion {
     CREATE_051F,
-    CREATE_051B;
+    LEGACY;
 
     private static CreateVersion loadedVersion;
 
@@ -18,13 +18,15 @@ public enum CreateVersion {
         if (createVersion.contains("0.5.1.f")) { // it has suffix in dev
             loadedVersion = CREATE_051F;
         }
-        if (createVersion.contains("0.5.1.b")) { // it has suffix in dev
-            loadedVersion = CREATE_051B;
+        if (createVersion.contains("0.5.1.b")
+            || createVersion.contains("0.5.1.c")
+            || createVersion.contains("0.5.1.e") ) { // it has suffix in dev
+            loadedVersion = LEGACY;
         }
         if (loadedVersion == null) {
-            throw new IllegalStateException("Vault-Filters - Create version " + createVersion + " is not supported, install 0.5.1.b or 0.5.1.f");
+            throw new IllegalStateException("Vault-Filters - Create version " + createVersion + " is not supported, install 0.5.1.b to 0.5.1.f");
         }
-        System.out.println("Vault-Filters - Detected create: " + loadedVersion); // logger not available so early
+        System.out.println("Vault-Filters - Detected create: " + loadedVersion + " - " + createVersion); // logger not available so early
     }
 
 

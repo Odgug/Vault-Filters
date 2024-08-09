@@ -210,13 +210,13 @@ public class VaultFilters {
 
     private static Method testMethod;
 
-    private static boolean basicFilterTest_051B(Object filterStack, ItemStack stack, Level level) {
+    private static boolean basicFilterTestLegacy(Object filterStack, ItemStack stack, Level level) {
         if (testMethod == null) {
             // try to find the method
             try {
                 testMethod = FilterItem.class.getMethod("test", Level.class, ItemStack.class, ItemStack.class);
             } catch (NoSuchMethodException e) {
-                VaultFilters.LOGGER.error("[0.5.1.b] could not find test method: {}", e.getMessage());
+                VaultFilters.LOGGER.error("[0.5.1.b-e] could not find test method: {}", e.getMessage());
                 // wrap it in unchecked exception
                 throw new IllegalStateException(e);
             }
@@ -225,7 +225,7 @@ public class VaultFilters {
         try {
             return (boolean) testMethod.invoke(null, level, stack, filterStack);
         } catch (IllegalAccessException | InvocationTargetException e) {
-            VaultFilters.LOGGER.error("[0.5.1.b] could not invoke test method: {}", e.getMessage());
+            VaultFilters.LOGGER.error("[0.5.1.b-e] could not invoke test method: {}", e.getMessage());
             // wrap it in unchecked exception
             throw new IllegalStateException(e);
 
@@ -253,8 +253,8 @@ public class VaultFilters {
             return false;
         }
 
-        if (CreateVersion.getLoadedVersion() == CreateVersion.CREATE_051B) {
-            return basicFilterTest_051B(filterStack, stack, level);
+        if (CreateVersion.getLoadedVersion() == CreateVersion.LEGACY) {
+            return basicFilterTestLegacy(filterStack, stack, level);
         }
         return false;
 
