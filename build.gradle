@@ -96,6 +96,7 @@ mixin {
     config "mixins.${mod_id}.sophisticatedcore.json"
     config "mixins.${mod_id}.modularrouters.json"
     config "mixins.${mod_id}.tomsstorage.json"
+    config "mixins.${mod_id}.create.json"
     config "mixins.${mod_id}.core.json"
 }
 

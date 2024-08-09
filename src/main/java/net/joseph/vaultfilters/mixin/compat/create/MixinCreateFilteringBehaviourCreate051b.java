@@ -12,8 +12,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value = FilteringBehaviour.class, remap = false)
-public abstract class MixinCreateFilteringBehaviour extends BlockEntityBehaviour {
-    public MixinCreateFilteringBehaviour(SmartBlockEntity be) {
+public abstract class MixinCreateFilteringBehaviourCreate051b extends BlockEntityBehaviour {
+    public MixinCreateFilteringBehaviourCreate051b(SmartBlockEntity be) {
         super(be);
     }
 
