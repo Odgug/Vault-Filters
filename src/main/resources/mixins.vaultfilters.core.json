@@ -3,8 +3,6 @@
   "package": "net.joseph.vaultfilters.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "compat.create.MixinCreateFilteringBehaviour",
-    "compat.create.MixinSimpleItemMatcher",
     "data.EffectCloudAccessor",
     "data.EffectCloudAttributeAccessor",
     "data.CardEntryAccessor",

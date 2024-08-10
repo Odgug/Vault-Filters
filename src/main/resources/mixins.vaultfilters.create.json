@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "net.joseph.vaultfilters.mixin.compat.create",
+  "compatibilityLevel": "JAVA_17",
+  "plugin": "net.joseph.vaultfilters.mixin.compat.create.CreateMixinPlugin",
+  "mixins": [
+    "MixinCreateFilteringBehaviour",
+    "MixinCreateFilteringBehaviourLegacy",
+    "MixinSimpleItemMatcher"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "vaultfilters.mixin-refmap.json"
+}

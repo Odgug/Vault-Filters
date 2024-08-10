@@ -2,6 +2,7 @@ package net.joseph.vaultfilters;
 
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.content.logistics.filter.FilterItem;
+import com.simibubi.create.content.logistics.filter.FilterItemStack;
 import iskallia.vault.gear.data.GearDataCache;
 import iskallia.vault.gear.item.VaultGearItem;
 import iskallia.vault.item.CardItem;
@@ -50,6 +51,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.slf4j.Logger;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 //import com.simibubi.create.content.logistics.filter.FilterItemStack;
 
@@ -175,7 +178,7 @@ public class VaultFilters {
 
 
     }
-    public static boolean checkFilter(ItemStack stack, ItemStack filterStack, boolean useCache, Level level) {
+    public static boolean checkFilter(ItemStack stack, Object filterStack, boolean useCache, Level level) {
         if (!useCache) {
             return basicFilterTest(stack,filterStack,level);
         }
@@ -185,7 +188,7 @@ public class VaultFilters {
                 stackItem instanceof TrinketItem || stackItem instanceof CardItem)) {
             return basicFilterTest(stack,filterStack,level);
         }
-        if (VFServerConfig.CACHE_DATAFIX.get()) {
+        if (VFServerConfig.CACHE_DATAFIX.get() && filterStack instanceof ItemStack) {
             DataFixers.clearNBTCache(stack);
         }
         //if (filterStack.getDisplayName().getString().equals("Ignore Caching")) {
@@ -204,7 +207,32 @@ public class VaultFilters {
 
 
     public static String filterKey = "hashes";
-    public static boolean basicFilterTest(ItemStack stack, ItemStack filterStack, Level level) {
+
+    private static Method testMethod;
+
+    private static boolean basicFilterTestLegacy(Object filterStack, ItemStack stack, Level level) {
+        if (testMethod == null) {
+            // try to find the method
+            try {
+                testMethod = FilterItem.class.getMethod("test", Level.class, ItemStack.class, ItemStack.class);
+            } catch (NoSuchMethodException e) {
+                VaultFilters.LOGGER.error("[0.5.1.b-e] could not find test method: {}", e.getMessage());
+                // wrap it in unchecked exception
+                throw new IllegalStateException(e);
+            }
+        }
+
+        try {
+            return (boolean) testMethod.invoke(null, level, stack, filterStack);
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            VaultFilters.LOGGER.error("[0.5.1.b-e] could not invoke test method: {}", e.getMessage());
+            // wrap it in unchecked exception
+            throw new IllegalStateException(e);
+
+        }
+    }
+
+    public static boolean basicFilterTest(ItemStack stack, Object filterStack, Level level) {
 
 
         if (level == null) {
@@ -214,7 +242,22 @@ public class VaultFilters {
             }
 
         }
-        return FilterItem.test(level,stack, filterStack);
+        if (CreateVersion.getLoadedVersion() == CreateVersion.CREATE_051F) {
+            if (filterStack instanceof ItemStack stackFilter) {
+                return FilterItemStack.of(stackFilter).test(level, stack);
+            }
+            if (filterStack instanceof FilterItemStack filterItemStack) {
+                return filterItemStack.test(level, stack);
+            }
+            VaultFilters.LOGGER.debug("[0.5.1.f] invalid filter entered");
+            return false;
+        }
+
+        if (CreateVersion.getLoadedVersion() == CreateVersion.LEGACY) {
+            return basicFilterTestLegacy(filterStack, stack, level);
+        }
+        return false;
+
     }
     private static boolean cacheTest(ItemStack stack, ItemStack filterStack, int maxHashes, Level level) {
         CompoundTag tag = stack.getOrCreateTag();
