@@ -2,6 +2,7 @@ package net.joseph.vaultfilters.mixin.compat.tomsstorage.mixin;
 
 import com.simibubi.create.content.logistics.filter.FilterItem;
 import com.tom.storagemod.util.FilteredInventoryHandler;
+import net.joseph.vaultfilters.VFTests;
 import net.joseph.vaultfilters.VaultFilters;
 import net.joseph.vaultfilters.configs.VFServerConfig;
 import net.minecraft.world.Container;
@@ -23,7 +24,7 @@ public class MixinFilteredInventoryHandler {
             for(int i = 0; i < this.filter.getContainerSize(); ++i) {
                 ItemStack is = this.filter.getItem(i);
                 if(is.getItem() instanceof FilterItem) {
-                    if (VaultFilters.checkFilter(checkStack, is, true, null)) {
+                    if (VFTests.checkFilter(checkStack, is, true, null)) {
                         cir.setReturnValue(true);
                     }
                 }

@@ -6,6 +6,7 @@ import appeng.api.stacks.AEKey;
 import appeng.api.stacks.KeyCounter;
 import appeng.util.prioritylist.FuzzyPriorityList;
 import com.simibubi.create.content.logistics.filter.FilterItem;
+import net.joseph.vaultfilters.VFTests;
 import net.joseph.vaultfilters.VaultFilters;
 import net.joseph.vaultfilters.configs.VFServerConfig;
 import org.spongepowered.asm.mixin.Final;
@@ -29,9 +30,9 @@ public abstract class MixinFuzzyPriorityList {
                 if (key instanceof AEItemKey itemKey) {
                     if (itemKey.getItem() instanceof FilterItem && input instanceof AEItemKey inputItemKey) {
                         if (!(inputItemKey.getItem() instanceof FilterItem)) {
-                            cir.setReturnValue(VaultFilters.checkFilter(inputItemKey.toStack(), itemKey.toStack(), true, null) || !this.list.findFuzzy(input, this.mode).isEmpty());
+                            cir.setReturnValue(VFTests.checkFilter(inputItemKey.toStack(), itemKey.toStack(), true, null) || !this.list.findFuzzy(input, this.mode).isEmpty());
                         } else {
-                            cir.setReturnValue(VaultFilters.checkFilter(inputItemKey.toStack(), itemKey.toStack(), true, null));
+                            cir.setReturnValue(VFTests.checkFilter(inputItemKey.toStack(), itemKey.toStack(), true, null));
                         }
 
                     }

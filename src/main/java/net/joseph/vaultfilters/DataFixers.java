@@ -114,9 +114,9 @@ public class DataFixers {
             return;
         }
         tag = tag.getCompound("clientCache");
-        if (!((tag.contains(VaultFilters.filterKey)))) {
+        if (!((tag.contains(VFTests.filterKey)))) {
             return;
         }
-        tag.remove(VaultFilters.filterKey);
+        tag.remove(VFTests.filterKey);
     }
 }

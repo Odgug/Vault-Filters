@@ -14,7 +14,7 @@ public class VFCache {
     public static boolean getOrCreateFilter(ItemStack stack, Object filterStack, Level level) {
         int itemHash = stack.hashCode();
         if (!(cacheMap.containsKey(itemHash))) {
-            boolean testResult = VaultFilters.basicFilterTest(stack,filterStack,level);
+            boolean testResult = VFTests.basicFilterTest(stack,filterStack,level);
             cacheMap.put(itemHash, new VFCache(filterStack, testResult));
             return testResult;
         }
@@ -26,7 +26,7 @@ public class VFCache {
             cache.resetTTK();
             return innerMap.get(filterHash);
         }
-        boolean testResult = VaultFilters.basicFilterTest(stack,filterStack,level);
+        boolean testResult = VFTests.basicFilterTest(stack,filterStack,level);
         cache.resetTTK();
         innerMap.put(filterHash,testResult);
         return testResult;

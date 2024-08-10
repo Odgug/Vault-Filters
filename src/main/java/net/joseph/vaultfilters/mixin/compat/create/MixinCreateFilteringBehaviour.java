@@ -4,6 +4,7 @@ import com.simibubi.create.content.logistics.filter.FilterItemStack;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.filtering.FilteringBehaviour;
+import net.joseph.vaultfilters.VFTests;
 import net.joseph.vaultfilters.VaultFilters;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -29,7 +30,7 @@ public abstract class MixinCreateFilteringBehaviour extends BlockEntityBehaviour
 
     @Inject(method = "test(Lnet/minecraft/world/item/ItemStack;)Z", at = @At("HEAD"), cancellable = true)
     public void checkFilter(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
-        cir.setReturnValue(!isActive() || this.filter.isEmpty() || VaultFilters.checkFilter(stack,this.filter,true,this.blockEntity.getLevel()));
+        cir.setReturnValue(!isActive() || this.filter.isEmpty() || VFTests.checkFilter(stack,this.filter,true,this.blockEntity.getLevel()));
     }
 
 }

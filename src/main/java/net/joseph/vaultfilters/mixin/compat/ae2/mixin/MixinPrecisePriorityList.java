@@ -7,6 +7,7 @@ import appeng.api.stacks.KeyCounter;
 import appeng.util.prioritylist.FuzzyPriorityList;
 import appeng.util.prioritylist.PrecisePriorityList;
 import com.simibubi.create.content.logistics.filter.FilterItem;
+import net.joseph.vaultfilters.VFTests;
 import net.joseph.vaultfilters.VaultFilters;
 import net.joseph.vaultfilters.configs.VFServerConfig;
 import org.spongepowered.asm.mixin.Final;
@@ -37,10 +38,10 @@ public abstract class MixinPrecisePriorityList {
                 if (key instanceof AEItemKey itemKey) {
                     if (itemKey.getItem() instanceof FilterItem && input instanceof AEItemKey inputItemKey) {
                         if(!(inputItemKey.getItem() instanceof FilterItem)) {
-                            cir.setReturnValue(VaultFilters.checkFilter(inputItemKey.toStack(), itemKey.toStack(), true, null) || this.list.get(input) > 0L);
+                            cir.setReturnValue(VFTests.checkFilter(inputItemKey.toStack(), itemKey.toStack(), true, null) || this.list.get(input) > 0L);
                         }
                         else {
-                            cir.setReturnValue(VaultFilters.checkFilter(inputItemKey.toStack(), itemKey.toStack(), true, null));
+                            cir.setReturnValue(VFTests.checkFilter(inputItemKey.toStack(), itemKey.toStack(), true, null));
                         }
 
                     }
