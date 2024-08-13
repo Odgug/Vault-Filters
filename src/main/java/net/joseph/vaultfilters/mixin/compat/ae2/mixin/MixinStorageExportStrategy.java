@@ -10,6 +10,7 @@ import appeng.parts.automation.StorageExportStrategy;
 import appeng.util.BlockApiCache;
 import com.simibubi.create.content.logistics.filter.FilterItem;
 import it.unimi.dsi.fastutil.objects.Object2LongMap;
+import net.joseph.vaultfilters.VFTests;
 import net.joseph.vaultfilters.VaultFilters;
 import net.joseph.vaultfilters.configs.VFServerConfig;
 import net.minecraft.core.Direction;
@@ -67,7 +68,7 @@ public class MixinStorageExportStrategy<C> {
                         continue;
                     }
                     ItemStack stack = ((AEItemKey) aek).toStack();
-                    if (VaultFilters.checkFilter(stack,filterStack,true,null)) {
+                    if (VFTests.checkFilter(stack,filterStack,true,null)) {
                         what = aek;
                         break;
                     }

@@ -7,6 +7,14 @@
     "compat.create.MixinSimpleItemMatcher",
     "data.EffectCloudAccessor",
     "data.EffectCloudAttributeAccessor",
+    "data.CardEntryAccessor",
+    "data.CardConditionAccessor",
+    "data.ScalerFilterAccessor",
+    "data.CardScaleAccessor",
+    "data.ConditionFilterAccessor",
+    "data.GearCardModifierAccesor",
+    "data.LootCardModifierConfigAccessor",
+    "data.TaskLootCardModifierAccessor",
     "other.MixinAttributeResearchBypass"
   ],
   "injectors": {

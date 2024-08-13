@@ -5,6 +5,7 @@ import iskallia.vault.gear.attribute.VaultGearModifier;
 import iskallia.vault.gear.attribute.ability.AbilityLevelAttribute;
 import iskallia.vault.gear.attribute.custom.EffectAvoidanceGearAttribute;
 import iskallia.vault.gear.attribute.custom.EffectCloudAttribute;
+import iskallia.vault.gear.attribute.talent.RandomVaultModifierAttribute;
 import iskallia.vault.gear.data.VaultGearData;
 import iskallia.vault.gear.item.VaultGearItem;
 import iskallia.vault.gear.reader.IncreasedPercentageReader;
@@ -86,6 +87,7 @@ public abstract class AffixAttribute extends StringAttribute {
             String cloudType = (tooltip.contains(" ") ? tooltip.substring(0, tooltip.lastIndexOf(' ')) : tooltip) + " Cloud";
             return cloudType + (whenHit ? " when Hit" : "");
         }
+
 
         // Get name returns blank for Ability Level Attributes
         if (modifier.getValue() instanceof AbilityLevelAttribute levelAttribute) {

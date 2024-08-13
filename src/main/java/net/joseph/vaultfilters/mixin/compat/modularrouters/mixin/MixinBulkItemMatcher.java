@@ -3,6 +3,7 @@ package net.joseph.vaultfilters.mixin.compat.modularrouters.mixin;
 import me.desht.modularrouters.logic.filter.Filter;
 import me.desht.modularrouters.logic.filter.matchers.BulkItemMatcher;
 import me.desht.modularrouters.util.SetofItemStack;
+import net.joseph.vaultfilters.VFTests;
 import net.joseph.vaultfilters.VaultFilters;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Final;
@@ -22,7 +23,7 @@ public class MixinBulkItemMatcher {
     @Inject(method = "matchItem", at = @At("HEAD"), cancellable = true)
     public void createItemMatcher(ItemStack stack, Filter.Flags flags, CallbackInfoReturnable<Boolean> cir){
         for (ItemStack filter : this.stacks) {
-            if (VaultFilters.checkFilter(stack, filter,true,null)) {
+            if (VFTests.checkFilter(stack, filter,true,null)) {
                 cir.setReturnValue(true);
             }
         }

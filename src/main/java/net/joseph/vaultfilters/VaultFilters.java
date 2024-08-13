@@ -2,14 +2,17 @@ package net.joseph.vaultfilters;
 
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.content.logistics.filter.FilterItem;
-import iskallia.vault.core.vault.Vault;
+import com.simibubi.create.content.logistics.filter.FilterItemStack;
 import iskallia.vault.gear.data.GearDataCache;
 import iskallia.vault.gear.item.VaultGearItem;
+import iskallia.vault.item.CardItem;
 import iskallia.vault.item.InfusedCatalystItem;
 import iskallia.vault.item.InscriptionItem;
 import iskallia.vault.item.gear.CharmItem;
 import iskallia.vault.item.gear.TrinketItem;
+import net.joseph.vaultfilters.attributes.abstracts.Objects.Modifier;
 import net.joseph.vaultfilters.attributes.affix.*;
+import net.joseph.vaultfilters.attributes.card.*;
 import net.joseph.vaultfilters.attributes.catalysts.CatalystHasModifierAttribute;
 import net.joseph.vaultfilters.attributes.catalysts.CatalystModifierCategoryAttribute;
 import net.joseph.vaultfilters.attributes.catalysts.CatalystSizeAttribute;
@@ -48,6 +51,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.slf4j.Logger;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 //import com.simibubi.create.content.logistics.filter.FilterItemStack;
 
@@ -141,6 +146,22 @@ public class VaultFilters {
         new NumberSuffixAttribute("", "", 0).register(NumberSuffixAttribute::new);
 
         new ModifierGroupAttribute("ModAbility").register(ModifierGroupAttribute::new);
+
+        // Cards
+        new CardAtleastTierAttribute(2).register(CardAtleastTierAttribute::new);
+        new CardColorAttribute("Red").register(CardColorAttribute::new);
+        new CardTypeAttribute("Foil").register(CardTypeAttribute::new);
+        new CardUpgradableAttribute(true).register(CardUpgradableAttribute::new);
+        new CardModifierAttribute("Lucky Hit").register(CardModifierAttribute::new);
+        new CardIsScalingAttribute(true).register(CardIsScalingAttribute::new);
+        new CardHasConditionAttribute(true).register(CardHasConditionAttribute::new);
+        new CardScaleTypesAttribute("Diagonal").register(CardScaleTypesAttribute::new);
+        new CardConditionCompAttribute("At Least").register(CardConditionCompAttribute::new);
+        new CardConditionGroupsAttribute("Blue").register(CardConditionGroupsAttribute::new);
+        new CardConditionNumAttribute(5).register(CardConditionNumAttribute::new);
+        new CardTaskAttribute("Wooden Chests").register(CardTaskAttribute::new);
+        new CardTaskNumberAttribute(5).register(CardTaskNumberAttribute::new);
+        new CardModifierNumberAttribute(new Modifier("+1 Attack Damage", "Attack Damage",1)).register(CardModifierNumberAttribute::new);
         // Charms
         new CharmUsesAttribute(0).register(CharmUsesAttribute::new);
         new CharmAffinityAttribute(0).register(CharmAffinityAttribute::new);
@@ -157,90 +178,5 @@ public class VaultFilters {
 
 
     }
-    public static boolean checkFilter(ItemStack stack, ItemStack filterStack, boolean useCache, Level level) {
-        if (!useCache) {
-            return basicFilterTest(stack,filterStack,level);
-        }
-        Item stackItem = stack.getItem();
-        if (! (stackItem instanceof VaultGearItem || stackItem instanceof InscriptionItem ||
-                stackItem instanceof InfusedCatalystItem ||stackItem instanceof CharmItem ||
-                stackItem instanceof TrinketItem)) {
-            return basicFilterTest(stack,filterStack,level);
-        }
-        if (VFServerConfig.CACHE_DATAFIX.get()) {
-            DataFixers.clearNBTCache(stack);
-        }
-        //if (filterStack.getDisplayName().getString().equals("Ignore Caching")) {
-            //return basicFilterTest(stack,filterStack,level);
-        //}
 
-        //return FilterItemStack.of(filterStack).test(null, stack);
-        //return cacheTest(stack, filterStack, VFServerConfig.MAX_CACHES.get(),level);
-        return VFCache.getOrCreateFilter(stack,filterStack,level);
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public static Level getClientLevel() {
-        return (Level) net.minecraft.client.Minecraft.getInstance().level;
-    };
-
-
-    public static String filterKey = "hashes";
-    public static boolean basicFilterTest(ItemStack stack, ItemStack filterStack, Level level) {
-
-
-        if (level == null) {
-            level = LEVEL_REF;
-            if (FMLEnvironment.dist.isClient()) {
-                DistExecutor.unsafeCallWhenOn(Dist.CLIENT, () -> VaultFilters::getClientLevel);
-            }
-
-        }
-        return FilterItem.test(level,stack, filterStack);
-    }
-    private static boolean cacheTest(ItemStack stack, ItemStack filterStack, int maxHashes, Level level) {
-        CompoundTag tag = stack.getOrCreateTag();
-        if (!(stack.getOrCreateTag().contains("clientCache"))) {
-            GearDataCache.createCache(stack);
-        }
-
-        tag = (CompoundTag) tag.get("clientCache");
-        ListTag filterHashes = tag.get(filterKey) instanceof ListTag listTag ? listTag : new ListTag();
-        if (!tag.contains(filterKey)) {
-            tag.put(filterKey,filterHashes);
-        }
-
-        int hashCount = filterHashes.size();
-        while (hashCount > maxHashes) {
-            filterHashes.remove(0);
-            hashCount--;
-        }
-
-        if (maxHashes == 0) {
-            return VaultFilters.basicFilterTest(stack,filterStack,level);
-        }
-
-        int hash = filterStack.hashCode();
-        IntTag passedHash = IntTag.valueOf(hash);
-        IntTag failedHash = IntTag.valueOf(-hash);
-        if (filterHashes.contains(failedHash)) {
-            return false;
-        } else if (filterHashes.contains(passedHash)) {
-            return true;
-        }
-
-        if (hashCount == maxHashes) {
-            filterHashes.remove(0);
-        }
-
-        boolean result = VaultFilters.basicFilterTest(stack,filterStack,level);
-
-        if (result) {
-            filterHashes.add(passedHash);
-        } else {
-            filterHashes.add(failedHash);
-        }
-
-        return result;
-    }
 }
