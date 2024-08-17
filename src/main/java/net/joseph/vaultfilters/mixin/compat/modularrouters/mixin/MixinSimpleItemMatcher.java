@@ -1,10 +1,9 @@
-package net.joseph.vaultfilters.mixin.compat.create;
+package net.joseph.vaultfilters.mixin.compat.modularrouters.mixin;
 
 import com.simibubi.create.content.logistics.filter.FilterItem;
 import me.desht.modularrouters.logic.filter.Filter;
 import me.desht.modularrouters.logic.filter.matchers.SimpleItemMatcher;
 import net.joseph.vaultfilters.VFTests;
-import net.joseph.vaultfilters.VaultFilters;
 import net.joseph.vaultfilters.configs.VFServerConfig;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Final;

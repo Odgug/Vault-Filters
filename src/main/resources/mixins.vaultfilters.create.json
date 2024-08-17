@@ -5,8 +5,7 @@
   "plugin": "net.joseph.vaultfilters.mixin.compat.create.CreateMixinPlugin",
   "mixins": [
     "MixinCreateFilteringBehaviour",
-    "MixinCreateFilteringBehaviourLegacy",
-    "MixinSimpleItemMatcher"
+    "MixinCreateFilteringBehaviourLegacy"
   ],
   "injectors": {
     "defaultRequire": 1

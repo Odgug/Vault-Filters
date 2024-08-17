@@ -6,7 +6,8 @@
   "mixins": [
     "MixinBulkItemMatcher",
     "MixinContainerModule",
-    "MixinItemStackHashingStrategy"
+    "MixinItemStackHashingStrategy",
+    "MixinSimpleItemMatcher"
   ],
   "injectors": {
     "defaultRequire": 1
