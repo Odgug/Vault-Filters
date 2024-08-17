@@ -61,7 +61,7 @@ public class MixinFilterScreen extends AbstractFilterScreen<FilterMenu> {
     }
 
     @Inject(method = "init",at = @At(value = "INVOKE",
-            target = "Lcom/simibubi/create/content/logistics/filter/FilterScreen;handleIndicators()V",shift = At.Shift.BEFORE,ordinal = 0),remap = false)
+            target = "Lcom/simibubi/create/content/logistics/filter/FilterScreen;handleIndicators()V",shift = At.Shift.BEFORE,ordinal = 0))
     private void injectInitializer(CallbackInfo ci, @Local(ordinal = 0) int x, @Local(ordinal = 1) int y) {
         matchAll = new IconButton(x + 102, y + 75, AllIcons.I_WHITELIST_AND);
         matchAll.withCallback(() -> {
