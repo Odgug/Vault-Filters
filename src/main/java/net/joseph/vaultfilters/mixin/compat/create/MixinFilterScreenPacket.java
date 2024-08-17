@@ -8,14 +8,14 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
-@Mixin(value = FilterScreenPacket.class, remap = false)
+@Mixin(value = FilterScreenPacket.class)
 public class MixinFilterScreenPacket {
     @Final
     @Shadow
     private FilterScreenPacket.Option option;
 
 
-    @ModifyVariable(method = "lambda$handle$0", at = @At(value = "STORE", ordinal = 0), name = "c")
+    @ModifyVariable(method = "lambda$handle$0", at = @At(value = "STORE", ordinal = 0), name = "c",remap = false)
     private FilterMenu modifyFilterMenu(FilterMenu c) {
         // Modify or use the FilterMenu instance `c` here
         if (this.option == FilterScreenPacket.Option.ADD_TAG) {

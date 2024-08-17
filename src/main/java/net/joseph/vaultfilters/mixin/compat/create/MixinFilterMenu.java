@@ -11,10 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value = FilterMenu.class, remap = false)
-
-
-
+@Mixin(value = FilterMenu.class)
 public class MixinFilterMenu implements FilterMenuAdvancedAccessor{
 
 
@@ -24,28 +21,28 @@ public class MixinFilterMenu implements FilterMenuAdvancedAccessor{
     boolean blacklist;
 
     @Unique
-    boolean vault_filters$matchAll;
-    @Inject(method = "initAndReadInventory(Lnet/minecraft/world/item/ItemStack;)V", at = @At("TAIL"))
+    boolean vf$matchAll;
+    @Inject(method = "initAndReadInventory(Lnet/minecraft/world/item/ItemStack;)V", at = @At("TAIL"),remap = false)
     public void initMatchALl(ItemStack filterItem, CallbackInfo ci, @Local CompoundTag tag) {
-        vault_filters$matchAll = tag.getBoolean("MatchAll");
+        vf$matchAll = tag.getBoolean("MatchAll");
     }
 
     @Inject(method = "saveData(Lnet/minecraft/world/item/ItemStack;)V", at = @At(value = "INVOKE",
-            target = "Lnet/minecraft/nbt/CompoundTag;putBoolean(Ljava/lang/String;Z)V", ordinal = 1), cancellable = true)
+            target = "Lnet/minecraft/nbt/CompoundTag;putBoolean(Ljava/lang/String;Z)V", ordinal = 1), cancellable = true,remap = false)
     private void injectSaveData(ItemStack filterItem, CallbackInfo ci, @Local CompoundTag tag) {
-        tag.putBoolean("MatchAll", vault_filters$matchAll);
-        if (blacklist || respectNBT || vault_filters$matchAll) {
+        tag.putBoolean("MatchAll", vf$matchAll);
+        if (blacklist || respectNBT || vf$matchAll) {
             ci.cancel();
         }
     }
 
     @Override
     public boolean vault_filters$getMatchAll() {
-        return vault_filters$matchAll;
+        return vf$matchAll;
     }
 
     @Override
     public void vault_filters$setMatchAll(boolean matchAll) {
-        this.vault_filters$matchAll = matchAll;
+        this.vf$matchAll = matchAll;
     }
 }

@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(value = FilterItemStack.ListFilterItemStack.class, remap = false)
+@Mixin(value = FilterItemStack.ListFilterItemStack.class)
 public class MixinListFilterItemStack {
     @Unique
     public boolean isMatchAll;
@@ -22,13 +22,13 @@ public class MixinListFilterItemStack {
     @Shadow
     public boolean shouldRespectNBT;
 
-    @Inject(method = "<init>", at = @At("TAIL"), cancellable = true)
+    @Inject(method = "<init>", at = @At("TAIL"), cancellable = true,remap = false)
     public void initMatchALl(ItemStack filter, CallbackInfo ci, @Local boolean defaults) {
         isMatchAll = defaults ? false
                 : filter.getTag().getBoolean("MatchAll");
     }
 
-    @Inject(method = "test(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;Z)Z", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "test(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;Z)Z", at = @At("HEAD"), cancellable = true,remap = false)
     private void modifyTestMethod(Level world, ItemStack stack, boolean matchNBT, CallbackInfoReturnable<Boolean> cir) {
         if (((FilterItemStack.ListFilterItemStack) (Object) this).containedItems.isEmpty()) {
             return;
