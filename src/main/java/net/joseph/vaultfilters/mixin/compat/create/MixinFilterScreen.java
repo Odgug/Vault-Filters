@@ -25,8 +25,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Arrays;
 import java.util.List;
 
-import static java.awt.SystemColor.menu;
-
 @Mixin(value = FilterScreen.class, remap = false)
 public class MixinFilterScreen extends AbstractFilterScreen<FilterMenu> {
     @Shadow private IconButton blacklist;
@@ -66,14 +64,14 @@ public class MixinFilterScreen extends AbstractFilterScreen<FilterMenu> {
     private void injectInitializer(CallbackInfo ci, @Local(ordinal = 0) int x, @Local(ordinal = 1) int y) {
         matchAll = new IconButton(x + 102, y + 75, AllIcons.I_WHITELIST_AND);
         matchAll.withCallback(() -> {
-            ((FilterMenuAdvancedAccessor)menu).setMatchAll(true);
+            ((FilterMenuAdvancedAccessor)menu).vault_filters$setMatchAll(true);
             sendOptionUpdate(FilterScreenPacket.Option.ADD_TAG);
         });
         matchAll.setToolTip(allowAllN);
 
         matchAny= new IconButton(x + 120, y + 75, AllIcons.I_WHITELIST_OR);
         matchAny.withCallback(() -> {
-            ((FilterMenuAdvancedAccessor)menu).setMatchAll(false);
+            ((FilterMenuAdvancedAccessor)menu).vault_filters$setMatchAll(false);
             sendOptionUpdate(FilterScreenPacket.Option.ADD_INVERTED_TAG);
         });
         matchAny.setToolTip(allowAnyN);
@@ -101,18 +99,18 @@ public class MixinFilterScreen extends AbstractFilterScreen<FilterMenu> {
     @Inject(method = "isButtonEnabled", at = @At("TAIL"), cancellable = true)
     private void addButtonsEnabled(IconButton button, CallbackInfoReturnable<Boolean> cir) {
         if (button == matchAll)
-            cir.setReturnValue(!((FilterMenuAdvancedAccessor)menu).getMatchAll());
+            cir.setReturnValue(!((FilterMenuAdvancedAccessor)menu).vault_filters$getMatchAll());
         if (button == matchAny)
-            cir.setReturnValue(((FilterMenuAdvancedAccessor)menu).getMatchAll());
+            cir.setReturnValue(((FilterMenuAdvancedAccessor)menu).vault_filters$getMatchAll());
         cir.setReturnValue(true);
     }
 
     @Inject(method = "isIndicatorOn", at = @At("TAIL"), cancellable = true)
     private void addIndicatorsEnabled(Indicator indicator, CallbackInfoReturnable<Boolean> cir) {
         if (indicator == matchAllIndicator)
-            cir.setReturnValue(((FilterMenuAdvancedAccessor)menu).getMatchAll());
+            cir.setReturnValue(((FilterMenuAdvancedAccessor)menu).vault_filters$getMatchAll());
         if (indicator == matchAnyIndicator)
-            cir.setReturnValue(!((FilterMenuAdvancedAccessor)menu).getMatchAll());
+            cir.setReturnValue(!((FilterMenuAdvancedAccessor)menu).vault_filters$getMatchAll());
         cir.setReturnValue(true);
     }
 
