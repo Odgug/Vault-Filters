@@ -27,7 +27,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Mixin(value = FilterScreen.class)
-public class MixinFilterScreen extends AbstractFilterScreen<FilterMenu> {
+public abstract class MixinFilterScreen extends AbstractFilterScreen<FilterMenu> {
     @Shadow private IconButton blacklist;
     @Shadow private IconButton whitelist;
     @Shadow private IconButton respectNBT;
@@ -115,14 +115,5 @@ public class MixinFilterScreen extends AbstractFilterScreen<FilterMenu> {
 
 
     //meaningless
-    @Override
-    protected boolean isButtonEnabled(IconButton button) {
-        return false;
-    }
 
-    //meaningless
-    @Override
-    protected boolean isIndicatorOn(Indicator indicator) {
-        return false;
-    }
 }

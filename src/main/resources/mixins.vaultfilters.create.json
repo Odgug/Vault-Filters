@@ -9,7 +9,8 @@
     "MixinFilterMenu",
     "FilterMenuAccessor",
     "MixinFilterScreen",
-    "MixinListFilterItemStack"
+    "MixinListFilterItemStack",
+    "MixinFilterScreenPacket"
 
   ],
   "injectors": {
