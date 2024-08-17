@@ -103,7 +103,6 @@ public class MixinFilterScreen extends AbstractFilterScreen<FilterMenu> {
             cir.setReturnValue(!((FilterMenuAdvancedAccessor)menu).vault_filters$getMatchAll());
         if (button == matchAny)
             cir.setReturnValue(((FilterMenuAdvancedAccessor)menu).vault_filters$getMatchAll());
-        cir.setReturnValue(true);
     }
 
     @Inject(method = "isIndicatorOn", at = @At("TAIL"), cancellable = true,remap = false)
@@ -112,7 +111,6 @@ public class MixinFilterScreen extends AbstractFilterScreen<FilterMenu> {
             cir.setReturnValue(((FilterMenuAdvancedAccessor)menu).vault_filters$getMatchAll());
         if (indicator == matchAnyIndicator)
             cir.setReturnValue(!((FilterMenuAdvancedAccessor)menu).vault_filters$getMatchAll());
-        cir.setReturnValue(true);
     }
 
 

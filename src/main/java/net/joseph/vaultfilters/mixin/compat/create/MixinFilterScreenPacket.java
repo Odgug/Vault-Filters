@@ -16,7 +16,7 @@ public class MixinFilterScreenPacket {
     private FilterScreenPacket.Option option;
 
 
-    @ModifyVariable(method = "lambda$handle$0", at = @At(value = "STORE", ordinal = 0), name = "c",remap = false)
+    @ModifyVariable(method = "lambda$handle$0(Lnet/minecraftforge/network/NetworkEvent$Context;)V", at = @At(value = "STORE", ordinal = 0), name = "c",remap = false)
     private FilterMenu modifyFilterMenu(FilterMenu c) {
         // Modify or use the FilterMenu instance `c` here
         if (this.option == FilterScreenPacket.Option.ADD_TAG) {
