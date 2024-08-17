@@ -7,10 +7,10 @@
     "MixinCreateFilteringBehaviour",
     "MixinCreateFilteringBehaviourLegacy",
     "MixinFilterMenu",
-    "MixinListFilterItemStack",
-    "MixinFilterScreenPacket",
     "FilterMenuAccessor",
-    "MixinFilterScreen"
+    "MixinFilterScreen",
+    "MixinListFilterItemStack"
+
   ],
   "injectors": {
     "defaultRequire": 1

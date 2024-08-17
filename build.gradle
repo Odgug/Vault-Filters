@@ -90,7 +90,7 @@ minecraft {
 }
 
 mixin {
-    add sourceSets.main, "mixins.${mod_id}.refmap.json"
+    add sourceSets.main, "${mod_id}.mixin-refmap.json"
     config "mixins.${mod_id}.ae2.json"
     config "mixins.${mod_id}.rs.json"
     config "mixins.${mod_id}.sophisticatedcore.json"
