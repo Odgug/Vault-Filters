@@ -3,6 +3,7 @@ package net.joseph.vaultfilters.mixin.compat.create;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.simibubi.create.content.logistics.filter.FilterItem;
 import com.simibubi.create.content.logistics.filter.FilterItemStack;
+import net.joseph.vaultfilters.VFTests;
 import net.joseph.vaultfilters.VaultFilters;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -24,10 +25,6 @@ import static net.joseph.vaultfilters.VFTests.testMethodMatchNBT;
 @Mixin(value = FilterItem.class, remap = false)
 public class MixinFilterItemLegacy {
 
-
-    private static boolean testDirect(ItemStack filter, ItemStack stack, boolean matchNBT) {
-        return matchNBT ? ItemHandlerHelper.canItemStacksStack(filter, stack) : ItemStack.isSame(filter, stack);
-    }
 
     @Inject(method = "test(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;Z)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/nbt/CompoundTag;getBoolean(Ljava/lang/String;)Z", ordinal = 1, shift = At.Shift.AFTER), cancellable = true, remap = false)
     private static void modifyTestMethod(Level world, ItemStack stack, ItemStack filter, boolean matchNBT, CallbackInfoReturnable<Boolean> cir,
@@ -68,7 +65,7 @@ public class MixinFilterItemLegacy {
             }
 
             if (newIsEmpty) {
-                cir.setReturnValue(testDirect(filter, stack, matchNBT));
+                cir.setReturnValue(VFTests.testDirect(filter, stack, matchNBT));
             } else {
                 cir.setReturnValue(!blacklist);
             }

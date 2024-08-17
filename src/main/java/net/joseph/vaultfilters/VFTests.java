@@ -16,6 +16,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.minecraftforge.items.ItemHandlerHelper;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -105,5 +106,8 @@ public class VFTests {
         }
         return false;
 
+    }
+    public static boolean testDirect(ItemStack filter, ItemStack stack, boolean matchNBT) {
+        return matchNBT ? ItemHandlerHelper.canItemStacksStack(filter, stack) : ItemStack.isSame(filter, stack);
     }
 }
