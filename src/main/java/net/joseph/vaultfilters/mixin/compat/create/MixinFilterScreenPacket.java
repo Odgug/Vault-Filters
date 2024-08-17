@@ -2,6 +2,7 @@ package net.joseph.vaultfilters.mixin.compat.create;
 
 
 import com.simibubi.create.content.logistics.filter.*;
+import net.joseph.vaultfilters.access.FilterMenuAdvancedAccessor;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

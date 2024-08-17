@@ -1,4 +1,4 @@
-package net.joseph.vaultfilters.mixin.compat.create;
+package net.joseph.vaultfilters.access;
 
 
 public interface FilterMenuAdvancedAccessor {

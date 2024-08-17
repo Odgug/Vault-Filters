@@ -28,7 +28,7 @@ public class MixinListFilterItemStack {
                 : filter.getTag().getBoolean("MatchAll");
     }
 
-    @Inject(method = "test(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;Z)Z", at = @At("HEAD"), cancellable = true,remap = false)
+    @Inject(method = "test(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;Z)Z", at = @At("HEAD"), cancellable = true)
     private void modifyTestMethod(Level world, ItemStack stack, boolean matchNBT, CallbackInfoReturnable<Boolean> cir) {
         if (((FilterItemStack.ListFilterItemStack) (Object) this).containedItems.isEmpty()) {
             return;
