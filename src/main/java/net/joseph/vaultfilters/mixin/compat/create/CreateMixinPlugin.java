@@ -18,6 +18,9 @@ public class CreateMixinPlugin extends MixinConfig {
         if (mixinClassName.equals("net.joseph.vaultfilters.mixin.compat.create.MixinListFilterItemStack")) {
             return CreateVersion.getLoadedVersion() == CreateVersion.CREATE_051F;
         }
+        if (mixinClassName.equals("net.joseph.vaultfilters.mixin.compat.create.MixinFilterItemLegacy")) {
+            return CreateVersion.getLoadedVersion() == CreateVersion.LEGACY;
+        }
         return true;
     }
 }
