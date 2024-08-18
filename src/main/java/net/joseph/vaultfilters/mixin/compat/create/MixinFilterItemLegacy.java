@@ -27,15 +27,18 @@ public class MixinFilterItemLegacy {
         return matchNBT ? ItemHandlerHelper.canItemStacksStack(filter, stack) : ItemStack.isSame(filter, stack);
     }
 
-    @Inject(method = "test(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;Z)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/nbt/CompoundTag;getBoolean(Ljava/lang/String;)Z", ordinal = 1, shift = At.Shift.AFTER, remap = true), cancellable = true, remap = false)
+    @Inject(method = "test(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;Z)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/nbt/CompoundTag;getBoolean(Ljava/lang/String;)Z", ordinal = 0, shift = At.Shift.BEFORE, remap = true), cancellable = true, remap = false)
     private static void modifyLegacyTestMethod(Level world, ItemStack stack, ItemStack filter, boolean matchNBT, CallbackInfoReturnable<Boolean> cir,
                                                @Local ItemStackHandler filterItems,
-                                               @Local(ordinal = 1) boolean respectNBT,
-                                               @Local(ordinal = 2) boolean blacklist) {
-        VaultFilters.LOGGER.info("reached mixin");
-        boolean matchAll = !filter.hasTag() ? false : filter.getTag().getBoolean("MatchAll");
+                                               @Local(ordinal = 1) boolean defaults) {
+
+        //VaultFilters.LOGGER.info("reached mixin");
+        boolean matchAll = defaults ? false : filter.getTag().getBoolean("MatchAll");
         if (matchAll) {
-            VaultFilters.LOGGER.info("matchAll returned true");
+            boolean respectNBT = defaults ? false : filter.getTag().getBoolean("RespectNBT");
+            boolean blacklist = defaults ? false : filter.getTag().getBoolean("Blacklist");
+            boolean isEmpty = true;
+            //VaultFilters.LOGGER.info("matchAll returned true");
             if (testMethodMatchNBT == null) {
                 // try to find the method
                 try {
@@ -45,14 +48,13 @@ public class MixinFilterItemLegacy {
                     // wrap it in unchecked exception
                     throw new IllegalStateException(e);
                 }
-                VaultFilters.LOGGER.info("testMethod was defined");
+                //VaultFilters.LOGGER.info("testMethod was defined");
             }
-            boolean newIsEmpty = true;
             for (int slot = 0; slot < filterItems.getSlots(); ++slot) {
                 ItemStack stackInSlot = filterItems.getStackInSlot(slot);
-                VaultFilters.LOGGER.info("going over item");
+                //VaultFilters.LOGGER.info("going over item");
                 if (!stackInSlot.isEmpty()) {
-                    newIsEmpty = false;
+                    isEmpty = false;
                     //boolean matches = FilterItem.test(world, stack, stackInSlot, respectNBT);
                     boolean matches;
                     try {
@@ -63,18 +65,21 @@ public class MixinFilterItemLegacy {
                         throw new IllegalStateException(e);
 
                     }
-                    VaultFilters.LOGGER.info("item returned " + matches);
-                    VaultFilters.LOGGER.info("blacklist is " + blacklist);
+                    //VaultFilters.LOGGER.info("item returned " + matches);
+                    //VaultFilters.LOGGER.info("blacklist is " + blacklist);
                     if (!matches) {
                         cir.setReturnValue(blacklist);
+                        return;
                     }
                 }
             }
 
-            if (newIsEmpty) {
+            if (isEmpty) {
                 cir.setReturnValue(testDirect(filter, stack, matchNBT));
+                return;
             } else {
                 cir.setReturnValue(!blacklist);
+                return;
             }
         }
     }

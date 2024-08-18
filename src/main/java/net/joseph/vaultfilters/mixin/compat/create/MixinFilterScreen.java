@@ -84,33 +84,44 @@ public abstract class MixinFilterScreen extends AbstractFilterScreen<FilterMenu>
     @Inject(method = "getTooltipButtons", at = @At("HEAD"), cancellable = true,remap = false)
     private void addToolTipButtons(CallbackInfoReturnable<List<IconButton>> cir) {
         cir.setReturnValue(Arrays.asList(blacklist,whitelist,respectNBT,ignoreNBT,matchAll,matchAny));
+        return;
     }
     @Inject(method = "getTooltipDescriptions", at = @At("HEAD"), cancellable = true,remap = false)
     private void addToolTipDescriptions(CallbackInfoReturnable<List<MutableComponent>> cir) {
         cir.setReturnValue(Arrays.asList(denyDESC.plainCopy(),allowDESC.plainCopy(),respectDataDESC.plainCopy(),ignoreDataDESC.plainCopy(),
                 allowAllDESC.plainCopy(),allowAnyDESC.plainCopy()));
+        return;
     }
     @Inject(method = "getIndicators", at = @At("HEAD"), cancellable = true,remap = false)
     private void addIndicators(CallbackInfoReturnable<List<Indicator>> cir) {
         cir.setReturnValue(Arrays.asList(blacklistIndicator,whitelistIndicator,respectNBTIndicator,ignoreNBTIndicator,
                 matchAllIndicator,matchAnyIndicator));
+        return;
     }
 
 
     @Inject(method = "isButtonEnabled", at = @At("TAIL"), cancellable = true,remap = false)
     private void addButtonsEnabled(IconButton button, CallbackInfoReturnable<Boolean> cir) {
-        if (button == matchAll)
-            cir.setReturnValue(!((FilterMenuAdvancedAccessor)menu).vault_filters$getMatchAll());
-        if (button == matchAny)
-            cir.setReturnValue(((FilterMenuAdvancedAccessor)menu).vault_filters$getMatchAll());
+        if (button == matchAll) {
+            cir.setReturnValue(!((FilterMenuAdvancedAccessor) menu).vault_filters$getMatchAll());
+            return;
+        }
+        if (button == matchAny) {
+            cir.setReturnValue(((FilterMenuAdvancedAccessor) menu).vault_filters$getMatchAll());
+            return;
+        }
     }
 
     @Inject(method = "isIndicatorOn", at = @At("TAIL"), cancellable = true,remap = false)
     private void addIndicatorsEnabled(Indicator indicator, CallbackInfoReturnable<Boolean> cir) {
-        if (indicator == matchAllIndicator)
-            cir.setReturnValue(((FilterMenuAdvancedAccessor)menu).vault_filters$getMatchAll());
-        if (indicator == matchAnyIndicator)
-            cir.setReturnValue(!((FilterMenuAdvancedAccessor)menu).vault_filters$getMatchAll());
+        if (indicator == matchAllIndicator) {
+            cir.setReturnValue(((FilterMenuAdvancedAccessor) menu).vault_filters$getMatchAll());
+            return;
+        }
+        if (indicator == matchAnyIndicator) {
+            cir.setReturnValue(!((FilterMenuAdvancedAccessor) menu).vault_filters$getMatchAll());
+            return;
+        }
     }
 
 

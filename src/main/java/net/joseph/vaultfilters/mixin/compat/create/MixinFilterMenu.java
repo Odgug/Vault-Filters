@@ -29,11 +29,12 @@ public class MixinFilterMenu implements FilterMenuAdvancedAccessor {
     }
 
     @Inject(method = "saveData(Lnet/minecraft/world/item/ItemStack;)V", at = @At(value = "INVOKE",
-            target = "Lnet/minecraft/nbt/CompoundTag;putBoolean(Ljava/lang/String;Z)V", ordinal = 1), cancellable = true)
+            target = "Lnet/minecraft/nbt/CompoundTag;putBoolean(Ljava/lang/String;Z)V", ordinal = 1,shift = At.Shift.AFTER), cancellable = true)
     private void injectSaveData(ItemStack filterItem, CallbackInfo ci, @Local CompoundTag tag) {
         tag.putBoolean("MatchAll", vf$matchAll);
         if (blacklist || respectNBT || vf$matchAll) {
             ci.cancel();
+            return;
         }
     }
 
