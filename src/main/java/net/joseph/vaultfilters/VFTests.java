@@ -62,7 +62,7 @@ public class VFTests {
             try {
                 testMethod = FilterItem.class.getMethod("test", Level.class, ItemStack.class, ItemStack.class);
             } catch (NoSuchMethodException e) {
-                VaultFilters.LOGGER.error("[0.5.1.b-e] could not find test method: {}", e.getMessage());
+                VaultFilters.LOGGER.error("[0.5.1.b-e] could not find test method", e);
                 // wrap it in unchecked exception
                 throw new IllegalStateException(e);
             }
@@ -71,7 +71,7 @@ public class VFTests {
         try {
             return (boolean) testMethod.invoke(null, level, stack, filterStack);
         } catch (IllegalAccessException | InvocationTargetException e) {
-            VaultFilters.LOGGER.error("[0.5.1.b-e] could not invoke test method: {}", e.getMessage());
+            VaultFilters.LOGGER.error("[0.5.1.b-e] could not invoke test method", e);
             // wrap it in unchecked exception
             throw new IllegalStateException(e);
 

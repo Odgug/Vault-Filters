@@ -39,7 +39,7 @@ public class MixinFilterItemLegacy {
                 try {
                     testMethodMatchNBT = FilterItem.class.getMethod("test", Level.class, ItemStack.class, ItemStack.class, Boolean.class);
                 } catch (NoSuchMethodException e) {
-                    VaultFilters.LOGGER.error("[0.5.1.b-e] could not find test method: {}", e.getMessage());
+                    VaultFilters.LOGGER.error("[0.5.1.b-e] could not find test method", e);
                     // wrap it in unchecked exception
                     throw new IllegalStateException(e);
                 }
