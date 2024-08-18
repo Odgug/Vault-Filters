@@ -32,8 +32,10 @@ public class MixinFilterItemLegacy {
                                          @Local ItemStackHandler filterItems,
                                          @Local(ordinal = 1) boolean respectNBT,
                                          @Local(ordinal = 2) boolean blacklist) {
+        VaultFilters.LOGGER.info("reached mixin");
         boolean matchAll = !filter.hasTag() ? false : filter.getTag().getBoolean("MatchAll");
         if (matchAll) {
+            VaultFilters.LOGGER.info("matchAll returned true");
             if (testMethodMatchNBT == null) {
                 // try to find the method
                 try {
