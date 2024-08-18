@@ -1,15 +1,6 @@
 package net.joseph.vaultfilters;
 
 import com.mojang.logging.LogUtils;
-import com.simibubi.create.content.logistics.filter.FilterItem;
-import com.simibubi.create.content.logistics.filter.FilterItemStack;
-import iskallia.vault.gear.data.GearDataCache;
-import iskallia.vault.gear.item.VaultGearItem;
-import iskallia.vault.item.CardItem;
-import iskallia.vault.item.InfusedCatalystItem;
-import iskallia.vault.item.InscriptionItem;
-import iskallia.vault.item.gear.CharmItem;
-import iskallia.vault.item.gear.TrinketItem;
 import net.joseph.vaultfilters.attributes.abstracts.Objects.Modifier;
 import net.joseph.vaultfilters.attributes.affix.*;
 import net.joseph.vaultfilters.attributes.card.*;
