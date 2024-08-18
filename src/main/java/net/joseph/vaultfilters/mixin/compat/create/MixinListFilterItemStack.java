@@ -36,14 +36,13 @@ public class MixinListFilterItemStack {
 
         // Injected code to handle `isMatchAll`
         if (isMatchAll) {
-            boolean result = true;
             for (FilterItemStack filterItemStack : ((FilterItemStack.ListFilterItemStack) (Object) this).containedItems) {
                 if (!(filterItemStack.test(world, stack, shouldRespectNBT))) {
-                    result = isBlacklist;
-                    break;
+                    cir.setReturnValue(isBlacklist);
+                    return;
                 }
             }
-            cir.setReturnValue(result ? !isBlacklist : isBlacklist);
+            cir.setReturnValue(!isBlacklist);
         }
     }
 }
