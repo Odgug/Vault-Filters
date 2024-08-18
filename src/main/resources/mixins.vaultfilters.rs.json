@@ -14,5 +14,6 @@
   "injectors": {
     "defaultRequire": 1
   },
-  "refmap": "mixins.vaultfilters.refmap.json"
+  "refmap": "mixins.vaultfilters.refmap.json",
+  "minVersion" : "0"
 }
