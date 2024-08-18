@@ -27,7 +27,7 @@ public class MixinFilterItemLegacy {
 
 
     @Inject(method = "test(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;Z)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/nbt/CompoundTag;getBoolean(Ljava/lang/String;)Z", ordinal = 1, shift = At.Shift.AFTER), cancellable = true, remap = false)
-    private static void modifyTestMethod(Level world, ItemStack stack, ItemStack filter, boolean matchNBT, CallbackInfoReturnable<Boolean> cir,
+    private static void modifyLegacyTestMethod(Level world, ItemStack stack, ItemStack filter, boolean matchNBT, CallbackInfoReturnable<Boolean> cir,
                                          @Local ItemStackHandler filterItems,
                                          @Local(ordinal = 1) boolean respectNBT,
                                          @Local(ordinal = 2) boolean blacklist) {
