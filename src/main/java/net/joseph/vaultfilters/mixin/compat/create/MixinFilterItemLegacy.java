@@ -17,7 +17,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 
-@Mixin(value = FilterItem.class, remap = false)
+@Mixin(value = FilterItem.class)
 public class MixinFilterItemLegacy {
 
     @Unique
