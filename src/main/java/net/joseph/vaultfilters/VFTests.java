@@ -56,7 +56,6 @@ public class VFTests {
 
     private static Method testMethod;
 
-    public static Method testMethodMatchNBT;
 
     private static boolean basicFilterTestLegacy(Object filterStack, ItemStack stack, Level level) {
         if (testMethod == null) {
