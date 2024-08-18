@@ -127,6 +127,7 @@ public class VaultFilters {
         new ModifierGroupAttribute("ModAbility").register(ModifierGroupAttribute::new);
 
         // Cards
+        new CardPackOpenedAttribute(true).register(CardPackOpenedAttribute::new);
         new CardAtleastTierAttribute(2).register(CardAtleastTierAttribute::new);
         new CardColorAttribute("Red").register(CardColorAttribute::new);
         new CardTypeAttribute("Foil").register(CardTypeAttribute::new);
