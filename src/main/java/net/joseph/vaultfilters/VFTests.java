@@ -32,7 +32,8 @@ public class VFTests {
         Item stackItem = stack.getItem();
         if (! (stackItem instanceof VaultGearItem || stackItem instanceof InscriptionItem ||
                 stackItem instanceof InfusedCatalystItem ||stackItem instanceof CharmItem ||
-                stackItem instanceof TrinketItem || stackItem instanceof CardItem)) {
+                stackItem instanceof TrinketItem || stackItem instanceof CardItem ||
+                stackItem instanceof BoosterPackItem)) {
             return basicFilterTest(stack,filterStack,level);
         }
         if (VFServerConfig.CACHE_DATAFIX.get() && filterStack instanceof ItemStack) {
