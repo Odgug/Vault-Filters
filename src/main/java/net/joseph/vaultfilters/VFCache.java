@@ -1,5 +1,6 @@
 package net.joseph.vaultfilters;
 
+import iskallia.vault.item.BoosterPackItem;
 import net.joseph.vaultfilters.configs.VFServerConfig;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -14,7 +15,12 @@ public class VFCache {
     public static boolean getOrCreateFilter(ItemStack stack, Object filterStack, Level level) {
         int itemHash = stack.hashCode();
         if (!(cacheMap.containsKey(itemHash))) {
-            boolean testResult = VFTests.basicFilterTest(stack,filterStack,level);
+            boolean testResult;
+            if (stack.getItem() instanceof BoosterPackItem) {
+                testResult = VFTests.testCardPack(stack,filterStack,level);
+            } else {
+                testResult = VFTests.basicFilterTest(stack, filterStack, level);
+            }
             cacheMap.put(itemHash, new VFCache(filterStack, testResult));
             return testResult;
         }

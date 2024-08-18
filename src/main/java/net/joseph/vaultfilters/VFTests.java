@@ -3,6 +3,7 @@ package net.joseph.vaultfilters;
 import com.simibubi.create.content.logistics.filter.FilterItem;
 import com.simibubi.create.content.logistics.filter.FilterItemStack;
 import iskallia.vault.gear.item.VaultGearItem;
+import iskallia.vault.item.BoosterPackItem;
 import iskallia.vault.item.CardItem;
 import iskallia.vault.item.InfusedCatalystItem;
 import iskallia.vault.item.InscriptionItem;
@@ -19,6 +20,7 @@ import net.minecraftforge.fml.loading.FMLEnvironment;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.List;
 
 import static net.joseph.vaultfilters.VaultFilters.LEVEL_REF;
 
@@ -104,5 +106,21 @@ public class VFTests {
         }
         return false;
 
+    }
+    public static boolean testCardPack(ItemStack stack, Object filterStack, Level level) {
+        List<ItemStack> cardPack = BoosterPackItem.getOutcomes(stack);
+        boolean packMatch = basicFilterTest(stack,filterStack,level);
+        if (cardPack == null) {
+            return packMatch;
+        }
+        if (packMatch) {
+            return true;
+        }
+        for (ItemStack card : cardPack) {
+            if (basicFilterTest(card,filterStack,level)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
