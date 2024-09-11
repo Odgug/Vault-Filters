@@ -24,7 +24,7 @@ public enum CreateVersion {
             loadedVersion = LEGACY;
         }
         if (loadedVersion == null) {
-            throw new IllegalStateException("Vault-Filters - Create version " + createVersion + " is not supported, install 0.5.1.b to 0.5.1.f");
+            //throw new IllegalStateException("Vault-Filters - Create version " + createVersion + " is not supported, install 0.5.1.b to 0.5.1.f");
         }
         System.out.println("Vault-Filters - Detected create: " + loadedVersion + " - " + createVersion); // logger not available so early
     }

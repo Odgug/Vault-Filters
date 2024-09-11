@@ -19,7 +19,7 @@ public class MixinRSItemMatcher {
             cir.setReturnValue(VFTests.checkFilter(left, right,true,null));
         }
         if (VFServerConfig.RS_COMPAT.get() && flags == VaultFilters.NO_CACHE_FLAG && right.getItem() instanceof FilterItem) {
-            cir.setReturnValue(VFTests.checkFilter(left, right,false,null));
+            cir.setReturnValue(VFTests.checkFilter(left, right,true,null));
         }
     }
 

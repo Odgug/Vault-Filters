@@ -3,6 +3,7 @@ package net.joseph.vaultfilters;
 import com.simibubi.create.content.logistics.filter.FilterItem;
 import com.simibubi.create.content.logistics.filter.FilterItemStack;
 import iskallia.vault.gear.item.VaultGearItem;
+import iskallia.vault.item.BoosterPackItem;
 import iskallia.vault.item.CardItem;
 import iskallia.vault.item.InfusedCatalystItem;
 import iskallia.vault.item.InscriptionItem;
@@ -19,6 +20,7 @@ import net.minecraftforge.fml.loading.FMLEnvironment;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.List;
 
 import static net.joseph.vaultfilters.VaultFilters.LEVEL_REF;
 
@@ -30,7 +32,8 @@ public class VFTests {
         Item stackItem = stack.getItem();
         if (! (stackItem instanceof VaultGearItem || stackItem instanceof InscriptionItem ||
                 stackItem instanceof InfusedCatalystItem ||stackItem instanceof CharmItem ||
-                stackItem instanceof TrinketItem || stackItem instanceof CardItem)) {
+                stackItem instanceof TrinketItem || stackItem instanceof CardItem ||
+                stackItem instanceof BoosterPackItem)) {
             return basicFilterTest(stack,filterStack,level);
         }
         if (VFServerConfig.CACHE_DATAFIX.get() && filterStack instanceof ItemStack) {
@@ -55,13 +58,14 @@ public class VFTests {
 
     private static Method testMethod;
 
+
     private static boolean basicFilterTestLegacy(Object filterStack, ItemStack stack, Level level) {
         if (testMethod == null) {
             // try to find the method
             try {
                 testMethod = FilterItem.class.getMethod("test", Level.class, ItemStack.class, ItemStack.class);
             } catch (NoSuchMethodException e) {
-                VaultFilters.LOGGER.error("[0.5.1.b-e] could not find test method: {}", e.getMessage());
+                VaultFilters.LOGGER.error("[0.5.1.b-e] could not find test method", e);
                 // wrap it in unchecked exception
                 throw new IllegalStateException(e);
             }
@@ -70,7 +74,7 @@ public class VFTests {
         try {
             return (boolean) testMethod.invoke(null, level, stack, filterStack);
         } catch (IllegalAccessException | InvocationTargetException e) {
-            VaultFilters.LOGGER.error("[0.5.1.b-e] could not invoke test method: {}", e.getMessage());
+            VaultFilters.LOGGER.error("[0.5.1.b-e] could not invoke test method", e);
             // wrap it in unchecked exception
             throw new IllegalStateException(e);
 
@@ -103,5 +107,21 @@ public class VFTests {
         }
         return false;
 
+    }
+    public static boolean testCardPack(ItemStack stack, Object filterStack, Level level) {
+        List<ItemStack> cardPack = BoosterPackItem.getOutcomes(stack);
+        boolean packMatch = basicFilterTest(stack,filterStack,level);
+        if (cardPack == null) {
+            return packMatch;
+        }
+        if (packMatch) {
+            return true;
+        }
+        for (ItemStack card : cardPack) {
+            if (basicFilterTest(card,filterStack,level)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

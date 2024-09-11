@@ -1,15 +1,6 @@
 package net.joseph.vaultfilters;
 
 import com.mojang.logging.LogUtils;
-import com.simibubi.create.content.logistics.filter.FilterItem;
-import com.simibubi.create.content.logistics.filter.FilterItemStack;
-import iskallia.vault.gear.data.GearDataCache;
-import iskallia.vault.gear.item.VaultGearItem;
-import iskallia.vault.item.CardItem;
-import iskallia.vault.item.InfusedCatalystItem;
-import iskallia.vault.item.InscriptionItem;
-import iskallia.vault.item.gear.CharmItem;
-import iskallia.vault.item.gear.TrinketItem;
 import net.joseph.vaultfilters.attributes.abstracts.Objects.Modifier;
 import net.joseph.vaultfilters.attributes.affix.*;
 import net.joseph.vaultfilters.attributes.card.*;
@@ -28,31 +19,19 @@ import net.joseph.vaultfilters.attributes.soul.*;
 import net.joseph.vaultfilters.attributes.tool.ToolMaterialAttribute;
 import net.joseph.vaultfilters.attributes.trinket.*;
 import net.joseph.vaultfilters.configs.VFServerConfig;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.IntTag;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.slf4j.Logger;
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 //import com.simibubi.create.content.logistics.filter.FilterItemStack;
 
@@ -148,6 +127,8 @@ public class VaultFilters {
         new ModifierGroupAttribute("ModAbility").register(ModifierGroupAttribute::new);
 
         // Cards
+        new CardPackOpenedAttribute(true).register(CardPackOpenedAttribute::new);
+        new CardPackTypeAttribute("Stat").register(CardPackTypeAttribute::new);
         new CardAtleastTierAttribute(2).register(CardAtleastTierAttribute::new);
         new CardColorAttribute("Red").register(CardColorAttribute::new);
         new CardTypeAttribute("Foil").register(CardTypeAttribute::new);

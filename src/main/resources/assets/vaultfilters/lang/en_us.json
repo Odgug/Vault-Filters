@@ -132,6 +132,9 @@
   "create.item_attributes.card_scales": "is a scaling card",
   "create.item_attributes.card_scales.inverted": "is not a scaling card",
 
+  "create.item_attributes.card_pack_opened": "is an opened card pack",
+  "create.item_attributes.card_pack_opened.inverted": "is not an opened card pack",
+
   "create.item_attributes.card_scale_type": "is a card that scales based on \"%1$s\" cards",
   "create.item_attributes.card_scale_type.inverted": "is not a card that scales based on \"%1$s\" cards",
 
@@ -139,7 +142,10 @@
   "create.item_attributes.card_condition_group.inverted": "is not a card with a condition based on \"%1$s\" cards",
 
   "create.item_attributes.card_condition_comp": "is a card with an \"%1$s\" condition",
-  "create.item_attributes.card_condition_com.inverted": "is not a card with an \"%1$s\" condition",
+  "create.item_attributes.card_condition_comp.inverted": "is not a card with an \"%1$s\" condition",
+
+  "create.item_attributes.card_pack_type": "is a \"%1$s\" card pack",
+  "create.item_attributes.card_pack_type.inverted": "is not a \"%1$s\" card pack",
 
   "create.item_attributes.card_condition_num": "is a card with a condition that will allow \"%1$s\" matching cards",
   "create.item_attributes.card_condition_num.inverted": "is not a a card with a condition that will allow \"%1$s\" matching cards",
