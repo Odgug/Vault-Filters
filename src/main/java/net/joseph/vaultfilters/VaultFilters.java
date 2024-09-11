@@ -19,10 +19,16 @@ import net.joseph.vaultfilters.attributes.soul.*;
 import net.joseph.vaultfilters.attributes.tool.ToolMaterialAttribute;
 import net.joseph.vaultfilters.attributes.trinket.*;
 import net.joseph.vaultfilters.configs.VFServerConfig;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -31,7 +37,14 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.PacketDistributor;
+import net.minecraftforge.network.simple.SimpleChannel;
 import org.slf4j.Logger;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 //import com.simibubi.create.content.logistics.filter.FilterItemStack;
 
@@ -42,6 +55,17 @@ public class VaultFilters {
     public static final int CHECK_FILTER_FLAG = 456;
     public static final int NO_CACHE_FLAG = 457;
     public static final Logger LOGGER = LogUtils.getLogger();
+
+    public static final Set<UUID> PLAYERS_WITH_VAULT_FILTERS = new HashSet<>();
+    public static boolean serverHasVaultFilters = false;
+    private static final String PROTOCOL_VERSION = "1";
+    public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
+            new ResourceLocation(MOD_ID, "main"),
+            () -> PROTOCOL_VERSION,
+            PROTOCOL_VERSION::equals,
+            PROTOCOL_VERSION::equals
+    );
+
     public VaultFilters() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         eventBus.addListener(this::setup);
@@ -79,6 +103,13 @@ public class VaultFilters {
     }
 
     private void setup(FMLCommonSetupEvent event) {
+        // Mod Detection System
+        CHANNEL.messageBuilder(ModPresenceMessage.class, 0)
+                .encoder(ModPresenceMessage::encoder)
+                .decoder(ModPresenceMessage::decoder)
+                .consumer(ModPresenceMessage::consumer)
+                .add();
+
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, VFServerConfig.SPEC, "vaultfilters-server.toml");
         // This has a specific order as this controls the order displayed in the filters
         new ItemNameAttribute(("Vault Helmet")).register(ItemNameAttribute::new);
@@ -160,4 +191,15 @@ public class VaultFilters {
 
     }
 
+    @OnlyIn(Dist.CLIENT) @SubscribeEvent
+    public static void onClientConnect(ClientPlayerNetworkEvent.LoggedInEvent event) {
+        CHANNEL.sendToServer(new ModPresenceMessage());
+    }
+
+    @OnlyIn(Dist.DEDICATED_SERVER) @SubscribeEvent
+    public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
+        if (event.getPlayer() instanceof ServerPlayer player) {
+            CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new ModPresenceMessage());
+        }
+    }
 }
