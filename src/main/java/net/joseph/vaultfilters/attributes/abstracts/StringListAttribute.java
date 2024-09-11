@@ -17,7 +17,6 @@ public abstract class StringListAttribute extends ListAttribute<String> {
     public void register(Function<String, StringListAttribute> factory) {
         factories.put(getClass(), factory);
         super.register();
-
     }
 
     @Override

@@ -1,10 +1,10 @@
 {
   "required": true,
-  "package": "net.joseph.vaultfilters.mixin.compat.tomsstorage.mixin",
+  "package": "net.joseph.vaultfilters.mixin.compat.tomsstorage",
   "compatibilityLevel": "JAVA_17",
   "plugin": "net.joseph.vaultfilters.mixin.compat.tomsstorage.TomsStorageMixinPlugin",
   "mixins": [
-    "MixinFilteredInventoryHandler"
+    "mixin.MixinFilteredInventoryHandler"
   ],
   "injectors": {
     "defaultRequire": 1

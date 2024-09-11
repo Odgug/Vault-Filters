@@ -15,8 +15,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static iskallia.vault.item.CardItem.getCard;
-
 public class CardScaleTypesAttribute extends StringListAttribute {
     public CardScaleTypesAttribute(String value) {
         super(value);
@@ -28,31 +26,29 @@ public class CardScaleTypesAttribute extends StringListAttribute {
     }
 
     @Override
-
-    public ArrayList<String> getValues(ItemStack itemStack) {
+    public List<String> getValues(ItemStack itemStack) {
         if (!(itemStack.getItem() instanceof CardItem)) {
             return null;
         }
-        Card card = getCard(itemStack);
 
-
+        Card card = CardItem.getCard(itemStack);
         List<CardEntry> entries = card.getEntries();
-        if (entries == null) {
+        if (entries == null || entries.isEmpty()) {
             return null;
         }
-        if (entries.isEmpty()) {
-            return null;
-        }
+
         CardEntry entry = entries.get(0);
         CardScaler scaler = entry.getScaler();
         if (scaler == null) {
             return null;
         }
+
         Map<Integer, List<CardScaler.Filter>> filters = ((CardScaleAccessor)scaler).getFilters();
         if (filters == null) {
             return null;
         }
-        ArrayList<String> categoryList = new ArrayList<String>();
+
+        List<String> categoryList = new ArrayList<String>();
         for (int key : filters.keySet()) {
             for (CardScaler.Filter filter : filters.get(key)) {
                 Set<CardNeighborType> neighborFilter = ((ScalerFilterAccessor)filter).getNeighborFilter();
@@ -64,7 +60,7 @@ public class CardScaleTypesAttribute extends StringListAttribute {
                 Set<Integer> tierFilter = ((ScalerFilterAccessor)filter).getTierFilter();
                 if (tierFilter != null) {
                     for (Integer tier : tierFilter) {
-                        categoryList.add("Tier " + String.valueOf(tier));
+                        categoryList.add("Tier " + tier);
                     }
                 }
                 Set<CardEntry.Color> colorFilter = ((ScalerFilterAccessor)filter).getColorFilter();
@@ -75,20 +71,17 @@ public class CardScaleTypesAttribute extends StringListAttribute {
                 }
                 Set<String> groupFilter = ((ScalerFilterAccessor)filter).getGroupFilter();
                 if (groupFilter != null) {
-                    for (String group : groupFilter) {
-                        categoryList.add(group);
-                    }
+                    categoryList.addAll(groupFilter);
                 }
             }
         }
-
 
         return categoryList;
     }
 
     @Override
     public Object[] getTranslationParameters() {
-        return new Object[]{this.value.charAt(0) + this.value.substring(1).toLowerCase()};
+        return new Object[] { this.value.charAt(0) + this.value.substring(1).toLowerCase() };
     }
 
     @Override

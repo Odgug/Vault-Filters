@@ -7,7 +7,6 @@
     "MixinCreateFilteringBehaviour",
     "MixinCreateFilteringBehaviourLegacy",
     "MixinFilterMenu",
-    "FilterMenuAccessor",
     "MixinFilterScreen",
     "MixinListFilterItemStack",
     "MixinFilterScreenPacket",

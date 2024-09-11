@@ -10,35 +10,56 @@ import iskallia.vault.item.InscriptionItem;
 import iskallia.vault.item.gear.CharmItem;
 import iskallia.vault.item.gear.TrinketItem;
 import net.joseph.vaultfilters.configs.VFServerConfig;
+import net.minecraft.client.Minecraft;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.event.world.WorldEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.loading.FMLEnvironment;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.MethodType;
 import java.util.List;
 
-import static net.joseph.vaultfilters.VaultFilters.LEVEL_REF;
-
 public class VFTests {
+    public static String filterKey = "hashes";
+    private static MethodHandle testMethodHandle;
+    private static Level level;
+
+    static {
+        if (CreateVersion.getLoadedVersion() == CreateVersion.LEGACY) {
+            try {
+                MethodType methodType = MethodType.methodType(boolean.class, Level.class, ItemStack.class, ItemStack.class);
+                testMethodHandle = MethodHandles.lookup().findStatic(FilterItem.class, "test", methodType);
+            } catch (NoSuchMethodException | IllegalAccessException e) {
+                VaultFilters.LOGGER.error("[0.5.1.b-e] could not find test method", e);
+                throw new IllegalStateException(e);
+            }
+        }
+    }
+
     public static boolean checkFilter(ItemStack stack, Object filterStack, boolean useCache, Level level) {
         if (!useCache) {
             return basicFilterTest(stack,filterStack,level);
         }
+
         Item stackItem = stack.getItem();
-        if (! (stackItem instanceof VaultGearItem || stackItem instanceof InscriptionItem ||
+        if (!(stackItem instanceof VaultGearItem || stackItem instanceof InscriptionItem ||
                 stackItem instanceof InfusedCatalystItem ||stackItem instanceof CharmItem ||
                 stackItem instanceof TrinketItem || stackItem instanceof CardItem ||
                 stackItem instanceof BoosterPackItem)) {
             return basicFilterTest(stack,filterStack,level);
         }
+
         if (VFServerConfig.CACHE_DATAFIX.get() && filterStack instanceof ItemStack) {
             DataFixers.clearNBTCache(stack);
         }
+
         //if (filterStack.getDisplayName().getString().equals("Ignore Caching")) {
         //return basicFilterTest(stack,filterStack,level);
         //}
@@ -48,54 +69,30 @@ public class VFTests {
         return VFCache.getOrCreateFilter(stack,filterStack,level);
     }
 
-    @OnlyIn(Dist.CLIENT)
-    public static Level getClientLevel() {
-        return (Level) net.minecraft.client.Minecraft.getInstance().level;
-    };
+    public static boolean testCardPack(ItemStack stack, Object filterStack, Level level) {
+        List<ItemStack> cardPack = BoosterPackItem.getOutcomes(stack);
+        boolean packMatch = basicFilterTest(stack, filterStack, level);
+        if (cardPack == null || packMatch) {
+            return packMatch;
+        }
 
-
-    public static String filterKey = "hashes";
-
-    private static Method testMethod;
-
-
-    private static boolean basicFilterTestLegacy(Object filterStack, ItemStack stack, Level level) {
-        if (testMethod == null) {
-            // try to find the method
-            try {
-                testMethod = FilterItem.class.getMethod("test", Level.class, ItemStack.class, ItemStack.class);
-            } catch (NoSuchMethodException e) {
-                VaultFilters.LOGGER.error("[0.5.1.b-e] could not find test method", e);
-                // wrap it in unchecked exception
-                throw new IllegalStateException(e);
+        for (ItemStack card : cardPack) {
+            if (basicFilterTest(card,filterStack,level)) {
+                return true;
             }
         }
-
-        try {
-            return (boolean) testMethod.invoke(null, level, stack, filterStack);
-        } catch (IllegalAccessException | InvocationTargetException e) {
-            VaultFilters.LOGGER.error("[0.5.1.b-e] could not invoke test method", e);
-            // wrap it in unchecked exception
-            throw new IllegalStateException(e);
-
-        }
+        return false;
     }
 
     public static boolean basicFilterTest(ItemStack stack, Object filterStack, Level level) {
-
-
         if (level == null) {
-            level = LEVEL_REF;
-            if (FMLEnvironment.dist.isClient()) {
-                DistExecutor.unsafeCallWhenOn(Dist.CLIENT, () -> VFTests::getClientLevel);
-            }
-
+            level = DistExecutor.unsafeRunForDist(() -> VFTests::getClientLevel, () -> () -> VFTests.level);
         }
+
         if (CreateVersion.getLoadedVersion() == CreateVersion.CREATE_051F) {
             if (filterStack instanceof ItemStack stackFilter) {
                 return FilterItemStack.of(stackFilter).test(level, stack);
-            }
-            if (filterStack instanceof FilterItemStack filterItemStack) {
+            } else if (filterStack instanceof FilterItemStack filterItemStack) {
                 return filterItemStack.test(level, stack);
             }
             VaultFilters.LOGGER.debug("[0.5.1.f] invalid filter entered");
@@ -106,22 +103,32 @@ public class VFTests {
             return basicFilterTestLegacy(filterStack, stack, level);
         }
         return false;
-
     }
-    public static boolean testCardPack(ItemStack stack, Object filterStack, Level level) {
-        List<ItemStack> cardPack = BoosterPackItem.getOutcomes(stack);
-        boolean packMatch = basicFilterTest(stack,filterStack,level);
-        if (cardPack == null) {
-            return packMatch;
+
+    private static boolean basicFilterTestLegacy(Object filterStack, ItemStack stack, Level level) {
+        if (testMethodHandle == null) {
+            throw new IllegalStateException("[0.5.1.b-e] could not find test method");
         }
-        if (packMatch) {
-            return true;
+
+        try {
+            return (boolean) testMethodHandle.invoke(level, stack, filterStack);
+        } catch (Throwable e) {
+            VaultFilters.LOGGER.error("[0.5.1.b-e] could not invoke test method", e);
+            // wrap it in unchecked exception
+            throw new IllegalStateException(e);
         }
-        for (ItemStack card : cardPack) {
-            if (basicFilterTest(card,filterStack,level)) {
-                return true;
-            }
+    }
+
+    @SubscribeEvent
+    public static void onWorldLoad(WorldEvent.Load event) {
+        MinecraftServer server = event.getWorld().getServer();
+        if (server != null) {
+            level = server.getLevel(Level.OVERWORLD);
         }
-        return false;
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static Level getClientLevel() {
+        return Minecraft.getInstance().level;
     }
 }

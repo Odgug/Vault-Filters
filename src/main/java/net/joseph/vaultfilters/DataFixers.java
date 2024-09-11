@@ -106,17 +106,9 @@ public class DataFixers {
     }
 
     public static void clearNBTCache(ItemStack itemStack) {
-        if (!(itemStack.getItem() instanceof VaultGearItem)) {
-            return;
+        if (itemStack.getItem() instanceof VaultGearItem
+                && itemStack.getOrCreateTag().get("clientCache") instanceof CompoundTag clientCache) {
+            clientCache.remove(VFTests.filterKey);
         }
-        CompoundTag tag = itemStack.getOrCreateTag();
-        if (!(tag.contains("clientCache"))) {
-            return;
-        }
-        tag = tag.getCompound("clientCache");
-        if (!((tag.contains(VFTests.filterKey)))) {
-            return;
-        }
-        tag.remove(VFTests.filterKey);
     }
 }

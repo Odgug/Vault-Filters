@@ -12,7 +12,7 @@ import static iskallia.vault.item.CardItem.getCard;
 
 public class CardIsScalingAttribute extends BooleanAttribute {
     public CardIsScalingAttribute(Boolean value) {
-        super(true);
+        super(value);
     }
 
     @Override
@@ -20,12 +20,10 @@ public class CardIsScalingAttribute extends BooleanAttribute {
         if (!(itemStack.getItem() instanceof CardItem)) {
             return false;
         }
+
         Card card = getCard(itemStack);
         List<CardEntry> entries = card.getEntries();
-        if (entries == null) {
-            return null;
-        }
-        if (entries.isEmpty()) {
+        if (entries == null || entries.isEmpty()) {
             return null;
         }
         return entries.get(0).getScaler() != null;
@@ -35,5 +33,4 @@ public class CardIsScalingAttribute extends BooleanAttribute {
     public String getTranslationKey() {
         return "card_scales";
     }
-
 }

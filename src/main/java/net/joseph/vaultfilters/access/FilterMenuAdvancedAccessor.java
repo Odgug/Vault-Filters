@@ -2,7 +2,6 @@ package net.joseph.vaultfilters.access;
 
 
 public interface FilterMenuAdvancedAccessor {
-    public boolean vault_filters$getMatchAll();
-
-    public void vault_filters$setMatchAll(boolean matchAny);
+    boolean vault_filters$getMatchAll();
+    void vault_filters$setMatchAll(boolean matchAny);
 }

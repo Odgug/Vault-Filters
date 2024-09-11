@@ -17,8 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value = SimpleItemMatcher.class, remap = false)
 public class MixinSimpleItemMatcher {
-    @Shadow
-    @Final
+    @Shadow @Final
     private ItemStack filterStack;
 
     @Inject(method = "matchItem", at = @At("HEAD"), cancellable = true)
