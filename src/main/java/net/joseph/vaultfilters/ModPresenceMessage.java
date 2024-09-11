@@ -3,28 +3,49 @@ package net.joseph.vaultfilters;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
 public class ModPresenceMessage {
-    public void encoder(FriendlyByteBuf ignored) {}
+    protected final String version;
 
-    public static ModPresenceMessage decoder(FriendlyByteBuf ignored) {
-        return new ModPresenceMessage();
+    public ModPresenceMessage(String version) {
+        this.version = version;
+    }
+
+    public void encoder(FriendlyByteBuf buf) {
+        buf.writeUtf(this.version);
+    }
+
+    public static ModPresenceMessage decoder(FriendlyByteBuf buf) {
+        return new ModPresenceMessage(buf.readUtf());
     }
 
     public void consumer(Supplier<NetworkEvent.Context> ctx) {
+        NetworkEvent.Context context = ctx.get();
+        LogicalSide side = context.getDirection().getReceptionSide();
+
         DistExecutor.unsafeRunForDist(() -> () -> {
-            VaultFilters.serverHasVaultFilters = true;
+            if (side.isClient()) {
+                VaultFilters.serverHasVaultFilters = this.version.equals(VaultFilters.MOD_VERSION);
+            }
             return null;
         }, () -> () -> {
-            ServerPlayer player = ctx.get().getSender();
-            if (player != null) {
-                VaultFilters.PLAYERS_WITH_VAULT_FILTERS.add(player.getUUID());
+            if (side.isServer()) {
+                ServerPlayer player = context.getSender();
+                if (player != null) {
+                    if (this.version.equals(VaultFilters.MOD_VERSION)) {
+                        VaultFilters.PLAYERS_WITH_VAULT_FILTERS.add(player.getUUID());
+                    } else {
+                        // TODO: send message to player
+                    }
+                }
             }
             return null;
         });
-        ctx.get().setPacketHandled(true);
+
+        context.setPacketHandled(true);
     }
 }

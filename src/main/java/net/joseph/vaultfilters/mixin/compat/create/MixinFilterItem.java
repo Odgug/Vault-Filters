@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(FilterItem.class)
 public class MixinFilterItem {
-    @Inject(method = "use", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "use", at = @At("HEAD"), cancellable = true, remap = false)
     public void use(Level world, Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir) {
         if (VaultFilters.PLAYERS_WITH_VAULT_FILTERS.contains(player.getUUID())) {
             return;
@@ -35,7 +35,14 @@ public class MixinFilterItem {
             return;
         }
 
-        ListTag attributes = heldItem.getTag().getList("MatchedAttributes", CompoundTag.TAG_COMPOUND);
+        CompoundTag tag = heldItem.getTag();
+        if (tag.contains("MatchAll", CompoundTag.TAG_BYTE)) {
+            // TODO: send a message to the player
+            cir.setReturnValue(InteractionResultHolder.pass(heldItem));
+            return;
+        }
+
+        ListTag attributes = tag.getList("MatchedAttributes", CompoundTag.TAG_COMPOUND);
         for (Tag attribute : attributes) {
             if (attribute instanceof CompoundTag compound && ItemAttribute.fromNBT(compound) instanceof VaultAttribute<?>) {
                 // TODO: send a message to the player

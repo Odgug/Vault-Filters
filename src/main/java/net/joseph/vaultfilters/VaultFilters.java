@@ -52,6 +52,7 @@ import java.util.UUID;
 @Mod(VaultFilters.MOD_ID)
 public class VaultFilters {
     public static final String MOD_ID = "vaultfilters";
+    public static final String MOD_VERSION = "1.13.0";
     public static final int CHECK_FILTER_FLAG = 456;
     public static final int NO_CACHE_FLAG = 457;
     public static final Logger LOGGER = LogUtils.getLogger();
@@ -193,13 +194,25 @@ public class VaultFilters {
 
     @OnlyIn(Dist.CLIENT) @SubscribeEvent
     public static void onClientConnect(ClientPlayerNetworkEvent.LoggedInEvent event) {
-        CHANNEL.sendToServer(new ModPresenceMessage());
+        CHANNEL.sendToServer(new ModPresenceMessage(MOD_VERSION));
+    }
+
+    @OnlyIn(Dist.CLIENT) @SubscribeEvent
+    public static void onClientDisconnect(ClientPlayerNetworkEvent.LoggedOutEvent event) {
+        serverHasVaultFilters = false;
     }
 
     @OnlyIn(Dist.DEDICATED_SERVER) @SubscribeEvent
     public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
         if (event.getPlayer() instanceof ServerPlayer player) {
-            CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new ModPresenceMessage());
+            CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new ModPresenceMessage(MOD_VERSION));
+        }
+    }
+
+    @OnlyIn(Dist.DEDICATED_SERVER) @SubscribeEvent
+    public static void onPlayerLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
+        if (event.getPlayer() instanceof ServerPlayer player) {
+            PLAYERS_WITH_VAULT_FILTERS.remove(player.getUUID());
         }
     }
 }
