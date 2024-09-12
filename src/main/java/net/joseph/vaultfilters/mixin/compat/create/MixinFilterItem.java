@@ -3,10 +3,14 @@ package net.joseph.vaultfilters.mixin.compat.create;
 import com.simibubi.create.content.logistics.filter.FilterItem;
 import com.simibubi.create.content.logistics.filter.ItemAttribute;
 import net.joseph.vaultfilters.ModPresence;
+import net.joseph.vaultfilters.VaultFilters;
 import net.joseph.vaultfilters.attributes.abstracts.VaultAttribute;
+import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -35,9 +39,13 @@ public class MixinFilterItem {
             return;
         }
 
+        Component s2cUIAttemptNoVF = new TextComponent("This filter has Vault Filters features selected on it. " +
+                "Install Vault Filters version " + VaultFilters.MOD_VERSION + " " +
+                "to open the UI").withStyle(ChatFormatting.RED);
+
         CompoundTag tag = heldItem.getTag();
         if (tag.contains("MatchAll", CompoundTag.TAG_BYTE)) {
-            // TODO: send a message to the player
+            player.displayClientMessage(s2cUIAttemptNoVF,false);
             cir.setReturnValue(InteractionResultHolder.pass(heldItem));
             return;
         }
@@ -45,7 +53,7 @@ public class MixinFilterItem {
         ListTag attributes = tag.getList("MatchedAttributes", CompoundTag.TAG_COMPOUND);
         for (Tag attribute : attributes) {
             if (attribute instanceof CompoundTag compound && ItemAttribute.fromNBT(compound) instanceof VaultAttribute<?>) {
-                // TODO: send a message to the player
+                player.displayClientMessage(s2cUIAttemptNoVF,false);
                 cir.setReturnValue(InteractionResultHolder.pass(heldItem));
                 break;
             }

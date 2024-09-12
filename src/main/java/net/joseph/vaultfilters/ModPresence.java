@@ -1,6 +1,12 @@
 package net.joseph.vaultfilters;
 
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextColor;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.api.distmarker.Dist;
@@ -58,7 +64,9 @@ public class ModPresence {
 
         clientLoginTicks++;
         if (clientLoginTicks == RECEIVE_MESSAGE_TIMEOUT) {
-            // TODO: send message to player about server not having VF
+            Component cNoVFOnServer = new TextComponent("Valid Vault Filters version not detected on server, " +
+                    "Vault Filters features are disabled.").withStyle(ChatFormatting.RED);
+            Minecraft.getInstance().player.displayClientMessage(cNoVFOnServer,false);
         }
     }
 
@@ -90,7 +98,9 @@ public class ModPresence {
         if (ticks < RECEIVE_MESSAGE_TIMEOUT) {
             SERVER_LOGIN_TICKS.put(uuid, ticks + 1);
         } else {
-            // TODO: send message to player about getting VF
+            Component s2cNoVaultFilters = new TextComponent("This server has Vault Filters installed," +
+                    "please install Vault Filters version " + VaultFilters.MOD_VERSION + "to use its features").withStyle(ChatFormatting.RED);
+            player.displayClientMessage(s2cNoVaultFilters,false);
             SERVER_LOGIN_TICKS.remove(uuid);
         }
     }
@@ -134,7 +144,11 @@ public class ModPresence {
                         if (this.version.equals(VaultFilters.MOD_VERSION)) {
                             PLAYERS_WITH_VAULT_FILTERS.add(uuid);
                         } else {
-                            // TODO: send message to player
+
+                            Component s2cVersionMismatch = new TextComponent("Vault Filters version mismatch with the server, " +
+                                    "please install version " + VaultFilters.MOD_VERSION +
+                                    "to use Vault Filter's features").withStyle(ChatFormatting.RED);
+                            player.displayClientMessage(s2cVersionMismatch,false);
                         }
                         SERVER_LOGIN_TICKS.remove(uuid);
                     }
