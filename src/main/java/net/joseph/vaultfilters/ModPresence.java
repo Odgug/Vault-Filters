@@ -6,6 +6,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
@@ -15,14 +16,20 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.function.Supplier;
 
+@SuppressWarnings("unused")
 public class ModPresence {
+    private static final int RECEIVE_MESSAGE_TIMEOUT = 20 * 30; // 20 ticks per second, 30 seconds
+    public static final Map<UUID, Integer> SERVER_LOGIN_TICKS = new HashMap<>();
     public static final Set<UUID> PLAYERS_WITH_VAULT_FILTERS = new HashSet<>();
     public static boolean serverHasVaultFilters = false;
+    public static int clientLoginTicks = 0;
     public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
             new ResourceLocation(VaultFilters.MOD_ID, "main"),
             () -> "1",
@@ -44,6 +51,18 @@ public class ModPresence {
     }
 
     @OnlyIn(Dist.CLIENT) @SubscribeEvent
+    public static void onClientTick(TickEvent.ClientTickEvent event) {
+        if (serverHasVaultFilters || event.phase != TickEvent.Phase.END || clientLoginTicks == RECEIVE_MESSAGE_TIMEOUT) {
+            return;
+        }
+
+        clientLoginTicks++;
+        if (clientLoginTicks == RECEIVE_MESSAGE_TIMEOUT) {
+            // TODO: send message to player about server not having VF
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT) @SubscribeEvent
     public static void onClientDisconnect(ClientPlayerNetworkEvent.LoggedOutEvent event) {
         serverHasVaultFilters = false;
     }
@@ -52,6 +71,27 @@ public class ModPresence {
     public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
         if (event.getPlayer() instanceof ServerPlayer player) {
             CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new ModPresence.Message(VaultFilters.MOD_VERSION));
+            SERVER_LOGIN_TICKS.put(player.getUUID(), 0);
+        }
+    }
+
+    @OnlyIn(Dist.DEDICATED_SERVER) @SubscribeEvent
+    public static void onServerTick(TickEvent.PlayerTickEvent event) {
+        if (event.phase != TickEvent.Phase.END || !(event.player instanceof ServerPlayer player)) {
+            return;
+        }
+
+        UUID uuid = player.getUUID();
+        Integer ticks = SERVER_LOGIN_TICKS.get(uuid);
+        if (ticks == null) {
+            return;
+        }
+
+        if (ticks < RECEIVE_MESSAGE_TIMEOUT) {
+            SERVER_LOGIN_TICKS.put(uuid, ticks + 1);
+        } else {
+            // TODO: send message to player about getting VF
+            SERVER_LOGIN_TICKS.remove(uuid);
         }
     }
 
@@ -90,11 +130,13 @@ public class ModPresence {
                 if (side.isServer()) {
                     ServerPlayer player = context.getSender();
                     if (player != null) {
+                        UUID uuid = player.getUUID();
                         if (this.version.equals(VaultFilters.MOD_VERSION)) {
-                            PLAYERS_WITH_VAULT_FILTERS.add(player.getUUID());
+                            PLAYERS_WITH_VAULT_FILTERS.add(uuid);
                         } else {
                             // TODO: send message to player
                         }
+                        SERVER_LOGIN_TICKS.remove(uuid);
                     }
                 }
                 return null;
