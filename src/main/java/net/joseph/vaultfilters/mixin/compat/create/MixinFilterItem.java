@@ -2,7 +2,7 @@ package net.joseph.vaultfilters.mixin.compat.create;
 
 import com.simibubi.create.content.logistics.filter.FilterItem;
 import com.simibubi.create.content.logistics.filter.ItemAttribute;
-import net.joseph.vaultfilters.VaultFilters;
+import net.joseph.vaultfilters.ModPresence;
 import net.joseph.vaultfilters.attributes.abstracts.VaultAttribute;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -20,9 +20,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(FilterItem.class)
 public class MixinFilterItem {
-    @Inject(method = "use", at = @At("HEAD"), cancellable = true, remap = true)
+    @Inject(method = "use", at = @At("HEAD"), cancellable = true)
     public void use(Level world, Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir) {
-        if (VaultFilters.PLAYERS_WITH_VAULT_FILTERS.contains(player.getUUID())) {
+        if (ModPresence.PLAYERS_WITH_VAULT_FILTERS.contains(player.getUUID())) {
             return;
         }
 
