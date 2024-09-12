@@ -77,7 +77,7 @@ public class VFCache {
             if (++ticks >= 60 * 20) { // 60 seconds * 20 tps
                 VaultFilters.LOGGER.info("Pruning Vault Filters Cache ({} items)", ITEM_CACHES.size());
                 ITEM_CACHES.values().forEach(VFCache::tick);
-                VaultFilters.LOGGER.info("Vault Filters Cache Cleared ({} items remaining)", ITEM_CACHES.size());
+                VaultFilters.LOGGER.info("Vault Filters Cache Pruned ({} items remaining)", ITEM_CACHES.size());
                 ticks = 0;
             }
         }
