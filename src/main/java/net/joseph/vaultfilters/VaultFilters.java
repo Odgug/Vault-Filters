@@ -63,8 +63,8 @@ public class VaultFilters {
     public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
             new ResourceLocation(MOD_ID, "main"),
             () -> PROTOCOL_VERSION,
-            PROTOCOL_VERSION::equals,
-            PROTOCOL_VERSION::equals
+            o -> true,
+            o -> true
     );
 
     public VaultFilters() {
@@ -93,12 +93,14 @@ public class VaultFilters {
             if (ticks >= 60*20) { //60 seconds * 20 tps
                 ticks = 0;
                 //VaultFilters.LOGGER.info("cleared");
+                VaultFilters.LOGGER.info("Clearing Vault Filters cache with " + VFCache.cacheMap.size() + "elements");
                 VFCache.cacheMap.forEach((key, value) -> {
                     if (value.TTK == 0) {
                         VFCache.cacheMap.remove(key);
                     }
                     value.TTK--;
                 });
+                VaultFilters.LOGGER.info("Vault Filters cache cleared " + VFCache.cacheMap.size() + "elements remaining");
             }
         }
     }
@@ -193,24 +195,24 @@ public class VaultFilters {
     }
 
     @OnlyIn(Dist.CLIENT) @SubscribeEvent
-    public static void onClientConnect(ClientPlayerNetworkEvent.LoggedInEvent event) {
+    public void onClientConnect(ClientPlayerNetworkEvent.LoggedInEvent event) {
         CHANNEL.sendToServer(new ModPresenceMessage(MOD_VERSION));
     }
 
     @OnlyIn(Dist.CLIENT) @SubscribeEvent
-    public static void onClientDisconnect(ClientPlayerNetworkEvent.LoggedOutEvent event) {
+    public void onClientDisconnect(ClientPlayerNetworkEvent.LoggedOutEvent event) {
         serverHasVaultFilters = false;
     }
 
     @OnlyIn(Dist.DEDICATED_SERVER) @SubscribeEvent
-    public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
+    public void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
         if (event.getPlayer() instanceof ServerPlayer player) {
             CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new ModPresenceMessage(MOD_VERSION));
         }
     }
 
     @OnlyIn(Dist.DEDICATED_SERVER) @SubscribeEvent
-    public static void onPlayerLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
+    public void onPlayerLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
         if (event.getPlayer() instanceof ServerPlayer player) {
             PLAYERS_WITH_VAULT_FILTERS.remove(player.getUUID());
         }

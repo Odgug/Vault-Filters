@@ -30,6 +30,11 @@ public class ModPresenceMessage {
         DistExecutor.unsafeRunForDist(() -> () -> {
             if (side.isClient()) {
                 VaultFilters.serverHasVaultFilters = this.version.equals(VaultFilters.MOD_VERSION);
+                if (VaultFilters.serverHasVaultFilters) {
+                    VaultFilters.LOGGER.info("Matching Vault Filters version received from server");
+                } else {
+                    VaultFilters.LOGGER.info("Mismatching Vault Filters version received from server " + this.version);
+                }
             }
             return null;
         }, () -> () -> {
@@ -38,8 +43,10 @@ public class ModPresenceMessage {
                 if (player != null) {
                     if (this.version.equals(VaultFilters.MOD_VERSION)) {
                         VaultFilters.PLAYERS_WITH_VAULT_FILTERS.add(player.getUUID());
+                        VaultFilters.LOGGER.info("Received matching Vault Filters version" + player.getGameProfile().getName());
                     } else {
                         // TODO: send message to player
+                        VaultFilters.LOGGER.info("Received mismatching Vault filters Version from" + player.getGameProfile().getName() + " "+ this.version);
                     }
                 }
             }
