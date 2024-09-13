@@ -55,12 +55,11 @@ public abstract class MixinFilterScreen extends AbstractFilterScreen<FilterMenu>
     @Unique
     private Indicator matchAnyIndicator, matchAllIndicator;
     @Unique
-    private FilterMenuAdvancedAccessor menuAccessor;
+    private FilterMenuAdvancedAccessor menuAccessor = (FilterMenuAdvancedAccessor) menu;
 
     // This constructor is required by Mixin
     protected MixinFilterScreen(FilterMenu menu, Inventory inv, Component title, AllGuiTextures background) {
         super(menu, inv, title, background);
-        this.menuAccessor = (FilterMenuAdvancedAccessor) menu;
     }
 
     @Inject(method = "init",at = @At(value = "INVOKE",
