@@ -4,8 +4,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.TextColor;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -58,7 +56,8 @@ public class ModPresence {
 
     @OnlyIn(Dist.CLIENT) @SubscribeEvent
     public static void onClientTick(TickEvent.ClientTickEvent event) {
-        if (serverHasVaultFilters || event.phase != TickEvent.Phase.END || clientLoginTicks == RECEIVE_MESSAGE_TIMEOUT) {
+        Minecraft minecraft = Minecraft.getInstance();
+        if (minecraft.getCurrentServer() == null || minecraft.player == null || serverHasVaultFilters || event.phase != TickEvent.Phase.END || clientLoginTicks == RECEIVE_MESSAGE_TIMEOUT) {
             return;
         }
 
@@ -66,13 +65,14 @@ public class ModPresence {
         if (clientLoginTicks == RECEIVE_MESSAGE_TIMEOUT) {
             Component cNoVFOnServer = new TextComponent("Valid Vault Filters version not detected on server, " +
                     "Vault Filters features are disabled.").withStyle(ChatFormatting.RED);
-            Minecraft.getInstance().player.displayClientMessage(cNoVFOnServer,false);
+            minecraft.player.displayClientMessage(cNoVFOnServer,false);
         }
     }
 
     @OnlyIn(Dist.CLIENT) @SubscribeEvent
     public static void onClientDisconnect(ClientPlayerNetworkEvent.LoggedOutEvent event) {
         serverHasVaultFilters = false;
+        clientLoginTicks = 0;
     }
 
     @OnlyIn(Dist.DEDICATED_SERVER) @SubscribeEvent
@@ -99,7 +99,7 @@ public class ModPresence {
             SERVER_LOGIN_TICKS.put(uuid, ticks + 1);
         } else {
             Component s2cNoVaultFilters = new TextComponent("This server has Vault Filters installed," +
-                    "please install Vault Filters version " + VaultFilters.MOD_VERSION + "to use its features").withStyle(ChatFormatting.RED);
+                    "please install Vault Filters version " + VaultFilters.MOD_VERSION + " to use its features").withStyle(ChatFormatting.RED);
             player.displayClientMessage(s2cNoVaultFilters,false);
             SERVER_LOGIN_TICKS.remove(uuid);
         }
