@@ -26,7 +26,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class MixinFilterItem {
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
     public void use(Level world, Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir) {
-        if (ModPresence.PLAYERS_WITH_VAULT_FILTERS.contains(player.getUUID())) {
+        if (ModPresence.playerHasVaultFilters(player.getUUID())) {
             return;
         }
 

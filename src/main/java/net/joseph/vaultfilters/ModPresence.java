@@ -30,11 +30,11 @@ import java.util.function.Supplier;
 @SuppressWarnings("unused")
 public class ModPresence {
     private static final int RECEIVE_MESSAGE_TIMEOUT = 20 * 30; // 20 ticks per second, 30 seconds
-    public static final Map<UUID, Integer> SERVER_LOGIN_TICKS = new HashMap<>();
-    public static final Set<UUID> PLAYERS_WITH_VAULT_FILTERS = new HashSet<>();
-    public static boolean serverHasVaultFilters = false;
-    public static int clientLoginTicks = 0;
-    public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
+    private static final Map<UUID, Integer> SERVER_LOGIN_TICKS = new HashMap<>();
+    private static final Set<UUID> PLAYERS_WITH_VAULT_FILTERS = new HashSet<>();
+    private static boolean serverHasVaultFilters = false;
+    private static int clientLoginTicks = 0;
+    private static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
             new ResourceLocation(VaultFilters.MOD_ID, "main"),
             () -> "1",
             o -> true,
@@ -47,6 +47,14 @@ public class ModPresence {
                 .decoder(ModPresence.Message::decoder)
                 .consumer(ModPresence.Message::consumer)
                 .add();
+    }
+
+    public static boolean serverHasVaultFilters() {
+        return Minecraft.getInstance().isLocalServer() || serverHasVaultFilters;
+    }
+
+    public static boolean playerHasVaultFilters(UUID uuid) {
+        return Minecraft.getInstance().isLocalServer() || PLAYERS_WITH_VAULT_FILTERS.contains(uuid);
     }
 
     @OnlyIn(Dist.CLIENT) @SubscribeEvent

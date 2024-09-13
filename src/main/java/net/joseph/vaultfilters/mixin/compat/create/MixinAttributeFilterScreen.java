@@ -16,7 +16,7 @@ import java.util.List;
 public class MixinAttributeFilterScreen {
     @Redirect(at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/logistics/filter/ItemAttribute;listAttributesOf(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;)Ljava/util/List;"), method = "referenceItemChanged", remap = false)
     public List<ItemAttribute> listAttributes(ItemAttribute instance, ItemStack stack, Level world) {
-        if (!ModPresence.serverHasVaultFilters && instance instanceof VaultAttribute<?>) {
+        if (!ModPresence.serverHasVaultFilters() && instance instanceof VaultAttribute<?>) {
             return List.of();
         }
         return instance.listAttributesOf(stack, world);

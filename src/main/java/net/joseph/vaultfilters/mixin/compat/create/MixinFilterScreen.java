@@ -65,7 +65,7 @@ public abstract class MixinFilterScreen extends AbstractFilterScreen<FilterMenu>
     @Inject(method = "init",at = @At(value = "INVOKE",
             target = "Lcom/simibubi/create/content/logistics/filter/FilterScreen;handleIndicators()V",shift = At.Shift.BEFORE, ordinal = 0))
     private void injectInitializer(CallbackInfo ci, @Local(ordinal = 0) int x, @Local(ordinal = 1) int y) {
-        if (!ModPresence.serverHasVaultFilters) {
+        if (!ModPresence.serverHasVaultFilters()) {
             return;
         }
 
@@ -90,14 +90,14 @@ public abstract class MixinFilterScreen extends AbstractFilterScreen<FilterMenu>
 
     @Inject(method = "getTooltipButtons", at = @At("HEAD"), cancellable = true,remap = false)
     private void addToolTipButtons(CallbackInfoReturnable<List<IconButton>> cir) {
-        if (ModPresence.serverHasVaultFilters) {
+        if (ModPresence.serverHasVaultFilters()) {
             cir.setReturnValue(Arrays.asList(blacklist, whitelist, respectNBT, ignoreNBT, matchAll, matchAny));
         }
     }
 
     @Inject(method = "getTooltipDescriptions", at = @At("HEAD"), cancellable = true,remap = false)
     private void addToolTipDescriptions(CallbackInfoReturnable<List<MutableComponent>> cir) {
-        if (ModPresence.serverHasVaultFilters) {
+        if (ModPresence.serverHasVaultFilters()) {
             cir.setReturnValue(Arrays.asList(denyDESC.plainCopy(), allowDESC.plainCopy(), respectDataDESC.plainCopy(),
                     ignoreDataDESC.plainCopy(), allowAllDESC.plainCopy(), allowAnyDESC.plainCopy()));
 
@@ -105,7 +105,7 @@ public abstract class MixinFilterScreen extends AbstractFilterScreen<FilterMenu>
     }
     @Inject(method = "getIndicators", at = @At("HEAD"), cancellable = true,remap = false)
     private void addIndicators(CallbackInfoReturnable<List<Indicator>> cir) {
-        if (ModPresence.serverHasVaultFilters) {
+        if (ModPresence.serverHasVaultFilters()) {
             cir.setReturnValue(Arrays.asList(blacklistIndicator, whitelistIndicator, respectNBTIndicator,
                     ignoreNBTIndicator, matchAllIndicator, matchAnyIndicator));
 

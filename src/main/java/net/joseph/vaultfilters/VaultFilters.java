@@ -28,9 +28,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
-//import com.simibubi.create.content.logistics.filter.FilterItemStack;
-
-
 @Mod(VaultFilters.MOD_ID)
 public class VaultFilters {
     public static final String MOD_ID = "vaultfilters";
