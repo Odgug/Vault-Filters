@@ -64,7 +64,7 @@ public class ModPresence {
         clientLoginTicks++;
         if (clientLoginTicks == RECEIVE_MESSAGE_TIMEOUT) {
             Component cNoVFOnServer = new TextComponent("Valid Vault Filters version not detected on server, " +
-                    "Vault Filters features are disabled.").withStyle(ChatFormatting.RED);
+                    "Vault Filters features are disabled").withStyle(ChatFormatting.RED);
             minecraft.player.displayClientMessage(cNoVFOnServer,false);
         }
     }
@@ -98,7 +98,7 @@ public class ModPresence {
         if (ticks < RECEIVE_MESSAGE_TIMEOUT) {
             SERVER_LOGIN_TICKS.put(uuid, ticks + 1);
         } else {
-            Component s2cNoVaultFilters = new TextComponent("This server has Vault Filters installed," +
+            Component s2cNoVaultFilters = new TextComponent("This server has Vault Filters installed, " +
                     "please install Vault Filters version " + VaultFilters.MOD_VERSION + " to use its features").withStyle(ChatFormatting.RED);
             player.displayClientMessage(s2cNoVaultFilters,false);
             SERVER_LOGIN_TICKS.remove(uuid);
@@ -148,7 +148,7 @@ public class ModPresence {
                         } else {
 
                             Component s2cVersionMismatch = new TextComponent("Vault Filters version mismatch with the server, " +
-                                    "please install version " + VaultFilters.MOD_VERSION +
+                                    "please install version " + VaultFilters.MOD_VERSION + " " +
                                     "to use Vault Filter's features").withStyle(ChatFormatting.RED);
                             player.displayClientMessage(s2cVersionMismatch,false);
                         }
