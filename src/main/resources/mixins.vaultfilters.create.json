@@ -7,7 +7,6 @@
     "MixinAttributeFilterScreen"
   ],
   "mixins": [
-    "FilterMenuAccessor",
     "MixinCreateFilteringBehaviour",
     "MixinCreateFilteringBehaviourLegacy",
     "MixinFilterItem",
