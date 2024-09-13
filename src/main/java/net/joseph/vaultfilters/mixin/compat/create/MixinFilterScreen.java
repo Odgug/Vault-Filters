@@ -63,7 +63,7 @@ public abstract class MixinFilterScreen extends AbstractFilterScreen<FilterMenu>
     }
 
     @Inject(method = "init",at = @At(value = "INVOKE",
-            target = "Lcom/simibubi/create/content/logistics/filter/FilterScreen;handleIndicators()V",shift = At.Shift.BEFORE, ordinal = 0))
+            target = "Lcom/simibubi/create/content/logistics/filter/FilterScreen;handleIndicators()V",shift = At.Shift.BEFORE, ordinal = 0), remap = true)
     private void injectInitializer(CallbackInfo ci, @Local(ordinal = 0) int x, @Local(ordinal = 1) int y) {
         if (!ModPresence.serverHasVaultFilters()) {
             return;
