@@ -109,6 +109,7 @@ public class ModPresence {
     public static void onPlayerLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
         if (event.getPlayer() instanceof ServerPlayer player) {
             PLAYERS_WITH_VAULT_FILTERS.remove(player.getUUID());
+            SERVER_LOGIN_TICKS.remove(player.getUUID());
         }
     }
 
@@ -134,6 +135,7 @@ public class ModPresence {
             DistExecutor.unsafeRunForDist(() -> () -> {
                 if (side.isClient()) {
                     serverHasVaultFilters = this.version.equals(VaultFilters.MOD_VERSION);
+                    clientLoginTicks = RECEIVE_MESSAGE_TIMEOUT;
                 }
                 return null;
             }, () -> () -> {
