@@ -34,18 +34,22 @@ import org.slf4j.Logger;
 @Mod(VaultFilters.MOD_ID)
 public class VaultFilters {
     public static final String MOD_ID = "vaultfilters";
+    public static final String MOD_VERSION = "1.13.1";
     public static final int CHECK_FILTER_FLAG = 456;
     public static final int NO_CACHE_FLAG = 457;
     public static final Logger LOGGER = LogUtils.getLogger();
+
     public VaultFilters() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         eventBus.addListener(this::setup);
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(VFCache.class);
         MinecraftForge.EVENT_BUS.register(VFTests.class);
+        MinecraftForge.EVENT_BUS.register(ModPresence.class);
     }
 
     private void setup(FMLCommonSetupEvent event) {
+        ModPresence.init();
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, VFServerConfig.SPEC, "vaultfilters-server.toml");
 
         // This has a specific order as this controls the order displayed in the filters
