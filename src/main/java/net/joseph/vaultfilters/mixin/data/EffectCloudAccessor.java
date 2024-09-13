@@ -6,6 +6,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(EffectCloudAttribute.EffectCloud.class)
 public interface EffectCloudAccessor {
-    @Accessor
+    @Accessor(remap = false)
     String getTooltip();
 }

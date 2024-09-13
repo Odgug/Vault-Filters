@@ -9,6 +9,6 @@ import java.util.Map;
 
 @Mixin(CardCondition.class)
 public interface CardConditionAccessor {
-    @Accessor
+    @Accessor(remap = false)
     Map<Integer, List<CardCondition.Filter>> getFilters();
 }

@@ -11,6 +11,6 @@ import java.util.Map;
 
 @Mixin(CardEntry.class)
 public interface CardEntryAccessor {
-    @Accessor
+    @Accessor(remap = false)
     CardCondition getCondition();
 }

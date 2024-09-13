@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 import java.util.Set;
 
-@Mixin(CardCondition.Filter.class)
+@Mixin(value = CardCondition.Filter.class, remap = false)
 public interface ConditionFilterAccessor {
     @Accessor
     Set<CardNeighborType> getNeighborFilter();

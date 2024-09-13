@@ -9,6 +9,6 @@ import java.util.Map;
 
 @Mixin(CardScaler.class)
 public interface CardScaleAccessor {
-    @Accessor
+    @Accessor(remap = false)
     Map<Integer, List<CardScaler.Filter>> getFilters();
 }

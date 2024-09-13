@@ -7,6 +7,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(TaskLootCardModifier.Config.class)
 public interface LootCardModifierConfigAccessor {
-    @Accessor
+    @Accessor(remap = false)
     LootPool getLoot();
 }

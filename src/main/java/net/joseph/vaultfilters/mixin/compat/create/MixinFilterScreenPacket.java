@@ -9,12 +9,12 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
-@Mixin(FilterScreenPacket.class)
+@Mixin(value = FilterScreenPacket.class, remap = false)
 public class MixinFilterScreenPacket {
     @Final @Shadow
     private FilterScreenPacket.Option option;
 
-    @ModifyVariable(method = "lambda$handle$0(Lnet/minecraftforge/network/NetworkEvent$Context;)V", at = @At(value = "STORE", ordinal = 0), name = "c", remap = false)
+    @ModifyVariable(method = "lambda$handle$0(Lnet/minecraftforge/network/NetworkEvent$Context;)V", at = @At(value = "STORE", ordinal = 0), name = "c")
     private FilterMenu modifyFilterMenu(FilterMenu c) {
         // Modify or use the FilterMenu instance `c` here
         if (this.option == FilterScreenPacket.Option.ADD_TAG) {

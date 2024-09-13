@@ -9,6 +9,6 @@ import java.util.Map;
 
 @Mixin(TaskLootCardModifier.class)
 public interface TaskLootCardModifierAccessor {
-    @Accessor
+    @Accessor(remap = false)
     Map<Integer, Integer> getCounts();
 }
