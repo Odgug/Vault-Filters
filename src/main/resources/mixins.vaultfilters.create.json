@@ -3,20 +3,23 @@
   "package": "net.joseph.vaultfilters.mixin.compat.create",
   "compatibilityLevel": "JAVA_17",
   "plugin": "net.joseph.vaultfilters.mixin.compat.create.CreateMixinPlugin",
+  "client": [
+    "MixinAttributeFilterScreen"
+  ],
   "mixins": [
+    "FilterMenuAccessor",
     "MixinCreateFilteringBehaviour",
     "MixinCreateFilteringBehaviourLegacy",
+    "MixinFilterItem",
+    "MixinFilterItemLegacy",
     "MixinFilterMenu",
-    "FilterMenuAccessor",
     "MixinFilterScreen",
-    "MixinListFilterItemStack",
     "MixinFilterScreenPacket",
-    "MixinFilterItemLegacy"
-
+    "MixinListFilterItemStack"
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "refmap": "mixins.vaultfilters.refmap.json",
-  "minVersion" : "0.8"
+  "minVersion": "0.8"
 }
