@@ -44,7 +44,7 @@ public class MixinFilterItem {
                 "to open the UI").withStyle(ChatFormatting.RED);
 
         CompoundTag tag = heldItem.getTag();
-        if (tag.contains("MatchAll", CompoundTag.TAG_BYTE)) {
+        if (tag.contains("MatchAll", CompoundTag.TAG_BYTE) && tag.getBoolean("MatchAll")) {
             player.displayClientMessage(s2cUIAttemptNoVF,false);
             cir.setReturnValue(InteractionResultHolder.pass(heldItem));
             return;
