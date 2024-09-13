@@ -9,24 +9,19 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
-@Mixin(value = FilterScreenPacket.class)
+@Mixin(FilterScreenPacket.class)
 public class MixinFilterScreenPacket {
-    @Final
-    @Shadow
+    @Final @Shadow
     private FilterScreenPacket.Option option;
 
-
-    @ModifyVariable(method = "lambda$handle$0(Lnet/minecraftforge/network/NetworkEvent$Context;)V", at = @At(value = "STORE", ordinal = 0), name = "c",remap = false)
+    @ModifyVariable(method = "lambda$handle$0(Lnet/minecraftforge/network/NetworkEvent$Context;)V", at = @At(value = "STORE", ordinal = 0), name = "c", remap = false)
     private FilterMenu modifyFilterMenu(FilterMenu c) {
         // Modify or use the FilterMenu instance `c` here
         if (this.option == FilterScreenPacket.Option.ADD_TAG) {
-            ((FilterMenuAdvancedAccessor)c).vault_filters$setMatchAll(true);
-        }
-        if (this.option == FilterScreenPacket.Option.ADD_INVERTED_TAG) {
-            ((FilterMenuAdvancedAccessor)c).vault_filters$setMatchAll(false);
+            ((FilterMenuAdvancedAccessor) c).vault_filters$setMatchAll(true);
+        } else if (this.option == FilterScreenPacket.Option.ADD_INVERTED_TAG) {
+            ((FilterMenuAdvancedAccessor) c).vault_filters$setMatchAll(false);
         }
         return c;
     }
-
-
 }

@@ -6,8 +6,6 @@ import net.joseph.vaultfilters.attributes.abstracts.StringAttribute;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 
-import java.util.Optional;
-
 public class CardPackTypeAttribute extends StringAttribute {
     public CardPackTypeAttribute(String value) {
         super(value);
@@ -18,16 +16,11 @@ public class CardPackTypeAttribute extends StringAttribute {
         if (!(itemStack.getItem() instanceof BoosterPackItem)) {
             return null;
         }
-        Optional<Component> name = ModConfigs.BOOSTER_PACK.getName(BoosterPackItem.getId(itemStack));
-        if (name.isEmpty()) {
-            return null;
-        }
-        return name.get().getString();
+        return ModConfigs.BOOSTER_PACK.getName(BoosterPackItem.getId(itemStack)).map(Component::getString).orElse(null);
     }
 
     @Override
     public String getTranslationKey() {
         return "card_pack_type";
     }
-
 }

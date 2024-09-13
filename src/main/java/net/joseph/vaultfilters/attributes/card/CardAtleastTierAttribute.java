@@ -1,16 +1,8 @@
 package net.joseph.vaultfilters.attributes.card;
 
-import iskallia.vault.core.card.Card;
-import iskallia.vault.gear.data.VaultGearData;
-import iskallia.vault.gear.item.VaultGearItem;
 import iskallia.vault.item.CardItem;
-import iskallia.vault.item.tool.JewelItem;
 import net.joseph.vaultfilters.attributes.abstracts.IntAttribute;
 import net.minecraft.world.item.ItemStack;
-
-import javax.print.DocFlavor;
-
-import static iskallia.vault.item.CardItem.getCard;
 
 public class CardAtleastTierAttribute extends IntAttribute {
     public CardAtleastTierAttribute(Integer value) {
@@ -19,14 +11,11 @@ public class CardAtleastTierAttribute extends IntAttribute {
 
     @Override
     public Integer getValue(ItemStack itemStack) {
-        if (!(itemStack.getItem() instanceof CardItem)) {
-            return null;
+        if (itemStack.getItem() instanceof CardItem) {
+            return CardItem.getCard(itemStack).getTier();
         }
-        Card card = getCard(itemStack);
-        return card.getTier();
+        return null;
     }
-
-
 
     @Override
     public String getTranslationKey() {

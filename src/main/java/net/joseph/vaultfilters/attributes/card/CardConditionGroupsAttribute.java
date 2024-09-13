@@ -26,31 +26,29 @@ public class CardConditionGroupsAttribute extends StringListAttribute {
     }
 
     @Override
-
-    public ArrayList<String> getValues(ItemStack itemStack) {
+    public List<String> getValues(ItemStack itemStack) {
         if (!(itemStack.getItem() instanceof CardItem)) {
             return null;
         }
+
         Card card = getCard(itemStack);
-
-
         List<CardEntry> entries = card.getEntries();
-        if (entries == null) {
+        if (entries == null || entries.isEmpty()) {
             return null;
         }
-        if (entries.isEmpty()) {
-            return null;
-        }
+
         CardEntry entry = entries.get(0);
-        CardCondition condition = ((CardEntryAccessor)entry).getCondition();
+        CardCondition condition = ((CardEntryAccessor) entry).getCondition();
         if (condition == null) {
             return null;
         }
+
         Map<Integer, List<CardCondition.Filter>> filters = ((CardConditionAccessor)condition).getFilters();
-        if (filters == null) {
+        if (filters == null || filters.isEmpty()) {
             return null;
         }
-        ArrayList<String> categoryList = new ArrayList<String>();
+
+        List<String> categoryList = new ArrayList<>();
         for (int key : filters.keySet()) {
             for (CardCondition.Filter filter : filters.get(key)) {
                 Set<CardNeighborType> neighborFilter = ((ConditionFilterAccessor)filter).getNeighborFilter();
@@ -80,13 +78,12 @@ public class CardConditionGroupsAttribute extends StringListAttribute {
             }
         }
 
-
         return categoryList;
     }
 
     @Override
     public Object[] getTranslationParameters() {
-        return new Object[]{this.value.charAt(0) + this.value.substring(1).toLowerCase()};
+        return new Object[] { this.value.charAt(0) + this.value.substring(1).toLowerCase() };
     }
 
     @Override

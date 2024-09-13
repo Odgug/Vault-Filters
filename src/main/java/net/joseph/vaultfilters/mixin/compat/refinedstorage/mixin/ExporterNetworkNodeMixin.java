@@ -16,24 +16,24 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(value = ExporterNetworkNode.class, remap = false)
 public class ExporterNetworkNodeMixin {
     @ModifyArg(method = "update", at = @At(value = "INVOKE", target = "Lcom/refinedmods/refinedstorage/api/util/IComparer;isEqual(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;I)Z"))
-    private int modifyCompareFlag(ItemStack left, ItemStack right, int compare){
-        if (VFServerConfig.RS_COMPAT.get() && right.getItem() instanceof FilterItem){
+    private int modifyCompareFlag(ItemStack left, ItemStack right, int compare) {
+        if (VFServerConfig.RS_COMPAT.get() && right.getItem() instanceof FilterItem) {
             return VaultFilters.CHECK_FILTER_FLAG;
         }
         return compare;
     }
 
     @ModifyArg(method = "update", at = @At(value = "INVOKE", target = "Lcom/refinedmods/refinedstorage/api/network/INetwork;extractItem(Lnet/minecraft/world/item/ItemStack;IILcom/refinedmods/refinedstorage/api/util/Action;)Lnet/minecraft/world/item/ItemStack;"), index = 2)
-    private int modifyCompareFlag(ItemStack slot, int size, int compare, Action action){
-        if (VFServerConfig.RS_COMPAT.get() && slot.getItem() instanceof FilterItem){
+    private int modifyCompareFlag(ItemStack slot, int size, int compare, Action action) {
+        if (VFServerConfig.RS_COMPAT.get() && slot.getItem() instanceof FilterItem) {
             return VaultFilters.CHECK_FILTER_FLAG;
         }
         return compare;
     }
 
     @Redirect(method = "update", at = @At(value = "INVOKE", target = "Lcom/refinedmods/refinedstorage/api/util/IComparer;isEqualNoQuantity(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;)Z"))
-    private boolean EqualsNoQty(IComparer instance, ItemStack left, ItemStack right){
-        if (VFServerConfig.RS_COMPAT.get() && right.getItem() instanceof FilterItem){
+    private boolean EqualsNoQty(IComparer instance, ItemStack left, ItemStack right) {
+        if (VFServerConfig.RS_COMPAT.get() && right.getItem() instanceof FilterItem) {
             return VFTests.checkFilter(left, right,true,null);
         }
         return instance.isEqualNoQuantity(left, right);

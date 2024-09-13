@@ -4,10 +4,6 @@ import com.refinedmods.refinedstorage.api.network.INetwork;
 import com.refinedmods.refinedstorage.api.storage.cache.InvalidateCause;
 import com.refinedmods.refinedstorage.api.util.Action;
 import com.refinedmods.refinedstorage.apiimpl.network.grid.handler.ItemGridHandler;
-import net.minecraft.Util;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -15,7 +11,6 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(value = ItemGridHandler.class, remap = false)
 public class MixinItemGridHandler {
-
     /**
      * If vault filter is in exporter it will generate vault cache in the itemStack
      * but RS won't know that the stack has changed, and it will try to extract the item without the vault cache
@@ -37,8 +32,7 @@ public class MixinItemGridHandler {
                     target = "Lcom/refinedmods/refinedstorage/api/network/INetwork;extractItem(Lnet/minecraft/world/item/ItemStack;ILcom/refinedmods/refinedstorage/api/util/Action;)Lnet/minecraft/world/item/ItemStack;",
                     ordinal = 0)
     )
-
-    private ItemStack vaultfilters$onExtract(INetwork instance, ItemStack stack, int size, Action action) {
+    private ItemStack onExtract(INetwork instance, ItemStack stack, int size, Action action) {
         ItemStack itemStack = instance.extractItem(stack, size, action);
         if (itemStack.isEmpty()) {
             instance.getItemStorageCache().invalidate(InvalidateCause.UNKNOWN);

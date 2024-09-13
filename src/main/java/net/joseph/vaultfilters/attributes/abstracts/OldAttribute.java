@@ -11,8 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
-public abstract class OldAttribute extends VaultAttribute{
-
+public abstract class OldAttribute extends VaultAttribute<Object> {
     protected OldAttribute(Object value) {
         super(value);
     }
@@ -37,24 +36,19 @@ public abstract class OldAttribute extends VaultAttribute{
     public Object getValue(ItemStack itemStack) {
         return null;
     }
+
     @Override
     public List<ItemAttribute> listAttributesOf(ItemStack itemStack) {
-        List<ItemAttribute> attributes = new ArrayList<>();
-        return attributes;
+        return new ArrayList<>();
     }
-    @Override
-    public void writeNBT(CompoundTag nbt) {
 
-    }
+    @Override
+    public void writeNBT(CompoundTag nbt) {}
 
     @Override
     public ItemAttribute readNBT(CompoundTag nbt) {
-        if (nbt.contains(getLegacyKey())) {
-            nbt.remove(getLegacyKey());
-        }
-        if (nbt.contains(getTranslationKey())) {
-            nbt.remove(getTranslationKey());
-        }
+        nbt.remove(getLegacyKey());
+        nbt.remove(getTranslationKey());
         return null;
     }
 }
