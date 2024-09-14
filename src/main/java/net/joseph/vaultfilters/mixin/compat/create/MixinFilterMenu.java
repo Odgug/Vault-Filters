@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value = FilterMenu.class, remap = false)
+@Mixin(FilterMenu.class)
 public class MixinFilterMenu implements FilterMenuAdvancedAccessor {
     @Shadow
     boolean respectNBT;
@@ -22,7 +22,7 @@ public class MixinFilterMenu implements FilterMenuAdvancedAccessor {
     @Unique
     boolean vf$matchAll;
 
-    @Inject(method = "initAndReadInventory(Lnet/minecraft/world/item/ItemStack;)V", at = @At("TAIL"))
+    @Inject(method = "initAndReadInventory(Lnet/minecraft/world/item/ItemStack;)V", at = @At("TAIL"),remap = false)
     public void initMatchALl(ItemStack filterItem, CallbackInfo ci, @Local CompoundTag tag) {
         vf$matchAll = tag.getBoolean("MatchAll");
     }

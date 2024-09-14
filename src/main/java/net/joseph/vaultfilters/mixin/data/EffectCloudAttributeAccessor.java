@@ -6,6 +6,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(EffectCloudAttribute.class)
 public interface EffectCloudAttributeAccessor {
-    @Accessor(remap = false)
+    @Accessor
     EffectCloudAttribute.EffectCloud getEffectCloud();
 }
