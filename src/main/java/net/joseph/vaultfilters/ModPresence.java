@@ -54,7 +54,8 @@ public class ModPresence {
     }
 
     public static boolean playerHasVaultFilters(UUID uuid) {
-        return Minecraft.getInstance().isLocalServer() || PLAYERS_WITH_VAULT_FILTERS.contains(uuid);
+        return DistExecutor.unsafeRunForDist(() -> () -> Minecraft.getInstance().isLocalServer(),
+                () -> () -> PLAYERS_WITH_VAULT_FILTERS.contains(uuid));
     }
 
     @OnlyIn(Dist.CLIENT) @SubscribeEvent
