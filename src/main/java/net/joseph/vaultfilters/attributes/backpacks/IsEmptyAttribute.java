@@ -36,7 +36,7 @@ public class IsEmptyAttribute extends BooleanAttribute
     @Override
     public String getTranslationKey()
     {
-        return "empty_bag";
+        return "bag_empty";
     }
 
 }

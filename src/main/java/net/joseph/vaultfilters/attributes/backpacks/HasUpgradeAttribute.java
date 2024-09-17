@@ -22,7 +22,7 @@ public class HasUpgradeAttribute extends StringListAttribute {
 
     @Override
     public String getTranslationKey() {
-        return "backpack_has_upgrade";
+        return "bag_upgrade";
     }
 
     @Override

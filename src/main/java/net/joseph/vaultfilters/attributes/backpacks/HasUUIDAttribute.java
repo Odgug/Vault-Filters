@@ -22,7 +22,7 @@ public class HasUUIDAttribute extends StringAttribute {
 
     @Override
     public String getTranslationKey() {
-        return "backpack_has_uuid";
+        return "bag_uuid";
     }
 
     public static String getBackpackUUID(ItemStack stack) {
