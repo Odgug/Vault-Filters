@@ -174,8 +174,8 @@
   "create.item_attributes.catalyst_category": "is a catalyst with a \"%1$s\" category modifier",
   "create.item_attributes.catalyst_category.inverted": "is not a catalyst with a \"%1$s\"  category modifier",
 
-  "create.item_attributes.is_empty": "is empty",
-  "create.item_attributes.is_empty.inverted": "is not empty",
+  "create.item_attributes.empty_bag": "is an empty bag",
+  "create.item_attributes.empty_bag.inverted": "is not an empty bag",
 
   "item.create.filter.tooltip.summary": "_Matches items_ against a collection of _items_ or _other filters_ (Attribute and List filters). Can be used in _Filter Slots_ of some mods (Create, RS, MR, AE2 and Backpacks by default)",
   "item.create.filter.tooltip.condition1": "When R-Clicked",
