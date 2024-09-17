@@ -75,12 +75,7 @@ public class VFCache {
     public static void onServerTick(TickEvent.ServerTickEvent event) {
         if (event.phase == TickEvent.Phase.END) {
             if (++ticks >= 60 * 20 ) { // 60 seconds * 20 tps
-                int preClear = ITEM_CACHES.size();
                 ITEM_CACHES.values().forEach(VFCache::tick);
-                int postClear = ITEM_CACHES.size();
-                if (preClear > postClear) {
-                    VaultFilters.LOGGER.info("Vault filters cache pruned ({} items pruned)", preClear-postClear);
-                }
                 ticks = 0;
             }
         }
