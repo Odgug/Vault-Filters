@@ -36,12 +36,7 @@ public class IsEmptyAttribute extends BooleanAttribute
     @Override
     public String getTranslationKey()
     {
-        return "is_empty";
+        return "empty_bag";
     }
 
-    @Override
-    public String getLegacyKey()
-    {
-        return "empty";
-    }
 }
