@@ -74,7 +74,7 @@ public class VFCache {
     @SubscribeEvent
     public static void onServerTick(TickEvent.ServerTickEvent event) {
         if (event.phase == TickEvent.Phase.END) {
-            if (++ticks >= 60 * 20) { // 60 seconds * 20 tps
+            if (++ticks >= 60 * 20 * 5 ) { // 60 seconds * 5 minutes * 20 tps
                 VaultFilters.LOGGER.info("Pruning Vault Filters Cache ({} items)", ITEM_CACHES.size());
                 ITEM_CACHES.values().forEach(VFCache::tick);
                 VaultFilters.LOGGER.info("Vault Filters Cache Pruned ({} items remaining)", ITEM_CACHES.size());
