@@ -11,11 +11,14 @@ simple as that! The mod of course provides more than just rarity filtering, it p
 Huge thanks to the people here for making this mod possible
 - Author: Joseph Franci
 - Contributor: [JustAHuman-xD](https://github.com/JustAHuman-xD)
-Rewrite with both code and performance optimizations and a ton of polishing
+Rewrite with both code and performance optimizations and a ton of polishing and mod presence detection.
 - Contributor: [radimous](https://github.com/radimous)
 Added a ton of mod compatibility and huge technical help
 - Contributor: [iwolfking](https://github.com/iwolfking)
-Added additional support to Refined Storage and Applied Energistics, provided technical help.
+Added additional support to Refined Storage and Applied Energistics, added Tom's storage support, added backpack attributes and provided technical help.
+- Contributor: [ShiftTheDev](https://github.com/shiftthedev)
+Added backpack attributes
+- 
 
 <details open>
 <summary style="font-size: 1.75em; font-weight: bold">
