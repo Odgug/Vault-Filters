@@ -3,6 +3,7 @@ package net.joseph.vaultfilters.attributes.backpacks;
 import net.joseph.vaultfilters.attributes.abstracts.BooleanAttribute;
 import net.joseph.vaultfilters.mixin.compat.sophisticatedcore.mixin.InventoryHandlerSlotTrackerAccessor;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.ShulkerBoxBlock;
 import net.p3pp3rf1y.sophisticatedbackpacks.api.CapabilityBackpackWrapper;
 import net.p3pp3rf1y.sophisticatedbackpacks.backpack.BackpackItem;
 

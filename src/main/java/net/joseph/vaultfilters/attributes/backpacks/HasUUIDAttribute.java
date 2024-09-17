@@ -26,7 +26,7 @@ public class HasUUIDAttribute extends StringAttribute {
     }
 
     public static String getBackpackUUID(ItemStack stack) {
-        final AtomicReference<String> uuid = new AtomicReference<>("");
+        final AtomicReference<String> uuid = new AtomicReference<>(null);
         if(stack.getItem() instanceof BackpackItem backpack) {
             stack.getCapability(CapabilityBackpackWrapper.getCapabilityInstance()).ifPresent(iBackpackWrapper -> {
                 if(iBackpackWrapper.getContentsUuid().isPresent()) {
