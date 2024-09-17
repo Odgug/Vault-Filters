@@ -1,4 +1,4 @@
-package net.joseph.vaultfilters.attributes.card;
+package net.joseph.vaultfilters.attributes.packs;
 
 import iskallia.vault.item.BoosterPackItem;
 import net.joseph.vaultfilters.attributes.abstracts.BooleanAttribute;

@@ -1,4 +1,4 @@
-package net.joseph.vaultfilters.attributes.card;
+package net.joseph.vaultfilters.attributes.packs;
 
 import iskallia.vault.init.ModConfigs;
 import iskallia.vault.item.BoosterPackItem;
