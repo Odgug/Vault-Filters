@@ -4,6 +4,10 @@ import com.mojang.logging.LogUtils;
 import net.joseph.vaultfilters.attributes.abstracts.Objects.Modifier;
 import net.joseph.vaultfilters.attributes.affix.*;
 import net.joseph.vaultfilters.attributes.backpacks.IsEmptyAttribute;
+
+import net.joseph.vaultfilters.attributes.backpacks.HasUUIDAttribute;
+import net.joseph.vaultfilters.attributes.backpacks.HasUpgradeAttribute;
+
 import net.joseph.vaultfilters.attributes.card.*;
 import net.joseph.vaultfilters.attributes.catalysts.CatalystHasModifierAttribute;
 import net.joseph.vaultfilters.attributes.catalysts.CatalystModifierCategoryAttribute;
@@ -136,8 +140,14 @@ public class VaultFilters {
         new CatalystSizeAttribute(10).register(CatalystSizeAttribute::new);
         new CatalystHasModifierAttribute("Ornate").register(CatalystHasModifierAttribute::new);
         new CatalystModifierCategoryAttribute("Bonus Chests").register(CatalystModifierCategoryAttribute::new);
+
         
         // Backpacks
         new IsEmptyAttribute(true).register(IsEmptyAttribute::new);
+
+
+        new HasUpgradeAttribute("Backpack Upgrade").register(HasUpgradeAttribute::new);
+        new HasUUIDAttribute("Backpack UUID").register(HasUUIDAttribute::new);
+
     }
 }
