@@ -79,7 +79,7 @@ public class VFCache {
                 ITEM_CACHES.values().forEach(VFCache::tick);
                 int postClear = ITEM_CACHES.size();
                 if (preClear > postClear) {
-                    VaultFilters.LOGGER.info("Vault filters cache pruned ({} items)", preClear-postClear);
+                    VaultFilters.LOGGER.info("Vault filters cache pruned ({} items pruned)", preClear-postClear);
                 }
                 ticks = 0;
             }
