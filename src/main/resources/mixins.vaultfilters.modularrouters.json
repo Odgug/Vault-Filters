@@ -6,10 +6,12 @@
   "mixins": [
     "MixinBulkItemMatcher",
     "MixinContainerModule",
-    "MixinItemStackHashingStrategy"
+    "MixinItemStackHashingStrategy",
+    "MixinSimpleItemMatcher"
   ],
   "injectors": {
     "defaultRequire": 1
   },
-  "refmap": "vaultfilters.mixin-refmap.json"
+  "refmap": "mixins.vaultfilters.refmap.json",
+  "minVersion" : "0.8"
 }

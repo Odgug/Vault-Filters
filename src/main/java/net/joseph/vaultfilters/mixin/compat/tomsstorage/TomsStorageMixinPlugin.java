@@ -7,8 +7,7 @@ import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 
 public class TomsStorageMixinPlugin extends MixinConfig {
     @Override
-    public boolean shouldApplyMixin(String targetClassName, String mixinClassName)
-    {
+    public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         return LoadingModList.get().getModFileById("toms_storage") != null;
     }
 }

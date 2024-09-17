@@ -35,11 +35,12 @@ public class CardConditionNumAttribute extends IntAttribute {
 
     @Override
     public List<ItemAttribute> listAttributesOf(ItemStack itemStack) {
-        List<ItemAttribute> attributes = new ArrayList<>();
         Tuple<Integer,Integer> counts = getCardMinMax(itemStack);
         if (counts == null) {
-            return attributes;
+            return new ArrayList<>();
         }
+
+        List<ItemAttribute> attributes = new ArrayList<>();
         Integer minCount = counts.getA();
         Integer maxCount = counts.getB();
         if (minCount != null) {
@@ -48,43 +49,8 @@ public class CardConditionNumAttribute extends IntAttribute {
         if (maxCount != null) {
             attributes.add(withValue(maxCount));
         }
+
         return attributes;
-    }
-    public static Tuple<Integer,Integer> getCardMinMax(ItemStack itemStack) {
-        if (!(itemStack.getItem() instanceof CardItem)) {
-            return null;
-        }
-        Card card = getCard(itemStack);
-        List<CardEntry> entries = card.getEntries();
-        if (entries == null) {
-            return null;
-        }
-        if (entries.isEmpty()) {
-            return null;
-        }
-        CardEntry entry = entries.get(0);
-        CardCondition condition = ((CardEntryAccessor)entry).getCondition();
-        if (condition == null) {
-            return null;
-        }
-        Map<Integer, List<CardCondition.Filter>> filters = ((CardConditionAccessor)condition).getFilters();
-        if (filters == null) {
-            return null;
-        }
-        Tuple<Integer, Integer> tuple = new Tuple<Integer,Integer>(null,null);
-        for (int key : filters.keySet()) {
-            for (CardCondition.Filter filter : filters.get(key)) {
-                Integer tempMinCount= ((ConditionFilterAccessor)filter).getMinCount();
-                Integer tempMaxCount= ((ConditionFilterAccessor)filter).getMaxCount();
-                if (tempMinCount != null) {
-                    tuple.setA(tempMinCount);
-                }
-                if (tempMaxCount != null) {
-                    tuple.setB(tempMaxCount);
-                }
-            }
-        }
-        return tuple;
     }
 
     @Override
@@ -93,25 +59,60 @@ public class CardConditionNumAttribute extends IntAttribute {
         if (counts == null) {
             return false;
         }
+
         Integer minCount = counts.getA();
         Integer maxCount = counts.getB();
         if (maxCount == null && minCount == null) {
             return false;
-        }
-        if (maxCount != null && minCount != null) {
+        } else if (maxCount != null && minCount != null) {
             return (this.value >= minCount && this.value <= maxCount);
-        }
-        if (maxCount != null) {
+        } else if (maxCount != null) {
             return this.value <= maxCount;
         }
         return this.value >= minCount;
     }
-
 
     @Override
     public String getTranslationKey() {
         return "card_condition_num";
     }
 
+    public static Tuple<Integer,Integer> getCardMinMax(ItemStack itemStack) {
+        if (!(itemStack.getItem() instanceof CardItem)) {
+            return null;
+        }
 
+        Card card = getCard(itemStack);
+        List<CardEntry> entries = card.getEntries();
+        if (entries == null || entries.isEmpty()) {
+            return null;
+        }
+
+        CardEntry entry = entries.get(0);
+        CardCondition condition = ((CardEntryAccessor)entry).getCondition();
+        if (condition == null) {
+            return null;
+        }
+
+        Map<Integer, List<CardCondition.Filter>> filters = ((CardConditionAccessor)condition).getFilters();
+        if (filters == null || filters.isEmpty()) {
+            return null;
+        }
+
+        Tuple<Integer, Integer> counts = new Tuple<Integer,Integer>(null, null);
+        for (int key : filters.keySet()) {
+            for (CardCondition.Filter filter : filters.get(key)) {
+                Integer tempMinCount= ((ConditionFilterAccessor)filter).getMinCount();
+                Integer tempMaxCount= ((ConditionFilterAccessor)filter).getMaxCount();
+                if (tempMinCount != null) {
+                    counts.setA(tempMinCount);
+                }
+                if (tempMaxCount != null) {
+                    counts.setB(tempMaxCount);
+                }
+            }
+        }
+
+        return counts;
+    }
 }

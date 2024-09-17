@@ -15,12 +15,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class MixinRSItemMatcher {
     @Inject(method = "isEqual(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;I)Z", at = @At("HEAD"), cancellable = true)
     public void checkFilter(ItemStack left, ItemStack right, int flags, CallbackInfoReturnable<Boolean> cir) {
-        if (VFServerConfig.RS_COMPAT.get() && flags == VaultFilters.CHECK_FILTER_FLAG && right.getItem() instanceof FilterItem) {
-            cir.setReturnValue(VFTests.checkFilter(left, right,true,null));
+        if (!VFServerConfig.RS_COMPAT.get() || !(right.getItem() instanceof FilterItem)) {
+            return;
         }
-        if (VFServerConfig.RS_COMPAT.get() && flags == VaultFilters.NO_CACHE_FLAG && right.getItem() instanceof FilterItem) {
-            cir.setReturnValue(VFTests.checkFilter(left, right,false,null));
+
+        switch (flags) {
+            case VaultFilters.CHECK_FILTER_FLAG -> cir.setReturnValue(VFTests.checkFilter(left, right,true,null));
+            case VaultFilters.NO_CACHE_FLAG -> cir.setReturnValue(VFTests.checkFilter(left, right,true,null));
         }
     }
-
 }

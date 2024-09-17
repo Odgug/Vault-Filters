@@ -10,6 +10,7 @@ buildscript {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
         classpath 'org.parchmentmc:librarian:1.+'
         classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+
     }
 }
 
@@ -30,6 +31,7 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 minecraft {
     mappings channel: 'parchment', version: '1.18.1-2022.03.06-1.18.2'
+    //mappings channel: 'official', version: '1.18.2'
 
     runs {
         client {
@@ -90,7 +92,7 @@ minecraft {
 }
 
 mixin {
-    add sourceSets.main, "mixins.${mod_id}.refmap.json"
+    add sourceSets.main, "mixins.vaultfilters.refmap.json"
     config "mixins.${mod_id}.ae2.json"
     config "mixins.${mod_id}.rs.json"
     config "mixins.${mod_id}.sophisticatedcore.json"
@@ -113,9 +115,11 @@ repositories {
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.18.2-40.2.9'
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     implementation fg.deobf("curse.maven:vault-hunters-official-mod-458203:5601579")
 
     implementation fg.deobf("com.simibubi.create:create-${create_minecraft_version}:${create_version}:slim") { transitive = false }
+    compileOnly fg.deobf("curse.maven:create-328085:4550986")
     implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}")
     implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
 

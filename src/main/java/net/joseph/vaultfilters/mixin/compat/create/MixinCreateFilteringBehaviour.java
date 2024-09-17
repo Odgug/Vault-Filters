@@ -5,7 +5,6 @@ import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.filtering.FilteringBehaviour;
 import net.joseph.vaultfilters.VFTests;
-import net.joseph.vaultfilters.VaultFilters;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -15,22 +14,18 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value = FilteringBehaviour.class, remap = false)
 public abstract class MixinCreateFilteringBehaviour extends BlockEntityBehaviour {
-    public MixinCreateFilteringBehaviour(SmartBlockEntity be) {
-        super(be);
-    }
-
-    @Shadow
-    public boolean isActive() {return true;}
-
     @Shadow
     private FilterItemStack filter;
 
-
-
+    protected MixinCreateFilteringBehaviour(SmartBlockEntity be) {
+        super(be);
+    }
 
     @Inject(method = "test(Lnet/minecraft/world/item/ItemStack;)Z", at = @At("HEAD"), cancellable = true)
     public void checkFilter(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
-        cir.setReturnValue(!isActive() || this.filter.isEmpty() || VFTests.checkFilter(stack,this.filter,true,this.blockEntity.getLevel()));
+        cir.setReturnValue(!isActive() || this.filter.isEmpty() || VFTests.checkFilter(stack, this.filter, true, this.blockEntity.getLevel()));
     }
 
+    @Shadow
+    public abstract boolean isActive();
 }

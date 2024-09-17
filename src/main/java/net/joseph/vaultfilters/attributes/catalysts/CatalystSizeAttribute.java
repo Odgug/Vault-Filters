@@ -1,8 +1,6 @@
 package net.joseph.vaultfilters.attributes.catalysts;
 
 import iskallia.vault.item.InfusedCatalystItem;
-import iskallia.vault.item.InscriptionItem;
-import iskallia.vault.item.data.InscriptionData;
 import net.joseph.vaultfilters.attributes.abstracts.IntAttribute;
 import net.minecraft.world.item.ItemStack;
 
@@ -14,8 +12,7 @@ public class CatalystSizeAttribute extends IntAttribute {
     @Override
     public Integer getValue(ItemStack itemStack) {
         if (itemStack.getItem() instanceof InfusedCatalystItem) {
-
-            return (Integer) InfusedCatalystItem.getSize(itemStack).orElse(null);
+            return InfusedCatalystItem.getSize(itemStack).orElse(null);
         }
         return null;
     }

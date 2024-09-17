@@ -30,6 +30,6 @@ public class CharmAffinityAttribute extends IntAttribute {
 
     @Override
     public Object[] getTranslationParameters() {
-        return new Object[]{this.value + "%"};
+        return new Object[] { this.value + "%" };
     }
 }

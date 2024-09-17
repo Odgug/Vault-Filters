@@ -2,6 +2,7 @@ package net.joseph.vaultfilters.mixin.compat.ae2.mixin;
 
 import appeng.api.behaviors.StackTransferContext;
 import appeng.api.config.Actionable;
+import appeng.api.networking.storage.IStorageService;
 import appeng.api.stacks.AEItemKey;
 import appeng.api.stacks.AEKey;
 import appeng.api.storage.StorageHelper;
@@ -11,7 +12,6 @@ import appeng.util.BlockApiCache;
 import com.simibubi.create.content.logistics.filter.FilterItem;
 import it.unimi.dsi.fastutil.objects.Object2LongMap;
 import net.joseph.vaultfilters.VFTests;
-import net.joseph.vaultfilters.VaultFilters;
 import net.joseph.vaultfilters.configs.VFServerConfig;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
@@ -23,26 +23,16 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(value = StorageExportStrategy.class, remap = false)
 public class MixinStorageExportStrategy<C> {
-    /**
-     * @author
-     * @reason
-     */
-    @Final
-    @Shadow
+    @Shadow @Final
     private HandlerStrategy<C, CallbackI.S> handlerStrategy;
-
-
-    @Final
-    @Shadow
+    @Shadow @Final
     private BlockApiCache<C> apiCache;
-
-    @Final
-    @Shadow
+    @Shadow @Final
     private Direction fromSide;
 
     /**
-     * @author
-     * @reason
+     * @author TODO
+     * @reason TODO: Add a reason
      */
     @Overwrite
     public long transfer(StackTransferContext context, AEKey what, long amount, Actionable mode) {
@@ -50,40 +40,35 @@ public class MixinStorageExportStrategy<C> {
             return 0;
         }
 
-        var adjacentStorage = apiCache.find(fromSide);
+        C adjacentStorage = apiCache.find(fromSide);
         if (adjacentStorage == null) {
             return 0;
         }
 
-        var inv = context.getInternalStorage();
+        IStorageService inv = context.getInternalStorage();
+        if (what instanceof AEItemKey itemKey && VFServerConfig.AE2_COMPAT.get() && itemKey.getItem() instanceof FilterItem) {
+            ItemStack filterStack = itemKey.toStack();
+            for (Object2LongMap.Entry<AEKey> key : inv.getInventory().getAvailableStacks()) {
+                AEKey aek = key.getKey();
+                if (!(aek instanceof AEItemKey itemKey2)) {
+                    continue;
+                }
 
-        if (what instanceof AEItemKey filterItemKey) {
-
-            if (VFServerConfig.AE2_COMPAT.get() && filterItemKey.getItem() instanceof FilterItem) {
-                ItemStack filterStack = filterItemKey.toStack();
-                Iterable<Object2LongMap.Entry<AEKey>> invitems = inv.getInventory().getAvailableStacks();
-                for (Object2LongMap.Entry<AEKey> key : invitems) {
-                    AEKey aek = key.getKey();
-                    if (!(aek instanceof AEItemKey)) {
-                        continue;
-                    }
-                    ItemStack stack = ((AEItemKey) aek).toStack();
-                    if (VFTests.checkFilter(stack,filterStack,true,null)) {
-                        what = aek;
-                        break;
-                    }
+                ItemStack stack = itemKey2.toStack();
+                if (VFTests.checkFilter(stack, filterStack, true, null)) {
+                    what = aek;
+                    break;
                 }
             }
         }
 
-        var extracted = StorageHelper.poweredExtraction(
+        long extracted = StorageHelper.poweredExtraction(
                 context.getEnergySource(),
                 inv.getInventory(),
                 what,
                 amount,
                 context.getActionSource(),
                 Actionable.SIMULATE);
-
         long wasInserted = handlerStrategy.insert(adjacentStorage, what, extracted, Actionable.SIMULATE);
 
         if (wasInserted > 0) {
@@ -95,17 +80,14 @@ public class MixinStorageExportStrategy<C> {
                         wasInserted,
                         context.getActionSource(),
                         Actionable.MODULATE);
-
                 wasInserted = handlerStrategy.insert(adjacentStorage, what, extracted, Actionable.MODULATE);
 
                 if (wasInserted < extracted) {
                     // Be nice and try to give the overflow back
                     long leftover = extracted - wasInserted;
-                    leftover -= inv.getInventory().insert(what, leftover, Actionable.MODULATE,
-                            context.getActionSource());
+                    leftover -= inv.getInventory().insert(what, leftover, Actionable.MODULATE, context.getActionSource());
                     if (leftover > 0) {
-                        //LOGGER.error("Storage export: adjacent block unexpectedly refused insert, voided {}x{}",
-                        //leftover, what);
+                        // TODO: maybe handle this better?
                     }
                 }
             }

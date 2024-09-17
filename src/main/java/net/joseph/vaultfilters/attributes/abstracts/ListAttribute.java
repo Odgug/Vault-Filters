@@ -8,20 +8,20 @@ import java.util.List;
 import java.util.Objects;
 
 public abstract class ListAttribute<V> extends VaultAttribute<V> {
-
     protected ListAttribute(V value) {
         super(value);
     }
 
-    public abstract ArrayList<V> getValues(ItemStack itemStack);
+    public abstract List<V> getValues(ItemStack itemStack);
 
     @Override
     public boolean appliesTo(ItemStack itemStack) {
-        ArrayList<V> values = getValues(itemStack);
+        List<V> values = getValues(itemStack);
         if (values == null) {
             return false;
         }
-        for(V singleValue : values) {
+
+        for (V singleValue : values) {
             if (singleAppliesTo(singleValue)) {
                 return true;
             }
@@ -30,16 +30,17 @@ public abstract class ListAttribute<V> extends VaultAttribute<V> {
     }
 
     public boolean singleAppliesTo(V singleValue) {
-        return (Objects.equals(this.value,singleValue));
+        return Objects.equals(this.value, singleValue);
     }
 
     @Override
     public List<ItemAttribute> listAttributesOf(ItemStack itemStack) {
-        List<ItemAttribute> attributes = new ArrayList<>();
-        ArrayList<V> values = getValues(itemStack);
+        List<V> values = getValues(itemStack);
         if (values == null) {
-            return attributes;
+            return new ArrayList<>();
         }
+
+        List<ItemAttribute> attributes = new ArrayList<>();
         for (V singleValue : values) {
             ItemAttribute attribute = singleValue != null ? withValue(singleValue) : null;
             if (attribute != null) {

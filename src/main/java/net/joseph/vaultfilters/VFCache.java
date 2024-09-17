@@ -1,7 +1,7 @@
 package net.joseph.vaultfilters;
 
+import iskallia.vault.item.BoosterPackItem;
 import net.joseph.vaultfilters.configs.VFServerConfig;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.TickEvent;
@@ -10,44 +10,76 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class VFCache {
-    public static ConcurrentHashMap<Integer,VFCache> cacheMap = new ConcurrentHashMap<Integer, VFCache>();
+    private static final ConcurrentHashMap<Integer, VFCache> ITEM_CACHES = new ConcurrentHashMap<>();
+    private static int ticks = 0;
+
+    private final int itemHash;
+    private final ConcurrentHashMap<Integer, Boolean> filterMap;
+    private int ttk; // ttk = time to kill
+
+    public VFCache(int itemHash) {
+        this.itemHash = itemHash;
+        this.filterMap = new ConcurrentHashMap<>();
+        this.ttk = VFServerConfig.CACHE_TTK.get();
+    }
+
+    public VFCache addFilter(int filterHash, boolean result) {
+        filterMap.put(filterHash, result);
+        resetTTK();
+        return this;
+    }
+
+    public Boolean result(int filterHash) {
+        Boolean result = filterMap.get(filterHash);
+        if (result != null) {
+            resetTTK();
+        }
+        return result;
+    }
+
+    public void resetTTK() {
+        this.ttk = VFServerConfig.CACHE_TTK.get();
+    }
+
+    public void tick() {
+        if (this.ttk == 0) {
+            ITEM_CACHES.remove(this.itemHash);
+            return;
+        }
+        this.ttk--;
+    }
+
     public static boolean getOrCreateFilter(ItemStack stack, Object filterStack, Level level) {
         int itemHash = stack.hashCode();
-        if (!(cacheMap.containsKey(itemHash))) {
-            boolean testResult = VFTests.basicFilterTest(stack,filterStack,level);
-            cacheMap.put(itemHash, new VFCache(filterStack, testResult));
-            return testResult;
+        VFCache cache = ITEM_CACHES.get(itemHash);
+        if (cache == null) {
+            boolean result = stack.getItem() instanceof BoosterPackItem
+                    ? VFTests.testCardPack(stack, filterStack, level)
+                    : VFTests.basicFilterTest(stack, filterStack, level);
+            ITEM_CACHES.put(itemHash, new VFCache(itemHash).addFilter(filterStack.hashCode(), result));
+            return result;
         }
 
-        VFCache cache = cacheMap.get(itemHash);
         int filterHash = filterStack.hashCode();
-        ConcurrentHashMap<Integer, Boolean> innerMap = cache.filterMap;
-        if (innerMap.containsKey(filterHash)) {
-            cache.resetTTK();
-            return innerMap.get(filterHash);
+        Boolean cachedResult = cache.result(filterHash);
+        if (cachedResult != null) {
+            return cachedResult;
         }
-        boolean testResult = VFTests.basicFilterTest(stack,filterStack,level);
-        cache.resetTTK();
-        innerMap.put(filterHash,testResult);
-        return testResult;
-    }
-    public int TTK = VFServerConfig.CACHE_TTK.get();
-    public ConcurrentHashMap<Integer, Boolean> filterMap = new ConcurrentHashMap<Integer,Boolean>();
-    public VFCache(Object filterStack, boolean result) {
-        int filterHash = filterStack.hashCode();
-        if (!(filterMap.containsKey(filterHash))) {
-            filterMap.put(filterHash,result);
-        }
-    }
-    public void addFilter(ItemStack filterStack, boolean result) {
-        int filterHash = filterStack.hashCode();
-        if (!(filterMap.containsKey(filterHash))) {
-            filterMap.put(filterHash,result);
-        }
-    }
-    public void resetTTK() {
-        this.TTK = VFServerConfig.CACHE_TTK.get();
+
+        boolean result = VFTests.basicFilterTest(stack, filterStack, level);
+        cache.addFilter(filterHash, result);
+        return result;
     }
 
-
+    @SubscribeEvent
+    public static void onServerTick(TickEvent.ServerTickEvent event) {
+        if (event.phase == TickEvent.Phase.END) {
+            if (++ticks >= 60 * 20) { // 60 seconds * 20 tps
+                VaultFilters.LOGGER.info("Pruning Vault Filters Cache ({} items)", ITEM_CACHES.size());
+                ITEM_CACHES.values().forEach(VFCache::tick);
+                VaultFilters.LOGGER.info("Vault Filters Cache Pruned ({} items remaining)", ITEM_CACHES.size());
+                ticks = 0;
+            }
+        }
+    }
 }

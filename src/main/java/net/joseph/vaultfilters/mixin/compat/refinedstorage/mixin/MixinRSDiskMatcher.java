@@ -17,43 +17,10 @@ import java.util.Collection;
 
 @Mixin(value = ItemStorageDisk.class, remap = false)
 public class MixinRSDiskMatcher {
-    @Unique
-    private static final Item[] VAULT_GEAR = {
-            ModItems.HELMET,
-            ModItems.CHESTPLATE,
-            ModItems.LEGGINGS,
-            ModItems.BOOTS,
-            ModItems.SWORD,
-            ModItems.AXE,
-            ModItems.SHIELD,
-            ModItems.IDOL_BENEVOLENT,
-            ModItems.IDOL_MALEVOLENCE,
-            ModItems.IDOL_OMNISCIENT,
-            ModItems.IDOL_TIMEKEEPER,
-            ModItems.JEWEL,
-            ModItems.MAGNET,
-            ModItems.WAND,
-            ModItems.FOCUS,
-            ModItems.SMALL_CHARM,
-            ModItems.LARGE_CHARM,
-            ModItems.GRAND_CHARM,
-            ModItems.MAJESTIC_CHARM,
-            ModItems.TRINKET,
-            ModItems.INSCRIPTION,
-            ModItems.CARD,
-            ModItems.VAULT_CATALYST_INFUSED
-    };
-
     @Redirect(method = "extract(Lnet/minecraft/world/item/ItemStack;IILcom/refinedmods/refinedstorage/api/util/Action;)Lnet/minecraft/world/item/ItemStack;", at = @At(value = "INVOKE", target = "Lcom/google/common/collect/Multimap;get(Ljava/lang/Object;)Ljava/util/Collection;"))
     private Collection<ItemStack> getAllItemsIfFilter(Multimap<Item, ItemStack> instance, Object item) {
-        if (item instanceof FilterItem filterItem) {
-            // Need to get the filter item itself too, otherwise you won't be able to pick it up
-            ArrayList<ItemStack> stacks = new ArrayList<>(instance.get(filterItem));
-            for (Item gearPiece: instance.keySet()) {
-                stacks.addAll(instance.get(gearPiece));
-            }
-            return stacks;
-        }
-        return instance.get((Item) item);
+        return item instanceof FilterItem
+                ? new ArrayList<>(instance.values())
+                : instance.get((Item) item);
     }
 }

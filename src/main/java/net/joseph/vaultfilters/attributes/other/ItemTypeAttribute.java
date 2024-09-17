@@ -4,7 +4,6 @@ import iskallia.vault.block.TreasureDoorBlock;
 import iskallia.vault.gear.item.VaultGearItem;
 import iskallia.vault.item.InfusedCatalystItem;
 import iskallia.vault.item.InscriptionItem;
-import iskallia.vault.item.VaultCatalystItem;
 import iskallia.vault.item.gear.CharmItem;
 import iskallia.vault.item.gear.TrinketItem;
 import iskallia.vault.item.tool.JewelItem;
@@ -50,6 +49,7 @@ public class ItemTypeAttribute extends StringAttribute {
         }
         return false;
     }
+
     @Override
     public String getTranslationKey() {
         return "item_type";

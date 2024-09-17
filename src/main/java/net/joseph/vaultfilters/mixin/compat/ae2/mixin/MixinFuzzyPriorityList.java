@@ -7,7 +7,6 @@ import appeng.api.stacks.KeyCounter;
 import appeng.util.prioritylist.FuzzyPriorityList;
 import com.simibubi.create.content.logistics.filter.FilterItem;
 import net.joseph.vaultfilters.VFTests;
-import net.joseph.vaultfilters.VaultFilters;
 import net.joseph.vaultfilters.configs.VFServerConfig;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,27 +17,31 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value = FuzzyPriorityList.class, remap = false)
 public abstract class MixinFuzzyPriorityList {
-
-    @Shadow @Final private KeyCounter list;
-    @Shadow @Final private FuzzyMode mode;
-    @Shadow public abstract Iterable<AEKey> getItems();
+    @Shadow @Final
+    private KeyCounter list;
+    @Shadow @Final
+    private FuzzyMode mode;
 
     @Inject(method = "isListed", at = @At("HEAD"), cancellable = true)
     public void isListed(AEKey input, CallbackInfoReturnable<Boolean> cir) {
-        if(VFServerConfig.AE2_COMPAT.get()) {
-            for (AEKey key : this.getItems()) {
-                if (key instanceof AEItemKey itemKey) {
-                    if (itemKey.getItem() instanceof FilterItem && input instanceof AEItemKey inputItemKey) {
-                        if (!(inputItemKey.getItem() instanceof FilterItem)) {
-                            cir.setReturnValue(VFTests.checkFilter(inputItemKey.toStack(), itemKey.toStack(), true, null) || !this.list.findFuzzy(input, this.mode).isEmpty());
-                        } else {
-                            cir.setReturnValue(VFTests.checkFilter(inputItemKey.toStack(), itemKey.toStack(), true, null));
-                        }
+        if (!VFServerConfig.AE2_COMPAT.get()) {
+            return;
+        }
+        for (AEKey key : this.getItems()) {
+            if (!(key instanceof AEItemKey itemKey)) {
+                continue;
+            }
 
-                    }
-                }
+
+            if (itemKey.getItem() instanceof FilterItem && input instanceof AEItemKey inputItemKey) {
+                boolean result = VFTests.checkFilter(inputItemKey.toStack(), itemKey.toStack(), true, null);
+                cir.setReturnValue(!(inputItemKey.getItem() instanceof FilterItem)
+                        ? result || !this.list.findFuzzy(input, this.mode).isEmpty()
+                        : result);
             }
         }
     }
 
+    @Shadow
+    public abstract Iterable<AEKey> getItems();
 }
