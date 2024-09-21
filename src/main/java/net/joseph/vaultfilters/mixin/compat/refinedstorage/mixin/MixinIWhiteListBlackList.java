@@ -23,16 +23,19 @@ public interface MixinIWhiteListBlackList {
             return false;
         }
 
-        boolean inverted = mode == 1;
+        boolean blacklist = mode == 1;
         for (int i = 0; i < filters.getSlots(); ++i) {
             ItemStack slot = filters.getStackInSlot(i);
             if (slot.getItem() instanceof FilterItem && VFServerConfig.RS_COMPAT.get()) {
-                return inverted != VFTests.checkFilter(stack, slot, true, null);
+                boolean result = VFTests.checkFilter(stack, slot, true, null);
+                if (blacklist || result) {
+                    return blacklist != result;
+                }
             } else if (API.instance().getComparer().isEqual(slot, stack, compare)) {
-                return !inverted;
+                return !blacklist;
             }
         }
 
-        return inverted;
+        return blacklist;
     }
 }
