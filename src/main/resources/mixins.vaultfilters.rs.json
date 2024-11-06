@@ -6,7 +6,6 @@
   "mixins": [
     "ExporterNetworkNodeMixin",
     "MixinFilterGridFilter",
-    "MixinItemGridHandler",
     "MixinIWhiteListBlackList",
     "MixinRSDiskMatcher",
     "MixinRSItemMatcher"
