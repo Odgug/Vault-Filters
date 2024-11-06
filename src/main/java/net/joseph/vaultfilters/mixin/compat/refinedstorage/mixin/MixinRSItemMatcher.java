@@ -25,7 +25,7 @@ public class MixinRSItemMatcher {
         if (flags >= VaultFilters.CHECK_FILTER_FLAG) {
             flags = flags - VaultFilters.CHECK_FILTER_FLAG;
             if (VFServerConfig.RS_COMPAT.get() && right.getItem() instanceof FilterItem) {
-                return (flags & 1) == 1 && !VFTests.checkFilter(left, right,true,null) ? false : (flags & 2) != 2 || left.getCount() == right.getCount();
+                return VFTests.checkFilter(left, right,true,null);
             }
         }
         if (left.isEmpty() && right.isEmpty()) {
