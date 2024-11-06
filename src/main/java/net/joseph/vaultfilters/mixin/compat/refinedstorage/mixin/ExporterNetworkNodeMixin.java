@@ -18,7 +18,7 @@ public class ExporterNetworkNodeMixin {
     @ModifyArg(method = "update", at = @At(value = "INVOKE", target = "Lcom/refinedmods/refinedstorage/api/util/IComparer;isEqual(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;I)Z"))
     private int modifyCompareFlag(ItemStack left, ItemStack right, int compare) {
         if (VFServerConfig.RS_COMPAT.get() && right.getItem() instanceof FilterItem) {
-            return VaultFilters.CHECK_FILTER_FLAG + compare;
+            return VaultFilters.CHECK_FILTER_FLAG;
         }
         return compare;
     }
@@ -26,7 +26,7 @@ public class ExporterNetworkNodeMixin {
     @ModifyArg(method = "update", at = @At(value = "INVOKE", target = "Lcom/refinedmods/refinedstorage/api/network/INetwork;extractItem(Lnet/minecraft/world/item/ItemStack;IILcom/refinedmods/refinedstorage/api/util/Action;)Lnet/minecraft/world/item/ItemStack;"), index = 2)
     private int modifyCompareFlag(ItemStack slot, int size, int compare, Action action) {
         if (VFServerConfig.RS_COMPAT.get() && slot.getItem() instanceof FilterItem) {
-            return VaultFilters.CHECK_FILTER_FLAG + compare;
+            return VaultFilters.CHECK_FILTER_FLAG;
         }
         return compare;
     }
