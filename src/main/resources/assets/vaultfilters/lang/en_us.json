@@ -147,6 +147,9 @@
   "create.item_attributes.bag_uuid": "is a bag with a UUID of \"%1$s\"",
   "create.item_attributes.bag_uuid.inverted": "isn't a bag with a UUID of \"%1$s\"",
 
+  "create.item_attributes.artifact_id": "is an artifact with an ID of \"%1$s\"",
+  "create.item_attributes.artifact_id.inverted": "isn't an artifact with an ID of \"%1$s\"",
+
   "create.item_attributes.card_condition_comp": "is a card with an \"%1$s\" condition",
   "create.item_attributes.card_condition_comp.inverted": "is not a card with an \"%1$s\" condition",
 
