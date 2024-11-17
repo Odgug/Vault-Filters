@@ -39,9 +39,8 @@ import org.slf4j.Logger;
 @Mod(VaultFilters.MOD_ID)
 public class VaultFilters {
     public static final String MOD_ID = "vaultfilters";
-    public static final String MOD_VERSION = "1.15.0";
+    public static final String MOD_VERSION = "1.16.0";
     public static final int CHECK_FILTER_FLAG = 456;
-    public static final int NO_CACHE_FLAG = 457;
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public VaultFilters() {
@@ -108,6 +107,19 @@ public class VaultFilters {
         new NumberImplicitAttribute("", "", 0).register(NumberImplicitAttribute::new);
         new NumberPrefixAttribute("", "", 0).register(NumberPrefixAttribute::new);
         new NumberSuffixAttribute("", "", 0).register(NumberSuffixAttribute::new);
+
+        new HasCorruptedAttribute(true).register(HasCorruptedAttribute::new);
+        new CorruptedImplicitAttribute("Attack Damage").register(CorruptedImplicitAttribute::new);
+        new CorruptedPrefixAttribute("Attack Damage").register(CorruptedPrefixAttribute::new);
+        new CorruptedSuffixAttribute("Trap Disarm").register(CorruptedSuffixAttribute::new);
+        new IsCorruptedAttribute(true).register(IsCorruptedAttribute::new);
+
+        new HasFrozenAttribute(true).register(HasFrozenAttribute::new);
+
+        new HasCraftedAttribute(true).register(HasCraftedAttribute::new);
+        new IsCraftedAttribute(true).register(IsCraftedAttribute::new);
+
+        new GearUniqueAttribute("Baguette").register(GearUniqueAttribute::new);
 
         new ModifierGroupAttribute("ModAbility").register(ModifierGroupAttribute::new);
 
