@@ -32,9 +32,4 @@ public class HasCraftedAttribute extends BooleanAttribute {
     public String getTranslationKey() {
         return "has_crafted";
     }
-
-    @Override
-    public String getLegacyKey() {
-        return "crafted";
-    }
 }

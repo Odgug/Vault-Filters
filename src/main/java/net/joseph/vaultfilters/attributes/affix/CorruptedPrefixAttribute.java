@@ -28,8 +28,4 @@ public class CorruptedPrefixAttribute extends AffixAttribute {
         return "corrupted_prefix";
     }
 
-    @Override
-    public String getLegacyKey() {
-        return "corruptedPrefix";
-    }
 }

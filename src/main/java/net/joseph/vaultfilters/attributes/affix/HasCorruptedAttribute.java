@@ -34,8 +34,4 @@ public class HasCorruptedAttribute extends BooleanAttribute {
         return "has_corrupted";
     }
 
-    @Override
-    public String getLegacyKey() {
-        return "corrupted";
-    }
 }

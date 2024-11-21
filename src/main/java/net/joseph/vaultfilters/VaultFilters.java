@@ -39,7 +39,7 @@ import org.slf4j.Logger;
 @Mod(VaultFilters.MOD_ID)
 public class VaultFilters {
     public static final String MOD_ID = "vaultfilters";
-    public static final String MOD_VERSION = "1.16.0";
+    public static final String MOD_VERSION = "1.17.0";
     public static final int CHECK_FILTER_FLAG = 456;
     public static final Logger LOGGER = LogUtils.getLogger();
 
@@ -88,6 +88,9 @@ public class VaultFilters {
         new GearTransmogAttribute("Sword_4").register(GearTransmogAttribute::new);
         new GearRepairSlotAttribute(0).register(GearRepairSlotAttribute::new);
 
+        new GearUniqueNameAttribute("Baguette").register(GearUniqueNameAttribute::new);
+        new GearIsUniqueAttribute(true).register(GearIsUniqueAttribute::new);
+
         // Jewels
         new JewelSizeAttribute(0).register(JewelSizeAttribute::new);
         new JewelCutsAttribute(0).register(JewelCutsAttribute::new);
@@ -119,7 +122,6 @@ public class VaultFilters {
         new HasCraftedAttribute(true).register(HasCraftedAttribute::new);
         new IsCraftedAttribute(true).register(IsCraftedAttribute::new);
 
-        new GearUniqueAttribute("Baguette").register(GearUniqueAttribute::new);
 
         new ModifierGroupAttribute("ModAbility").register(ModifierGroupAttribute::new);
 

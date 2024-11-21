@@ -29,6 +29,9 @@
   "create.item_attributes.gear_unique_key": "is a \"%1$s\" Unique",
   "create.item_attributes.gear_unique_key.inverted": "isn't a \"%1$s\" Unique",
 
+  "create.item_attributes.gear_unique": "is a Unique",
+  "create.item_attributes.gear_unique.inverted": "isn't a Unique",
+
   "create.item_attributes.tool_material": "is a \"%1$s\" vault tool",
   "create.item_attributes.tool_material.inverted": "is not a \"%1$s\" vault tool",
 

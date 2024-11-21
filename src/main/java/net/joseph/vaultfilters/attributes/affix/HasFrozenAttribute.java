@@ -35,8 +35,4 @@ public class HasFrozenAttribute extends BooleanAttribute {
         return "has_frozen";
     }
 
-    @Override
-    public String getLegacyKey() {
-        return "frozen";
-    }
 }

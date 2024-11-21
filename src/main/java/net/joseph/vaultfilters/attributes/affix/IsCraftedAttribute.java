@@ -31,8 +31,4 @@ public class IsCraftedAttribute extends BooleanAttribute {
         return "is_crafted";
     }
 
-    @Override
-    public String getLegacyKey() {
-        return "isCrafted";
-    }
 }

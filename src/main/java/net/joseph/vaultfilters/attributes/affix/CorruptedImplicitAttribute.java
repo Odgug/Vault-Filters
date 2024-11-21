@@ -28,8 +28,4 @@ public class CorruptedImplicitAttribute extends AffixAttribute {
         return "corrupted_implicit";
     }
 
-    @Override
-    public String getLegacyKey() {
-        return "corruptedImplicit";
-    }
 }

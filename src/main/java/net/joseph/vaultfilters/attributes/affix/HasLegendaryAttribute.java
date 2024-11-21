@@ -32,8 +32,4 @@ public class HasLegendaryAttribute extends BooleanAttribute {
         return "has_legendary";
     }
 
-    @Override
-    public String getLegacyKey() {
-        return "legendary";
-    }
 }

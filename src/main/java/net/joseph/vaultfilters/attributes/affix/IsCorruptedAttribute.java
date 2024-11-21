@@ -28,8 +28,4 @@ public class IsCorruptedAttribute extends BooleanAttribute {
         return "is_corrupted";
     }
 
-    @Override
-    public String getLegacyKey() {
-        return "isCorrupted";
-    }
 }
