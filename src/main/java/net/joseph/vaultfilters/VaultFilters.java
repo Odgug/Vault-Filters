@@ -108,6 +108,19 @@ public class VaultFilters {
         new NumberPrefixAttribute("", "", 0).register(NumberPrefixAttribute::new);
         new NumberSuffixAttribute("", "", 0).register(NumberSuffixAttribute::new);
 
+        new HasCorruptedAttribute(true).register(HasCorruptedAttribute::new);
+        new CorruptedImplicitAttribute("Attack Damage").register(CorruptedImplicitAttribute::new);
+        new CorruptedPrefixAttribute("Attack Damage").register(CorruptedPrefixAttribute::new);
+        new CorruptedSuffixAttribute("Trap Disarm").register(CorruptedSuffixAttribute::new);
+        new IsCorruptedAttribute(true).register(IsCorruptedAttribute::new);
+
+        new HasFrozenAttribute(true).register(HasFrozenAttribute::new);
+
+        new HasCraftedAttribute(true).register(HasCraftedAttribute::new);
+        new IsCraftedAttribute(true).register(IsCraftedAttribute::new);
+
+        new GearUniqueAttribute("Baguette").register(GearUniqueAttribute::new);
+
         new ModifierGroupAttribute("ModAbility").register(ModifierGroupAttribute::new);
 
         // Cards

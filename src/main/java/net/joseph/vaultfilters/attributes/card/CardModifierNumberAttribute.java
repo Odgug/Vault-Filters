@@ -5,7 +5,7 @@ import iskallia.vault.gear.attribute.VaultGearAttribute;
 import iskallia.vault.gear.attribute.VaultGearAttributeInstance;
 import iskallia.vault.gear.attribute.VaultGearModifier;
 import iskallia.vault.gear.attribute.ability.AbilityLevelAttribute;
-import iskallia.vault.gear.attribute.custom.EffectAvoidanceGearAttribute;
+import iskallia.vault.gear.attribute.custom.effect.EffectAvoidanceGearAttribute;
 import iskallia.vault.gear.attribute.talent.RandomVaultModifierAttribute;
 import iskallia.vault.gear.reader.VaultGearModifierReader;
 import iskallia.vault.item.CardItem;

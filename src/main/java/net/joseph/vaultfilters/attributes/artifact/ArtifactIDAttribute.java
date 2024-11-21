@@ -1,7 +1,6 @@
 package net.joseph.vaultfilters.attributes.artifact;
 
 import iskallia.vault.block.VaultArtifactBlock;
-import iskallia.vault.item.ItemUnidentifiedArtifact;
 import net.joseph.vaultfilters.attributes.abstracts.IntAttribute;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;

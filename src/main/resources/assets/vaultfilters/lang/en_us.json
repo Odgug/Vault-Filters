@@ -26,6 +26,9 @@
   "create.item_attributes.gear_transmog": "uses the \"%1$s\" transmog",
   "create.item_attributes.gear_transmog.inverted": "doesn't use the \"%1$s\" transmog",
 
+  "create.item_attributes.gear_unique_key": "is a \"%1$s\" Unique",
+  "create.item_attributes.gear_unique_key.inverted": "isn't a \"%1$s\" Unique",
+
   "create.item_attributes.tool_material": "is a \"%1$s\" vault tool",
   "create.item_attributes.tool_material.inverted": "is not a \"%1$s\" vault tool",
 
@@ -55,11 +58,36 @@
   "create.item_attributes.has_legendary": "has a legendary modifier",
   "create.item_attributes.has_legendary.inverted": "doesn't have a legendary modifier",
 
+  "create.item_attributes.has_crafted": "has a crafted modifier",
+  "create.item_attributes.has_crafted.inverted": "doesn't have a crafted modifier",
+
+  "create.item_attributes.has_corrupted": "has a corrupted modifier",
+  "create.item_attributes.has_corrupted.inverted": "doesn't have a corrupted modifier",
+
+  "create.item_attributes.has_frozen": "has a frozen modifier",
+  "create.item_attributes.has_frozen.inverted": "doesn't have a frozen modifier",
+
   "create.item_attributes.is_unidentified": "is unidentified",
   "create.item_attributes.is_unidentified.inverted": "is not unidentified",
 
+  "create.item_attributes.is_crafted": "is a crafted gear piece",
+  "create.item_attributes.is_crafted.inverted": "is not a crafted gear piece",
+
+  "create.item_attributes.is_corrupted": "is a corrupted gear piece",
+  "create.item_attributes.is_corrupted.inverted": "is not a corrupted gear piece",
+
   "create.item_attributes.legendary_prefix": "has a legendary \"%1$s\" prefix",
   "create.item_attributes.legendary_prefix.inverted": "doesn't have a legendary \"%1$s\" prefix",
+
+  "create.item_attributes.corrupted_prefix": "has a corrupted \"%1$s\" prefix",
+  "create.item_attributes.corrupted_prefix.inverted": "doesn't have a corrupted \"%1$s\" prefix",
+
+  "create.item_attributes.corrupted_suffix": "has a corrupted \"%1$s\" suffix",
+  "create.item_attributes.corrupted_suffix.inverted": "doesn't have a corrupted \"%1$s\" suffix",
+
+  "create.item_attributes.corrupted_implicit": "has a corrupted \"%1$s\" implicit",
+  "create.item_attributes.corrupted_implicit.inverted": "doesn't have a corrupted \"%1$s\" implicit",
+
 
   "create.item_attributes.legendary_suffix": "has a legendary \"%1$s\" suffix",
   "create.item_attributes.legendary_suffix.inverted": "doesn't have a legendary \"%1$s\" suffix",
