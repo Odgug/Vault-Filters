@@ -1,6 +1,7 @@
 package net.joseph.vaultfilters;
 
 import iskallia.vault.item.BoosterPackItem;
+import iskallia.vault.item.JewelPouchItem;
 import net.joseph.vaultfilters.configs.VFServerConfig;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -53,9 +54,14 @@ public class VFCache {
         int itemHash = stack.hashCode();
         VFCache cache = ITEM_CACHES.get(itemHash);
         if (cache == null) {
-            boolean result = stack.getItem() instanceof BoosterPackItem
-                    ? VFTests.testCardPack(stack, filterStack, level)
-                    : VFTests.basicFilterTest(stack, filterStack, level);
+            boolean result = false;
+            if (stack.getItem() instanceof BoosterPackItem) {
+                result = VFTests.testCardPack(stack,filterStack,level);
+            } else if (stack.getItem() instanceof JewelPouchItem) {
+                result = VFTests.testJewelPouch(stack,filterStack,level);
+            } else {
+                result = VFTests.basicFilterTest(stack,filterStack,level);
+            }
             ITEM_CACHES.put(itemHash, new VFCache(itemHash).addFilter(filterStack.hashCode(), result));
             return result;
         }

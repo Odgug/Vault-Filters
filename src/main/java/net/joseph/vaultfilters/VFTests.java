@@ -3,10 +3,7 @@ package net.joseph.vaultfilters;
 import com.simibubi.create.content.logistics.filter.FilterItem;
 import com.simibubi.create.content.logistics.filter.FilterItemStack;
 import iskallia.vault.gear.item.VaultGearItem;
-import iskallia.vault.item.BoosterPackItem;
-import iskallia.vault.item.CardItem;
-import iskallia.vault.item.InfusedCatalystItem;
-import iskallia.vault.item.InscriptionItem;
+import iskallia.vault.item.*;
 import iskallia.vault.item.gear.CharmItem;
 import iskallia.vault.item.gear.TrinketItem;
 import net.joseph.vaultfilters.configs.VFServerConfig;
@@ -24,6 +21,7 @@ import net.minecraftforge.fml.DistExecutor;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
+import java.util.ArrayList;
 import java.util.List;
 
 public class VFTests {
@@ -52,7 +50,7 @@ public class VFTests {
         if (!(stackItem instanceof VaultGearItem || stackItem instanceof InscriptionItem ||
                 stackItem instanceof InfusedCatalystItem ||stackItem instanceof CharmItem ||
                 stackItem instanceof TrinketItem || stackItem instanceof CardItem ||
-                stackItem instanceof BoosterPackItem)) {
+                stackItem instanceof BoosterPackItem || stackItem instanceof JewelPouchItem)) {
             return basicFilterTest(stack,filterStack,level);
         }
 
@@ -78,6 +76,26 @@ public class VFTests {
 
         for (ItemStack card : cardPack) {
             if (basicFilterTest(card,filterStack,level)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public static boolean testJewelPouch(ItemStack stack, Object filterStack, Level level) {
+        List<JewelPouchItem.RolledJewel> jewelPouch= JewelPouchItem.getJewels(stack);
+        List<ItemStack> jewelOptions = new ArrayList<>();
+        for (JewelPouchItem.RolledJewel rolledJewel : jewelPouch) {
+            if (rolledJewel.identified()) {
+                jewelOptions.add(rolledJewel.stack());
+            }
+        }
+        boolean pouchMatch = basicFilterTest(stack,filterStack,level);
+        if (jewelOptions.isEmpty() || pouchMatch) {
+            return pouchMatch;
+        }
+
+        for (ItemStack jewel : jewelOptions) {
+            if (basicFilterTest(jewel,filterStack,level)) {
                 return true;
             }
         }
