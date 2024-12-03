@@ -32,10 +32,10 @@ public abstract class MixinPrecisePriorityList {
 
             if (itemKey.getItem() instanceof FilterItem && input instanceof AEItemKey inputItemKey) {
                 boolean result = VFTests.checkFilter(inputItemKey.toStack(), itemKey.toStack(), true, null);
-                cir.setReturnValue(!(inputItemKey.getItem() instanceof FilterItem)
-                        ? result || this.list.get(input) > 0L
-                        : result);
-                // Should we break here?
+                if (result || (!(inputItemKey.getItem() instanceof FilterItem) && this.list.get(input) > 0L)) {
+                    cir.setReturnValue(true);
+                    break;
+                }
             }
         }
     }

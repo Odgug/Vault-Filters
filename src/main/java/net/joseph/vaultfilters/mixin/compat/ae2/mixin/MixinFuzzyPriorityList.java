@@ -35,9 +35,10 @@ public abstract class MixinFuzzyPriorityList {
 
             if (itemKey.getItem() instanceof FilterItem && input instanceof AEItemKey inputItemKey) {
                 boolean result = VFTests.checkFilter(inputItemKey.toStack(), itemKey.toStack(), true, null);
-                cir.setReturnValue(!(inputItemKey.getItem() instanceof FilterItem)
-                        ? result || !this.list.findFuzzy(input, this.mode).isEmpty()
-                        : result);
+                if (result || (!(inputItemKey.getItem() instanceof FilterItem) && this.list.findFuzzy(input, this.mode).isEmpty())) {
+                    cir.setReturnValue(true);
+                    break;
+                }
             }
         }
     }
