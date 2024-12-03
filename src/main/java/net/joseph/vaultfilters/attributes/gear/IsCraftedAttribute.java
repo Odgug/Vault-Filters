@@ -1,10 +1,6 @@
 
-package net.joseph.vaultfilters.attributes.affix;
+package net.joseph.vaultfilters.attributes.gear;
 
-import iskallia.vault.block.entity.VaultArtisanStationTileEntity;
-import iskallia.vault.client.gui.screen.block.VaultArtisanStationScreen;
-import iskallia.vault.container.VaultArtisanStationContainer;
-import iskallia.vault.gear.attribute.VaultGearModifier;
 import iskallia.vault.gear.data.VaultGearData;
 import iskallia.vault.gear.item.VaultGearItem;
 import iskallia.vault.init.ModGearAttributes;
