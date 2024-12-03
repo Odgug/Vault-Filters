@@ -17,12 +17,14 @@ import net.joseph.vaultfilters.attributes.charm.*;
 import net.joseph.vaultfilters.attributes.inscription.*;
 import net.joseph.vaultfilters.attributes.jewel.*;
 import net.joseph.vaultfilters.attributes.gear.*;
+import net.joseph.vaultfilters.attributes.old.GearIsUniqueAttribute;
 import net.joseph.vaultfilters.attributes.old.InscriptionCompletionAttribute;
 import net.joseph.vaultfilters.attributes.old.InscriptionInstabilityAttribute;
 import net.joseph.vaultfilters.attributes.old.InscriptionTimeAttribute;
 import net.joseph.vaultfilters.attributes.other.*;
 import net.joseph.vaultfilters.attributes.packs.CardPackOpenedAttribute;
 import net.joseph.vaultfilters.attributes.packs.CardPackTypeAttribute;
+import net.joseph.vaultfilters.attributes.pouch.JewelPouchOpenedAttribute;
 import net.joseph.vaultfilters.attributes.soul.*;
 import net.joseph.vaultfilters.attributes.tool.ToolMaterialAttribute;
 import net.joseph.vaultfilters.attributes.trinket.*;
@@ -39,7 +41,7 @@ import org.slf4j.Logger;
 @Mod(VaultFilters.MOD_ID)
 public class VaultFilters {
     public static final String MOD_ID = "vaultfilters";
-    public static final String MOD_VERSION = "1.17.0";
+    public static final String MOD_VERSION = "1.18.0";
     public static final int CHECK_FILTER_FLAG = 456;
     public static final Logger LOGGER = LogUtils.getLogger();
 
@@ -78,18 +80,16 @@ public class VaultFilters {
         new InscriptionRoomTypeAttribute("Challenge").register(InscriptionRoomTypeAttribute::new);
         new InscriptionRoomAttribute("Wild West").register(InscriptionRoomAttribute::new);
 
-        // Old (register anyway for data fixing purposes)
-        new InscriptionTimeAttribute(0).register(InscriptionTimeAttribute::new);
-        new InscriptionCompletionAttribute(0).register(InscriptionCompletionAttribute::new);
-        new InscriptionInstabilityAttribute(0D).register(InscriptionInstabilityAttribute::new);
 
         // Gear
         new GearLevelAttribute(0).register(GearLevelAttribute::new);
         new GearTransmogAttribute("Sword_4").register(GearTransmogAttribute::new);
         new GearRepairSlotAttribute(0).register(GearRepairSlotAttribute::new);
-
+        new IsCraftedAttribute(true).register(IsCraftedAttribute::new);
         new GearUniqueNameAttribute("Baguette").register(GearUniqueNameAttribute::new);
-        new GearIsUniqueAttribute(true).register(GearIsUniqueAttribute::new);
+
+        // Jewel Pouches
+        new JewelPouchOpenedAttribute(true).register(JewelPouchOpenedAttribute::new);
 
         // Jewels
         new JewelSizeAttribute(0).register(JewelSizeAttribute::new);
@@ -100,6 +100,10 @@ public class VaultFilters {
 
         // Affixes
         new HasLegendaryAttribute(true).register(HasLegendaryAttribute::new);
+        new HasCorruptedAttribute(true).register(HasCorruptedAttribute::new);
+        new HasGreaterAttribute(true).register(HasGreaterAttribute::new);
+        new HasFrozenAttribute(true).register(HasFrozenAttribute::new);
+        new HasCraftedAttribute(true).register(HasCraftedAttribute::new);
         new LegendaryPrefixAttribute("Attack Damage").register(LegendaryPrefixAttribute::new);
         new LegendarySuffixAttribute("Trap Disarm").register(LegendarySuffixAttribute::new);
 
@@ -111,23 +115,23 @@ public class VaultFilters {
         new NumberPrefixAttribute("", "", 0).register(NumberPrefixAttribute::new);
         new NumberSuffixAttribute("", "", 0).register(NumberSuffixAttribute::new);
 
-        new HasCorruptedAttribute(true).register(HasCorruptedAttribute::new);
+
         new CorruptedImplicitAttribute("Attack Damage").register(CorruptedImplicitAttribute::new);
         new CorruptedPrefixAttribute("Attack Damage").register(CorruptedPrefixAttribute::new);
         new CorruptedSuffixAttribute("Trap Disarm").register(CorruptedSuffixAttribute::new);
         new IsCorruptedAttribute(true).register(IsCorruptedAttribute::new);
 
-        new HasFrozenAttribute(true).register(HasFrozenAttribute::new);
-
-        new HasCraftedAttribute(true).register(HasCraftedAttribute::new);
-        new IsCraftedAttribute(true).register(IsCraftedAttribute::new);
-
 
         new ModifierGroupAttribute("ModAbility").register(ModifierGroupAttribute::new);
 
-        // Cards
+
+        // Card Packs
+
         new CardPackOpenedAttribute(true).register(CardPackOpenedAttribute::new);
         new CardPackTypeAttribute("Stat").register(CardPackTypeAttribute::new);
+
+        // Cards
+
         new CardAtleastTierAttribute(2).register(CardAtleastTierAttribute::new);
         new CardColorAttribute("Red").register(CardColorAttribute::new);
         new CardTypeAttribute("Foil").register(CardTypeAttribute::new);
@@ -169,5 +173,10 @@ public class VaultFilters {
         //Artifacts
         new ArtifactIDAttribute(0).register(ArtifactIDAttribute::new);
 
+        //Old
+        new InscriptionTimeAttribute(0).register(InscriptionTimeAttribute::new);
+        new InscriptionCompletionAttribute(0).register(InscriptionCompletionAttribute::new);
+        new InscriptionInstabilityAttribute(0D).register(InscriptionInstabilityAttribute::new);
+        new GearIsUniqueAttribute(true).register(GearIsUniqueAttribute::new);
     }
 }

@@ -70,6 +70,9 @@
   "create.item_attributes.has_frozen": "has a frozen modifier",
   "create.item_attributes.has_frozen.inverted": "doesn't have a frozen modifier",
 
+  "create.item_attributes.has_greater": "has a greater modifier",
+  "create.item_attributes.has_greater.inverted": "doesn't have a greater modifier",
+
   "create.item_attributes.is_unidentified": "is unidentified",
   "create.item_attributes.is_unidentified.inverted": "is not unidentified",
 
@@ -165,6 +168,10 @@
 
   "create.item_attributes.card_pack_opened": "is an opened card pack",
   "create.item_attributes.card_pack_opened.inverted": "is not an opened card pack",
+
+  "create.item_attributes.jewel_pouch_opened": "is an opened jewel pouch",
+  "create.item_attributes.jewel_pouch_opened.inverted": "is not an jewel pouch",
+
 
   "create.item_attributes.card_scale_type": "is a card that scales based on \"%1$s\" cards",
   "create.item_attributes.card_scale_type.inverted": "is not a card that scales based on \"%1$s\" cards",
