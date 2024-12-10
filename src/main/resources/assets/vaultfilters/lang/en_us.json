@@ -76,6 +76,9 @@
   "create.item_attributes.is_unidentified": "is unidentified",
   "create.item_attributes.is_unidentified.inverted": "is not unidentified",
 
+  "create.item_attributes.rotten_scav": "is a rotten scavenger item",
+  "create.item_attributes.rotten_scav.inverted": "is not a rotten scavenger item",
+
   "create.item_attributes.is_crafted": "is a crafted gear piece",
   "create.item_attributes.is_crafted.inverted": "is not a crafted gear piece",
 

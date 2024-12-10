@@ -25,6 +25,7 @@ import net.joseph.vaultfilters.attributes.other.*;
 import net.joseph.vaultfilters.attributes.packs.CardPackOpenedAttribute;
 import net.joseph.vaultfilters.attributes.packs.CardPackTypeAttribute;
 import net.joseph.vaultfilters.attributes.pouch.JewelPouchOpenedAttribute;
+import net.joseph.vaultfilters.attributes.scav.IsRottenScavAttribute;
 import net.joseph.vaultfilters.attributes.soul.*;
 import net.joseph.vaultfilters.attributes.tool.ToolMaterialAttribute;
 import net.joseph.vaultfilters.attributes.trinket.*;
@@ -173,6 +174,9 @@ public class VaultFilters {
 
         //Artifacts
         new ArtifactIDAttribute(0).register(ArtifactIDAttribute::new);
+
+        //Scav
+        new IsRottenScavAttribute(true).register(IsRottenScavAttribute::new);
 
         //Old
         new InscriptionTimeAttribute(0).register(InscriptionTimeAttribute::new);
