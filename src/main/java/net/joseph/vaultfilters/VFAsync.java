@@ -45,6 +45,8 @@ public class VFAsync {
     public static void onClientTick(TickEvent.ClientTickEvent event) {
         if (event.phase == TickEvent.Phase.END && Minecraft.getInstance().level == null) {
             shutdownAsync();
+        } else if (Minecraft.getInstance().level != null) {
+            isShuttingDown = false;
         }
     }
 
