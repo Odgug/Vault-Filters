@@ -1,8 +1,6 @@
 package net.joseph.vaultfilters;
 
 import appeng.api.stacks.AEItemKey;
-import iskallia.vault.item.BoosterPackItem;
-import iskallia.vault.item.JewelPouchItem;
 import net.joseph.vaultfilters.configs.VFServerConfig;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -10,6 +8,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.concurrent.ConcurrentHashMap;
+import static net.joseph.vaultfilters.VFAsync.asyncIterateCache;
 
 public class VFCache {
     private static final ConcurrentHashMap<Integer, VFCache> ITEM_CACHES = new ConcurrentHashMap<>();
@@ -85,14 +84,18 @@ public class VFCache {
         cache.addFilter(filterHash, result);
         return result;
     }
-
+    public static void iterateCache() {
+        ITEM_CACHES.values().forEach(VFCache::tick);
+    }
     @SubscribeEvent
     public static void onServerTick(TickEvent.ServerTickEvent event) {
         if (event.phase == TickEvent.Phase.END) {
             if (++ticks >= 60 * 20 ) { // 60 seconds * 20 tps
-                ITEM_CACHES.values().forEach(VFCache::tick);
+                asyncIterateCache();
                 ticks = 0;
             }
         }
     }
+
+
 }
