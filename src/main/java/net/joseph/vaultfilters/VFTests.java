@@ -1,5 +1,6 @@
 package net.joseph.vaultfilters;
 
+import appeng.api.stacks.AEItemKey;
 import com.simibubi.create.content.logistics.filter.FilterItem;
 import com.simibubi.create.content.logistics.filter.FilterItemStack;
 import iskallia.vault.gear.item.VaultGearItem;
@@ -47,12 +48,12 @@ public class VFTests {
         }
 
         Item stackItem = stack.getItem();
-        if (!(stackItem instanceof VaultGearItem || stackItem instanceof InscriptionItem ||
-                stackItem instanceof InfusedCatalystItem ||stackItem instanceof CharmItem ||
-                stackItem instanceof TrinketItem || stackItem instanceof CardItem ||
-                stackItem instanceof BoosterPackItem || stackItem instanceof JewelPouchItem)) {
-            return basicFilterTest(stack,filterStack,level);
-        }
+        //if (!(stackItem instanceof VaultGearItem || stackItem instanceof InscriptionItem ||
+        //        stackItem instanceof InfusedCatalystItem ||stackItem instanceof CharmItem ||
+        //        stackItem instanceof TrinketItem || stackItem instanceof CardItem ||
+        //        stackItem instanceof BoosterPackItem || stackItem instanceof JewelPouchItem)) {
+        //    return basicFilterTest(stack,filterStack,level);
+        //}
 
         if (VFServerConfig.CACHE_DATAFIX.get() && filterStack instanceof ItemStack) {
             DataFixers.clearNBTCache(stack);
@@ -64,6 +65,12 @@ public class VFTests {
 
         //return FilterItemStack.of(filterStack).test(null, stack);
         //return cacheTest(stack, filterStack, VFServerConfig.MAX_CACHES.get(),level);
+        return VFCache.getOrCreateFilter(stack,filterStack,level);
+    }
+    public static boolean checkFilter(AEItemKey stack, Object filterStack, boolean useCache, Level level) {
+        if (!useCache) {
+            return basicFilterTest(stack.toStack(),filterStack,level);
+        }
         return VFCache.getOrCreateFilter(stack,filterStack,level);
     }
 
@@ -102,6 +109,16 @@ public class VFTests {
         return false;
     }
 
+    public static boolean noCacheDetailedTest(ItemStack stack, Object filterStack, Level level) {
+        if (stack.getItem() instanceof BoosterPackItem) {
+            return VFTests.testCardPack(stack,filterStack,level);
+        } else if (stack.getItem() instanceof JewelPouchItem) {
+            return VFTests.testJewelPouch(stack,filterStack,level);
+        } else {
+            return VFTests.basicFilterTest(stack, filterStack, level);
+        }
+    }
+
     public static boolean basicFilterTest(ItemStack stack, Object filterStack, Level level) {
         if (level == null) {
             level = DistExecutor.unsafeRunForDist(() -> VFTests::getClientLevel, () -> () -> VFTests.level);
@@ -112,6 +129,8 @@ public class VFTests {
                 return FilterItemStack.of(stackFilter).test(level, stack);
             } else if (filterStack instanceof FilterItemStack filterItemStack) {
                 return filterItemStack.test(level, stack);
+            } else if (filterStack instanceof AEItemKey aeItemKey) {
+                return FilterItemStack.of(aeItemKey.toStack()).test(level,stack);
             }
             VaultFilters.LOGGER.debug("[0.5.1.f] invalid filter entered");
             return false;

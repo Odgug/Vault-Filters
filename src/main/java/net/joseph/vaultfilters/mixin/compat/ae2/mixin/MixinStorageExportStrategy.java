@@ -47,15 +47,13 @@ public class MixinStorageExportStrategy<C> {
 
         IStorageService inv = context.getInternalStorage();
         if (what instanceof AEItemKey itemKey && VFServerConfig.AE2_COMPAT.get() && itemKey.getItem() instanceof FilterItem) {
-            ItemStack filterStack = itemKey.toStack();
             for (Object2LongMap.Entry<AEKey> key : inv.getInventory().getAvailableStacks()) {
                 AEKey aek = key.getKey();
                 if (!(aek instanceof AEItemKey itemKey2)) {
                     continue;
                 }
 
-                ItemStack stack = itemKey2.toStack();
-                if (VFTests.checkFilter(stack, filterStack, true, null)) {
+                if (VFTests.checkFilter(itemKey2, itemKey, true, null)) {
                     what = aek;
                     break;
                 }

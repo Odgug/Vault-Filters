@@ -31,7 +31,7 @@ public abstract class MixinPrecisePriorityList {
             }
 
             if (itemKey.getItem() instanceof FilterItem && input instanceof AEItemKey inputItemKey) {
-                boolean result = VFTests.checkFilter(inputItemKey.toStack(), itemKey.toStack(), true, null);
+                boolean result = VFTests.checkFilter(inputItemKey, itemKey, true, null);
                 if (result || (!(inputItemKey.getItem() instanceof FilterItem) && this.list.get(input) > 0L)) {
                     cir.setReturnValue(true);
                     break;

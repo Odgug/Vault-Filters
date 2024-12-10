@@ -34,7 +34,7 @@ public abstract class MixinFuzzyPriorityList {
 
 
             if (itemKey.getItem() instanceof FilterItem && input instanceof AEItemKey inputItemKey) {
-                boolean result = VFTests.checkFilter(inputItemKey.toStack(), itemKey.toStack(), true, null);
+                boolean result = VFTests.checkFilter(inputItemKey, itemKey, true, null);
                 if (result || (!(inputItemKey.getItem() instanceof FilterItem) && this.list.findFuzzy(input, this.mode).isEmpty())) {
                     cir.setReturnValue(true);
                     break;

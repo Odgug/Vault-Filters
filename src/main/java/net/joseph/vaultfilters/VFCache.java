@@ -1,5 +1,6 @@
 package net.joseph.vaultfilters;
 
+import appeng.api.stacks.AEItemKey;
 import iskallia.vault.item.BoosterPackItem;
 import iskallia.vault.item.JewelPouchItem;
 import net.joseph.vaultfilters.configs.VFServerConfig;
@@ -54,25 +55,33 @@ public class VFCache {
         int itemHash = stack.hashCode();
         VFCache cache = ITEM_CACHES.get(itemHash);
         if (cache == null) {
-            boolean result = false;
-            if (stack.getItem() instanceof BoosterPackItem) {
-                result = VFTests.testCardPack(stack,filterStack,level);
-            } else if (stack.getItem() instanceof JewelPouchItem) {
-                result = VFTests.testJewelPouch(stack,filterStack,level);
-            } else {
-                result = VFTests.basicFilterTest(stack,filterStack,level);
-            }
+            boolean result = VFTests.noCacheDetailedTest(stack,filterStack,level);
             ITEM_CACHES.put(itemHash, new VFCache(itemHash).addFilter(filterStack.hashCode(), result));
             return result;
         }
-
         int filterHash = filterStack.hashCode();
         Boolean cachedResult = cache.result(filterHash);
         if (cachedResult != null) {
             return cachedResult;
         }
-
         boolean result = VFTests.basicFilterTest(stack, filterStack, level);
+        cache.addFilter(filterHash, result);
+        return result;
+    }
+    public static boolean getOrCreateFilter(AEItemKey stack, Object filterStack, Level level) {
+        int itemHash = stack.hashCode();
+        VFCache cache = ITEM_CACHES.get(itemHash);
+        if (cache == null) {
+            boolean result = VFTests.noCacheDetailedTest(stack.toStack(),filterStack,level);
+            ITEM_CACHES.put(itemHash, new VFCache(itemHash).addFilter(filterStack.hashCode(), result));
+            return result;
+        }
+        int filterHash = filterStack.hashCode();
+        Boolean cachedResult = cache.result(filterHash);
+        if (cachedResult != null) {
+            return cachedResult;
+        }
+        boolean result = VFTests.basicFilterTest(stack.toStack(), filterStack, level);
         cache.addFilter(filterHash, result);
         return result;
     }
