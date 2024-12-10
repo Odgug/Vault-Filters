@@ -25,6 +25,11 @@ public class HasCorruptedAttribute extends BooleanAttribute {
                 return true;
             }
         }
+        for (VaultGearModifier<?> modifier : data.getModifiers(VaultGearModifier.AffixType.IMPLICIT)) {
+            if (modifier.hasCategory(VaultGearModifier.AffixCategory.CORRUPTED)) {
+                return true;
+            }
+        }
 
         return false;
     }
