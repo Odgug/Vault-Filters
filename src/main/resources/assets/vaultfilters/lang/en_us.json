@@ -38,6 +38,12 @@
   "create.item_attributes.repair": "has at least \"%1$s\" unused repair slots",
   "create.item_attributes.repair.inverted": "doesn't have at least \"%1$s\" unused repair slots",
 
+  "create.item_attributes.max_potential": "has at least \"%1$s\" max crafting potential",
+  "create.item_attributes.max_potential.inverted": "doesn't have at least \"%1$s\" max crafting potential",
+
+  "create.item_attributes.current_potential": "has at least \"%1$s\" crafting potential",
+  "create.item_attributes.current_potential.inverted": "doesn't have at least \"%1$s\" crafting potential",
+
   "create.item_attributes.level": "is at least level \"%1$s\"",
   "create.item_attributes.level.inverted": "is not at least level \"%1$s\"",
 

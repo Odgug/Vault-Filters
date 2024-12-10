@@ -89,6 +89,8 @@ public class VaultFilters {
         new GearRepairSlotAttribute(0).register(GearRepairSlotAttribute::new);
         new IsCraftedAttribute(true).register(IsCraftedAttribute::new);
         new GearUniqueNameAttribute("Baguette").register(GearUniqueNameAttribute::new);
+        new PotentialCurrentAttribute(255).register(PotentialCurrentAttribute::new);
+        new PotentialMaxAttribute(256).register(PotentialMaxAttribute::new);
 
         // Jewel Pouches
         new JewelPouchOpenedAttribute(true).register(JewelPouchOpenedAttribute::new);
