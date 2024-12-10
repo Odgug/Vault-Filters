@@ -41,14 +41,7 @@ public class VFAsync {
     public static void onServerStopping(ServerStoppingEvent event) {
         shutdownAsync();
     }
-    @SubscribeEvent
-    public static void onClientTick(TickEvent.ClientTickEvent event) {
-        if (event.phase == TickEvent.Phase.END && Minecraft.getInstance().level == null) {
-            shutdownAsync();
-        } else if (Minecraft.getInstance().level != null) {
-            isShuttingDown = false;
-        }
+    static {
+        Runtime.getRuntime().addShutdownHook(new Thread(VFAsync::shutdownAsync));
     }
-
-
 }
