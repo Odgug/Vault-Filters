@@ -4,6 +4,7 @@ import com.simibubi.create.content.logistics.filter.ItemAttribute;
 import iskallia.vault.gear.attribute.VaultGearModifier;
 import iskallia.vault.gear.attribute.ability.AbilityLevelAttribute;
 import iskallia.vault.gear.attribute.custom.effect.EffectAvoidanceGearAttribute;
+import iskallia.vault.gear.attribute.custom.effect.EffectAvoidanceListGearAttribute;
 import iskallia.vault.gear.attribute.custom.effect.EffectCloudAttribute;
 import iskallia.vault.gear.attribute.talent.RandomVaultModifierAttribute;
 import iskallia.vault.gear.data.VaultGearData;
@@ -100,6 +101,9 @@ public abstract class AffixAttribute extends StringAttribute {
         // Get name returns blank for Effect Avoidance Attributes as well
         if (modifier.getValue() instanceof EffectAvoidanceGearAttribute avoidanceAttribute) {
             return avoidanceAttribute.getEffect().getDisplayName().getString() + " Avoidance";
+        }
+        if (modifier.getValue() instanceof EffectAvoidanceListGearAttribute effAvAttribute) {
+            return "Effect Avoidance";
         }
 
         VaultGearModifierReader<T> reader = modifier.getAttribute().getReader();
