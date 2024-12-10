@@ -91,6 +91,7 @@ public class VaultFilters {
         new GearUniqueNameAttribute("Baguette").register(GearUniqueNameAttribute::new);
         new PotentialCurrentAttribute(255).register(PotentialCurrentAttribute::new);
         new PotentialMaxAttribute(256).register(PotentialMaxAttribute::new);
+        new HasSoulboundAttribute(true).register(HasSoulboundAttribute::new);
 
         // Jewel Pouches
         new JewelPouchOpenedAttribute(true).register(JewelPouchOpenedAttribute::new);
