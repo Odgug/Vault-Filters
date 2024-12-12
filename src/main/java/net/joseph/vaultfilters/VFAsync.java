@@ -37,11 +37,8 @@ public class VFAsync {
         }
 
     }
-    @SubscribeEvent
-    public static void onServerStopping(ServerStoppingEvent event) {
-        shutdownAsync();
-    }
     static {
         Runtime.getRuntime().addShutdownHook(new Thread(VFAsync::shutdownAsync));
+        VaultFilters.LOGGER.info("shutting down extra thread");
     }
 }
