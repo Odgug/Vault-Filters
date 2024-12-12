@@ -4,7 +4,9 @@
   "compatibilityLevel": "JAVA_17",
   "plugin": "net.joseph.vaultfilters.mixin.compat.create.CreateMixinPlugin",
   "client": [
-    "MixinAttributeFilterScreen"
+    "MixinAttributeFilterScreen",
+    "MixinClientFilterItem"
+
   ],
   "mixins": [
     "FilterItemInvoker",
