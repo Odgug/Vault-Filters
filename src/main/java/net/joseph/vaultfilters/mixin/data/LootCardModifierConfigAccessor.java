@@ -5,7 +5,7 @@ import iskallia.vault.core.world.loot.LootPool;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Mixin(TaskLootCardModifier.Config.class)
+@Mixin(value = TaskLootCardModifier.Config.class, remap = false)
 public interface LootCardModifierConfigAccessor {
     @Accessor
     LootPool getLoot();
