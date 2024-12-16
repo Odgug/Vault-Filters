@@ -16,7 +16,11 @@ public enum CreateVersion {
             createVersion = createInfo.versionString();
         }
 
-        if (createVersion.contains("0.5.1.f")) { // it has suffix in dev
+        if (createVersion.contains("0.5.1.f")
+            || createVersion.contains("0.5.1.g")
+            || createVersion.contains("0.5.1.h")
+            || createVersion.contains("0.5.1.i")
+        ) { // it has suffix in dev
             loadedVersion = CREATE_051F;
         } else if (createVersion.contains("0.5.1.b")
             || createVersion.contains("0.5.1.c")
