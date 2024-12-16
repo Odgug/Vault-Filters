@@ -5,7 +5,7 @@ issueTrackerURL="https://github.com/Odgug/Vault-Filters/issues"
 
 [[mods]]
 modId="vaultfilters"
-version="1.19.1"
+version="1.19.2"
 displayName="Vault Filters"
 logoFile="vaultfilters.png"
 description='''
@@ -24,7 +24,7 @@ authors="Joseph Franci"
 [[dependencies.vaultfilters]]
     modId="create"
     mandatory=true
-    versionRange="[0.5.1.b,0.5.1.f-332]"
+    versionRange="[0.5.1.b,0.5.1.i-435]"
     ordering="AFTER"
     side="BOTH"
 
