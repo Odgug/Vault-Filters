@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 import java.util.Set;
 
-@Mixin(InventoryHandlerSlotTracker.class)
+@Mixin(value = InventoryHandlerSlotTracker.class, remap = false)
 public interface InventoryHandlerSlotTrackerAccessor
 {
     @Accessor("emptySlots")

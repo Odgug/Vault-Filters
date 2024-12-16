@@ -3,13 +3,12 @@ package net.joseph.vaultfilters.mixin.data;
 import iskallia.vault.core.card.CardCondition;
 import iskallia.vault.core.card.CardEntry;
 import iskallia.vault.core.card.CardNeighborType;
-import iskallia.vault.core.card.CardScaler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 import java.util.Set;
 
-@Mixin(CardCondition.Filter.class)
+@Mixin(value = CardCondition.Filter.class, remap = false)
 public interface ConditionFilterAccessor {
     @Accessor
     Set<CardNeighborType> getNeighborFilter();

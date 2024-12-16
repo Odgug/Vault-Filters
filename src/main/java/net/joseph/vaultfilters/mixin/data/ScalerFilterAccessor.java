@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 import java.util.Set;
 
-@Mixin(CardScaler.Filter.class)
+@Mixin(value = CardScaler.Filter.class, remap = false)
 public interface ScalerFilterAccessor {
     @Accessor
     Set<CardNeighborType> getNeighborFilter();

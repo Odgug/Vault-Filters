@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
-@Mixin(FilterItemStack.ListFilterItemStack.class)
+@Mixin(value = FilterItemStack.ListFilterItemStack.class, remap = false)
 public class MixinListFilterItemStack {
     @Unique
     public boolean vault_filters$isMatchAll;
@@ -30,7 +30,7 @@ public class MixinListFilterItemStack {
         vault_filters$isMatchAll = !defaults && filter.getTag().getBoolean("MatchAll");
     }
 
-    @Inject(method = "test(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;Z)Z", at = @At("HEAD"), cancellable = true, remap = false)
+    @Inject(method = "test(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;Z)Z", at = @At("HEAD"), cancellable = true)
     private void modifyTestMethod(Level world, ItemStack stack, boolean matchNBT, CallbackInfoReturnable<Boolean> cir) {
         if (this.containedItems.isEmpty()) {
             return;
