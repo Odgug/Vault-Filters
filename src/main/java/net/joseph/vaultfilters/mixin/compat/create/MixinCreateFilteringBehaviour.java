@@ -14,8 +14,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value = FilteringBehaviour.class, remap = false)
 public abstract class MixinCreateFilteringBehaviour extends BlockEntityBehaviour {
-    @Shadow
-    private FilterItemStack filter;
+
+    @Shadow public abstract ItemStack getFilter();
 
     protected MixinCreateFilteringBehaviour(SmartBlockEntity be) {
         super(be);
@@ -23,7 +23,7 @@ public abstract class MixinCreateFilteringBehaviour extends BlockEntityBehaviour
 
     @Inject(method = "test(Lnet/minecraft/world/item/ItemStack;)Z", at = @At("HEAD"), cancellable = true)
     public void checkFilter(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
-        cir.setReturnValue(!isActive() || this.filter.isEmpty() || VFTests.checkFilter(stack, this.filter, true, this.blockEntity.getLevel()));
+        cir.setReturnValue(!isActive() || this.getFilter().isEmpty() || VFTests.checkFilter(stack, this.getFilter(), true, this.blockEntity.getLevel()));
     }
 
     @Shadow

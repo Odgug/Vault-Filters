@@ -66,6 +66,7 @@ public abstract class MixinClientFilterItem {
     }
 
     @ModifyArg(method = "makeSummary", at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z", ordinal = 0), remap = false)
+    @SuppressWarnings("unchecked") // erased generics
     private <E> E showAndAnyInListFilterTooltip(E e, @Local LocalBooleanRef blacklist,
                                              @Local(argsOnly = true) ItemStack filter) {
 

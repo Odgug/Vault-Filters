@@ -27,7 +27,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Arrays;
 import java.util.List;
 
-@Mixin(FilterScreen.class)
+@Mixin(value = FilterScreen.class, remap = false)
 public abstract class MixinFilterScreen extends AbstractFilterScreen<FilterMenu> {
     @Shadow private IconButton blacklist;
     @Shadow private IconButton whitelist;
@@ -63,7 +63,7 @@ public abstract class MixinFilterScreen extends AbstractFilterScreen<FilterMenu>
     }
 
     @Inject(method = "init",at = @At(value = "INVOKE",
-            target = "Lcom/simibubi/create/content/logistics/filter/FilterScreen;handleIndicators()V",shift = At.Shift.BEFORE, ordinal = 0))
+            target = "Lcom/simibubi/create/content/logistics/filter/FilterScreen;handleIndicators()V",shift = At.Shift.BEFORE, ordinal = 0, remap = false), remap = true)
     private void injectInitializer(CallbackInfo ci, @Local(ordinal = 0) int x, @Local(ordinal = 1) int y) {
         if (!ModPresence.serverHasVaultFilters()) {
             return;
@@ -88,14 +88,14 @@ public abstract class MixinFilterScreen extends AbstractFilterScreen<FilterMenu>
         addRenderableWidgets(matchAll, matchAny, matchAllIndicator, matchAnyIndicator);
     }
 
-    @Inject(method = "getTooltipButtons", at = @At("HEAD"), cancellable = true,remap = false)
+    @Inject(method = "getTooltipButtons", at = @At("HEAD"), cancellable = true)
     private void addToolTipButtons(CallbackInfoReturnable<List<IconButton>> cir) {
         if (ModPresence.serverHasVaultFilters()) {
             cir.setReturnValue(Arrays.asList(blacklist, whitelist, respectNBT, ignoreNBT, matchAll, matchAny));
         }
     }
 
-    @Inject(method = "getTooltipDescriptions", at = @At("HEAD"), cancellable = true,remap = false)
+    @Inject(method = "getTooltipDescriptions", at = @At("HEAD"), cancellable = true)
     private void addToolTipDescriptions(CallbackInfoReturnable<List<MutableComponent>> cir) {
         if (ModPresence.serverHasVaultFilters()) {
             cir.setReturnValue(Arrays.asList(denyDESC.plainCopy(), allowDESC.plainCopy(), respectDataDESC.plainCopy(),
@@ -103,7 +103,7 @@ public abstract class MixinFilterScreen extends AbstractFilterScreen<FilterMenu>
 
         }
     }
-    @Inject(method = "getIndicators", at = @At("HEAD"), cancellable = true,remap = false)
+    @Inject(method = "getIndicators", at = @At("HEAD"), cancellable = true)
     private void addIndicators(CallbackInfoReturnable<List<Indicator>> cir) {
         if (ModPresence.serverHasVaultFilters()) {
             cir.setReturnValue(Arrays.asList(blacklistIndicator, whitelistIndicator, respectNBTIndicator,
@@ -112,7 +112,7 @@ public abstract class MixinFilterScreen extends AbstractFilterScreen<FilterMenu>
         }
     }
 
-    @Inject(method = "isButtonEnabled", at = @At("TAIL"), cancellable = true,remap = false)
+    @Inject(method = "isButtonEnabled", at = @At("TAIL"), cancellable = true)
     private void addButtonsEnabled(IconButton button, CallbackInfoReturnable<Boolean> cir) {
         if (button == matchAll) {
             cir.setReturnValue(!menuAccessor.vault_filters$getMatchAll());
@@ -121,7 +121,7 @@ public abstract class MixinFilterScreen extends AbstractFilterScreen<FilterMenu>
         }
     }
 
-    @Inject(method = "isIndicatorOn", at = @At("TAIL"), cancellable = true,remap = false)
+    @Inject(method = "isIndicatorOn", at = @At("TAIL"), cancellable = true)
     private void addIndicatorsEnabled(Indicator indicator, CallbackInfoReturnable<Boolean> cir) {
         if (indicator == matchAllIndicator) {
             cir.setReturnValue(menuAccessor.vault_filters$getMatchAll());
