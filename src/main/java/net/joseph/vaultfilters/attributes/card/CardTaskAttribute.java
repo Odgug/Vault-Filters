@@ -1,6 +1,8 @@
 package net.joseph.vaultfilters.attributes.card;
 
 import iskallia.vault.core.card.*;
+import iskallia.vault.core.card.modifier.card.CardModifier;
+import iskallia.vault.core.card.modifier.card.TaskLootCardModifier;
 import iskallia.vault.item.CardItem;
 import iskallia.vault.task.KillEntityTask;
 import iskallia.vault.task.LootChestTask;
