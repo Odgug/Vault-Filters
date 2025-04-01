@@ -2,8 +2,8 @@ package net.joseph.vaultfilters.attributes.card;
 
 import iskallia.vault.core.card.Card;
 import iskallia.vault.core.card.CardEntry;
-import iskallia.vault.core.card.CardModifier;
-import iskallia.vault.core.card.TaskLootCardModifier;
+import iskallia.vault.core.card.modifier.card.CardModifier;
+import iskallia.vault.core.card.modifier.card.TaskLootCardModifier;
 import iskallia.vault.item.CardItem;
 import iskallia.vault.task.ProgressConfiguredTask;
 import iskallia.vault.task.Task;

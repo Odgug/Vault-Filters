@@ -1,6 +1,9 @@
 package net.joseph.vaultfilters.attributes.card;
 
 import iskallia.vault.core.card.*;
+import iskallia.vault.core.card.modifier.card.CardModifier;
+import iskallia.vault.core.card.modifier.card.GearCardModifier;
+import iskallia.vault.core.card.modifier.card.TaskLootCardModifier;
 import iskallia.vault.core.random.JavaRandom;
 import iskallia.vault.core.vault.modifier.registry.VaultModifierRegistry;
 import iskallia.vault.core.vault.modifier.spi.VaultModifier;

@@ -1,6 +1,6 @@
 package net.joseph.vaultfilters.mixin.data;
 
-import iskallia.vault.core.card.TaskLootCardModifier;
+import iskallia.vault.core.card.modifier.card.TaskLootCardModifier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
