@@ -62,7 +62,7 @@ public abstract class MixinClientFilterItem {
     @Inject(method = "appendHoverText", at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/logistics/filter/FilterItem;makeSummary(Lnet/minecraft/world/item/ItemStack;)Ljava/util/List;", remap = false))
     private void addCtrlHint(ItemStack stack, Level worldIn, List<Component> tooltip, TooltipFlag flagIn, CallbackInfo ci) {
         ChatFormatting color = Screen.hasControlDown() ? ChatFormatting.WHITE : ChatFormatting.GRAY;
-        tooltip.add(Components.literal("Hold [").append(Components.translatable("create.tooltip.keyCtrl").withStyle(color)).append("] to show nested filters.").withStyle(ChatFormatting.DARK_GRAY));
+        tooltip.add(Components.literal("Hold [").append(Components.translatable("create.tooltip.keyCtrl").withStyle(color)).append("] to show nested filters").withStyle(ChatFormatting.DARK_GRAY));
     }
 
     @ModifyArg(method = "makeSummary", at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z", ordinal = 0), remap = false)
