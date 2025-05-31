@@ -1,5 +1,7 @@
 package net.joseph.vaultfilters.mixin.compat.create;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.simibubi.create.AllPackets;
 import com.simibubi.create.content.logistics.filter.AbstractFilterScreen;
@@ -25,8 +27,10 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,13 +70,13 @@ public abstract class MixinAttributeFilterScreen extends AbstractFilterScreen<At
     @Unique private int vault_Filters$selectedAttrIndex = 0;
     @Unique private int vault_Filters$deletionLastTick = 0;
     @Unique private int vault_Filters$deletionProgressTick = 0;
-
+    
     // scrolling of selected attributes
     @Override public boolean mouseScrolled(double pMouseX, double pMouseY, double pDelta) {
         var res = super.mouseScrolled(pMouseX, pMouseY, pDelta);
         if (this.hoveredSlot != null && this.hoveredSlot.index == 37) {
             var idx = vault_Filters$selectedAttrIndex;
-            if (pDelta < 0 && idx + 1 < this.selectedAttributes.size() - 1) {
+            if (pDelta < 0 && idx + 1 < this.selectedAttributes.size() - 2) {
                 vault_Filters$selectedAttrIndex = idx + 1;
                 var oldAt = this.selectedAttributes.get(idx + 1);
                 this.selectedAttributes.set(idx + 1, Components.literal(oldAt.getString()).withStyle(ChatFormatting.GRAY));
@@ -93,6 +97,34 @@ public abstract class MixinAttributeFilterScreen extends AbstractFilterScreen<At
         return res;
     }
 
+    // deletion tooltip
+    @Unique private static final Component vault_Filters$delTooltipLine =  Components.literal("Hold [").withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC)
+        .append(Components.literal("DEL").withStyle(ChatFormatting.WHITE))
+        .append(Components.literal("] to remove attribute"));
+
+    @Inject(method = "init", at = @At("TAIL"), remap = true)
+    private void addDelTooltipLine(CallbackInfo ci) {
+        if (this.selectedAttributes.size() > 1) {
+            this.selectedAttributes.add(vault_Filters$delTooltipLine);
+        }
+    }
+    @Inject(method = "handleAddedAttibute", at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z"))
+    private void rmDelTooltipLine(boolean inverted, CallbackInfoReturnable<Boolean> cir) {
+        this.selectedAttributes.remove(vault_Filters$delTooltipLine);
+    }
+
+    @Inject(method = "handleAddedAttibute", at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z", shift = At.Shift.AFTER))
+    private void addDelTooltipLine(boolean inverted, CallbackInfoReturnable<Boolean> cir) {
+        this.selectedAttributes.add(vault_Filters$delTooltipLine);
+    }
+    @WrapOperation(method = "renderForeground", at = @At(value = "INVOKE", target = "Ljava/util/List;size()I"))
+    private int renderForeground(List<Component> instance, Operation<Integer> original) {
+        if (!instance.isEmpty() && instance.get(instance.size() - 1) == vault_Filters$delTooltipLine) {
+            return instance.size() - 1; // don't count the deletion tooltip line
+        }
+        return original.call(instance);
+    }
+
     // handle hold to delete and highlighting
     @Inject(method = "containerTick", at = @At("TAIL"), remap = true)
     private void attributeDeletionTick(CallbackInfo ci) {
@@ -107,7 +139,7 @@ public abstract class MixinAttributeFilterScreen extends AbstractFilterScreen<At
             }
         }
         int idx = vault_Filters$selectedAttrIndex;
-        if (idx >= 0 && idx + 1 < selectedAttributes.size()) {
+        if (idx >= 0 && idx + 1 < this.selectedAttributes.size()) {
             float progress = Math.min(Math.max(0, vault_Filters$deletionProgressTick), 20) / 20f;
             var selected = this.selectedAttributes.get(idx + 1);
             String text = selected.getString();
@@ -153,7 +185,9 @@ public abstract class MixinAttributeFilterScreen extends AbstractFilterScreen<At
         if (((AttributeFilterMenuAccessor) this.menu).getSelectedAttributes().size() == 1) {
             this.selectedAttributes.set(0, this.selectedT.plainCopy().withStyle(ChatFormatting.YELLOW));
         }
+        this.selectedAttributes.remove(vault_Filters$delTooltipLine);
         this.selectedAttributes.add(Components.literal("- ").append(itemAttribute.format(inverted)).withStyle(ChatFormatting.GRAY));
+        this.selectedAttributes.add(vault_Filters$delTooltipLine);
     }
 
     // deletes all attrs and readds everything except the one that should be removed
