@@ -5,9 +5,9 @@
   "client": [
     "MixinAttributeFilterScreen",
     "MixinClientFilterItem"
-
   ],
   "mixins": [
+    "AttributeFilterMenuAccessor",
     "FilterItemInvoker",
     "MixinCreateFilteringBehaviour",
     "MixinFilterItem",
