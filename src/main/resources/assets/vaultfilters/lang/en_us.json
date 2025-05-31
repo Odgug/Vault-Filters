@@ -184,6 +184,8 @@
   "create.item_attributes.jewel_pouch_opened": "is an opened jewel pouch",
   "create.item_attributes.jewel_pouch_opened.inverted": "is not an jewel pouch",
 
+  "create.item_attributes.jewel_pouch_choose": "choose a jewel from opened pouch in MR activator module",
+  "create.item_attributes.jewel_pouch_choose.inverted": "do not choose a jewel from opened pouch in MR activator module",
 
   "create.item_attributes.card_scale_type": "is a card that scales based on \"%1$s\" cards",
   "create.item_attributes.card_scale_type.inverted": "is not a card that scales based on \"%1$s\" cards",
@@ -205,6 +207,9 @@
 
   "create.item_attributes.card_pack_type": "is a \"%1$s\" card pack",
   "create.item_attributes.card_pack_type.inverted": "is not a \"%1$s\" card pack",
+
+  "create.item_attributes.card_pack_choose": "choose a card from opened pack in MR activator module",
+  "create.item_attributes.card_pack_choose.inverted": "do not choose a card from opened pack in MR activator module",
 
   "create.item_attributes.card_condition_num": "is a card with a condition that will allow \"%1$s\" matching cards",
   "create.item_attributes.card_condition_num.inverted": "is not a a card with a condition that will allow \"%1$s\" matching cards",
@@ -233,8 +238,6 @@
   "create.item_attributes.catalyst_category": "is a catalyst with a \"%1$s\" category modifier",
   "create.item_attributes.catalyst_category.inverted": "is not a catalyst with a \"%1$s\"  category modifier",
 
-  "create.item_attributes.bag_empty": "is an empty bag",
-  "create.item_attributes.bag_empty.inverted": "is not an empty bag",
 
   "item.create.filter.tooltip.summary": "_Matches items_ against a collection of _items_ or _other filters_ (Attribute and List filters). Can be used in _Filter Slots_ of some mods (Create, RS, MR, AE2 and Backpacks by default)",
   "item.create.filter.tooltip.condition1": "When R-Clicked",

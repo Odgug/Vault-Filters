@@ -32,6 +32,7 @@ public class VFAsync {
     }
     public static void shutdownAsync() {
         if (!isShuttingDown) {
+            VaultFilters.LOGGER.info("shutting down extra thread");
             EXECUTOR.shutdownNow();
             isShuttingDown = true;
         }
@@ -39,6 +40,5 @@ public class VFAsync {
     }
     static {
         Runtime.getRuntime().addShutdownHook(new Thread(VFAsync::shutdownAsync));
-        VaultFilters.LOGGER.info("shutting down extra thread");
     }
 }

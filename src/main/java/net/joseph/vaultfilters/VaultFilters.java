@@ -22,8 +22,10 @@ import net.joseph.vaultfilters.attributes.old.InscriptionCompletionAttribute;
 import net.joseph.vaultfilters.attributes.old.InscriptionInstabilityAttribute;
 import net.joseph.vaultfilters.attributes.old.InscriptionTimeAttribute;
 import net.joseph.vaultfilters.attributes.other.*;
+import net.joseph.vaultfilters.attributes.packs.CardPackChooseAttribute;
 import net.joseph.vaultfilters.attributes.packs.CardPackOpenedAttribute;
 import net.joseph.vaultfilters.attributes.packs.CardPackTypeAttribute;
+import net.joseph.vaultfilters.attributes.pouch.JewelPouchChooseAttribute;
 import net.joseph.vaultfilters.attributes.pouch.JewelPouchOpenedAttribute;
 import net.joseph.vaultfilters.attributes.scav.IsRottenScavAttribute;
 import net.joseph.vaultfilters.attributes.soul.*;
@@ -42,7 +44,7 @@ import org.slf4j.Logger;
 @Mod(VaultFilters.MOD_ID)
 public class VaultFilters {
     public static final String MOD_ID = "vaultfilters";
-    public static final String MOD_VERSION = "1.19.0";
+    public static final String MOD_VERSION = "1.21.0";
     public static final int CHECK_FILTER_FLAG = 456;
     public static final Logger LOGGER = LogUtils.getLogger();
 
@@ -95,6 +97,7 @@ public class VaultFilters {
 
         // Jewel Pouches
         new JewelPouchOpenedAttribute(true).register(JewelPouchOpenedAttribute::new);
+        new JewelPouchChooseAttribute(true).register(JewelPouchChooseAttribute::new);
 
         // Jewels
         new JewelSizeAttribute(0).register(JewelSizeAttribute::new);
@@ -134,6 +137,7 @@ public class VaultFilters {
 
         new CardPackOpenedAttribute(true).register(CardPackOpenedAttribute::new);
         new CardPackTypeAttribute("Stat").register(CardPackTypeAttribute::new);
+        new CardPackChooseAttribute(true).register(CardPackChooseAttribute::new);
 
         // Cards
 
