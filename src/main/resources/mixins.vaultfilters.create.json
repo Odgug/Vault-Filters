@@ -2,18 +2,15 @@
   "required": true,
   "package": "net.joseph.vaultfilters.mixin.compat.create",
   "compatibilityLevel": "JAVA_17",
-  "plugin": "net.joseph.vaultfilters.mixin.compat.create.CreateMixinPlugin",
   "client": [
     "MixinAttributeFilterScreen",
     "MixinClientFilterItem"
-
   ],
   "mixins": [
+    "AttributeFilterMenuAccessor",
     "FilterItemInvoker",
     "MixinCreateFilteringBehaviour",
-    "MixinCreateFilteringBehaviourLegacy",
     "MixinFilterItem",
-    "MixinFilterItemLegacy",
     "MixinFilterMenu",
     "MixinFilterScreen",
     "MixinFilterScreenPacket",

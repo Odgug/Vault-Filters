@@ -27,20 +27,7 @@ import java.util.List;
 
 public class VFTests {
     public static String filterKey = "hashes";
-    private static MethodHandle testMethodHandle;
     private static Level level;
-
-    static {
-        if (CreateVersion.getLoadedVersion() == CreateVersion.LEGACY) {
-            try {
-                MethodType methodType = MethodType.methodType(boolean.class, Level.class, ItemStack.class, ItemStack.class);
-                testMethodHandle = MethodHandles.lookup().findStatic(FilterItem.class, "test", methodType);
-            } catch (NoSuchMethodException | IllegalAccessException e) {
-                VaultFilters.LOGGER.error("[0.5.1.b-e] could not find test method", e);
-                throw new IllegalStateException(e);
-            }
-        }
-    }
 
     public static boolean checkFilter(ItemStack stack, Object filterStack, boolean useCache, Level level) {
         if (!useCache) {
@@ -124,36 +111,15 @@ public class VFTests {
             level = DistExecutor.unsafeRunForDist(() -> VFTests::getClientLevel, () -> () -> VFTests.level);
         }
 
-        if (CreateVersion.getLoadedVersion() == CreateVersion.CREATE_051F) {
-            if (filterStack instanceof ItemStack stackFilter) {
-                return FilterItemStack.of(stackFilter).test(level, stack);
-            } else if (filterStack instanceof FilterItemStack filterItemStack) {
-                return filterItemStack.test(level, stack);
-            } else if (filterStack instanceof AEItemKey aeItemKey) {
-                return FilterItemStack.of(aeItemKey.toStack()).test(level,stack);
-            }
-            VaultFilters.LOGGER.debug("[0.5.1.f] invalid filter entered");
-            return false;
+        if (filterStack instanceof ItemStack stackFilter) {
+            return FilterItemStack.of(stackFilter).test(level, stack);
+        } else if (filterStack instanceof FilterItemStack filterItemStack) {
+            return filterItemStack.test(level, stack);
+        } else if (filterStack instanceof AEItemKey aeItemKey) {
+            return FilterItemStack.of(aeItemKey.toStack()).test(level,stack);
         }
-
-        if (CreateVersion.getLoadedVersion() == CreateVersion.LEGACY) {
-            return basicFilterTestLegacy(filterStack, stack, level);
-        }
+        VaultFilters.LOGGER.debug("[0.5.1.f] invalid filter entered");
         return false;
-    }
-
-    private static boolean basicFilterTestLegacy(Object filterStack, ItemStack stack, Level level) {
-        if (testMethodHandle == null) {
-            throw new IllegalStateException("[0.5.1.b-e] could not find test method");
-        }
-
-        try {
-            return (boolean) testMethodHandle.invoke(level, stack, filterStack);
-        } catch (Throwable e) {
-            VaultFilters.LOGGER.error("[0.5.1.b-e] could not invoke test method", e);
-            // wrap it in unchecked exception
-            throw new IllegalStateException(e);
-        }
     }
 
     @SubscribeEvent
