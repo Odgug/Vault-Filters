@@ -247,6 +247,15 @@
   "create.item_attributes.boss_rune_gives_item": "is a rune that gives \"%1$s\"",
   "create.item_attributes.boss_rune_gives_item.inverted": "is not a rune that gives \"%1$s\"",
 
+  "create.item_attributes.boss_rune_gear_rarity": "is a rune that gives \"%1$s\" gear",
+  "create.item_attributes.boss_rune_gear_rarity.inverted": "is not a rune that gives \"%1$s\" gear",
+  
+  "create.item_attributes.boss_rune_booster_pack_type": "is a rune that gives a \"%1$s\" card pack",
+  "create.item_attributes.boss_rune_booster_pack_type.inverted": "is not a rune that gives a \"%1$s\" card pack",
+  
+  "create.item_attributes.boss_rune_inscription_type": "is a rune that gives a \"%1$s\" type inscription",
+  "create.item_attributes.boss_rune_inscription_type.inverted": "is not a rune that gives a \"%1$s\" type inscription",
+
   "item.create.filter.tooltip.summary": "_Matches items_ against a collection of _items_ or _other filters_ (Attribute and List filters). Can be used in _Filter Slots_ of some mods (Create, RS, MR, AE2 and Backpacks by default)",
   "item.create.filter.tooltip.condition1": "When R-Clicked",
   "item.create.filter.tooltip.behaviour1": "Opens the _configuration interface_.",
