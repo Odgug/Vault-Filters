@@ -7,6 +7,9 @@ import net.joseph.vaultfilters.attributes.artifact.ArtifactIDAttribute;
 import net.joseph.vaultfilters.attributes.backpacks.IsEmptyAttribute;
 import net.joseph.vaultfilters.attributes.rune.BossRuneModifierAttribute;
 import net.joseph.vaultfilters.attributes.rune.BossRuneGivesItemAttribute;
+import net.joseph.vaultfilters.attributes.rune.BossRuneGearRarityAttribute;
+import net.joseph.vaultfilters.attributes.rune.BossRuneBoosterPackTypeAttribute;
+import net.joseph.vaultfilters.attributes.rune.BossRuneInscriptionTypeAttribute;
 
 import net.joseph.vaultfilters.attributes.backpacks.HasUUIDAttribute;
 import net.joseph.vaultfilters.attributes.backpacks.HasUpgradeAttribute;
