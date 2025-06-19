@@ -241,6 +241,12 @@
   "create.item_attributes.bag_empty": "is an empty bag",
   "create.item_attributes.bag_empty.inverted": "is not an empty bag",
 
+  "create.item_attributes.boss_rune_modifier": "is a boss rune with modifier \"%1$s\" (any slot)",
+  "create.item_attributes.boss_rune_modifier.inverted": "is not a boss rune with modifier \"%1$s\" (any slot)",
+  
+  "create.item_attributes.boss_rune_contains_item": "adds \"%1$s\" to the completion crate",
+  "create.item_attributes.boss_rune_contains_item.inverted": "does not add \"%1$s\" to the completion crate"
+
   "item.create.filter.tooltip.summary": "_Matches items_ against a collection of _items_ or _other filters_ (Attribute and List filters). Can be used in _Filter Slots_ of some mods (Create, RS, MR, AE2 and Backpacks by default)",
   "item.create.filter.tooltip.condition1": "When R-Clicked",
   "item.create.filter.tooltip.behaviour1": "Opens the _configuration interface_.",
