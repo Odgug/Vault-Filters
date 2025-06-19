@@ -1,13 +1,14 @@
 package net.joseph.vaultfilters.attributes.rune;
 
+import iskallia.vault.init.ModConfigs;
+import iskallia.vault.item.BoosterPackItem;
 import iskallia.vault.item.BossRuneItem;
 import net.joseph.vaultfilters.attributes.abstracts.StringAttribute;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 public class BossRuneBoosterPackTypeAttribute extends StringAttribute {
     public BossRuneBoosterPackTypeAttribute(String value) {
@@ -21,23 +22,17 @@ public class BossRuneBoosterPackTypeAttribute extends StringAttribute {
         ListTag items = itemStack.getTag().getList("Items", 10);
         if (items.isEmpty()) return null;
         CompoundTag packTag = items.getCompound(0);
-        if (!packTag.contains("tag", 10)) return null;
-        CompoundTag innerTag = packTag.getCompound("tag");
-        if (!innerTag.contains("id")) return null;
-        return innerTag.getString("id");
-    }
+        if (!"the_vault:booster_pack".equals(packTag.getString("id"))) return null;
 
-    @Override
-    public Object[] getTranslationParameters() {
-        String displayName = this.value;
-        try {
-            ResourceLocation id = new ResourceLocation(this.value);
-            Item item = ForgeRegistries.ITEMS.getValue(id);
-            if (item != null && item.getDescription() != null) {
-                displayName = item.getDescription().getString();
-            }
-        } catch (Exception ignored) {}
-        return new Object[]{displayName};
+        // Synthesize a real booster pack ItemStack from the tag!
+        ItemStack fakePack = new ItemStack(packTag.contains("id") ? BoosterPackItem.INSTANCE : Items.AIR);
+        fakePack.setTag(packTag.getCompound("tag"));
+
+        // Use the same logic as CardPackTypeAttribute
+        return ModConfigs.BOOSTER_PACK
+            .getName(BoosterPackItem.getId(fakePack))
+            .map(Component::getString)
+            .orElse(null);
     }
 
     @Override
