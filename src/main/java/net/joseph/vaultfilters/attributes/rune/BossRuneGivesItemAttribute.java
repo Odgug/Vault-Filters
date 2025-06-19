@@ -4,7 +4,10 @@ import iskallia.vault.item.BossRuneItem;
 import net.joseph.vaultfilters.attributes.abstracts.StringAttribute;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class BossRuneGivesItemAttribute extends StringAttribute {
     public BossRuneGivesItemAttribute(String value) {
@@ -26,6 +29,22 @@ public class BossRuneGivesItemAttribute extends StringAttribute {
             }
         }
         return null;
+    }
+
+    @Override
+    public Object[] getTranslationParameters() {
+        // Convert the stored item ID value (e.g. "the_vault:helmet") to its display name for tooltips
+        String displayName = this.value;
+        try {
+            ResourceLocation id = new ResourceLocation(this.value);
+            Item item = ForgeRegistries.ITEMS.getValue(id);
+            if (item != null && item.getDescription() != null) {
+                displayName = item.getDescription().getString();
+            }
+        } catch (Exception ignored) {
+            // fallback to ID string if not found or invalid
+        }
+        return new Object[]{displayName};
     }
 
     @Override
