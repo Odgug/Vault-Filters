@@ -187,6 +187,9 @@ public class VaultFilters {
         // Runes
         new BossRuneModifierAttribute("Strength").register(BossRuneModifierAttribute::new);
         new BossRuneGivesItemAttribute("the_vault:helmet").register(BossRuneGivesItemAttribute::new);
+        new BossRuneGearRarityAttribute("Omega").register(BossRuneGearRarityAttribute::new);
+        new BossRuneBoosterPackTypeAttribute("the_vault:mega_stat_pack").register(BossRuneBoosterPackTypeAttribute::new);
+        new BossRuneInscriptionTypeAttribute("Laboratory").register(BossRuneInscriptionTypeAttribute::new);
 
         //Artifacts
         new ArtifactIDAttribute(0).register(ArtifactIDAttribute::new);
