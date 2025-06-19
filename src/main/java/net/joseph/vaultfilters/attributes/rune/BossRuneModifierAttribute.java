@@ -14,13 +14,8 @@ public class BossRuneModifierAttribute extends StringAttribute {
         if (!(itemStack.getItem() instanceof BossRuneItem)) {
             return null;
         }
-        String modifier = BossRuneItem.getModifier(itemStack);
-        String suffix = BossRuneItem.getSuffixModifier(itemStack);
-        if (modifier != null && value.equalsIgnoreCase(modifier)) {
-            return value;
-        }
-        if (suffix != null && value.equalsIgnoreCase(suffix)) {
-            return value;
+        if (itemStack.hasTag() && itemStack.getTag().contains("Modifier")) {
+            return itemStack.getTag().getString("Modifier");
         }
         return null;
     }
