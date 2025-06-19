@@ -29,22 +29,29 @@ public class BossRuneInscriptionTypeAttribute extends StringAttribute {
         CompoundTag entry = entries.getCompound(0);
         if (!entry.contains("pool")) return null;
         String pool = entry.getString("pool");
-        // Example: "the_vault:vault/rooms/challenge/laboratory"
+
+        // Edge case: Raid
+        if (pool.contains("/raid/")) {
+            return "Raid";
+        }
         String[] split = pool.split("/");
-        if (split.length < 4) return null;
-        String name = split[split.length - 1]; // e.g. "laboratory"
-        // Capitalize first letter
-        return Character.toUpperCase(name.charAt(0)) + name.substring(1);
+        // Find the last non-generic segment
+        for (int i = split.length - 1; i >= 0; i--) {
+            String s = split[i];
+            if (!s.equals("rooms") && !s.equals("challenge") && !s.equals("vault")) {
+                return Character.toUpperCase(s.charAt(0)) + s.substring(1);
+            }
+        }
+        return null;
     }
 
     @Override
     public Object[] getTranslationParameters() {
-        // Show user-friendly name, e.g. "Laboratory"
         return new Object[]{this.value};
     }
 
     @Override
     public String getTranslationKey() {
-        return "inscription_type";
+        return "boss_rune_inscription_type";
     }
 }

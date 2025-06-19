@@ -21,6 +21,30 @@ public class BossRuneModifierAttribute extends StringAttribute {
     }
 
     @Override
+    public Object[] getTranslationParameters() {
+        // Convert internal modifier string to user-friendly label
+        String display = this.value;
+        if (display != null && !display.isEmpty()) {
+            // Replace underscores/hyphens with spaces, capitalize words
+            display = display.trim()
+                    .replace('_', ' ')
+                    .replace('-', ' ')
+                    .toLowerCase();
+            String[] words = display.split(" ");
+            StringBuilder sb = new StringBuilder();
+            for (String word : words) {
+                if (!word.isEmpty()) {
+                    sb.append(Character.toUpperCase(word.charAt(0)))
+                      .append(word.substring(1))
+                      .append(" ");
+                }
+            }
+            display = sb.toString().trim();
+        }
+        return new Object[]{display};
+    }
+
+    @Override
     public String getTranslationKey() {
         return "boss_rune_modifier";
     }

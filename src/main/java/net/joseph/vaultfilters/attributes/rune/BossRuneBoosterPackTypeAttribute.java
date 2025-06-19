@@ -25,11 +25,13 @@ public class BossRuneBoosterPackTypeAttribute extends StringAttribute {
         if (!packTag.contains("tag", 10)) return null;
         CompoundTag innerTag = packTag.getCompound("tag");
         if (!innerTag.contains("id")) return null;
-        return innerTag.getString("id");
+        String boosterId = innerTag.getString("id");
+        return boosterId;
     }
 
     @Override
     public Object[] getTranslationParameters() {
+        // Display the pack type's item name if possible
         String displayName = this.value;
         try {
             ResourceLocation id = new ResourceLocation(this.value);
@@ -43,6 +45,6 @@ public class BossRuneBoosterPackTypeAttribute extends StringAttribute {
 
     @Override
     public String getTranslationKey() {
-        return "card_pack_type";
+        return "boss_rune_booster_pack_type";
     }
 }
