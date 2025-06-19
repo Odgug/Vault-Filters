@@ -8,7 +8,9 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.world.item.Item;
 
 public class BossRuneBoosterPackTypeAttribute extends StringAttribute {
     public BossRuneBoosterPackTypeAttribute(String value) {
@@ -25,8 +27,11 @@ public class BossRuneBoosterPackTypeAttribute extends StringAttribute {
         if (!"the_vault:booster_pack".equals(packTag.getString("id"))) return null;
 
         // Synthesize a real booster pack ItemStack from the tag!
-        ItemStack fakePack = new ItemStack(packTag.contains("id") ? BoosterPackItem.INSTANCE : Items.AIR);
-        fakePack.setTag(packTag.getCompound("tag"));
+        Item boosterPackItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation("the_vault:booster_pack"));
+        if (boosterPackItem == null) return null;
+        ItemStack fakePack = new ItemStack(boosterPackItem);
+        if (packTag.contains("tag", 10))
+            fakePack.setTag(packTag.getCompound("tag"));
 
         // Use the same logic as CardPackTypeAttribute
         return ModConfigs.BOOSTER_PACK
