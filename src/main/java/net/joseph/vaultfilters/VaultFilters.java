@@ -6,7 +6,7 @@ import net.joseph.vaultfilters.attributes.affix.*;
 import net.joseph.vaultfilters.attributes.artifact.ArtifactIDAttribute;
 import net.joseph.vaultfilters.attributes.backpacks.IsEmptyAttribute;
 import net.joseph.vaultfilters.attributes.rune.BossRuneModifierAttribute;
-import net.joseph.vaultfilters.attributes.rune.BossRuneContainsItemAttribute;
+import net.joseph.vaultfilters.attributes.rune.BossRuneGivesItemAttribute;
 
 import net.joseph.vaultfilters.attributes.backpacks.HasUUIDAttribute;
 import net.joseph.vaultfilters.attributes.backpacks.HasUpgradeAttribute;
@@ -183,7 +183,7 @@ public class VaultFilters {
 
         // Runes
         new BossRuneModifierAttribute("Strength").register(BossRuneModifierAttribute::new);
-        new BossRuneContainsItemAttribute("minecraft:diamond").register(BossRuneContainsItemAttribute::new);
+        new BossRuneGivesItemAttribute("the_vault:helmet").register(BossRuneGivesItemAttribute::new);
 
         //Artifacts
         new ArtifactIDAttribute(0).register(ArtifactIDAttribute::new);
