@@ -1,9 +1,13 @@
 package net.joseph.vaultfilters.attributes.jewel;
 
+import iskallia.vault.gear.VaultGearRarity;
 import iskallia.vault.gear.data.VaultGearData;
 import iskallia.vault.item.tool.JewelItem;
 import net.joseph.vaultfilters.attributes.abstracts.StringAttribute;
 import net.minecraft.world.item.ItemStack;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Locale;
 
 public class JewelRarityAttribute extends StringAttribute {
     public JewelRarityAttribute(String value) {
@@ -16,12 +20,13 @@ public class JewelRarityAttribute extends StringAttribute {
             return null;
         }
 
-        return switch (VaultGearData.read(itemStack).getRarity()) {
+        VaultGearRarity rarity = VaultGearData.read(itemStack).getRarity();
+        return switch (rarity) {
             case COMMON -> "Chipped";
             case RARE -> "Flawed";
             case EPIC -> "Flawless";
             case OMEGA -> "Perfect";
-            default -> null;
+            default -> StringUtils.capitalize(rarity.toString().toLowerCase(Locale.ROOT));
         };
     }
 
