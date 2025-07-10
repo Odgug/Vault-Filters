@@ -5,6 +5,11 @@ import net.joseph.vaultfilters.attributes.abstracts.Objects.Modifier;
 import net.joseph.vaultfilters.attributes.affix.*;
 import net.joseph.vaultfilters.attributes.artifact.ArtifactIDAttribute;
 import net.joseph.vaultfilters.attributes.backpacks.IsEmptyAttribute;
+import net.joseph.vaultfilters.attributes.rune.BossRuneModifierAttribute;
+import net.joseph.vaultfilters.attributes.rune.BossRuneGivesItemAttribute;
+import net.joseph.vaultfilters.attributes.rune.BossRuneGearRarityAttribute;
+import net.joseph.vaultfilters.attributes.rune.BossRuneBoosterPackTypeAttribute;
+import net.joseph.vaultfilters.attributes.rune.BossRuneInscriptionTypeAttribute;
 
 import net.joseph.vaultfilters.attributes.backpacks.HasUUIDAttribute;
 import net.joseph.vaultfilters.attributes.backpacks.HasUpgradeAttribute;
@@ -178,6 +183,13 @@ public class VaultFilters {
 
         new HasUpgradeAttribute("Backpack Upgrade").register(HasUpgradeAttribute::new);
         new HasUUIDAttribute("Backpack UUID").register(HasUUIDAttribute::new);
+
+        // Runes
+        new BossRuneModifierAttribute("Strength").register(BossRuneModifierAttribute::new);
+        new BossRuneGivesItemAttribute("the_vault:helmet").register(BossRuneGivesItemAttribute::new);
+        new BossRuneGearRarityAttribute("Omega").register(BossRuneGearRarityAttribute::new);
+        new BossRuneBoosterPackTypeAttribute("the_vault:mega_stat_pack").register(BossRuneBoosterPackTypeAttribute::new);
+        new BossRuneInscriptionTypeAttribute("Laboratory").register(BossRuneInscriptionTypeAttribute::new);
 
         //Artifacts
         new ArtifactIDAttribute(0).register(ArtifactIDAttribute::new);
