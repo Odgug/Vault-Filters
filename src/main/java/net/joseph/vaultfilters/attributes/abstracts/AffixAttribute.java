@@ -106,6 +106,7 @@ public abstract class AffixAttribute extends StringAttribute {
             return "Effect Avoidance";
         }
 
+
         VaultGearModifierReader<T> reader = modifier.getAttribute().getReader();
         if (reader instanceof IncreasedPercentageReader) {
             return "Increased " + reader.getModifierName();

@@ -1,5 +1,6 @@
 package net.joseph.vaultfilters.attributes.rune;
 
+import com.simibubi.create.content.logistics.filter.ItemAttribute;
 import iskallia.vault.item.BossRuneItem;
 import net.joseph.vaultfilters.attributes.abstracts.StringAttribute;
 import net.minecraft.nbt.CompoundTag;
@@ -8,6 +9,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BossRuneGivesItemAttribute extends StringAttribute {
     public BossRuneGivesItemAttribute(String value) {
@@ -45,6 +49,10 @@ public class BossRuneGivesItemAttribute extends StringAttribute {
             // fallback to ID string if not found or invalid
         }
         return new Object[]{displayName};
+    }
+    @Override
+    public List<ItemAttribute> listAttributesOf(ItemStack itemStack) {
+        return new ArrayList<>();
     }
 
     @Override

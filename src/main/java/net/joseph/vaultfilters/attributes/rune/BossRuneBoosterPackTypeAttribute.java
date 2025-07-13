@@ -1,5 +1,6 @@
 package net.joseph.vaultfilters.attributes.rune;
 
+import com.simibubi.create.content.logistics.filter.ItemAttribute;
 import iskallia.vault.init.ModConfigs;
 import iskallia.vault.item.BoosterPackItem;
 import iskallia.vault.item.BossRuneItem;
@@ -11,6 +12,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraft.world.item.Item;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BossRuneBoosterPackTypeAttribute extends StringAttribute {
     public BossRuneBoosterPackTypeAttribute(String value) {
@@ -38,6 +42,10 @@ public class BossRuneBoosterPackTypeAttribute extends StringAttribute {
             .getName(BoosterPackItem.getId(fakePack))
             .map(Component::getString)
             .orElse(null);
+    }
+    @Override
+    public List<ItemAttribute> listAttributesOf(ItemStack itemStack) {
+        return new ArrayList<>();
     }
 
     @Override

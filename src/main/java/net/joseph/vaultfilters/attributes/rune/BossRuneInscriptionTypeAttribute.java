@@ -1,10 +1,14 @@
 package net.joseph.vaultfilters.attributes.rune;
 
+import com.simibubi.create.content.logistics.filter.ItemAttribute;
 import iskallia.vault.item.BossRuneItem;
 import net.joseph.vaultfilters.attributes.abstracts.StringAttribute;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.world.item.ItemStack;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BossRuneInscriptionTypeAttribute extends StringAttribute {
     public BossRuneInscriptionTypeAttribute(String value) {
@@ -43,6 +47,10 @@ public class BossRuneInscriptionTypeAttribute extends StringAttribute {
             }
         }
         return null;
+    }
+    @Override
+    public List<ItemAttribute> listAttributesOf(ItemStack itemStack) {
+        return new ArrayList<>();
     }
 
     @Override

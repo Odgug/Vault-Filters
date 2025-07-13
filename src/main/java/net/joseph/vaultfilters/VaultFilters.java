@@ -5,6 +5,9 @@ import net.joseph.vaultfilters.attributes.abstracts.Objects.Modifier;
 import net.joseph.vaultfilters.attributes.affix.*;
 import net.joseph.vaultfilters.attributes.artifact.ArtifactIDAttribute;
 import net.joseph.vaultfilters.attributes.backpacks.IsEmptyAttribute;
+import net.joseph.vaultfilters.attributes.inner.InnerCardPackAttribute;
+import net.joseph.vaultfilters.attributes.inner.InnerJewelPouchAttribute;
+import net.joseph.vaultfilters.attributes.inner.InnerRuneItemAttribute;
 import net.joseph.vaultfilters.attributes.rune.BossRuneModifierAttribute;
 import net.joseph.vaultfilters.attributes.rune.BossRuneGivesItemAttribute;
 import net.joseph.vaultfilters.attributes.rune.BossRuneGearRarityAttribute;
@@ -49,7 +52,7 @@ import org.slf4j.Logger;
 @Mod(VaultFilters.MOD_ID)
 public class VaultFilters {
     public static final String MOD_ID = "vaultfilters";
-    public static final String MOD_VERSION = "1.21.0";
+    public static final String MOD_VERSION = "1.22.0";
     public static final int CHECK_FILTER_FLAG = 456;
     public static final Logger LOGGER = LogUtils.getLogger();
 
@@ -92,6 +95,7 @@ public class VaultFilters {
 
         // Gear
         new GearLevelAttribute(0).register(GearLevelAttribute::new);
+        new HasLivingAttribute(true).register(HasLivingAttribute::new);
         new GearTransmogAttribute("Sword_4").register(GearTransmogAttribute::new);
         new GearRepairSlotAttribute(0).register(GearRepairSlotAttribute::new);
         new IsCraftedAttribute(true).register(IsCraftedAttribute::new);
@@ -191,6 +195,10 @@ public class VaultFilters {
         new BossRuneBoosterPackTypeAttribute("the_vault:mega_stat_pack").register(BossRuneBoosterPackTypeAttribute::new);
         new BossRuneInscriptionTypeAttribute("Laboratory").register(BossRuneInscriptionTypeAttribute::new);
 
+        //Inner checks
+        new InnerCardPackAttribute(null).register(InnerCardPackAttribute::new);
+        new InnerJewelPouchAttribute(null).register(InnerJewelPouchAttribute::new);
+        new InnerRuneItemAttribute(null).register(InnerRuneItemAttribute::new);
         //Artifacts
         new ArtifactIDAttribute(0).register(ArtifactIDAttribute::new);
 

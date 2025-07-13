@@ -54,7 +54,7 @@ public class VFCache {
         int itemHash = stack.hashCode();
         VFCache cache = ITEM_CACHES.get(itemHash);
         if (cache == null) {
-            boolean result = VFTests.noCacheDetailedTest(stack,filterStack,level);
+            boolean result = VFTests.basicFilterTest(stack,filterStack,level);
             ITEM_CACHES.put(itemHash, new VFCache(itemHash).addFilter(filterStack.hashCode(), result));
             return result;
         }
@@ -71,7 +71,7 @@ public class VFCache {
         int itemHash = stack.hashCode();
         VFCache cache = ITEM_CACHES.get(itemHash);
         if (cache == null) {
-            boolean result = VFTests.noCacheDetailedTest(stack.toStack(),filterStack,level);
+            boolean result = VFTests.basicFilterTest(stack.toStack(),filterStack,level);
             ITEM_CACHES.put(itemHash, new VFCache(itemHash).addFilter(filterStack.hashCode(), result));
             return result;
         }

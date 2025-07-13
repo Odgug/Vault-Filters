@@ -1,10 +1,14 @@
 package net.joseph.vaultfilters.attributes.rune;
 
+import com.simibubi.create.content.logistics.filter.ItemAttribute;
 import iskallia.vault.item.BossRuneItem;
 import net.joseph.vaultfilters.attributes.abstracts.StringAttribute;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.world.item.ItemStack;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BossRuneGearRarityAttribute extends StringAttribute {
     public BossRuneGearRarityAttribute(String value) {
@@ -24,6 +28,10 @@ public class BossRuneGearRarityAttribute extends StringAttribute {
         CompoundTag clientCache = innerTag.getCompound("clientCache");
         if (!clientCache.contains("rollType")) return null;
         return clientCache.getString("rollType");
+    }
+    @Override
+    public List<ItemAttribute> listAttributesOf(ItemStack itemStack) {
+        return new ArrayList<>();
     }
 
     @Override

@@ -61,50 +61,6 @@ public class VFTests {
         return VFCache.getOrCreateFilter(stack,filterStack,level);
     }
 
-    public static boolean testCardPack(ItemStack stack, Object filterStack, Level level) {
-        List<ItemStack> cardPack = BoosterPackItem.getOutcomes(stack);
-        boolean packMatch = basicFilterTest(stack, filterStack, level);
-        if (cardPack == null || packMatch) {
-            return packMatch;
-        }
-
-        for (ItemStack card : cardPack) {
-            if (basicFilterTest(card,filterStack,level)) {
-                return true;
-            }
-        }
-        return false;
-    }
-    public static boolean testJewelPouch(ItemStack stack, Object filterStack, Level level) {
-        List<JewelPouchItem.RolledJewel> jewelPouch= JewelPouchItem.getJewels(stack);
-        List<ItemStack> jewelOptions = new ArrayList<>();
-        for (JewelPouchItem.RolledJewel rolledJewel : jewelPouch) {
-            if (rolledJewel.identified()) {
-                jewelOptions.add(rolledJewel.stack());
-            }
-        }
-        boolean pouchMatch = basicFilterTest(stack,filterStack,level);
-        if (jewelOptions.isEmpty() || pouchMatch) {
-            return pouchMatch;
-        }
-
-        for (ItemStack jewel : jewelOptions) {
-            if (basicFilterTest(jewel,filterStack,level)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static boolean noCacheDetailedTest(ItemStack stack, Object filterStack, Level level) {
-        if (stack.getItem() instanceof BoosterPackItem) {
-            return VFTests.testCardPack(stack,filterStack,level);
-        } else if (stack.getItem() instanceof JewelPouchItem) {
-            return VFTests.testJewelPouch(stack,filterStack,level);
-        } else {
-            return VFTests.basicFilterTest(stack, filterStack, level);
-        }
-    }
 
     public static boolean basicFilterTest(ItemStack stack, Object filterStack, Level level) {
         if (level == null) {

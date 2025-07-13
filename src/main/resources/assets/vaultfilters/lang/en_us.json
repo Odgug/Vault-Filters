@@ -256,6 +256,18 @@
   "create.item_attributes.boss_rune_inscription_type": "is a rune that gives a \"%1$s\" type inscription",
   "create.item_attributes.boss_rune_inscription_type.inverted": "is not a rune that gives a \"%1$s\" type inscription",
 
+  "create.item_attributes.inner_card_pack": "is a booster pack with a card that matches \"%1$s\"",
+  "create.item_attributes.inner_card_pack.inverted": "is not a booster pack with a card that matches \"%1$s\"",
+
+  "create.item_attributes.inner_jewel_pouch": "is a jewel pouch with a jewel that matches \"%1$s\"",
+  "create.item_attributes.inner_jewel_pouch.inverted": "is not a jewel pouch with a jewel that matches \"%1$s\"",
+
+  "create.item_attributes.inner_boss_rune": "is a rune with a reward that matches \"%1$s\"",
+  "create.item_attributes.inner_boss_rune.inverted": "is not a rune with a reward that matches \"%1$s\"",
+
+  "create.item_attributes.has_living": "is a gear piece with living",
+  "create.item_attributes.has_living.inverted": "is not a gear piece with living",
+
   "item.create.filter.tooltip.summary": "_Matches items_ against a collection of _items_ or _other filters_ (Attribute and List filters). Can be used in _Filter Slots_ of some mods (Create, RS, MR, AE2 and Backpacks by default)",
   "item.create.filter.tooltip.condition1": "When R-Clicked",
   "item.create.filter.tooltip.behaviour1": "Opens the _configuration interface_.",
