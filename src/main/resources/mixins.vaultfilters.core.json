@@ -3,15 +3,15 @@
   "package": "net.joseph.vaultfilters.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "data.EffectCloudAccessor",
-    "data.EffectCloudAttributeAccessor",
-    "data.CardEntryAccessor",
     "data.CardConditionAccessor",
-    "data.ScalerFilterAccessor",
+    "data.CardEntryAccessor",
     "data.CardScaleAccessor",
     "data.ConditionFilterAccessor",
+    "data.EffectCloudAccessor",
+    "data.EffectCloudAttributeAccessor",
     "data.GearCardModifierAccesor",
     "data.LootCardModifierConfigAccessor",
+    "data.ScalerFilterAccessor",
     "data.TaskLootCardModifierAccessor",
     "other.MixinAttributeResearchBypass"
   ],
@@ -19,5 +19,5 @@
     "defaultRequire": 1
   },
   "refmap": "mixins.vaultfilters.refmap.json",
-  "minVersion" : "0.8"
+  "minVersion": "0.8"
 }
