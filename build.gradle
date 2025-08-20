@@ -120,9 +120,9 @@ dependencies {
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     //implementation fg.deobf("curse.maven:vault-hunters-official-mod-458203:5601579")
 
-    implementation fg.deobf("com.simibubi.create:create-${create_minecraft_version}:${create_version}:slim") { transitive = false }
+    //implementation fg.deobf("com.simibubi.create:create-${create_minecraft_version}:${create_version}:slim") { transitive = false }
     compileOnly fg.deobf("curse.maven:create-328085:4550986")
-    implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}")
+    //implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}")
     implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
 
     implementation fg.deobf("curse.maven:curios-309927:4418032")
@@ -142,7 +142,7 @@ dependencies {
     implementation fg.deobf("curse.maven:sophisticated-backpacks-422301:4637292")
     implementation fg.deobf("curse.maven:storage-drawers-223852:3807626")
     implementation fg.deobf("curse.maven:toms-storage-378609:5211203")
-    implementation fg.deobf("curse.maven:vault-hunters-official-mod-458203:6644290")
+    implementation fg.deobf("curse.maven:vault-hunters-official-mod-458203:6833423")
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.6"))
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.3.6")) {
         jarJar.ranged(it, "[0.3.6,)")
