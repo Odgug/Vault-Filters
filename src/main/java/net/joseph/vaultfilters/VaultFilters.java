@@ -6,6 +6,7 @@ import net.joseph.vaultfilters.attributes.affix.*;
 import net.joseph.vaultfilters.attributes.artifact.ArtifactIDAttribute;
 import net.joseph.vaultfilters.attributes.backpacks.IsEmptyAttribute;
 import net.joseph.vaultfilters.attributes.companion.*;
+import net.joseph.vaultfilters.attributes.companion.items.CompanionEggSeriesAttribute;
 import net.joseph.vaultfilters.attributes.companion.items.CompanionRelicAttribute;
 import net.joseph.vaultfilters.attributes.companion.items.CompanionTrailAttribute;
 import net.joseph.vaultfilters.attributes.deck.CardDeckHasModifierAttribute;
@@ -213,6 +214,7 @@ public class VaultFilters {
         //Companion
         new CompanionRelicAttribute("").register(CompanionRelicAttribute::new);
         new CompanionTrailAttribute("").register(CompanionTrailAttribute::new);
+        new CompanionEggSeriesAttribute("").register(CompanionEggSeriesAttribute::new);
         new CompanionCooldownAttribute(true).register(CompanionCooldownAttribute::new);
         new CompanionCooldownAttribute(true).register(CompanionCooldownAttribute::new);
         new CompanionHeartAttribute(1).register(CompanionHeartAttribute::new);

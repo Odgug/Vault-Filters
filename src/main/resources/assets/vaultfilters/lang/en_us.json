@@ -289,6 +289,9 @@
   "create.item_attributes.companion_series": "is a Companion of the \"%1$s\" Series",
   "create.item_attributes.companion_series.inverted": "isn't a Companion of the \"%1$s\" Series",
 
+  "create.item_attributes.companion_egg_series": "is a Companion Egg of the \"%1$s\" Series",
+  "create.item_attributes.companion_egg_series.inverted": "isn't a Companion Egg of the \"%1$s\" Series",
+
   "create.item_attributes.companion_skin_name": "is a Companion with a skin of \"%1$s\"",
   "create.item_attributes.companion_skin_name.inverted": "isn't a Companion with a skin of \"%1$s\"",
 
