@@ -106,8 +106,8 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
     maven {
-        name = 'tterrag maven'
-        url = 'https://maven.tterrag.com/'
+        name = 'modmaven'
+        url = 'https://modmaven.dev'
     }
     flatDir {
         dir 'libs'
@@ -143,7 +143,7 @@ dependencies {
     implementation fg.deobf("curse.maven:storage-drawers-223852:3807626")
     implementation fg.deobf("curse.maven:toms-storage-378609:5211203")
     implementation fg.deobf("curse.maven:laserio-626839:4066820")
-    implementation fg.deobf("curse.maven:vault-hunters-official-mod-458203:6644290")
+    implementation fg.deobf("curse.maven:vault-hunters-official-mod-458203:6833423")
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.6"))
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.3.6")) {
         jarJar.ranged(it, "[0.3.6,)")

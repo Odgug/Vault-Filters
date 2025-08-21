@@ -268,6 +268,42 @@
   "create.item_attributes.has_living": "is a gear piece with living",
   "create.item_attributes.has_living.inverted": "is not a gear piece with living",
 
+  "create.item_attributes.card_deck_has_modifier": "is a Card Deck with a modifier",
+  "create.item_attributes.card_deck_has_modifier.inverted": "isn't a Card Deck with a modifier",
+
+  "create.item_attributes.card_deck_type": "is a \"%1$s\"",
+  "create.item_attributes.card_deck_type.inverted": "isn't a \"%1$s\"",
+
+  "create.item_attributes.companion_cooldown": "is a Companion on cooldown",
+  "create.item_attributes.companion_cooldown.inverted": "isn't a Companion on cooldown",
+
+  "create.item_attributes.companion_hearts": "is a Companion with at least \"%1$s\" hearts",
+  "create.item_attributes.companion_hearts.inverted": "isn't a Companion with at least \"%1$s\" hearts",
+
+  "create.item_attributes.companion_level": "is a Companion of at least level \"%1$s\"",
+  "create.item_attributes.companion_level.inverted": "isn't a Companion of at least level \"%1$s\"",
+
+  "create.item_attributes.companion_max_hearts": "is a Companion with at least \"%1$s\" max hearts",
+  "create.item_attributes.companion_max_hearts.inverted": "isn't a Companion with at least \"%1$s\" max hearts",
+
+  "create.item_attributes.companion_series": "is a Companion of the \"%1$s\" Series",
+  "create.item_attributes.companion_series.inverted": "isn't a Companion of the \"%1$s\" Series",
+
+  "create.item_attributes.companion_egg_series": "is a Companion Egg of the \"%1$s\" Series",
+  "create.item_attributes.companion_egg_series.inverted": "isn't a Companion Egg of the \"%1$s\" Series",
+
+  "create.item_attributes.companion_skin_name": "is a Companion with a skin of \"%1$s\"",
+  "create.item_attributes.companion_skin_name.inverted": "isn't a Companion with a skin of \"%1$s\"",
+
+  "create.item_attributes.companion_temporal": "is a Companion with a \"%1$s\" temporal modifier",
+  "create.item_attributes.companion_temporal.inverted": "isn't a Companion with a \"%1$s\" temporal modifier",
+
+  "create.item_attributes.companion_relic_modifiers": "is a Companion Relic with a \"%1$s\" modifier",
+  "create.item_attributes.companion_relic_modifiers.inverted": "isn't a Companion Relic with a \"%1$s\" modifier",
+
+  "create.item_attributes.companion_trail_type": "has a \"%1$s\" trail type",
+  "create.item_attributes.companion_trail_type.inverted": "doesn't have a \"%1$s\" trail type",
+
   "item.create.filter.tooltip.summary": "_Matches items_ against a collection of _items_ or _other filters_ (Attribute and List filters). Can be used in _Filter Slots_ of some mods (Create, RS, MR, AE2 and Backpacks by default)",
   "item.create.filter.tooltip.condition1": "When R-Clicked",
   "item.create.filter.tooltip.behaviour1": "Opens the _configuration interface_.",
