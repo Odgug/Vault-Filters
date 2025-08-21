@@ -58,7 +58,7 @@ import org.slf4j.Logger;
 @Mod(VaultFilters.MOD_ID)
 public class VaultFilters {
     public static final String MOD_ID = "vaultfilters";
-    public static final String MOD_VERSION = "1.22.0";
+    public static final String MOD_VERSION = "1.23.0";
     public static final int CHECK_FILTER_FLAG = 456;
     public static final Logger LOGGER = LogUtils.getLogger();
 
