@@ -1,6 +1,7 @@
 package net.joseph.vaultfilters.attributes.deck;
 
 import iskallia.vault.core.card.CardDeck;
+import iskallia.vault.core.card.modifier.deck.DummyDeckModifier;
 import iskallia.vault.item.CardDeckItem;
 import net.joseph.vaultfilters.attributes.abstracts.BooleanAttribute;
 import net.minecraft.world.item.ItemStack;
@@ -25,8 +26,7 @@ public class CardDeckHasModifierAttribute extends BooleanAttribute {
                 return null;
             }
 
-
-            return !deck.getModifiers().isEmpty();
+            return !deck.getModifiers().stream().filter(modifier -> !(modifier instanceof DummyDeckModifier)).toList().isEmpty();
         }
 
         return null;

@@ -40,6 +40,7 @@ public class MixinBaseCardCache {
 
         if(this.filterCard.isEmpty()) {
             cir.setReturnValue(true);
+            return;
         }
 
         //Ignore non-basic Filter Cards
@@ -48,6 +49,7 @@ public class MixinBaseCardCache {
 
             if (this.filterCache.containsKey(key)) {
                 cir.setReturnValue(this.filterCache.get(key));
+                return;
             }
 
             for(ItemStack stack : this.filteredItems) {
@@ -55,11 +57,13 @@ public class MixinBaseCardCache {
                     if(VFTests.checkFilter(key.getStack(), stack, true, null)) {
                         this.filterCache.put(key, this.isAllowList);
                         cir.setReturnValue(this.isAllowList);
+                        return;
                     }
                     else {
                         if (key.equals(new ItemStackKey(stack, this.isCompareNBT))) {
                             this.filterCache.put(key, this.isAllowList);
                             cir.setReturnValue(this.isAllowList);
+                            return;
                         }
                     }
                 }
