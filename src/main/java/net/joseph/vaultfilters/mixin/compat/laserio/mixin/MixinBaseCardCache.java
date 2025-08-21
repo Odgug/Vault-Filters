@@ -53,13 +53,12 @@ public class MixinBaseCardCache {
             }
 
             for(ItemStack stack : this.filteredItems) {
-                if(stack.getItem() instanceof FilterItem) {
-                    if(VFTests.checkFilter(key.getStack(), stack, true, null)) {
+                if(this.isCompareNBT && stack.getItem() instanceof FilterItem) {
+                    if(VFTests.checkFilter(testStack, stack, true, null)) {
                         this.filterCache.put(key, this.isAllowList);
                         cir.setReturnValue(this.isAllowList);
                         return;
-                    }
-                    else {
+                    } else {
                         if (key.equals(new ItemStackKey(stack, this.isCompareNBT))) {
                             this.filterCache.put(key, this.isAllowList);
                             cir.setReturnValue(this.isAllowList);
