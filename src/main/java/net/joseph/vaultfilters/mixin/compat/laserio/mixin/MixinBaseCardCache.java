@@ -1,7 +1,6 @@
 package net.joseph.vaultfilters.mixin.compat.laserio.mixin;
 
 import com.direwolf20.laserio.common.items.filters.FilterMod;
-import com.direwolf20.laserio.common.items.filters.FilterNBT;
 import com.direwolf20.laserio.common.items.filters.FilterTag;
 import com.direwolf20.laserio.util.BaseCardCache;
 import com.direwolf20.laserio.util.ItemStackKey;
@@ -44,7 +43,7 @@ public class MixinBaseCardCache {
         }
 
         //Ignore non-basic Filter Cards
-        if(!(this.filterCard.getItem() instanceof FilterMod || this.filterCard.getItem() instanceof FilterTag || this.filterCard.getItem() instanceof FilterNBT)) {
+        if(!(this.filterCard.getItem() instanceof FilterMod || this.filterCard.getItem() instanceof FilterTag)) {
             ItemStackKey key = new ItemStackKey(testStack, this.isCompareNBT);
 
             if (this.filterCache.containsKey(key)) {
