@@ -106,8 +106,8 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
     maven {
-        name = 'tterrag maven'
-        url = 'https://maven.tterrag.com/'
+        name = 'modmaven'
+        url = 'https://modmaven.dev'
     }
     flatDir {
         dir 'libs'
