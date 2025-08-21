@@ -99,6 +99,7 @@ mixin {
     config "mixins.${mod_id}.modularrouters.json"
     config "mixins.${mod_id}.tomsstorage.json"
     config "mixins.${mod_id}.create.json"
+    config "mixins.${mod_id}.laserio.json"
     config "mixins.${mod_id}.core.json"
 }
 
@@ -143,6 +144,7 @@ dependencies {
     implementation fg.deobf("curse.maven:storage-drawers-223852:3807626")
     implementation fg.deobf("curse.maven:toms-storage-378609:5211203")
     implementation fg.deobf("curse.maven:laserio-626839:4066820")
+    implementation fg.deobf("curse.maven:patchouli-306770:3846086") //laserio
     implementation fg.deobf("curse.maven:vault-hunters-official-mod-458203:6833423")
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.6"))
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.3.6")) {
