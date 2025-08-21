@@ -142,8 +142,8 @@ dependencies {
     implementation fg.deobf("curse.maven:sophisticated-backpacks-422301:4637292")
     implementation fg.deobf("curse.maven:storage-drawers-223852:3807626")
     implementation fg.deobf("curse.maven:toms-storage-378609:5211203")
-    implementation "curse.maven:laserio-626839:5730007"
-    implementation fg.deobf("curse.maven:vault-hunters-official-mod-458203:6644290")
+    implementation "curse.maven:laserio-626839:5730007")
+    implementation fg.deobf("curse.maven:vault-hunters-official-mod-458203:6833423")
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.6"))
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.3.6")) {
         jarJar.ranged(it, "[0.3.6,)")

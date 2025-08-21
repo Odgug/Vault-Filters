@@ -5,6 +5,12 @@ import net.joseph.vaultfilters.attributes.abstracts.Objects.Modifier;
 import net.joseph.vaultfilters.attributes.affix.*;
 import net.joseph.vaultfilters.attributes.artifact.ArtifactIDAttribute;
 import net.joseph.vaultfilters.attributes.backpacks.IsEmptyAttribute;
+import net.joseph.vaultfilters.attributes.companion.*;
+import net.joseph.vaultfilters.attributes.companion.items.CompanionEggSeriesAttribute;
+import net.joseph.vaultfilters.attributes.companion.items.CompanionRelicAttribute;
+import net.joseph.vaultfilters.attributes.companion.items.CompanionTrailAttribute;
+import net.joseph.vaultfilters.attributes.deck.CardDeckHasModifierAttribute;
+import net.joseph.vaultfilters.attributes.deck.CardDeckTypeAttribute;
 import net.joseph.vaultfilters.attributes.inner.InnerCardPackAttribute;
 import net.joseph.vaultfilters.attributes.inner.InnerJewelPouchAttribute;
 import net.joseph.vaultfilters.attributes.inner.InnerRuneItemAttribute;
@@ -204,6 +210,24 @@ public class VaultFilters {
 
         //Scav
         new IsRottenScavAttribute(true).register(IsRottenScavAttribute::new);
+
+        //Companion
+        new CompanionRelicAttribute("").register(CompanionRelicAttribute::new);
+        new CompanionTrailAttribute("").register(CompanionTrailAttribute::new);
+        new CompanionEggSeriesAttribute("").register(CompanionEggSeriesAttribute::new);
+        new CompanionCooldownAttribute(true).register(CompanionCooldownAttribute::new);
+        new CompanionCooldownAttribute(true).register(CompanionCooldownAttribute::new);
+        new CompanionHeartAttribute(1).register(CompanionHeartAttribute::new);
+        new CompanionLevelAttribute(1).register(CompanionLevelAttribute::new);
+        new CompanionMaxHeartAttribute(1).register(CompanionMaxHeartAttribute::new);
+        new CompanionSeriesAttribute("").register(CompanionSeriesAttribute::new);
+        new CompanionSkinAttribute("").register(CompanionSkinAttribute::new);
+        new CompanionTemporalAttribute("").register(CompanionTemporalAttribute::new);
+
+        //Deck
+        new CardDeckHasModifierAttribute(true).register(CardDeckHasModifierAttribute::new);
+        new CardDeckTypeAttribute("").register(CardDeckTypeAttribute::new);
+
 
         //Old
         new InscriptionTimeAttribute(0).register(InscriptionTimeAttribute::new);
