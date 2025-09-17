@@ -17,7 +17,8 @@ public class MixinAttributeResearchBypass {
     @Inject(method = "restrictedBy(Lnet/minecraft/world/item/ItemStack;Liskallia/vault/research/Restrictions$Type;)Ljava/lang/String;", at = @At("HEAD"), cancellable = true)
     public void researchOverride(ItemStack item, Restrictions.Type restrictionType, CallbackInfoReturnable<String> cir) {
         if (item.getItem() instanceof FilterItem){
-            cir.setReturnValue(VFCommonConfig.RESEARCH_NAME.get());
+            String name = VFCommonConfig.RESEARCH_NAME.get();
+            cir.setReturnValue(name.isBlank() ? null : name);
         }
     }
 }
