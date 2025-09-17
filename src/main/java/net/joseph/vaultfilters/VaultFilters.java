@@ -69,7 +69,6 @@ public class VaultFilters {
         MinecraftForge.EVENT_BUS.register(VFCache.class);
         MinecraftForge.EVENT_BUS.register(VFTests.class);
         MinecraftForge.EVENT_BUS.register(ModPresence.class);
-        MinecraftForge.EVENT_BUS.register(VFAsync.class);
     }
 
     private void setup(FMLCommonSetupEvent event) {
