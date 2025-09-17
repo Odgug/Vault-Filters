@@ -42,14 +42,6 @@ public abstract class MixinAttributeFilterScreen extends AbstractFilterScreen<At
         super(menu, inv, title, background);
     }
 
-    @Redirect(at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/logistics/filter/ItemAttribute;listAttributesOf(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;)Ljava/util/List;"), method = "referenceItemChanged")
-    public List<ItemAttribute> listAttributes(ItemAttribute instance, ItemStack stack, Level world) {
-        if (!ModPresence.serverHasVaultFilters() && instance instanceof VaultAttribute<?>) {
-            return List.of();
-        }
-        return instance.listAttributesOf(stack, world);
-    }
-
     // placing attr filter inside empty filter will take its attributes
     @Inject(at = @At(value = "HEAD"), method = "referenceItemChanged")
     public void copyCurrentAttrFilter(ItemStack stack, CallbackInfo ci) {
