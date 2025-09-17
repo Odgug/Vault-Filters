@@ -7,7 +7,6 @@ public class VFServerConfig {
     public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
     public static final ForgeConfigSpec SPEC;
 
-    public static final ForgeConfigSpec.ConfigValue<Integer> CACHE_TTK;
     public static final ForgeConfigSpec.ConfigValue<Boolean> MR_COMPAT;
     public static final ForgeConfigSpec.ConfigValue<Boolean> RS_COMPAT;
     public static final ForgeConfigSpec.ConfigValue<Boolean> BACKPACKS_COMPAT;
