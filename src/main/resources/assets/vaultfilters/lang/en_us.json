@@ -301,8 +301,8 @@
   "create.item_attributes.companion_relic_modifiers": "is a Companion Relic with a \"%1$s\" modifier",
   "create.item_attributes.companion_relic_modifiers.inverted": "isn't a Companion Relic with a \"%1$s\" modifier",
 
-  "create.item_attributes.companion_relic_modifiers": "is a Companion Relic with atleast \"%1$s\" modifiers",
-  "create.item_attributes.companion_relic_modifiers.inverted": "isn't a Companion Relic with atleast \"%1$s\" modifiers",
+  "create.item_attributes.companion_relic_count": "is a Companion Relic with atleast \"%1$s\" modifiers",
+  "create.item_attributes.companion_relic_count.inverted": "isn't a Companion Relic with atleast \"%1$s\" modifiers",
 
   "create.item_attributes.companion_trail_type": "has a \"%1$s\" trail type",
   "create.item_attributes.companion_trail_type.inverted": "doesn't have a \"%1$s\" trail type",
