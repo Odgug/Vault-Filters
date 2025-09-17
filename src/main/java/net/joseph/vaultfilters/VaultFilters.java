@@ -46,7 +46,6 @@ import net.joseph.vaultfilters.attributes.scav.IsRottenScavAttribute;
 import net.joseph.vaultfilters.attributes.soul.*;
 import net.joseph.vaultfilters.attributes.tool.ToolMaterialAttribute;
 import net.joseph.vaultfilters.attributes.trinket.*;
-import net.joseph.vaultfilters.configs.VFCommonConfig;
 import net.joseph.vaultfilters.configs.VFServerConfig;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -73,7 +72,6 @@ public class VaultFilters {
 
     private void setup(FMLCommonSetupEvent event) {
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, VFServerConfig.SPEC, "vaultfilters-server.toml");
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, VFCommonConfig.SPEC,"vaultfilters-common.toml");
 
         // This has a specific order as this controls the order displayed in the filters
         new ItemNameAttribute(("Vault Helmet")).register(ItemNameAttribute::new);

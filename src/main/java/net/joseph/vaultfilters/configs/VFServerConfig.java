@@ -7,6 +7,7 @@ public class VFServerConfig {
     public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
     public static final ForgeConfigSpec SPEC;
 
+    public static final ForgeConfigSpec.ConfigValue<String> RESEARCH_NAME;
     public static final ForgeConfigSpec.ConfigValue<Boolean> MR_COMPAT;
     public static final ForgeConfigSpec.ConfigValue<Boolean> RS_COMPAT;
     public static final ForgeConfigSpec.ConfigValue<Boolean> BACKPACKS_COMPAT;
@@ -18,6 +19,8 @@ public class VFServerConfig {
     static {
         BUILDER.push("Vault Filters Server Config");
 
+        RESEARCH_NAME = BUILDER.comment("\nThe research filters will be locked behind +" +
+                "\nLeave blank for no lock (the default)").define("Research Lock","");
 
         MR_COMPAT = BUILDER.comment("\nEnable compatibility for list and attribute filters inside Modular Router modules" +
                 "\nDefault:true").define("Modular Routers Compatibility",true);
