@@ -19,10 +19,6 @@ public class VFServerConfig {
     static {
         BUILDER.push("Vault Filters Server Config");
 
-        CACHE_TTK = BUILDER.comment("\nHow long till an unused cache entry gets cleared" +
-                "\nin minutes" +
-                "\nMinimum 2" +
-                "\nDefault: 5").defineInRange("Cache time to kill",5,2,100);
 
         MR_COMPAT = BUILDER.comment("\nEnable compatibility for list and attribute filters inside Modular Router modules" +
                 "\nDefault:true").define("Modular Routers Compatibility",true);
