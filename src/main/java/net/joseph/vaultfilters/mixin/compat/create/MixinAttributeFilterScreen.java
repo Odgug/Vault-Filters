@@ -13,7 +13,6 @@ import com.simibubi.create.content.logistics.filter.ItemAttribute;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
 import com.simibubi.create.foundation.utility.Components;
 import com.simibubi.create.foundation.utility.Pair;
-import net.joseph.vaultfilters.ModPresence;
 import net.joseph.vaultfilters.attributes.abstracts.VaultAttribute;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
