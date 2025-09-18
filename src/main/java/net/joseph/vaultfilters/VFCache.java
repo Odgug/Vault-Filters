@@ -1,101 +1,45 @@
 package net.joseph.vaultfilters;
-
 import appeng.api.stacks.AEItemKey;
-import net.joseph.vaultfilters.configs.VFServerConfig;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.concurrent.ConcurrentHashMap;
-import static net.joseph.vaultfilters.VFAsync.asyncIterateCache;
+import java.util.concurrent.TimeUnit;
 
 public class VFCache {
-    private static final ConcurrentHashMap<Integer, VFCache> ITEM_CACHES = new ConcurrentHashMap<>();
-    private static int ticks = 0;
-
-    private final int itemHash;
-    private final ConcurrentHashMap<Integer, Boolean> filterMap;
-    private int ttk; // ttk = time to kill
-
-    public VFCache(int itemHash) {
-        this.itemHash = itemHash;
-        this.filterMap = new ConcurrentHashMap<>();
-        this.ttk = VFServerConfig.CACHE_TTK.get();
-    }
-
-    public VFCache addFilter(int filterHash, boolean result) {
-        filterMap.put(filterHash, result);
-        resetTTK();
-        return this;
-    }
-
-    public Boolean result(int filterHash) {
-        Boolean result = filterMap.get(filterHash);
-        if (result != null) {
-            resetTTK();
+    //First object is either ItemStack or ae2Key
+    //Second object is either a filter itemStack or a FilterStack
+    private static final Cache<Object, ConcurrentHashMap<Object, Boolean>> ITEM_OUTER_CACHE = CacheBuilder.newBuilder()
+            .weakKeys()
+            .expireAfterAccess(5, TimeUnit.MINUTES)
+            .build();
+    public static ItemStack getStackFromObject(Object object) {
+        if (object instanceof ItemStack stack) {
+            return stack;
         }
-        return result;
-    }
-
-    public void resetTTK() {
-        this.ttk = VFServerConfig.CACHE_TTK.get();
-    }
-
-    public void tick() {
-        if (this.ttk == 0) {
-            ITEM_CACHES.remove(this.itemHash);
-            return;
+        if (object instanceof AEItemKey key) {
+            return key.toStack();
         }
-        this.ttk--;
+        VaultFilters.LOGGER.warn("UNDETECTED Object type");
+        return ItemStack.EMPTY;
     }
-
-    public static boolean getOrCreateFilter(ItemStack stack, Object filterStack, Level level) {
-        int itemHash = stack.hashCode();
-        VFCache cache = ITEM_CACHES.get(itemHash);
-        if (cache == null) {
-            boolean result = VFTests.basicFilterTest(stack,filterStack,level);
-            ITEM_CACHES.put(itemHash, new VFCache(itemHash).addFilter(filterStack.hashCode(), result));
+    public static boolean getOrCreateFilter(Object stack, Object filterStack, Level level) {
+        ConcurrentHashMap<Object, Boolean> FILTER_INNER_CACHE = ITEM_OUTER_CACHE.getIfPresent(stack);
+        if (FILTER_INNER_CACHE == null) {
+            FILTER_INNER_CACHE = new ConcurrentHashMap<>();
+            boolean result = VFTests.basicFilterTest(getStackFromObject(stack),filterStack,level);
+            FILTER_INNER_CACHE.put(filterStack,result);
+            ITEM_OUTER_CACHE.put(stack,FILTER_INNER_CACHE);
             return result;
         }
-        int filterHash = filterStack.hashCode();
-        Boolean cachedResult = cache.result(filterHash);
-        if (cachedResult != null) {
-            return cachedResult;
+        if (FILTER_INNER_CACHE.containsKey(filterStack)) {
+            return FILTER_INNER_CACHE.get(filterStack);
         }
-        boolean result = VFTests.basicFilterTest(stack, filterStack, level);
-        cache.addFilter(filterHash, result);
+        boolean result = VFTests.basicFilterTest(getStackFromObject(stack),filterStack,level);
+        FILTER_INNER_CACHE.put(filterStack,result);
         return result;
     }
-    public static boolean getOrCreateFilter(AEItemKey stack, Object filterStack, Level level) {
-        int itemHash = stack.hashCode();
-        VFCache cache = ITEM_CACHES.get(itemHash);
-        if (cache == null) {
-            boolean result = VFTests.basicFilterTest(stack.toStack(),filterStack,level);
-            ITEM_CACHES.put(itemHash, new VFCache(itemHash).addFilter(filterStack.hashCode(), result));
-            return result;
-        }
-        int filterHash = filterStack.hashCode();
-        Boolean cachedResult = cache.result(filterHash);
-        if (cachedResult != null) {
-            return cachedResult;
-        }
-        boolean result = VFTests.basicFilterTest(stack.toStack(), filterStack, level);
-        cache.addFilter(filterHash, result);
-        return result;
-    }
-    public static void iterateCache() {
-        ITEM_CACHES.values().forEach(VFCache::tick);
-    }
-    @SubscribeEvent
-    public static void onServerTick(TickEvent.ServerTickEvent event) {
-        if (event.phase == TickEvent.Phase.END) {
-            if (++ticks >= 60 * 20 ) { // 60 seconds * 20 tps
-                asyncIterateCache();
-                ticks = 0;
-            }
-        }
-    }
-
 
 }

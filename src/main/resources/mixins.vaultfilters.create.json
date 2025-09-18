@@ -10,7 +10,6 @@
     "AttributeFilterMenuAccessor",
     "FilterItemInvoker",
     "MixinCreateFilteringBehaviour",
-    "MixinFilterItem",
     "MixinFilterMenu",
     "MixinFilterScreen",
     "MixinFilterScreenPacket",

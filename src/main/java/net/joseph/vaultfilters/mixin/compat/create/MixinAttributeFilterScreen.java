@@ -13,7 +13,6 @@ import com.simibubi.create.content.logistics.filter.ItemAttribute;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
 import com.simibubi.create.foundation.utility.Components;
 import com.simibubi.create.foundation.utility.Pair;
-import net.joseph.vaultfilters.ModPresence;
 import net.joseph.vaultfilters.attributes.abstracts.VaultAttribute;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -40,14 +39,6 @@ public abstract class MixinAttributeFilterScreen extends AbstractFilterScreen<At
     protected MixinAttributeFilterScreen(AttributeFilterMenu menu, Inventory inv,
                                          Component title, AllGuiTextures background) {
         super(menu, inv, title, background);
-    }
-
-    @Redirect(at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/logistics/filter/ItemAttribute;listAttributesOf(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;)Ljava/util/List;"), method = "referenceItemChanged")
-    public List<ItemAttribute> listAttributes(ItemAttribute instance, ItemStack stack, Level world) {
-        if (!ModPresence.serverHasVaultFilters() && instance instanceof VaultAttribute<?>) {
-            return List.of();
-        }
-        return instance.listAttributesOf(stack, world);
     }
 
     // placing attr filter inside empty filter will take its attributes

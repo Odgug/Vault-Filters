@@ -7,6 +7,7 @@ import net.joseph.vaultfilters.attributes.artifact.ArtifactIDAttribute;
 import net.joseph.vaultfilters.attributes.backpacks.IsEmptyAttribute;
 import net.joseph.vaultfilters.attributes.companion.*;
 import net.joseph.vaultfilters.attributes.companion.items.CompanionEggSeriesAttribute;
+import net.joseph.vaultfilters.attributes.companion.items.CompanionRelicAtleastAttribute;
 import net.joseph.vaultfilters.attributes.companion.items.CompanionRelicAttribute;
 import net.joseph.vaultfilters.attributes.companion.items.CompanionTrailAttribute;
 import net.joseph.vaultfilters.attributes.deck.CardDeckHasModifierAttribute;
@@ -59,7 +60,6 @@ import org.slf4j.Logger;
 @Mod(VaultFilters.MOD_ID)
 public class VaultFilters {
     public static final String MOD_ID = "vaultfilters";
-    public static final String MOD_VERSION = "1.23.0";
     public static final int CHECK_FILTER_FLAG = 456;
     public static final Logger LOGGER = LogUtils.getLogger();
 
@@ -69,12 +69,9 @@ public class VaultFilters {
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(VFCache.class);
         MinecraftForge.EVENT_BUS.register(VFTests.class);
-        MinecraftForge.EVENT_BUS.register(ModPresence.class);
-        MinecraftForge.EVENT_BUS.register(VFAsync.class);
     }
 
     private void setup(FMLCommonSetupEvent event) {
-        ModPresence.init();
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, VFServerConfig.SPEC, "vaultfilters-server.toml");
 
         // This has a specific order as this controls the order displayed in the filters
@@ -224,6 +221,7 @@ public class VaultFilters {
         new CompanionSeriesAttribute("").register(CompanionSeriesAttribute::new);
         new CompanionSkinAttribute("").register(CompanionSkinAttribute::new);
         new CompanionTemporalAttribute("").register(CompanionTemporalAttribute::new);
+        new CompanionRelicAtleastAttribute(1).register(CompanionRelicAtleastAttribute::new);
 
         //Deck
         new CardDeckHasModifierAttribute(true).register(CardDeckHasModifierAttribute::new);

@@ -23,29 +23,16 @@ public class BossRuneBoosterPackTypeAttribute extends StringAttribute {
 
     @Override
     public String getValue(ItemStack itemStack) {
-        if (!(itemStack.getItem() instanceof BossRuneItem)) return null;
-        if (!itemStack.hasTag() || !itemStack.getTag().contains("Items", 9)) return null;
-        ListTag items = itemStack.getTag().getList("Items", 10);
-        if (items.isEmpty()) return null;
-        CompoundTag packTag = items.getCompound(0);
-        if (!"the_vault:booster_pack".equals(packTag.getString("id"))) return null;
-
-        // Synthesize a real booster pack ItemStack from the tag!
-        Item boosterPackItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation("the_vault:booster_pack"));
-        if (boosterPackItem == null) return null;
-        ItemStack fakePack = new ItemStack(boosterPackItem);
-        if (packTag.contains("tag", 10))
-            fakePack.setTag(packTag.getCompound("tag"));
-
-        // Use the same logic as CardPackTypeAttribute
-        return ModConfigs.BOOSTER_PACK
-            .getName(BoosterPackItem.getId(fakePack))
-            .map(Component::getString)
-            .orElse(null);
-    }
-    @Override
-    public List<ItemAttribute> listAttributesOf(ItemStack itemStack) {
-        return new ArrayList<>();
+        if (!(itemStack.getItem() instanceof BossRuneItem)) {
+            return null;
+        }
+        List<ItemStack> list = BossRuneItem.getItems(itemStack);
+        if (list.isEmpty()) return null;
+        ItemStack reward = list.get(0);
+        if (!(reward.getItem() instanceof BoosterPackItem)) {
+            return null;
+        }
+        return ModConfigs.BOOSTER_PACK.getName(BoosterPackItem.getId(reward)).map(Component::getString).orElse(null);
     }
 
     @Override
