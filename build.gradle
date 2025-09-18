@@ -173,7 +173,7 @@ jar.finalizedBy('reobfJar')
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            artifact jar
+            artifact tasks.named("jarJar").get()
         }
     }
     repositories {
@@ -182,7 +182,30 @@ publishing {
         }
     }
 }
+tasks.register("deleteShadowJar") {
+    dependsOn tasks.named("build") // Waits for the build to finish
+    doLast {
+        def shadowJarFile = file("${buildDir}/libs/${archivesBaseName}-${version}-shadow.jar")
+        if (shadowJarFile.exists()) {
+            shadowJarFile.delete()
+            println "Deleted shadow jar: ${shadowJarFile.name}"
+        } else {
+            println "No shadow jar to delete."
+        }
+    }
+}
+
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
+}
+tasks.named("jar") {
+    archiveClassifier.set("shadow") // Remove the `.all` suffix
+
+}
+tasks.named("jarJar") {
+    archiveClassifier.set("") // Remove the `.all` suffix
+}
+tasks.named("build").configure {
+    finalizedBy("deleteShadowJar")
 }
