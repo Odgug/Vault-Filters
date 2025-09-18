@@ -15,6 +15,7 @@ import net.joseph.vaultfilters.attributes.deck.CardDeckTypeAttribute;
 import net.joseph.vaultfilters.attributes.inner.InnerCardPackAttribute;
 import net.joseph.vaultfilters.attributes.inner.InnerJewelPouchAttribute;
 import net.joseph.vaultfilters.attributes.inner.InnerRuneItemAttribute;
+import net.joseph.vaultfilters.attributes.relic.TemporalRelicModifierAttribute;
 import net.joseph.vaultfilters.attributes.rune.BossRuneModifierAttribute;
 import net.joseph.vaultfilters.attributes.rune.BossRuneGivesItemAttribute;
 import net.joseph.vaultfilters.attributes.rune.BossRuneGearRarityAttribute;
@@ -226,6 +227,8 @@ public class VaultFilters {
         new CardDeckHasModifierAttribute(true).register(CardDeckHasModifierAttribute::new);
         new CardDeckTypeAttribute("").register(CardDeckTypeAttribute::new);
 
+        //Temporal Relic
+        new TemporalRelicModifierAttribute("").register(TemporalRelicModifierAttribute::new);
 
         //Old
         new InscriptionTimeAttribute(0).register(InscriptionTimeAttribute::new);
