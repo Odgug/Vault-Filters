@@ -13,7 +13,8 @@
     "data.LootCardModifierConfigAccessor",
     "data.ScalerFilterAccessor",
     "data.TaskLootCardModifierAccessor",
-    "other.MixinAttributeResearchBypass"
+    "other.MixinAttributeResearchBypass",
+    "other.MixinTagLoader"
   ],
   "injectors": {
     "defaultRequire": 1
