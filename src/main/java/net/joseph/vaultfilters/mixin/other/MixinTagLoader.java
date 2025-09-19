@@ -28,6 +28,10 @@ public class MixinTagLoader {
     @Inject(method = "build", at = @At("HEAD"))
     private void afterBuild(Map<ResourceLocation, Tag.Builder> pBuilders, CallbackInfoReturnable<Map<ResourceLocation, Tag<?>>> cir) {
         if ("tags/items".equals(this.directory)){
+
+            Set<ResourceLocation> wooden_items = vaultFilters$getItemsFromTables(vaultFilters$getTablesFromInfo(VaultMod.id("wooden_chest")));
+            vaultFilters$createTag(pBuilders,"wooden_chest_loot",wooden_items);
+
             Set<ResourceLocation> ornate_items = vaultFilters$getItemsFromTables(vaultFilters$getTablesFromInfo(VaultMod.id("ornate_chest")));
             ornate_items.addAll(vaultFilters$getItemsFromTables(vaultFilters$getTablesFromInfo(VaultMod.id("ornate_strongbox"))));
             vaultFilters$createTag(pBuilders,"ornate_chest_loot",ornate_items);
@@ -42,20 +46,24 @@ public class MixinTagLoader {
             vaultFilters$createTag(pBuilders,"gilded_chest_loot",gilded_items);
 
 
-            Set<ResourceLocation> all_chest_items = Stream.of(ornate_items, living_items, gilded_items)
+            Set<ResourceLocation> all_chest_items = Stream.of(wooden_items,ornate_items, living_items, gilded_items)
                     .flatMap(Set::stream)
                     .collect(Collectors.toSet());
-            vaultFilters$createTag(pBuilders,"chest_loot",all_chest_items);
+            vaultFilters$createTag(pBuilders,"all_chest_loot",all_chest_items);
 
 
 
             Set<ResourceLocation> treasure_items = vaultFilters$getItemsFromTables(vaultFilters$getTablesFromInfo(VaultMod.id("treasure_chest")));
             vaultFilters$createTag(pBuilders,"treasure_chest_loot",treasure_items);
 
-            Set<ResourceLocation> treasure_sand_items = vaultFilters$getItemsFromTables(vaultFilters$getTablesFromInfo(VaultMod.id("treasure_sand")));
-            vaultFilters$createTag(pBuilders,"treasure_sand_loot",treasure_sand_items);
+            Set<ResourceLocation> treasure_sand_treasure = vaultFilters$getItemsFromTables(vaultFilters$getTablesFromInfo(VaultMod.id("treasure_sand")));
+            vaultFilters$createTag(pBuilders,"treasure_sand_treasure",treasure_sand_treasure);
 
 
+            Set<ResourceLocation> treasure_sand_digsite = vaultFilters$getItemsFromTables(vaultFilters$getResourceLocationsFromStrings(
+                    new HashSet<>(Arrays.asList("digsite_sand_lvl0")
+                    )));
+            vaultFilters$createTag(pBuilders,"treasure_sand_digsite",treasure_sand_digsite);
 
             Set<ResourceLocation> flesh_items = vaultFilters$getItemsFromTables(vaultFilters$getTablesFromInfo(VaultMod.id("flesh_chest")));
             vaultFilters$createTag(pBuilders,"flesh_chest_loot",flesh_items);
@@ -70,10 +78,10 @@ public class MixinTagLoader {
             Set<ResourceLocation> raw_chest_items = Stream.of(hardened_items, enigma_items, flesh_items)
                     .flatMap(Set::stream)
                     .collect(Collectors.toSet());
-            vaultFilters$createTag(pBuilders,"raw_chest_loot",raw_chest_items);
+            vaultFilters$createTag(pBuilders,"all_skyvault_loot",raw_chest_items);
 
             Set<ResourceLocation> coin_items = vaultFilters$getItemsFromTables(vaultFilters$getTablesFromInfo(VaultMod.id("coin_pile")));
-            vaultFilters$createTag(pBuilders,"coins",coin_items);
+            vaultFilters$createTag(pBuilders,"coin_pile_loot",coin_items);
 
 
 
@@ -112,6 +120,13 @@ public class MixinTagLoader {
                     )));
             vaultFilters$createTag(pBuilders,"rune_loot",rune_loot);
 
+            Set<ResourceLocation> brazier_pillage_loot = vaultFilters$getItemsFromTables(vaultFilters$getResourceLocationsFromStrings(
+                    new HashSet<>(Arrays.asList("brazier_lvl0","brazier_lvl20","brazier_lvl50")
+                    )));
+            vaultFilters$createTag(pBuilders,"brazier_pillaging",brazier_pillage_loot);
+
+
+            // ores
             //black market loot
             //vendoor loot
         }
