@@ -1,9 +1,20 @@
 package net.joseph.vaultfilters.mixin.other;
 
 import iskallia.vault.VaultMod;
+import iskallia.vault.config.Config;
 import iskallia.vault.config.LootInfoConfig;
+import iskallia.vault.config.VaultAltarConfig;
+import iskallia.vault.config.altar.entry.AltarIngredientEntry;
+import iskallia.vault.core.world.data.item.ItemPredicate;
+import iskallia.vault.core.world.data.tile.OrItemPredicate;
 import iskallia.vault.core.world.loot.LootTableInfo;
 import iskallia.vault.init.ModConfigs;
+import iskallia.vault.item.ItemVaultFruit;
+import iskallia.vault.item.ItemVaultKey;
+import iskallia.vault.item.VaultXPFoodItem;
+import iskallia.vault.item.modification.GearModificationItem;
+import iskallia.vault.util.data.WeightedList;
+import net.joseph.vaultfilters.VaultFilters;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.Tag;
@@ -124,11 +135,55 @@ public class MixinTagLoader {
                     new HashSet<>(Arrays.asList("brazier_lvl0","brazier_lvl20","brazier_lvl50")
                     )));
             vaultFilters$createTag(pBuilders,"brazier_pillaging",brazier_pillage_loot);
-
+            Optional<Map<String, WeightedList<AltarIngredientEntry>>> pool = ModConfigs.VAULT_ALTAR_INGREDIENTS.LEVELS.getForLevel(100);
+            if (pool.isEmpty()) {
+                VaultFilters.LOGGER.info("couldn't get ingredients");
+            } else {
+                Map<String, WeightedList<AltarIngredientEntry>> map = pool.get();
+                Tag.Builder all = pBuilders.computeIfAbsent(VaultMod.id("vault_altar_all"), id -> Tag.Builder.tag());
+                map.forEach((name, pool2) -> {
+                    Tag.Builder category = pBuilders.computeIfAbsent(VaultMod.id("vault_altar_" + name), id -> Tag.Builder.tag());
+                    pool2.forEach((entry,num) -> {
+                        entry.getItems().forEach(itemStack -> {
+                            ResourceLocation rl = itemStack.getItem().getRegistryName();
+                            if (Registry.ITEM.getOptional(rl).isPresent()) {
+                                all.addElement(rl,"Vault Filters dynamic tags");
+                                category.addElement(rl,"Vault Filters dynamic tags");
+                            }
+                        });
+                    });
+                });
+            }
 
             // ores
             //black market loot
             //vendoor loot
+
+            Tag.Builder treasureKey = pBuilders.computeIfAbsent(VaultMod.id("keys"), id -> Tag.Builder.tag());
+            Tag.Builder fruit = pBuilders.computeIfAbsent(VaultMod.id("fruits"), id -> Tag.Builder.tag());
+            Tag.Builder focuses = pBuilders.computeIfAbsent(VaultMod.id("focuses"), id -> Tag.Builder.tag());
+            Tag.Builder burgers = pBuilders.computeIfAbsent(VaultMod.id("burgers"), id -> Tag.Builder.tag());
+            Registry.ITEM.keySet().stream()
+                    .map(Registry.ITEM::getOptional)
+                    .flatMap(Optional::stream)
+                    .forEach(item -> {
+                        ResourceLocation rl = item.getRegistryName();
+                        if (rl == null) {
+                            return;
+                        }
+                        if (item instanceof ItemVaultKey) {
+                            treasureKey.addElement(rl, "Vault Filters dynamic tags");
+                        }
+                        if (item instanceof ItemVaultFruit) {
+                            fruit.addElement(rl, "Vault Filters dynamic tags");
+                        }
+                        if (item instanceof GearModificationItem) {
+                            focuses.addElement(rl,"Vault Filters dynamic tags");
+                        }
+                        if (item instanceof VaultXPFoodItem) {
+                            burgers.addElement(rl,"Vault Filters dynamic tags");
+                        }
+                    });
         }
 
     }
