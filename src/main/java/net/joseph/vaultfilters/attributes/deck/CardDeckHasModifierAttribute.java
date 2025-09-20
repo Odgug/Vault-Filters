@@ -6,6 +6,8 @@ import iskallia.vault.item.CardDeckItem;
 import net.joseph.vaultfilters.attributes.abstracts.BooleanAttribute;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.Objects;
+
 public class CardDeckHasModifierAttribute extends BooleanAttribute {
 
     public CardDeckHasModifierAttribute(Boolean value) {
@@ -20,8 +22,13 @@ public class CardDeckHasModifierAttribute extends BooleanAttribute {
     @Override
     public Boolean getValue(ItemStack itemStack) {
         if(itemStack.getItem() instanceof CardDeckItem) {
-            CardDeck deck = CardDeckItem.getCardDeck(itemStack).orElse(null);
 
+            if (!(Objects.requireNonNullElse(CardDeckItem.getModifiersRoll(itemStack), "")).isEmpty()) {
+                // unrolled deck with modifier roll
+                return true;
+            }
+
+            CardDeck deck = CardDeckItem.getCardDeck(itemStack).orElse(null);
             if(deck == null) {
                 return null;
             }
