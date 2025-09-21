@@ -1,6 +1,7 @@
 package net.joseph.vaultfilters.mixin.other;
 
 import iskallia.vault.VaultMod;
+import iskallia.vault.block.item.VaultOreBlockItem;
 import iskallia.vault.config.Config;
 import iskallia.vault.config.LootInfoConfig;
 import iskallia.vault.config.VaultAltarConfig;
@@ -154,7 +155,6 @@ public class MixinTagLoader {
                     });
                 });
             }
-
             // ores
             //black market loot
             //vendoor loot
@@ -163,6 +163,7 @@ public class MixinTagLoader {
             Tag.Builder fruit = pBuilders.computeIfAbsent(VaultMod.id("fruits"), id -> Tag.Builder.tag());
             Tag.Builder focuses = pBuilders.computeIfAbsent(VaultMod.id("focuses"), id -> Tag.Builder.tag());
             Tag.Builder burgers = pBuilders.computeIfAbsent(VaultMod.id("burgers"), id -> Tag.Builder.tag());
+            Tag.Builder ores = pBuilders.computeIfAbsent(VaultMod.id("vault_ores"), id -> Tag.Builder.tag());
             Registry.ITEM.keySet().stream()
                     .map(Registry.ITEM::getOptional)
                     .flatMap(Optional::stream)
@@ -182,6 +183,9 @@ public class MixinTagLoader {
                         }
                         if (item instanceof VaultXPFoodItem) {
                             burgers.addElement(rl,"Vault Filters dynamic tags");
+                        }
+                        if (item instanceof VaultOreBlockItem) {
+                            ores.addElement(rl,"Vault Filters dynamic tags");
                         }
                     });
         }
