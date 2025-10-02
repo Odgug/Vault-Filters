@@ -3,6 +3,7 @@ package net.joseph.vaultfilters.mixin.compat.create;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.mojang.blaze3d.platform.InputConstants;
+import com.simibubi.create.AllItems;
 import com.simibubi.create.AllPackets;
 import com.simibubi.create.content.logistics.filter.AbstractFilterScreen;
 import com.simibubi.create.content.logistics.filter.AttributeFilterMenu;
@@ -17,6 +18,8 @@ import net.joseph.vaultfilters.attributes.abstracts.VaultAttribute;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
@@ -42,17 +45,37 @@ public abstract class MixinAttributeFilterScreen extends AbstractFilterScreen<At
     }
 
     // placing attr filter inside empty filter will take its attributes
-    @Inject(at = @At(value = "HEAD"), method = "referenceItemChanged")
-    public void copyCurrentAttrFilter(ItemStack stack, CallbackInfo ci) {
-        if (((AttributeFilterMenuAccessor)this.menu).getSelectedAttributes().isEmpty()
-            && FilterItemStack.of(stack) instanceof FilterItemStack.AttributeFilterItemStack attrFilter) {
-
-            var currentTests = attrFilter.attributeTests;
-            for (var test: currentTests){
-                this.vault_Filters$addAttr(test.getFirst(), test.getSecond());
+//    @Inject(at = @At(value = "HEAD"), method = "referenceItemChanged")
+//    public void copyCurrentAttrFilter(ItemStack stack, CallbackInfo ci) {
+//        if (((AttributeFilterMenuAccessor)this.menu).getSelectedAttributes().isEmpty()
+//            && FilterItemStack.of(stack) instanceof FilterItemStack.AttributeFilterItemStack attrFilter) {
+//
+//            var currentTests = attrFilter.attributeTests;
+//            for (var test: currentTests){
+//                this.vault_Filters$addAttr(test.getFirst(), test.getSecond());
+//            }
+//        }
+//    }
+    @Shadow
+    private List<ItemAttribute> attributesOfItem = new ArrayList<>();
+    @Inject(at = @At(value = "INVOKE_ASSIGN", target = "Ljava/util/List;stream()Ljava/util/stream/Stream;",shift = At.Shift.BEFORE), method = "referenceItemChanged")
+    public void addAttributesFromFilter(ItemStack stack, CallbackInfo ci) {
+        if (stack.is(AllItems.ATTRIBUTE_FILTER.get())) {
+            boolean defaults = !stack.hasTag();
+            ListTag attributes = defaults ? new ListTag() : stack.getTag().getList("MatchedAttributes", 10);
+            if (attributes.isEmpty()) {
+                return;
+            }
+            for (Tag inbt : attributes) {
+                CompoundTag compound = (CompoundTag)inbt;
+                ItemAttribute attribute = ItemAttribute.fromNBT(compound);
+                if (attribute != null) {
+                    attributesOfItem.add(attribute);
+                }
             }
         }
     }
+
 
     // deletion logic below
     @Shadow private List<Component> selectedAttributes;
