@@ -98,23 +98,23 @@ public class MixinTagLoader {
 
 
             Set<ResourceLocation> elixir_items = vaultFilters$getItemsFromTables(vaultFilters$getTablesFromInfo(VaultMod.id("completion_crate_elixir")));
-            vaultFilters$createTag(pBuilders,"elixir_crate_loot",elixir_items);
+            //vaultFilters$createTag(pBuilders,"elixir_crate_loot",elixir_items);
 
             Set<ResourceLocation> guardian_items = vaultFilters$getItemsFromTables(vaultFilters$getTablesFromInfo(VaultMod.id("completion_crate_guardian")));
-            vaultFilters$createTag(pBuilders,"guardian_crate_loot",guardian_items);
+            //vaultFilters$createTag(pBuilders,"guardian_crate_loot",guardian_items);
 
             Set<ResourceLocation> brazier_items = vaultFilters$getItemsFromTables(vaultFilters$getTablesFromInfo(VaultMod.id("completion_crate_brazier")));
-            vaultFilters$createTag(pBuilders,"brazier_crate_loot",brazier_items);
+            //vaultFilters$createTag(pBuilders,"brazier_crate_loot",brazier_items);
 
             Set<ResourceLocation> scavenger_crate_items = vaultFilters$getItemsFromTables(vaultFilters$getTablesFromInfo(VaultMod.id("completion_crate_scavenger")));
-            vaultFilters$createTag(pBuilders,"scavenger_crate_loot",scavenger_crate_items);
+            //vaultFilters$createTag(pBuilders,"scavenger_crate_loot",scavenger_crate_items);
 
             Set<ResourceLocation> paradox_items = vaultFilters$getItemsFromTables(vaultFilters$getTablesFromInfo(VaultMod.id("completion_crate_paradox")));
-            vaultFilters$createTag(pBuilders,"paradox_crate_loot",paradox_items);
+            //vaultFilters$createTag(pBuilders,"paradox_crate_loot",paradox_items);
 
             Set<ResourceLocation> bingo_items = vaultFilters$getItemsFromTables(vaultFilters$getTablesFromInfo(VaultMod.id("completion_crate_bingo")));
             bingo_items.addAll(vaultFilters$getItemsFromTables(vaultFilters$getTablesFromInfo(VaultMod.id("full_bingo"))));
-            vaultFilters$createTag(pBuilders,"bingo_crate_loot",bingo_items);
+            //vaultFilters$createTag(pBuilders,"bingo_crate_loot",bingo_items);
 
             Set<ResourceLocation> crate_loot = Stream.of(elixir_items,guardian_items,brazier_items,scavenger_crate_items,paradox_items,bingo_items)
                     .flatMap(Set::stream)
