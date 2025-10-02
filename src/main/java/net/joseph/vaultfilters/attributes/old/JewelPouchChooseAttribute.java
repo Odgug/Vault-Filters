@@ -1,4 +1,4 @@
-package net.joseph.vaultfilters.attributes.pouch;
+package net.joseph.vaultfilters.attributes.old;
 
 import iskallia.vault.item.JewelPouchItem;
 import net.joseph.vaultfilters.attributes.abstracts.BooleanAttribute;
@@ -14,7 +14,8 @@ public class JewelPouchChooseAttribute extends BooleanAttribute {
         if (!(itemStack.getItem() instanceof JewelPouchItem)) {
             return false;
         }
-        return !JewelPouchItem.getJewels(itemStack).isEmpty();
+        return false;
+        //return !JewelPouchItem.getJewels(itemStack).isEmpty();
     }
 
     @Override

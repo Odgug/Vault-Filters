@@ -10,8 +10,9 @@ import me.desht.modularrouters.logic.compiled.CompiledActivatorModule;
 import me.desht.modularrouters.logic.filter.matchers.BulkItemMatcher;
 import me.desht.modularrouters.logic.filter.matchers.IItemMatcher;
 import me.desht.modularrouters.logic.filter.matchers.SimpleItemMatcher;
-import net.joseph.vaultfilters.attributes.packs.CardPackChooseAttribute;
-import net.joseph.vaultfilters.attributes.pouch.JewelPouchChooseAttribute;
+import net.joseph.vaultfilters.attributes.old.CardPackChooseAttribute;
+import net.joseph.vaultfilters.attributes.old.JewelPouchChooseAttribute;
+import net.joseph.vaultfilters.items.VFItems;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.util.FakePlayer;
@@ -25,6 +26,7 @@ import java.util.List;
 
 @Mixin(value = CompiledActivatorModule.class, remap = false)
 public abstract class MixinCompiledActivatorModule {
+
 
     @Inject(method = "doUseItem", at = @At("HEAD"), cancellable = true)
     private void vaultOpenables(ModularRouterBlockEntity router, FakePlayer fakePlayer, CallbackInfoReturnable<Boolean> cir) {
@@ -72,6 +74,9 @@ public abstract class MixinCompiledActivatorModule {
     }
 
     @Unique private boolean vault_Filters$shouldChooseCard(List<IItemMatcher> matchers) {
+        if (((AccessorCompiledModule) this).getAugmentCounter().getAugmentCount(VFItems.CARD_PACK_AUGMENT.get()) > 0) {
+            return true;
+        }
         for (var matcher : matchers){
             if (matcher instanceof SimpleItemMatcher simpleItemMatcher){
                 var stack = ((AccessorSimpleItemMatcher)simpleItemMatcher).getFilterStack();
@@ -101,6 +106,10 @@ public abstract class MixinCompiledActivatorModule {
     }
 
     @Unique private boolean vault_Filters$shouldChooseJewel(List<IItemMatcher> matchers) {
+        if (((AccessorCompiledModule) this).getAugmentCounter().getAugmentCount(VFItems.JEWEL_POUCH_AUGMENT.get()) > 0) {
+            return true;
+        }
+
         for (var matcher : matchers){
             if (matcher instanceof SimpleItemMatcher simpleItemMatcher){
                 var stack = ((AccessorSimpleItemMatcher)simpleItemMatcher).getFilterStack();

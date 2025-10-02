@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "modularrouters:item/augment/augment_layer0",
+    "layer1": "the_vault:item/jewel_pouch_open"
+  }
+}

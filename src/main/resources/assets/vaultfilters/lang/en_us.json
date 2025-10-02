@@ -316,5 +316,10 @@
 
   "item.create.attribute_filter.tooltip.summary": "_Matches items_ against a set of _attributes_ or _categories_, contains _Vault Hunters_ related attributes for sorting gear, jewels and more. Can be used in _Filter Slots_ of some mods (Create, RS, MR, AE2 and Backpacks by default). Multiple of these can be placed inside a _List Filter_.",
   "item.create.attribute_filter.tooltip.condition1": "When R-Clicked",
-  "item.create.attribute_filter.tooltip.behaviour1": "Opens the _configuration interface_."
+  "item.create.attribute_filter.tooltip.behaviour1": "Opens the _configuration interface_.",
+
+  "item.vaultfilters.jewel_pouch_augment": "Jewel Pouch Opener Augment",
+  "modularrouters.itemText.usage.item.jewel_pouch_augment": "For use in an activator module. \nActivation on an opened Jewel Pouch will select the first Jewel that matches the filter if there is one.",
+  "item.vaultfilters.card_pack_augment": "Card Pack Opener Augment",
+  "modularrouters.itemText.usage.item.card_pack_augment": "For use in an activator module. \nActivation on an opened Card Pack will select the first Card that matches the filter if there is one."
 }

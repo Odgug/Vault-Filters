@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " D ",
+    "SOS",
+    " D "
+  ],
+  "key": {
+    "O": {
+      "item": "modularrouters:augment_core"
+    },
+    "D": {
+      "item": "the_vault:vault_diamond"
+    },
+    "S": {
+      "item": "the_vault:magic_silk"
+    }
+  },
+  "result": {
+    "item": "vaultfilters:jewel_pouch_augment",
+    "count": 1
+  }
+}

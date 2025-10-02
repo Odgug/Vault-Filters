@@ -1,4 +1,4 @@
-package net.joseph.vaultfilters.attributes.packs;
+package net.joseph.vaultfilters.attributes.old;
 
 import iskallia.vault.item.BoosterPackItem;
 import net.joseph.vaultfilters.attributes.abstracts.BooleanAttribute;
@@ -14,7 +14,8 @@ public class CardPackChooseAttribute extends BooleanAttribute {
         if (!(itemStack.getItem() instanceof BoosterPackItem)) {
             return false;
         }
-        return BoosterPackItem.getOutcomes(itemStack) != null;
+        return false;
+        //return BoosterPackItem.getOutcomes(itemStack) != null;
     }
 
     @Override

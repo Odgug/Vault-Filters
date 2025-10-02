@@ -38,16 +38,17 @@ import net.joseph.vaultfilters.attributes.old.InscriptionCompletionAttribute;
 import net.joseph.vaultfilters.attributes.old.InscriptionInstabilityAttribute;
 import net.joseph.vaultfilters.attributes.old.InscriptionTimeAttribute;
 import net.joseph.vaultfilters.attributes.other.*;
-import net.joseph.vaultfilters.attributes.packs.CardPackChooseAttribute;
+import net.joseph.vaultfilters.attributes.old.CardPackChooseAttribute;
 import net.joseph.vaultfilters.attributes.packs.CardPackOpenedAttribute;
 import net.joseph.vaultfilters.attributes.packs.CardPackTypeAttribute;
-import net.joseph.vaultfilters.attributes.pouch.JewelPouchChooseAttribute;
+import net.joseph.vaultfilters.attributes.old.JewelPouchChooseAttribute;
 import net.joseph.vaultfilters.attributes.pouch.JewelPouchOpenedAttribute;
 import net.joseph.vaultfilters.attributes.scav.IsRottenScavAttribute;
 import net.joseph.vaultfilters.attributes.soul.*;
 import net.joseph.vaultfilters.attributes.tool.ToolMaterialAttribute;
 import net.joseph.vaultfilters.attributes.trinket.*;
 import net.joseph.vaultfilters.configs.VFServerConfig;
+import net.joseph.vaultfilters.items.VFItems;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -69,6 +70,7 @@ public class VaultFilters {
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(VFCache.class);
         MinecraftForge.EVENT_BUS.register(VFTests.class);
+        VFItems.ITEMS.register(eventBus);
     }
 
     private void setup(FMLCommonSetupEvent event) {
