@@ -27,90 +27,100 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value = StorageExportStrategy.class, remap = false)
 public class MixinStorageExportStrategy<C> {
+    @Shadow @Final
+    private HandlerStrategy<C, CallbackI.S> handlerStrategy;
+    @Shadow @Final
+    private BlockApiCache<C> apiCache;
+    @Shadow @Final
+    private Direction fromSide;
 
-//    @Overwrite
-//    public long transfer(StackTransferContext context, AEKey what, long amount, Actionable mode) {
-//        if (!handlerStrategy.isSupported(what)) {
-//            return 0;
-//        }
-//
-//        C adjacentStorage = apiCache.find(fromSide);
-//        if (adjacentStorage == null) {
-//            return 0;
-//        }
-//
-//        IStorageService inv = context.getInternalStorage();
-//        if (what instanceof AEItemKey itemKey && VFServerConfig.AE2_COMPAT.get() && itemKey.getItem() instanceof FilterItem) {
-//            for (Object2LongMap.Entry<AEKey> key : inv.getInventory().getAvailableStacks()) {
-//                AEKey aek = key.getKey();
-//                if (!(aek instanceof AEItemKey itemKey2)) {
-//                    continue;
-//                }
-//
-//                if (VFTests.checkFilter(itemKey2, itemKey, true, null)) {
-//                    what = aek;
-//                    break;
-//                }
-//            }
-//        }
-//
-//        long extracted = StorageHelper.poweredExtraction(
-//                context.getEnergySource(),
-//                inv.getInventory(),
-//                what,
-//                amount,
-//                context.getActionSource(),
-//                Actionable.SIMULATE);
-//        long wasInserted = handlerStrategy.insert(adjacentStorage, what, extracted, Actionable.SIMULATE);
-//
-//        if (wasInserted > 0) {
-//            if (mode == Actionable.MODULATE) {
-//                extracted = StorageHelper.poweredExtraction(
-//                        context.getEnergySource(),
-//                        inv.getInventory(),
-//                        what,
-//                        wasInserted,
-//                        context.getActionSource(),
-//                        Actionable.MODULATE);
-//                wasInserted = handlerStrategy.insert(adjacentStorage, what, extracted, Actionable.MODULATE);
-//
-//                if (wasInserted < extracted) {
-//                    // Be nice and try to give the overflow back
-//                    long leftover = extracted - wasInserted;
-//                    leftover -= inv.getInventory().insert(what, leftover, Actionable.MODULATE, context.getActionSource());
-//                    if (leftover > 0) {
-//
-//                    }
-//                }
-//            }
-//
-//            return wasInserted;
-//        }
-//
-//        return 0;
-//    }
-    @ModifyVariable(
-            method = "transfer",
-            at = @At(
-                    value = "INVOKE_ASSIGN",
-                    target = "Lappeng/api/behaviors/StackTransferContext;getInternalStorage()Lappeng/api/networking/storage/IStorageService;",
-                    shift = At.Shift.AFTER
-            ),
-            ordinal = 1 //parameter what
-    )
-    private AEKey modifyWhat(AEKey originalWhat, StackTransferContext context, long amount, Actionable mode, @Local IStorageService inv) {
-        if (originalWhat instanceof AEItemKey itemKey && VFServerConfig.AE2_COMPAT.get() && itemKey.getItem() instanceof FilterItem) {
+    /**
+     * @author
+     * @reason
+     */
+    @Overwrite
+    public long transfer(StackTransferContext context, AEKey what, long amount, Actionable mode) {
+        if (!handlerStrategy.isSupported(what)) {
+            return 0;
+        }
+
+        C adjacentStorage = apiCache.find(fromSide);
+        if (adjacentStorage == null) {
+            return 0;
+        }
+
+        IStorageService inv = context.getInternalStorage();
+        if (what instanceof AEItemKey itemKey && VFServerConfig.AE2_COMPAT.get() && itemKey.getItem() instanceof FilterItem) {
             for (Object2LongMap.Entry<AEKey> key : inv.getInventory().getAvailableStacks()) {
                 AEKey aek = key.getKey();
-                if (!(aek instanceof AEItemKey itemKey2)) continue;
+                if (!(aek instanceof AEItemKey itemKey2)) {
+                    continue;
+                }
 
                 if (VFTests.checkFilter(itemKey2, itemKey, true, null)) {
-                    return aek;
+                    what = aek;
+                    break;
                 }
             }
         }
 
-        return originalWhat;
+        long extracted = StorageHelper.poweredExtraction(
+                context.getEnergySource(),
+                inv.getInventory(),
+                what,
+                amount,
+                context.getActionSource(),
+                Actionable.SIMULATE);
+        long wasInserted = handlerStrategy.insert(adjacentStorage, what, extracted, Actionable.SIMULATE);
+
+        if (wasInserted > 0) {
+            if (mode == Actionable.MODULATE) {
+                extracted = StorageHelper.poweredExtraction(
+                        context.getEnergySource(),
+                        inv.getInventory(),
+                        what,
+                        wasInserted,
+                        context.getActionSource(),
+                        Actionable.MODULATE);
+                wasInserted = handlerStrategy.insert(adjacentStorage, what, extracted, Actionable.MODULATE);
+
+                if (wasInserted < extracted) {
+                    // Be nice and try to give the overflow back
+                    long leftover = extracted - wasInserted;
+                    leftover -= inv.getInventory().insert(what, leftover, Actionable.MODULATE, context.getActionSource());
+                    if (leftover > 0) {
+
+                    }
+                }
+            }
+
+            return wasInserted;
+        }
+
+        return 0;
     }
+//    @ModifyVariable(
+//            method = "transfer",
+//            at = @At(
+//                    value = "INVOKE_ASSIGN",
+//                    target = "Lappeng/api/behaviors/StackTransferContext;getInternalStorage()Lappeng/api/networking/storage/IStorageService;",
+//                    shift = At.Shift.AFTER
+//            ),
+//            ordinal = 1 //parameter what
+//    )
+//    private AEKey modifyWhat(AEKey originalWhat, StackTransferContext context, long amount, Actionable mode, @Local IStorageService inv) {
+//        if (originalWhat instanceof AEItemKey itemKey && VFServerConfig.AE2_COMPAT.get() && itemKey.getItem() instanceof FilterItem) {
+//            for (Object2LongMap.Entry<AEKey> key : inv.getInventory().getAvailableStacks()) {
+//                AEKey aek = key.getKey();
+//                if (!(aek instanceof AEItemKey itemKey2)) continue;
+//
+//                if (VFTests.checkFilter(itemKey2, itemKey, true, null)) {
+//                    return aek;
+//                }
+//            }
+//        }
+//
+//        return originalWhat;
+//    }
 
 }
