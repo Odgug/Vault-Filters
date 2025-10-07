@@ -319,7 +319,7 @@
   "item.create.attribute_filter.tooltip.behaviour1": "Opens the _configuration interface_.",
 
   "item.vaultfilters.jewel_pouch_augment": "Jewel Pouch Opener Augment",
-  "modularrouters.itemText.usage.item.jewel_pouch_augment": "For use in an activator module. \nActivation on an opened Jewel Pouch will select the first Jewel that matches the filter if there is one.",
+  "modularrouters.itemText.usage.item.jewel_pouch_augment": "For use in an activator module. \nActivation on a Jewel Pouch will select the first Jewel that matches the filter if there is one.",
   "item.vaultfilters.card_pack_augment": "Card Pack Opener Augment",
-  "modularrouters.itemText.usage.item.card_pack_augment": "For use in an activator module. \nActivation on an opened Card Pack will select the first Card that matches the filter if there is one."
+  "modularrouters.itemText.usage.item.card_pack_augment": "For use in an activator module. \nActivation on a Card Pack will select the first Card that matches the filter if there is one."
 }
