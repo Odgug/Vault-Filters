@@ -49,6 +49,7 @@ import net.joseph.vaultfilters.attributes.tool.ToolMaterialAttribute;
 import net.joseph.vaultfilters.attributes.trinket.*;
 import net.joseph.vaultfilters.configs.VFServerConfig;
 import net.joseph.vaultfilters.items.VFItems;
+import net.joseph.vaultfilters.recipes.VFRecipes;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -71,6 +72,7 @@ public class VaultFilters {
         MinecraftForge.EVENT_BUS.register(VFCache.class);
         MinecraftForge.EVENT_BUS.register(VFTests.class);
         VFItems.ITEMS.register(eventBus);
+        VFRecipes.register(eventBus);
     }
 
     private void setup(FMLCommonSetupEvent event) {
