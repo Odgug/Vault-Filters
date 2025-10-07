@@ -38,6 +38,6 @@ public class ListFilterCopyRecipe extends AbstractCopyRecipe{
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return VFRecipes.ATTRIBUTE_FILTER_COPY.get();
+        return VFRecipes.LIST_FILTER_COPY.get();
     }
 }
