@@ -13,7 +13,8 @@
     "MixinFilterMenu",
     "MixinFilterScreen",
     "MixinFilterScreenPacket",
-    "MixinListFilterItemStack"
+    "MixinListFilterItemStack",
+    "MixinGhostItemMenu"
   ],
   "injectors": {
     "defaultRequire": 1
