@@ -56,8 +56,9 @@ public class MixinGhostItemMenu {
                                 }
                                 return null;
                             }
-                        };
 
+                        };
+                        //VaultFilters.LOGGER.info(stack.getDisplayName().getString());
                         NetworkHooks.openGui(serverPlayer, provider, buf -> buf.writeItem(stack));
                     }
                 }

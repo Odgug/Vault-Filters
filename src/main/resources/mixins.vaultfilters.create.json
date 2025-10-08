@@ -14,7 +14,9 @@
     "MixinFilterScreen",
     "MixinFilterScreenPacket",
     "MixinListFilterItemStack",
-    "MixinGhostItemMenu"
+    "MixinGhostItemMenu",
+    "MixinAbstractFilterScreen",
+    "MixinAbstractFilterMenu"
   ],
   "injectors": {
     "defaultRequire": 1
