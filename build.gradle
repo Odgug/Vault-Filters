@@ -152,6 +152,16 @@ dependencies {
     }
 }
 
+processResources {
+    var replaceProperties = [
+            mod_version: mod_version
+    ]
+    inputs.properties replaceProperties
+    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
+        expand replaceProperties + [project: project]
+    }
+}
+
 jar {
     manifest {
         attributes([
