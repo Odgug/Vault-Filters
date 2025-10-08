@@ -37,19 +37,19 @@ public class MixinGhostItemMenu {
                 ItemStack stackInSlot = ghostInventory.getStackInSlot(slot);
                 if (stackInSlot.getItem() instanceof FilterItem filterItem) {
                     if (player instanceof ServerPlayer serverPlayer) {
-                        ItemStack stack = stackInSlot.copy(); // the item you want to open the GUI for
+                        ItemStack stack = stackInSlot.copy();
 
                         MenuProvider provider = new MenuProvider() {
                             @Override
                             public Component getDisplayName() {
-                                return stack.getHoverName(); // or filterItem.getDescription()
+                                return stack.getHoverName();
                             }
 
                             @Override
                             public AbstractContainerMenu createMenu(int id, Inventory inv, Player p) {
                                 if (stack.getItem() instanceof FilterItem filterItem) {
                                     // Use the stack directly instead of player.getMainHandItem()
-                                    VaultFilters.LOGGER.info(stack.getDisplayName().getString());
+                                    //VaultFilters.LOGGER.info(stack.getDisplayName().getString());
                                     return stack.is(AllItems.FILTER.get())
                                             ? FilterMenu.create(id, inv, stack)
                                             : AttributeFilterMenu.create(id, inv, stack);
