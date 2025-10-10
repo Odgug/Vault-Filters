@@ -11,6 +11,7 @@ public class MixinAbstractFilterMenu {
      * @author
      * @reason
      */
+    //debug for nested filters
     @Overwrite
     public boolean stillValid(Player player) {
         return true;
