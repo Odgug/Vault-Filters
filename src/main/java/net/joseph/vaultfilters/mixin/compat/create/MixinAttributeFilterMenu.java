@@ -9,6 +9,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -22,6 +23,28 @@ public class MixinAttributeFilterMenu {
         if (name != null && !name.isEmpty()) {
             filterItem.setHoverName(Component.nullToEmpty(name));
         }
+        if (name.isEmpty() && filterItem.hasCustomHoverName()) {
+            vault_Filters$resetHoverName(filterItem);
+        }
+    }
+    @Unique
+    public void vault_Filters$resetHoverName(ItemStack stack) {
+        CompoundTag tag = stack.getTag();
+        if (tag != null && tag.contains("display", 10)) { // 10 = CompoundTag type
+            CompoundTag displayTag = tag.getCompound("display");
+            displayTag.remove("Name"); // Remove custom name
+            if (displayTag.isEmpty()) {
+                tag.remove("display"); // Clean up if empty
+            } else {
+                tag.put("display", displayTag); // Save changes
+            }
+
+            if (tag.isEmpty()) {
+                stack.setTag(null); // If whole tag is now empty, remove it
+            } else {
+                stack.setTag(tag); // Set updated tag
+            }
+        }
     }
     @Inject(method = "saveData(Lnet/minecraft/world/item/ItemStack;)V", at =
     @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getOrCreateTag()Lnet/minecraft/nbt/CompoundTag;",ordinal = 1,shift = At.Shift.AFTER), cancellable = true, remap = false)
@@ -29,5 +52,10 @@ public class MixinAttributeFilterMenu {
         if (filterItem.hasCustomHoverName()) {
             ci.cancel();
         }
+    }
+    @Inject(method = "initAndReadInventory(Lnet/minecraft/world/item/ItemStack;)V", at = @At(value = "TAIL"),remap = false)
+    private void initName(ItemStack filterItem, CallbackInfo ci) {
+        AttributeFilterMenu instance = (AttributeFilterMenu) (Object) (this);
+        ((AbstractFilterMenuAdvancedAccessor) (AbstractFilterMenu) instance).vault_filters$setName(filterItem.getHoverName().getString());
     }
 }

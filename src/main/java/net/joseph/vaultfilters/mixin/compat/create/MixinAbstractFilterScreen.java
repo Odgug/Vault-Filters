@@ -10,6 +10,7 @@ import com.simibubi.create.content.logistics.filter.FilterScreenPacket;
 import com.simibubi.create.content.trains.station.NoShadowFontWrapper;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
 import com.simibubi.create.foundation.gui.menu.AbstractSimiContainerScreen;
+import net.joseph.vaultfilters.access.AbstractFilterMenuAdvancedAccessor;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.player.LocalPlayer;
@@ -56,7 +57,7 @@ public abstract class MixinAbstractFilterScreen extends AbstractSimiContainerScr
         int y = topPos;
         ItemStack contentHolder = ((AbstractFilterMenu) this.menu).contentHolder;
         isList = contentHolder.is(AllItems.FILTER.get());
-        String text = contentHolder.getHoverName().getString();
+        String text = ((AbstractFilterMenuAdvancedAccessor)(AbstractFilterMenu)this.menu ).vault_filters$getName();
         name = text;
         int color = AllItems.FILTER.isIn(contentHolder)  ? 3158064 : 5841956;
         Consumer<String> onTextChanged;

@@ -28,6 +28,8 @@ public class MixinFilterMenu implements FilterMenuAdvancedAccessor {
     @Inject(method = "initAndReadInventory(Lnet/minecraft/world/item/ItemStack;)V", at = @At("TAIL"))
     public void initMatchALl(ItemStack filterItem, CallbackInfo ci, @Local CompoundTag tag) {
         vf$matchAll = tag.getBoolean("MatchAll");
+        FilterMenu instance = (FilterMenu) (Object) (this);
+        ((AbstractFilterMenuAdvancedAccessor) (AbstractFilterMenu) instance).vault_filters$setName(filterItem.getHoverName().getString());
     }
 
     @Inject(method = "saveData(Lnet/minecraft/world/item/ItemStack;)V", at = @At(value = "INVOKE",
@@ -48,7 +50,30 @@ public class MixinFilterMenu implements FilterMenuAdvancedAccessor {
         if (name != null && !name.isEmpty()) {
             filterItem.setHoverName(Component.nullToEmpty(name));
         }
+        if (name.isEmpty() && filterItem.hasCustomHoverName()) {
+            vault_Filters$resetHoverName(filterItem);
+        }
 
+    }
+
+    @Unique
+    public void vault_Filters$resetHoverName(ItemStack stack) {
+        CompoundTag tag = stack.getTag();
+        if (tag != null && tag.contains("display", 10)) { // 10 = CompoundTag type
+            CompoundTag displayTag = tag.getCompound("display");
+            displayTag.remove("Name"); // Remove custom name
+            if (displayTag.isEmpty()) {
+                tag.remove("display"); // Clean up if empty
+            } else {
+                tag.put("display", displayTag); // Save changes
+            }
+
+            if (tag.isEmpty()) {
+                stack.setTag(null); // If whole tag is now empty, remove it
+            } else {
+                stack.setTag(tag); // Set updated tag
+            }
+        }
     }
 
     @Override
