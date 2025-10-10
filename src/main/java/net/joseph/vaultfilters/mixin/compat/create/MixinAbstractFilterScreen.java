@@ -11,6 +11,7 @@ import com.simibubi.create.content.trains.station.NoShadowFontWrapper;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
 import com.simibubi.create.foundation.gui.menu.AbstractSimiContainerScreen;
 import net.joseph.vaultfilters.access.AbstractFilterMenuAdvancedAccessor;
+import net.joseph.vaultfilters.textures.VFGuiTextures;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.player.LocalPlayer;
@@ -128,7 +129,7 @@ public abstract class MixinAbstractFilterScreen extends AbstractSimiContainerScr
         String text = nameBox.getValue();
         if (!nameBox.isFocused()) {
             if (isList) {
-                AllGuiTextures.STATION_EDIT_NAME.render(ms,nameBoxX(text,nameBox)+font.width(text)+5,topPos+1);
+                VFGuiTextures.LIST_FILTER_EDIT_BUTTON.render(ms,nameBoxX(text,nameBox)+font.width(text)+5,topPos+1);
             } else {
                 AllGuiTextures.STATION_EDIT_NAME.render(ms,nameBoxX(text,nameBox) + font.width(text) +5, topPos+1);
             }
