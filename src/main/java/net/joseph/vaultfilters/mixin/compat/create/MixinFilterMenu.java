@@ -1,9 +1,12 @@
 package net.joseph.vaultfilters.mixin.compat.create;
 
 import com.llamalad7.mixinextras.sugar.Local;
+import com.simibubi.create.content.logistics.filter.AbstractFilterMenu;
 import com.simibubi.create.content.logistics.filter.FilterMenu;
+import net.joseph.vaultfilters.access.AbstractFilterMenuAdvancedAccessor;
 import net.joseph.vaultfilters.access.FilterMenuAdvancedAccessor;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -31,9 +34,21 @@ public class MixinFilterMenu implements FilterMenuAdvancedAccessor {
             target = "Lnet/minecraft/nbt/CompoundTag;putBoolean(Ljava/lang/String;Z)V", ordinal = 1,shift = At.Shift.AFTER), cancellable = true, remap = true)
     private void injectSaveData(ItemStack filterItem, CallbackInfo ci, @Local CompoundTag tag) {
         tag.putBoolean("MatchAll", vf$matchAll);
-        if (blacklist || respectNBT || vf$matchAll) {
+        //fixes hovername clear too
+        if (blacklist || respectNBT || vf$matchAll || filterItem.hasCustomHoverName()) {
             ci.cancel();
         }
+    }
+
+    @Inject(method = "saveData(Lnet/minecraft/world/item/ItemStack;)V", at = @At(value = "INVOKE",
+            target = "Lnet/minecraft/nbt/CompoundTag;putBoolean(Ljava/lang/String;Z)V", ordinal = 0,shift = At.Shift.BEFORE), cancellable = true, remap = true)
+    private void injectNameSave(ItemStack filterItem, CallbackInfo ci, @Local CompoundTag tag) {
+        FilterMenu instance = (FilterMenu) (Object) (this);
+        String name = ((AbstractFilterMenuAdvancedAccessor) (AbstractFilterMenu) instance).vault_filters$getName();
+        if (name != null && !name.isEmpty()) {
+            filterItem.setHoverName(Component.nullToEmpty(name));
+        }
+
     }
 
     @Override

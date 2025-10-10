@@ -4,6 +4,7 @@ package net.joseph.vaultfilters.mixin.compat.create;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.simibubi.create.content.logistics.filter.*;
 import net.joseph.vaultfilters.VaultFilters;
+import net.joseph.vaultfilters.access.AbstractFilterMenuAdvancedAccessor;
 import net.joseph.vaultfilters.access.FilterMenuAdvancedAccessor;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -40,9 +41,9 @@ public class MixinFilterScreenPacket {
     public void checkForNameChange(NetworkEvent.Context context, CallbackInfo ci, @Local ServerPlayer player) {
         if (player != null) {
 
-            if (player.containerMenu instanceof AbstractFilterMenu) {
+            if (player.containerMenu instanceof AbstractFilterMenu c) {
                 if (this.option == FilterScreenPacket.Option.UPDATE_FILTER_ITEM && this.data.contains("josephname")) {
-                    ((AbstractFilterMenu) player.containerMenu).contentHolder.setHoverName(Component.nullToEmpty(data.getString("josephname")));
+                    ((AbstractFilterMenuAdvancedAccessor)c).vault_filters$setName(data.getString("josephname"));
                     ci.cancel();
                 }
             }
