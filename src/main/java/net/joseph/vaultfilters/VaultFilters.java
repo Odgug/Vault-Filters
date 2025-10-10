@@ -49,12 +49,14 @@ import net.joseph.vaultfilters.attributes.tool.ToolMaterialAttribute;
 import net.joseph.vaultfilters.attributes.trinket.*;
 import net.joseph.vaultfilters.configs.VFServerConfig;
 import net.joseph.vaultfilters.items.VFItems;
+import net.joseph.vaultfilters.marker.ClientEvents;
 import net.joseph.vaultfilters.recipes.VFRecipes;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
@@ -73,6 +75,11 @@ public class VaultFilters {
         MinecraftForge.EVENT_BUS.register(VFTests.class);
         VFItems.ITEMS.register(eventBus);
         VFRecipes.register(eventBus);
+        eventBus.addListener(this::onClientSetup);
+    }
+    private void onClientSetup(final FMLClientSetupEvent event) {
+        // Register client-side event listeners
+        MinecraftForge.EVENT_BUS.addListener(ClientEvents::onDrawScreen);
     }
 
     private void setup(FMLCommonSetupEvent event) {
