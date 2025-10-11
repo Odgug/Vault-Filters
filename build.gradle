@@ -139,16 +139,16 @@ dependencies {
     implementation fg.deobf("curse.maven:geckolib-388172:4181370")
     implementation fg.deobf("curse.maven:citadel-331936:3783096")
     implementation fg.deobf("curse.maven:jei-238222:4593548")
-    implementation fg.deobf("curse.maven:sophisticated-core-618298:5296312")
+    implementation fg.deobf("curse.maven:sophisticated-core-618298:5296312")tyu
     implementation fg.deobf("curse.maven:sophisticated-backpacks-422301:5654080")
     implementation fg.deobf("curse.maven:storage-drawers-223852:3807626")
     implementation fg.deobf("curse.maven:toms-storage-378609:5211203")
     implementation fg.deobf("curse.maven:laserio-626839:4066820")
     implementation fg.deobf("curse.maven:patchouli-306770:3846086") //laserio
     implementation fg.deobf("curse.maven:vault-hunters-official-mod-458203:6833423")
-    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.6"))
-    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.3.6")) {
-        jarJar.ranged(it, "[0.3.6,)")
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.0"))
+    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.0")) {
+        jarJar.ranged(it, "[0.5.0,)")
     }
 }
 
