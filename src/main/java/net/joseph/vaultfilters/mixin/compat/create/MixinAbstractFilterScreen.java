@@ -52,7 +52,7 @@ public abstract class MixinAbstractFilterScreen extends AbstractSimiContainerScr
 
     //added label for name editing
 
-    @Inject(at = @At(value = "TAIL"), method = "init")
+    @Inject(at = @At(value = "TAIL"), method = "init",remap = true)
     public void addEditableText(CallbackInfo ci) {
         int x = leftPos;
         int y = topPos;
@@ -80,7 +80,7 @@ public abstract class MixinAbstractFilterScreen extends AbstractSimiContainerScr
     private int nameBoxX(String s, EditBox nameBox) {
         return leftPos + background.width / 2 - (Math.min(font.width(s), nameBox.getWidth()) + 10) / 2;
     }
-    @Inject(at = @At(value = "HEAD"), method = "containerTick")
+    @Inject(at = @At(value = "HEAD"), method = "containerTick",remap = true)
     public void checkFocus(CallbackInfo ci) {
         if (getFocused() != nameBox) {
             nameBox.setCursorPosition(nameBox.getValue().length());
@@ -117,14 +117,14 @@ public abstract class MixinAbstractFilterScreen extends AbstractSimiContainerScr
         syncName();
         super.onClose();
     }
-    @Redirect(at= @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;closeContainer()V"),method = "lambda$init$1()V")
+    @Redirect(at= @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;closeContainer()V",remap = true),method = "lambda$init$1()V")
     public void sendOnClose(LocalPlayer instance) {
         syncName();
         instance.closeContainer();
     }
 
 
-    @Inject(at = @At(value = "TAIL"), method = "renderBg")
+    @Inject(at = @At(value = "TAIL"), method = "renderBg",remap = true)
     public void renderEdit(PoseStack ms, float partialTicks, int mouseX, int mouseY, CallbackInfo ci) {
         String text = nameBox.getValue();
         if (!nameBox.isFocused()) {
@@ -138,7 +138,7 @@ public abstract class MixinAbstractFilterScreen extends AbstractSimiContainerScr
     }
 
 
-    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Font;draw(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/network/chat/Component;FFI)I"),method = "renderBg")
+    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Font;draw(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/network/chat/Component;FFI)I",remap = true),method = "renderBg",remap = true)
     public int stopNameDraw(Font instance, PoseStack pPoseStack, Component pText, float pX, float pY, int pColor) {
 
         return pColor;

@@ -47,7 +47,7 @@ public class MixinAttributeFilterMenu {
         }
     }
     @Inject(method = "saveData(Lnet/minecraft/world/item/ItemStack;)V", at =
-    @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getOrCreateTag()Lnet/minecraft/nbt/CompoundTag;",ordinal = 1,shift = At.Shift.AFTER), cancellable = true, remap = false)
+    @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;setTag(Lnet/minecraft/nbt/CompoundTag;)V",shift = At.Shift.BEFORE,remap = true), cancellable = true, remap = false)
     private void fixHovernameClear(ItemStack filterItem, CallbackInfo ci) {
         if (filterItem.hasCustomHoverName()) {
             ci.cancel();
