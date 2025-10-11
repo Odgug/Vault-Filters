@@ -47,7 +47,7 @@ public class MixinFilterMenu implements FilterMenuAdvancedAccessor {
     private void injectNameSave(ItemStack filterItem, CallbackInfo ci, @Local CompoundTag tag) {
         FilterMenu instance = (FilterMenu) (Object) (this);
         String name = ((AbstractFilterMenuAdvancedAccessor) (AbstractFilterMenu) instance).vault_filters$getName();
-        if (name != null && !name.isEmpty()) {
+        if (name != null && !name.isEmpty() && !name.equals(filterItem.getHoverName().getString())) {
             filterItem.setHoverName(Component.nullToEmpty(name));
         }
         if (name.isEmpty() && filterItem.hasCustomHoverName()) {
