@@ -47,8 +47,8 @@ public abstract class MixinAbstractFilterScreen extends AbstractSimiContainerScr
         super(container, inv, title);
     }
 // debug for nested filters
-//    @Redirect(method = "containerTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;closeContainer()V"),remap = true)
-//    private void dontClose(Player instance){}
+    @Redirect(method = "containerTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;closeContainer()V"),remap = true)
+    private void dontClose(Player instance){}
 
     //added label for name editing
 

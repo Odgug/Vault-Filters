@@ -25,8 +25,8 @@ public class MixinAbstractFilterMenu implements AbstractFilterMenuAdvancedAccess
      * @reason
      */
     //debug for nested filters
-//    @Overwrite
-//    public boolean stillValid(Player player) {
-//        return true;
-//    }
+    @Overwrite
+    public boolean stillValid(Player player) {
+        return true;
+    }
 }
