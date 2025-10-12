@@ -35,20 +35,32 @@ public abstract class MixinGhostItemMenu extends MenuBase implements GhostItemMe
     @Unique
     public GhostItemMenu<ItemStack> vaultfilters$previousMenu;
 
+    @Unique
+    public boolean vaultfilters$isCurrent = true;
+
 
     //unused
     protected MixinGhostItemMenu(MenuType type, int id, Inventory inv, FriendlyByteBuf extraData) {
         super(type, id, inv, extraData);
     }
 
-    @Unique
+    @Override
     public void vaultfilters$setPreviousMenu(GhostItemMenu<ItemStack> menu) {
         this.vaultfilters$previousMenu = menu;
     }
 
-    @Unique
+    @Override
     public GhostItemMenu<ItemStack> vaultfilters$getPreviousMenu() {
         return this.vaultfilters$previousMenu;
+    }
+
+    @Override
+    public boolean vaultfilters$getCurrent() {
+        return vaultfilters$isCurrent;
+    }
+    @Override
+    public void vaultfilters$setCurrent(boolean current) {
+        vaultfilters$isCurrent = current;
     }
 
 
@@ -79,6 +91,7 @@ public abstract class MixinGhostItemMenu extends MenuBase implements GhostItemMe
                                             ? FilterMenu.create(id, inv, stackInSlot)
                                             : AttributeFilterMenu.create(id, inv, stackInSlot);
                                     ((GhostItemMenuAdvancedAccessor) menu).vaultfilters$setPreviousMenu((previousMenu));
+                                    ((GhostItemMenuAdvancedAccessor) menu).vaultfilters$setCurrent(true);
                                     return menu;
                                 }
                                 return null;
@@ -86,7 +99,8 @@ public abstract class MixinGhostItemMenu extends MenuBase implements GhostItemMe
 
                         };
                         //VaultFilters.LOGGER.info(stack.getDisplayName().getString());
-                        NetworkHooks.openGui(serverPlayer, provider, buf -> buf.writeItem(stackInSlot));
+                            ((GhostItemMenuAdvancedAccessor) instance).vaultfilters$setCurrent(false);
+                            NetworkHooks.openGui(serverPlayer, provider, buf -> buf.writeItem(stackInSlot));
                         });
                     }
                 }
@@ -99,7 +113,7 @@ public abstract class MixinGhostItemMenu extends MenuBase implements GhostItemMe
         GhostItemMenu instance = (GhostItemMenu) (Object) this;
         if (instance instanceof AbstractFilterMenu filterMenu) {
             GhostItemMenu<ItemStack> previousMenu = ((GhostItemMenuAdvancedAccessor) instance).vaultfilters$getPreviousMenu();
-            if (previousMenu != null && playerIn instanceof ServerPlayer serverPlayer) {
+            if (previousMenu != null && playerIn instanceof ServerPlayer serverPlayer && vaultfilters$isCurrent) {
                 serverPlayer.server.execute(() -> {
                     ((MenuBaseAccessor)previousMenu ).vaultfilters$saveData(previousMenu.contentHolder);
                     MenuProvider provider = new MenuProvider() {
@@ -114,10 +128,12 @@ public abstract class MixinGhostItemMenu extends MenuBase implements GhostItemMe
                                     ? FilterMenu.create(id, inv, previousMenu.contentHolder)
                                     : AttributeFilterMenu.create(id, inv, previousMenu.contentHolder);
                             ((GhostItemMenuAdvancedAccessor) menu).vaultfilters$setPreviousMenu(((GhostItemMenuAdvancedAccessor)previousMenu).vaultfilters$getPreviousMenu());
+                            ((GhostItemMenuAdvancedAccessor) menu).vaultfilters$setCurrent(true);
                             return menu;
                         }
 
                     };
+                    ((GhostItemMenuAdvancedAccessor) instance).vaultfilters$setCurrent(false);
                     NetworkHooks.openGui(serverPlayer, provider, buf -> buf.writeItem(previousMenu.contentHolder));
                 });
 

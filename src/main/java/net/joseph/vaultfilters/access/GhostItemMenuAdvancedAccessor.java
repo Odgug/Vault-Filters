@@ -6,4 +6,6 @@ import net.minecraft.world.item.ItemStack;
 public interface GhostItemMenuAdvancedAccessor {
     void vaultfilters$setPreviousMenu(GhostItemMenu<ItemStack> menu);
     GhostItemMenu<ItemStack> vaultfilters$getPreviousMenu();
+    void vaultfilters$setCurrent(boolean current);
+    boolean vaultfilters$getCurrent();
 }
