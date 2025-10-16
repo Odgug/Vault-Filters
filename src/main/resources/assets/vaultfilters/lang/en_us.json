@@ -310,6 +310,9 @@
   "create.item_attributes.temporal_relic_modifier": "is a Temporal Relic with a \"%1$s\" modifier",
   "create.item_attributes.temporal_relic_modifier.inverted": "is not a Temporal Relic with a \"%1$s\" modifier",
 
+  "create.item_attributes.faceted_focus_type": "is a faceted focus with a \"%1$s\" modifier",
+  "create.item_attributes.faceted_focus_type.inverted": "is not a faceted focus with a \"%1$s\" modifier",
+
   "item.create.filter.tooltip.summary": "_Matches items_ against a collection of _items_ or _other filters_ (Attribute and List filters). Can be used in _Filter Slots_ of some mods (Create, RS, MR, AE2 and Backpacks by default)",
   "item.create.filter.tooltip.condition1": "When R-Clicked",
   "item.create.filter.tooltip.behaviour1": "Opens the _configuration interface_.",

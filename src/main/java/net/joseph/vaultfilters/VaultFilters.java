@@ -12,6 +12,7 @@ import net.joseph.vaultfilters.attributes.companion.items.CompanionRelicAttribut
 import net.joseph.vaultfilters.attributes.companion.items.CompanionTrailAttribute;
 import net.joseph.vaultfilters.attributes.deck.CardDeckHasModifierAttribute;
 import net.joseph.vaultfilters.attributes.deck.CardDeckTypeAttribute;
+import net.joseph.vaultfilters.attributes.focus.FacetedFocusTypeAttribute;
 import net.joseph.vaultfilters.attributes.inner.InnerCardPackAttribute;
 import net.joseph.vaultfilters.attributes.inner.InnerJewelPouchAttribute;
 import net.joseph.vaultfilters.attributes.inner.InnerRuneItemAttribute;
@@ -240,6 +241,10 @@ public class VaultFilters {
 
         //Temporal Relic
         new TemporalRelicModifierAttribute("").register(TemporalRelicModifierAttribute::new);
+
+
+        //Faceted Focus
+        new FacetedFocusTypeAttribute("Item Rarity").register(FacetedFocusTypeAttribute::new);
 
         //Old
         new InscriptionTimeAttribute(0).register(InscriptionTimeAttribute::new);
