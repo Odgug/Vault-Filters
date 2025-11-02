@@ -148,6 +148,9 @@
   "create.item_attributes.modifier_group": "has an affix in group \"%1$s\"",
   "create.item_attributes.modifier_group.inverted": "doesn't have an affix in group \"%1$s\"",
 
+  "create.item_attributes.max_legendary": "has a max roll legendary",
+  "create.item_attributes.max_legendary.inverted": "doesn't have a max roll legendary",
+
   "create.item_attributes.charm_affinity": "adds at least \"%1$s\" affinity",
   "create.item_attributes.charm_affinity.inverted": "doesn't add at least \"%1$s\" affinity",
 

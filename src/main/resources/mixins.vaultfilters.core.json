@@ -13,6 +13,7 @@
     "data.LootCardModifierConfigAccessor",
     "data.ScalerFilterAccessor",
     "data.TaskLootCardModifierAccessor",
+    "data.VaultGearModifierHelperAccessor",
     "other.MixinAttributeResearchBypass",
     "other.MixinTagLoader"
   ],

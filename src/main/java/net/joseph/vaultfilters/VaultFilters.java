@@ -157,6 +157,8 @@ public class VaultFilters {
 
         new ModifierGroupAttribute("ModAbility").register(ModifierGroupAttribute::new);
 
+        new MaxLegendaryAttribute(true).register(MaxLegendaryAttribute::new);
+
 
         // Card Packs
 
