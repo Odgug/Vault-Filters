@@ -280,6 +280,9 @@
   "create.item_attributes.companion_hearts": "is a Companion with at least \"%1$s\" hearts",
   "create.item_attributes.companion_hearts.inverted": "isn't a Companion with at least \"%1$s\" hearts",
 
+  "create.item_attributes.companion_retired": "is a retired Companion",
+  "create.item_attributes.companion_retired.inverted": "isn't a retired Companion",
+
   "create.item_attributes.companion_level": "is a Companion of at least level \"%1$s\"",
   "create.item_attributes.companion_level.inverted": "isn't a Companion of at least level \"%1$s\"",
 

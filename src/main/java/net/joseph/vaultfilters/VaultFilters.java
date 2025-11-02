@@ -234,7 +234,7 @@ public class VaultFilters {
         new CompanionSkinAttribute("").register(CompanionSkinAttribute::new);
         new CompanionTemporalAttribute("").register(CompanionTemporalAttribute::new);
         new CompanionRelicAtleastAttribute(1).register(CompanionRelicAtleastAttribute::new);
-
+        new CompanionRetiredAttribute(true).register(CompanionRetiredAttribute::new);
         //Deck
         new CardDeckHasModifierAttribute(true).register(CardDeckHasModifierAttribute::new);
         new CardDeckTypeAttribute("").register(CardDeckTypeAttribute::new);
