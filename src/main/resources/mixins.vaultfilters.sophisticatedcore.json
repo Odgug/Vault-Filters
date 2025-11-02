@@ -3,7 +3,6 @@
   "package": "net.joseph.vaultfilters.mixin.compat.sophisticatedcore.mixin",
   "compatibilityLevel": "JAVA_17",
   "plugin": "net.joseph.vaultfilters.mixin.compat.sophisticatedcore.SophisticatedCoreMixinPlugin",
-  "mixinextras": {"minVersion": "0.5.0"},
   "mixins": [
     "InventoryHandlerSlotTrackerAccessor",
     "MixinSophItemMatcher"
