@@ -159,6 +159,8 @@ public class VaultFilters {
 
         new MaxLegendaryAttribute(true).register(MaxLegendaryAttribute::new);
 
+        new BaseAbilityAffixAttribute("Fireball").register(BaseAbilityAffixAttribute::new);
+
 
         // Card Packs
 
@@ -182,7 +184,7 @@ public class VaultFilters {
         new CardTaskAttribute("Wooden Chests").register(CardTaskAttribute::new);
         new CardTaskNumberAttribute(5).register(CardTaskNumberAttribute::new);
         new CardModifierNumberAttribute(new Modifier("+1 Attack Damage", "Attack Damage",1)).register(CardModifierNumberAttribute::new);
-
+        new CardBaseAbilityAttribute("Fireball").register(CardBaseAbilityAttribute::new);
         // Charms
         new CharmUsesAttribute(0).register(CharmUsesAttribute::new);
         new CharmAffinityAttribute(0).register(CharmAffinityAttribute::new);
