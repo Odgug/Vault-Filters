@@ -12,6 +12,8 @@ import com.simibubi.create.foundation.gui.widget.Indicator;
 import com.simibubi.create.foundation.utility.Components;
 import com.simibubi.create.foundation.utility.Lang;
 import net.joseph.vaultfilters.access.FilterMenuAdvancedAccessor;
+import net.joseph.vaultfilters.network.MenuFeaturesPacket;
+import net.joseph.vaultfilters.network.VFMessages;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.player.Inventory;
@@ -67,7 +69,7 @@ public abstract class MixinFilterScreen extends AbstractFilterScreen<FilterMenu>
         matchAll = new IconButton(x + 102, y + 75, AllIcons.I_WHITELIST_AND);
         matchAll.withCallback(() -> {
             menuAccessor.vault_filters$setMatchAll(true);
-            sendOptionUpdate(FilterScreenPacket.Option.ADD_TAG);
+            VFMessages.VFCHANNEL.sendToServer(new MenuFeaturesPacket(MenuFeaturesPacket.MenuAction.MATCH_ALL));
         });
         matchAll.setToolTip(allowAllN);
         matchAllIndicator= new Indicator(x + 102, y + 69, Components.immutableEmpty());
@@ -75,7 +77,7 @@ public abstract class MixinFilterScreen extends AbstractFilterScreen<FilterMenu>
         matchAny= new IconButton(x + 120, y + 75, AllIcons.I_WHITELIST_OR);
         matchAny.withCallback(() -> {
             menuAccessor.vault_filters$setMatchAll(false);
-            sendOptionUpdate(FilterScreenPacket.Option.ADD_INVERTED_TAG);
+            VFMessages.VFCHANNEL.sendToServer(new MenuFeaturesPacket(MenuFeaturesPacket.MenuAction.MATCH_ANY));
         });
         matchAny.setToolTip(allowAnyN);
         matchAnyIndicator = new Indicator(x + 120, y + 69, Components.immutableEmpty());

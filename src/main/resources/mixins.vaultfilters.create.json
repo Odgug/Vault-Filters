@@ -12,7 +12,6 @@
     "MixinCreateFilteringBehaviour",
     "MixinFilterMenu",
     "MixinFilterScreen",
-    "MixinFilterScreenPacket",
     "MixinListFilterItemStack",
     "MixinAbstractFilterScreen",
     "MixinAbstractFilterMenu",

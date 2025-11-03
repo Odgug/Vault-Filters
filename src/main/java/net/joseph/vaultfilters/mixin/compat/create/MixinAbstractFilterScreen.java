@@ -11,6 +11,8 @@ import com.simibubi.create.content.trains.station.NoShadowFontWrapper;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
 import com.simibubi.create.foundation.gui.menu.AbstractSimiContainerScreen;
 import net.joseph.vaultfilters.access.AbstractFilterMenuAdvancedAccessor;
+import net.joseph.vaultfilters.network.MenuFeaturesPacket;
+import net.joseph.vaultfilters.network.VFMessages;
 import net.joseph.vaultfilters.textures.VFGuiTextures;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.EditBox;
@@ -148,9 +150,7 @@ public abstract class MixinAbstractFilterScreen extends AbstractSimiContainerScr
             return;
         }
         if (!nameBox.getValue().equals(name)) {
-            CompoundTag tag = new CompoundTag();
-            tag.putString("josephname",nameBox.getValue());
-            AllPackets.getChannel().sendToServer(new FilterScreenPacket( FilterScreenPacket.Option.UPDATE_FILTER_ITEM, tag));
+            VFMessages.VFCHANNEL.sendToServer(new MenuFeaturesPacket(MenuFeaturesPacket.MenuAction.CHANGE_NAME,nameBox.getValue()));
         }
 
     }

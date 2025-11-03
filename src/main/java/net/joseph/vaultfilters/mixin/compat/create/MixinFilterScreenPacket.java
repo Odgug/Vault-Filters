@@ -19,6 +19,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = FilterScreenPacket.class, remap = false)
+//INACTIVE, REPLACED WITH PACKETS
 public class MixinFilterScreenPacket {
     @Final @Shadow
     private FilterScreenPacket.Option option;
