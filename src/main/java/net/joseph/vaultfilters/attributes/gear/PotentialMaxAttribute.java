@@ -11,6 +11,10 @@ public class PotentialMaxAttribute extends IntAttribute {
     public PotentialMaxAttribute(Integer value) {
         super(value);
     }
+    @Override
+    public NumComparator getComparator() {
+        return NumComparator.AT_LEAST;
+    }
 
     @Override
     public Integer getValue(ItemStack itemStack) {

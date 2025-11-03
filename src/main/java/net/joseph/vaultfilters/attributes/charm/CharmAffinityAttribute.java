@@ -11,6 +11,11 @@ public class CharmAffinityAttribute extends IntAttribute {
     }
 
     @Override
+    public NumComparator getComparator() {
+        return NumComparator.AT_LEAST;
+    }
+
+    @Override
     public Integer getValue(ItemStack itemStack) {
         if (CharmItem.isIdentified(itemStack)) {
             return Math.round(CharmItem.getValue(itemStack) * 100.0F);

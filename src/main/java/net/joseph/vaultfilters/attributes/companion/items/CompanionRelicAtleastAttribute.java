@@ -14,6 +14,10 @@ public class CompanionRelicAtleastAttribute extends IntAttribute {
     public CompanionRelicAtleastAttribute(Integer value) {
         super(value);
     }
+    @Override
+    public NumComparator getComparator() {
+        return NumComparator.AT_LEAST;
+    }
 
     @Override
     public Integer getValue(ItemStack itemStack) {

@@ -10,6 +10,10 @@ public class GearRepairSlotAttribute extends IntAttribute {
     public GearRepairSlotAttribute(Integer value) {
         super(value);
     }
+    @Override
+    public NumComparator getComparator() {
+        return NumComparator.AT_LEAST;
+    }
 
     @Override
     public Integer getValue(ItemStack itemStack) {

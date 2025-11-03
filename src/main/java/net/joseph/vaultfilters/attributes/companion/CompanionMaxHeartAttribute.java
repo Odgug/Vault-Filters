@@ -8,6 +8,10 @@ public class CompanionMaxHeartAttribute extends IntAttribute {
     public CompanionMaxHeartAttribute(Integer value) {
         super(value);
     }
+    @Override
+    public NumComparator getComparator() {
+        return NumComparator.AT_LEAST;
+    }
 
     @Override
     public Integer getValue(ItemStack itemStack) {
@@ -24,8 +28,4 @@ public class CompanionMaxHeartAttribute extends IntAttribute {
         return "companion_max_hearts";
     }
 
-    public boolean appliesTo(ItemStack itemStack) {
-        Integer value = this.getValue(itemStack);
-        return value != null && value <= (Integer)this.value;
-    }
 }

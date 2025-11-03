@@ -32,6 +32,10 @@ public class CardConditionNumAttribute extends IntAttribute {
     public Integer getValue(ItemStack itemStack) {
         return null;
     }
+    @Override
+    public NumComparator getComparator() {
+        return null;
+    }
 
     @Override
     public List<ItemAttribute> listAttributesOf(ItemStack itemStack) {

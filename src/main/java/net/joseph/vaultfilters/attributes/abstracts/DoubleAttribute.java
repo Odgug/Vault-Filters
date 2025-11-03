@@ -20,10 +20,26 @@ public abstract class DoubleAttribute extends VaultAttribute<Double> {
         super.register();
     }
 
+    protected abstract IntAttribute.NumComparator getComparator();
+
     @Override
     public boolean appliesTo(ItemStack itemStack) {
         final Double value = getValue(itemStack);
-        return value != null && value >= this.value;
+        if (value == null) {
+            return false;
+        }
+        if (this.getComparator() == IntAttribute.NumComparator.AT_LEAST) {
+            return value >= this.value;
+        }
+        if (this.getComparator() == IntAttribute.NumComparator.AT_MOST) {
+            return value <= this.value;
+        }
+        if (this.getComparator() == IntAttribute.NumComparator.EQUAL) {
+            return value.equals(this.value);
+        }
+
+        return value >= this.value;
+
     }
 
     @Override

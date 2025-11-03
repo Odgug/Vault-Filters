@@ -10,6 +10,10 @@ public class CardAtleastTierAttribute extends IntAttribute {
     }
 
     @Override
+    public NumComparator getComparator() {
+        return NumComparator.AT_LEAST;
+    }
+    @Override
     public Integer getValue(ItemStack itemStack) {
         if (itemStack.getItem() instanceof CardItem) {
             return CardItem.getCard(itemStack).getTier();

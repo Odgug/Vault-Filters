@@ -10,6 +10,11 @@ public class CompanionHeartAttribute extends IntAttribute {
     }
 
     @Override
+    public NumComparator getComparator() {
+        return NumComparator.AT_LEAST;
+    }
+
+    @Override
     public Integer getValue(ItemStack itemStack) {
         if (!(itemStack.getItem() instanceof CompanionItem)) {
             return null;
@@ -24,8 +29,4 @@ public class CompanionHeartAttribute extends IntAttribute {
         return "companion_hearts";
     }
 
-    public boolean appliesTo(ItemStack itemStack) {
-        Integer value = this.getValue(itemStack);
-        return value != null && value <= (Integer)this.value;
-    }
 }

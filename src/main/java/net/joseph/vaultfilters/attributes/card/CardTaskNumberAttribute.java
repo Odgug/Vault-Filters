@@ -19,6 +19,12 @@ public class CardTaskNumberAttribute extends IntAttribute {
     }
 
     @Override
+    public NumComparator getComparator() {
+        return NumComparator.AT_MOST;
+    }
+
+
+    @Override
     public Integer getValue(ItemStack itemStack) {
         if (!(itemStack.getItem() instanceof CardItem)) {
             return null;
@@ -46,12 +52,6 @@ public class CardTaskNumberAttribute extends IntAttribute {
 
         TaskProgress progress = ((ProgressConfiguredTask<?, ?>) task).getCounter().getProgress();
         return progress.getTarget().intValue();
-    }
-
-    @Override
-    public boolean appliesTo(ItemStack itemStack) {
-        final Integer value = getValue(itemStack);
-        return value != null && value <= this.value;
     }
 
     @Override

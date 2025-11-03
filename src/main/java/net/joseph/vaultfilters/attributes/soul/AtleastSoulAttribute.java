@@ -10,6 +10,11 @@ public class AtleastSoulAttribute extends IntAttribute {
     }
 
     @Override
+    public NumComparator getComparator() {
+        return NumComparator.AT_LEAST;
+    }
+
+    @Override
     public Integer getValue(ItemStack itemStack) {
         return ModConfigs.VAULT_DIFFUSER.getDiffuserOutputMap().get(itemStack.getItem().getRegistryName());
     }

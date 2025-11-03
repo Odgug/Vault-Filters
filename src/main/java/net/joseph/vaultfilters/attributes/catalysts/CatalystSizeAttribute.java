@@ -8,6 +8,10 @@ public class CatalystSizeAttribute extends IntAttribute {
     public CatalystSizeAttribute(Integer value) {
         super(value);
     }
+    @Override
+    public NumComparator getComparator() {
+        return NumComparator.AT_MOST;
+    }
 
     @Override
     public Integer getValue(ItemStack itemStack) {
@@ -17,11 +21,6 @@ public class CatalystSizeAttribute extends IntAttribute {
         return null;
     }
 
-    @Override
-    public boolean appliesTo(ItemStack itemStack) {
-        final Integer value = getValue(itemStack);
-        return value != null && value <= this.value;
-    }
 
     @Override
     public String getTranslationKey() {

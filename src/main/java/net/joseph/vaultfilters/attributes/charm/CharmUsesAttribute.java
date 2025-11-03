@@ -10,6 +10,11 @@ public class CharmUsesAttribute extends IntAttribute {
     }
 
     @Override
+    public NumComparator getComparator() {
+        return NumComparator.AT_LEAST;
+    }
+
+    @Override
     public Integer getValue(ItemStack itemStack) {
         if (CharmItem.isIdentified(itemStack)) {
             return CharmItem.getUses(itemStack) - CharmItem.getUsedVaults(itemStack).size();

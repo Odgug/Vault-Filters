@@ -11,20 +11,40 @@ import java.util.function.Function;
 
 public abstract class IntAttribute extends VaultAttribute<Integer> {
     private static final Map<Class<?>, Function<Integer, IntAttribute>> factories = new HashMap<>();
-
+    public enum NumComparator {
+        AT_LEAST,
+        AT_MOST,
+        EQUAL
+    }
     protected IntAttribute(Integer value) {
         super(value);
     }
+
 
     public void register(Function<Integer, IntAttribute> factory) {
         factories.put(getClass(), factory);
         super.register();
     }
+    protected abstract NumComparator getComparator();
 
     @Override
     public boolean appliesTo(ItemStack itemStack) {
         final Integer value = getValue(itemStack);
-        return value != null && value >= this.value;
+        if (value == null) {
+            return false;
+        }
+        if (this.getComparator() == NumComparator.AT_LEAST) {
+            return value >= this.value;
+        }
+        if (this.getComparator() == NumComparator.AT_MOST) {
+            return value <= this.value;
+        }
+        if (this.getComparator() == NumComparator.EQUAL) {
+            return value.equals(this.value);
+        }
+
+        return value >= this.value;
+
     }
 
     @Override

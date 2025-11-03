@@ -8,17 +8,16 @@ public class ExactSoulAttribute extends IntAttribute {
     public ExactSoulAttribute(Integer value) {
         super(value);
     }
+    @Override
+    public NumComparator getComparator() {
+        return NumComparator.EQUAL;
+    }
 
     @Override
     public Integer getValue(ItemStack itemStack) {
         return ModConfigs.VAULT_DIFFUSER.getDiffuserOutputMap().get(itemStack.getItem().getRegistryName());
     }
 
-    @Override
-    public boolean appliesTo(ItemStack itemStack) {
-        Integer value = getValue(itemStack);
-        return value != null && value.equals(this.value);
-    }
 
     @Override
     public String getTranslationKey() {

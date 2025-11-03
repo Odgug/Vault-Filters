@@ -11,6 +11,11 @@ public class ArtifactIDAttribute extends IntAttribute {
     }
 
     @Override
+    public NumComparator getComparator() {
+        return NumComparator.EQUAL;
+    }
+
+    @Override
     public Integer getValue(ItemStack itemStack) {
         if(itemStack.getItem() instanceof BlockItem blockItem) {
             if(blockItem.getBlock() instanceof VaultArtifactBlock artifactBlock) {

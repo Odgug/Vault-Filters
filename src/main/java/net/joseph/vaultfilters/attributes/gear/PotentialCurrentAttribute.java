@@ -12,6 +12,10 @@ public class PotentialCurrentAttribute extends IntAttribute {
     public PotentialCurrentAttribute(Integer value) {
         super(value);
     }
+    @Override
+    public NumComparator getComparator() {
+        return NumComparator.AT_LEAST;
+    }
 
     @Override
     public Integer getValue(ItemStack itemStack) {
