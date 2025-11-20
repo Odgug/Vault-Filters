@@ -1,12 +1,7 @@
 package net.joseph.vaultfilters;
 
 import appeng.api.stacks.AEItemKey;
-import com.simibubi.create.content.logistics.filter.FilterItem;
 import com.simibubi.create.content.logistics.filter.FilterItemStack;
-import iskallia.vault.gear.item.VaultGearItem;
-import iskallia.vault.item.*;
-import iskallia.vault.item.gear.CharmItem;
-import iskallia.vault.item.gear.TrinketItem;
 import net.joseph.vaultfilters.configs.VFServerConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.server.MinecraftServer;
@@ -18,12 +13,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
-
-import java.lang.invoke.MethodHandle;
-import java.lang.invoke.MethodHandles;
-import java.lang.invoke.MethodType;
-import java.util.ArrayList;
-import java.util.List;
 
 public class VFTests {
     public static String filterKey = "hashes";
@@ -43,7 +32,7 @@ public class VFTests {
         //}
 
         if (VFServerConfig.CACHE_DATAFIX.get() && filterStack instanceof ItemStack) {
-            DataFixers.clearNBTCache(stack);
+            VFDataFixers.clearNBTCache(stack);
         }
 
         //if (filterStack.getDisplayName().getString().equals("Ignore Caching")) {

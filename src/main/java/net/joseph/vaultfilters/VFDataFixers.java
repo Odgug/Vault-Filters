@@ -6,7 +6,7 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.function.Function;
 
-public class DataFixers {
+public class VFDataFixers {
     public static String getModifierName(String modifier) {
         int firstSpace = modifier.indexOf(' ');
         if (modifier.contains("Cloud")) {
@@ -71,24 +71,24 @@ public class DataFixers {
     }
 
     /**
-     * Utility method for {@link DataFixers#parseLevel(String, String) parseLevel}
-     * Does not account for Clouds as that is handled in {@link DataFixers#parseLevel(String, String) parseLevel} already.
+     * Utility method for {@link VFDataFixers#parseLevel(String, String) parseLevel}
+     * Does not account for Clouds as that is handled in {@link VFDataFixers#parseLevel(String, String) parseLevel} already.
      *
      * @return Returns the parseMethod for the number type associated with the modifierName
      */
     private static Function<String, ? extends Number> getLevelType(String modifierName, boolean isPercent) {
         return switch (modifierName) {
             case "Mana"
-                    -> isPercent ? DataFixers::parseFloatPercent : Integer::parseInt;
+                    -> isPercent ? VFDataFixers::parseFloatPercent : Integer::parseInt;
             case "Armor", "Durability", "Chaining Attack", "Size", "Hammer Size"
-                    -> isPercent ? DataFixers::parseIntPercent : Integer::parseInt;
+                    -> isPercent ? VFDataFixers::parseIntPercent : Integer::parseInt;
             case "Attack Damage", "Reach", "Attack Range", "Attack Speed"
-                    -> isPercent ? DataFixers::parseDoublePercent : Double::parseDouble;
+                    -> isPercent ? VFDataFixers::parseDoublePercent : Double::parseDouble;
             default -> {
                 if (modifierName.contains("level of")) {
                     yield Integer::parseInt;
                 }
-                yield  isPercent ? DataFixers::parseFloatPercent : Float::parseFloat;
+                yield  isPercent ? VFDataFixers::parseFloatPercent : Float::parseFloat;
             }
         };
     }
