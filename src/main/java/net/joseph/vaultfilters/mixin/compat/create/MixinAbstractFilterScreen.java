@@ -105,6 +105,7 @@ public abstract class MixinAbstractFilterScreen extends AbstractSimiContainerScr
     @Unique
     @Override
     public boolean mouseClicked(double pMouseX, double pMouseY, int pButton) {
+        syncName();
         if (!nameBox.isFocused() && pMouseY > topPos && pMouseY < topPos + 14 && pMouseX > leftPos
                 && pMouseX < leftPos + background.width) {
             nameBox.setFocus(true);
