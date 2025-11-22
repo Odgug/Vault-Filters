@@ -34,7 +34,7 @@ public class MixinGhostItemMenu {
 
     @Inject(method = "clicked",at= @At(value = "INVOKE_ASSIGN",
             target = "Lcom/simibubi/create/foundation/gui/menu/GhostItemMenu;getCarried()Lnet/minecraft/world/item/ItemStack;",
-            shift = At.Shift.AFTER),cancellable = true)
+            shift = At.Shift.AFTER),cancellable = true,remap = true)
     private void onClicked(int slotId, int dragType, ClickType clickTypeIn, Player player, CallbackInfo ci) {
         GhostItemMenu instance = (GhostItemMenu) (Object) this;
         if (instance instanceof FilterMenu filterMenu && clickTypeIn == ClickType.CLONE) {

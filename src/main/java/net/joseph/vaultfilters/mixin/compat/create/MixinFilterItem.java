@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class MixinFilterItem {
     @Inject(method = "use",at = @At(value = "INVOKE",
             target = "Lnet/minecraftforge/network/NetworkHooks;openGui(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/world/MenuProvider;Ljava/util/function/Consumer;)V"
-    ,shift = At.Shift.BEFORE))
+    ,shift = At.Shift.BEFORE),remap = true)
     private void clearPlayerStack(Level world, Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir) {
         if (player instanceof ServerPlayer serverPlayer) {
             VFNestedFilters.clearAll(serverPlayer);
