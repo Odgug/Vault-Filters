@@ -22,6 +22,9 @@ public class VFMessages {
         VFCHANNEL.registerMessage(packetId++, MenuFeaturesPacket.class,
                 MenuFeaturesPacket::encode, MenuFeaturesPacket::decode, MenuFeaturesPacket::handle,
                 Optional.of(NetworkDirection.PLAY_TO_SERVER));
+        VFCHANNEL.registerMessage(packetId++,NestedFilterPacket.class,
+                NestedFilterPacket::encode,NestedFilterPacket::decode,NestedFilterPacket::handle,
+                Optional.of(NetworkDirection.PLAY_TO_SERVER));
     }
 
 }

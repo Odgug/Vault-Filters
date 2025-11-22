@@ -1,11 +1,16 @@
 package net.joseph.vaultfilters.mixin.compat.create;
 
 import com.simibubi.create.AllItems;
+import com.simibubi.create.content.logistics.filter.AbstractFilterMenu;
 import com.simibubi.create.content.logistics.filter.AttributeFilterMenu;
 import com.simibubi.create.content.logistics.filter.FilterItem;
 import com.simibubi.create.content.logistics.filter.FilterMenu;
 import com.simibubi.create.foundation.gui.menu.GhostItemMenu;
+import net.joseph.vaultfilters.VFNestedFilters;
 import net.joseph.vaultfilters.VaultFilters;
+import net.joseph.vaultfilters.network.NestedFilterPacket;
+import net.joseph.vaultfilters.network.VFMessages;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.MenuProvider;
@@ -37,32 +42,19 @@ public class MixinGhostItemMenu {
                 ItemStack stackInSlot = ghostInventory.getStackInSlot(slot);
                 if (stackInSlot.getItem() instanceof FilterItem filterItem) {
                     if (player instanceof ServerPlayer serverPlayer) {
-                        ItemStack stack = stackInSlot.copy();
-
-                        MenuProvider provider = new MenuProvider() {
-                            @Override
-                            public Component getDisplayName() {
-                                return stack.getHoverName();
+                        if (instance.contentHolder instanceof ItemStack currentItem)
+                            if (instance instanceof AbstractFilterMenu abm) {
+                                ((AbstractFilterMenuInvoker) abm).callSaveData(currentItem);
+                                VFNestedFilters.openNextMenu(serverPlayer,currentItem,stackInSlot,slot);
                             }
 
-                            @Override
-                            public AbstractContainerMenu createMenu(int id, Inventory inv, Player p) {
-                                if (stack.getItem() instanceof FilterItem filterItem) {
-                                    // Use the stack directly instead of player.getMainHandItem()
-                                    //VaultFilters.LOGGER.info(stack.getDisplayName().getString());
-                                    return stack.is(AllItems.FILTER.get())
-                                            ? FilterMenu.create(id, inv, stack)
-                                            : AttributeFilterMenu.create(id, inv, stack);
-                                }
-                                return null;
-                            }
-
-                        };
-                        //VaultFilters.LOGGER.info(stack.getDisplayName().getString());
-                        NetworkHooks.openGui(serverPlayer, provider, buf -> buf.writeItem(stack));
-                    }
+                        }
+//                    if (player instanceof LocalPlayer) {
+//                            VFMessages.VFCHANNEL.sendToServer(new NestedFilterPacket(false,slot));
+//                    }
                 }
                 ci.cancel();
         }
     }
+
 }

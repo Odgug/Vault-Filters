@@ -12,6 +12,7 @@ import com.simibubi.create.foundation.gui.AllGuiTextures;
 import com.simibubi.create.foundation.gui.menu.AbstractSimiContainerScreen;
 import net.joseph.vaultfilters.access.AbstractFilterMenuAdvancedAccessor;
 import net.joseph.vaultfilters.network.MenuFeaturesPacket;
+import net.joseph.vaultfilters.network.NestedFilterPacket;
 import net.joseph.vaultfilters.network.VFMessages;
 import net.joseph.vaultfilters.textures.VFGuiTextures;
 import net.minecraft.client.gui.Font;
@@ -49,8 +50,8 @@ public abstract class MixinAbstractFilterScreen extends AbstractSimiContainerScr
         super(container, inv, title);
     }
 // debug for nested filters
-//    @Redirect(method = "containerTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;closeContainer()V"),remap = true)
-//    private void dontClose(Player instance){}
+    @Redirect(method = "containerTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;closeContainer()V"),remap = true)
+    private void dontClose(Player instance){}
 
     //added label for name editing
 
@@ -122,7 +123,9 @@ public abstract class MixinAbstractFilterScreen extends AbstractSimiContainerScr
     @Redirect(at= @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;closeContainer()V",remap = true),method = "lambda$init$1()V")
     public void sendOnClose(LocalPlayer instance) {
         syncName();
-        instance.closeContainer();
+        openPreviousMenu();
+        //instance.closeContainer();
+
     }
 
 
@@ -153,6 +156,9 @@ public abstract class MixinAbstractFilterScreen extends AbstractSimiContainerScr
             VFMessages.VFCHANNEL.sendToServer(new MenuFeaturesPacket(MenuFeaturesPacket.MenuAction.CHANGE_NAME,nameBox.getValue()));
         }
 
+    }
+    private void openPreviousMenu() {
+        VFMessages.VFCHANNEL.sendToServer(new NestedFilterPacket(true,0));
     }
 }
 //unused injection points that i dont wanna delete
