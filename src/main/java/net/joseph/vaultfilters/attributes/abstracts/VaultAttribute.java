@@ -17,7 +17,7 @@ import java.util.Objects;
  * @author JustAHuman
  */
 public abstract class VaultAttribute<V> implements ItemAttribute {
-    protected final V value;
+    public final V value;
 
     protected VaultAttribute(V value) {
         this.value = value;

@@ -16,6 +16,8 @@ import net.joseph.vaultfilters.attributes.focus.FacetedFocusTypeAttribute;
 import net.joseph.vaultfilters.attributes.inner.InnerCardPackAttribute;
 import net.joseph.vaultfilters.attributes.inner.InnerJewelPouchAttribute;
 import net.joseph.vaultfilters.attributes.inner.InnerRuneItemAttribute;
+import net.joseph.vaultfilters.attributes.old.affix.PrefixAttribute;
+import net.joseph.vaultfilters.attributes.old.affix.SuffixAttribute;
 import net.joseph.vaultfilters.attributes.relic.TemporalRelicModifierAttribute;
 import net.joseph.vaultfilters.attributes.rune.BossRuneModifierAttribute;
 import net.joseph.vaultfilters.attributes.rune.BossRuneGivesItemAttribute;
@@ -143,8 +145,7 @@ public class VaultFilters {
         new LegendarySuffixAttribute("Trap Disarm").register(LegendarySuffixAttribute::new);
 
         new ImplicitAttribute("Armor").register(ImplicitAttribute::new);
-        new PrefixAttribute("Durability").register(PrefixAttribute::new);
-        new SuffixAttribute("Poison Cloud").register(SuffixAttribute::new);
+        new BasicAffixAttribute("Armor",1).register(BasicAffixAttribute::new);
 
         new NumberImplicitAttribute("", "", 0).register(NumberImplicitAttribute::new);
         new NumberPrefixAttribute("", "", 0).register(NumberPrefixAttribute::new);
@@ -257,5 +258,9 @@ public class VaultFilters {
         new InscriptionCompletionAttribute(0).register(InscriptionCompletionAttribute::new);
         new InscriptionInstabilityAttribute(0D).register(InscriptionInstabilityAttribute::new);
         new GearIsUniqueAttribute(true).register(GearIsUniqueAttribute::new);
+
+        new PrefixAttribute("Durability").register(PrefixAttribute::new);
+        new SuffixAttribute("Poison Cloud").register(SuffixAttribute::new);
+
     }
 }
