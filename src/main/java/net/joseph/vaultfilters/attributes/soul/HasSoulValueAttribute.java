@@ -15,7 +15,7 @@ public class HasSoulValueAttribute extends BooleanAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "has_soul";
     }
 

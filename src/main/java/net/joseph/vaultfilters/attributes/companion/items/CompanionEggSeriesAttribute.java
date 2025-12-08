@@ -27,7 +27,7 @@ public class CompanionEggSeriesAttribute extends StringAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "companion_egg_series";
     }
 }

@@ -19,7 +19,7 @@ public class JewelPouchOpenedAttribute extends BooleanAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "jewel_pouch_opened";
     }
 }

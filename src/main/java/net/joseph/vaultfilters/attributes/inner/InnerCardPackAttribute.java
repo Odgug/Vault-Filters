@@ -20,7 +20,7 @@ public class InnerCardPackAttribute extends InnerFilterAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "inner_card_pack";
     }
 }

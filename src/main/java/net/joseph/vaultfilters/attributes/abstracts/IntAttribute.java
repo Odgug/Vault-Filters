@@ -54,12 +54,12 @@ public abstract class IntAttribute extends VaultAttribute<Integer> {
 
     @Override
     public void writeNBT(CompoundTag compoundTag) {
-        compoundTag.putInt(getTranslationKey(), this.value);
+        compoundTag.putInt(getNBTKey(), this.value);
     }
 
     @Override
     public ItemAttribute readNBT(CompoundTag compoundTag) {
-        String key = getTranslationKey();
+        String key = getNBTKey();
         byte type = compoundTag.getTagType(key);
         if (type == CompoundTag.TAG_INT) {
             return withValue(compoundTag.getInt(key));

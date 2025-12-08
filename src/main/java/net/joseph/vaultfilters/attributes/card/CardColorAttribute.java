@@ -45,7 +45,7 @@ public class CardColorAttribute extends StringListAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "card_color";
     }
 }

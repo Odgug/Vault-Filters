@@ -49,12 +49,12 @@ public abstract class DoubleAttribute extends VaultAttribute<Double> {
 
     @Override
     public void writeNBT(CompoundTag compoundTag) {
-        compoundTag.putDouble(getTranslationKey(), this.value);
+        compoundTag.putDouble(getNBTKey(), this.value);
     }
 
     @Override
     public ItemAttribute readNBT(CompoundTag compoundTag) {
-        String key = getTranslationKey();
+        String key = getNBTKey();
         byte type = compoundTag.getTagType(key);
         if (type == CompoundTag.TAG_DOUBLE) {
             return withValue(compoundTag.getDouble(key));

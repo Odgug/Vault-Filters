@@ -40,13 +40,13 @@ public abstract class ModifierAttribute extends VaultAttribute<Modifier> {
 
     @Override
     public void writeNBT(CompoundTag compoundTag) {
-        compoundTag.putString(getTranslationKey(), this.value.getDisplayName());
+        compoundTag.putString(getNBTKey(), this.value.getDisplayName());
         writeLevel(compoundTag, this.value.getLevel());
-        compoundTag.putString(getTranslationKey() + "_simple", this.value.getNormalName());
+        compoundTag.putString(getNBTKey() + "_simple", this.value.getNormalName());
     }
 
     public void writeLevel(CompoundTag compoundTag, Number level) {
-        String levelKey = getTranslationKey() + "_level";
+        String levelKey = getNBTKey() + "_level";
         if (level instanceof Float f) {
             compoundTag.putFloat(levelKey, f);
         } else if (level instanceof Double d) {
@@ -58,7 +58,7 @@ public abstract class ModifierAttribute extends VaultAttribute<Modifier> {
 
     @Override
     public ItemAttribute readNBT(CompoundTag compoundTag) {
-        String key = getTranslationKey();
+        String key = getNBTKey();
         String simpleKey = key + "_simple";
         String levelKey = key + "_level";
         Number level = null;

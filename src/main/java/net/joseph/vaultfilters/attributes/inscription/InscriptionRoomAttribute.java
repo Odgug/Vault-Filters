@@ -23,7 +23,7 @@ public class InscriptionRoomAttribute extends StringAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "inscription_room";
     }
 

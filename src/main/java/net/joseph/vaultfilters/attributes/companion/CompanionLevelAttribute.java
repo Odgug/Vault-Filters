@@ -26,7 +26,7 @@ public class CompanionLevelAttribute extends IntAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "companion_level";
     }
 

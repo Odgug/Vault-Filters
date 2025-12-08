@@ -24,7 +24,7 @@ public class LegendaryPrefixAttribute extends AffixAttribute {
         return modifier.hasCategory(VaultGearModifier.AffixCategory.LEGENDARY) && this.value.equals(getName(modifier));
     }
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "legendary_prefix";
     }
 

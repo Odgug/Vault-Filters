@@ -19,7 +19,7 @@ public class CompanionRetiredAttribute extends BooleanAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "companion_retired";
     }
 }

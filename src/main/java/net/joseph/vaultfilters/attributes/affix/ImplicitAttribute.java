@@ -14,7 +14,7 @@ public class ImplicitAttribute extends AffixAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "implicit";
     }
 }

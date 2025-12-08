@@ -28,7 +28,7 @@ public class InnerJewelPouchAttribute extends InnerFilterAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "inner_jewel_pouch";
     }
 }

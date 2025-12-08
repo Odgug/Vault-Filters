@@ -36,7 +36,7 @@ public class BossRuneBoosterPackTypeAttribute extends StringAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "boss_rune_booster_pack_type";
     }
 }

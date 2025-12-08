@@ -51,7 +51,7 @@ public class BossRuneGearRarityAttribute extends StringAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "boss_rune_gear_rarity";
     }
 }

@@ -41,7 +41,7 @@ public class BossRuneInscriptionTypeAttribute extends StringAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "boss_rune_inscription_type";
     }
 }

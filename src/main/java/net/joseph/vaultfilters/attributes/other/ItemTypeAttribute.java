@@ -54,7 +54,7 @@ public class ItemTypeAttribute extends StringAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "item_type";
     }
 

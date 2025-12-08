@@ -23,7 +23,7 @@ public class IsCraftedAttribute extends BooleanAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "is_crafted";
     }
 

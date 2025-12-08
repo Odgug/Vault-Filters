@@ -43,7 +43,7 @@ public class CompanionRelicAttribute extends StringListAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "companion_relic_modifiers";
     }
 }

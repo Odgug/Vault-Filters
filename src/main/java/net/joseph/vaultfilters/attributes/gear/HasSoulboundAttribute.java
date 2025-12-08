@@ -25,7 +25,7 @@ public class HasSoulboundAttribute extends BooleanAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "soulbound_base";
     }
 }

@@ -27,12 +27,12 @@ public abstract class StringAttribute extends VaultAttribute<String> {
 
     @Override
     public void writeNBT(CompoundTag compoundTag) {
-        compoundTag.putString(getTranslationKey(), this.value);
+        compoundTag.putString(getNBTKey(), this.value);
     }
 
     @Override
     public ItemAttribute readNBT(CompoundTag compoundTag) {
-        String key = getTranslationKey();
+        String key = getNBTKey();
         byte type = compoundTag.getTagType(key);
         if (type == CompoundTag.TAG_STRING) {
             return withValue(compoundTag.getString(key));

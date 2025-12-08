@@ -19,7 +19,7 @@ public class InnerRuneItemAttribute extends InnerFilterAttribute {
         return null;
     }
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "inner_boss_rune";
     }
 }

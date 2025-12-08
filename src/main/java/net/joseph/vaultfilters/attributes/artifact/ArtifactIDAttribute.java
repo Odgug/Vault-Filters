@@ -26,7 +26,7 @@ public class ArtifactIDAttribute extends IntAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "artifact_id";
     }
 }

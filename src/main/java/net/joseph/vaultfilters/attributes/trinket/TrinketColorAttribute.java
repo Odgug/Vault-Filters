@@ -31,7 +31,7 @@ public class TrinketColorAttribute extends StringAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "trinket_color";
     }
 

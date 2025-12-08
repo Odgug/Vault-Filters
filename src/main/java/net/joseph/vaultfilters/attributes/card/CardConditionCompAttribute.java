@@ -29,7 +29,7 @@ public class CardConditionCompAttribute extends StringAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "card_condition_comp";
     }
 }

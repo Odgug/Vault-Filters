@@ -35,7 +35,7 @@ public class HasCorruptedAttribute extends BooleanAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "has_corrupted";
     }
 

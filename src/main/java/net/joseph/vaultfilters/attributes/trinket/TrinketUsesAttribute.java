@@ -22,7 +22,7 @@ public class TrinketUsesAttribute extends IntAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "trinket_uses";
     }
 

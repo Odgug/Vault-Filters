@@ -36,7 +36,7 @@ public class JewelSizeAttribute extends IntAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "jewel_size";
     }
 }

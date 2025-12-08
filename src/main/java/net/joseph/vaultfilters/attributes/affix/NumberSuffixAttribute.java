@@ -14,7 +14,7 @@ public class NumberSuffixAttribute extends NumberAffixAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "suffix_number";
     }
 

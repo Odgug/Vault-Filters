@@ -31,7 +31,7 @@ public class JewelRarityAttribute extends StringAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "jewel_rarity";
     }
 

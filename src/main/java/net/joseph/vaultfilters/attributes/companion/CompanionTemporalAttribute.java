@@ -34,7 +34,7 @@ public class CompanionTemporalAttribute extends StringAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "companion_temporal";
     }
 }

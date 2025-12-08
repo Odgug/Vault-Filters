@@ -26,7 +26,7 @@ public class CompanionSkinAttribute extends StringAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "companion_skin_name";
     }
 }

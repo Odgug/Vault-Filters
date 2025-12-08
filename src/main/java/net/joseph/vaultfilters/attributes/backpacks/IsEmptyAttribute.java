@@ -34,7 +34,7 @@ public class IsEmptyAttribute extends BooleanAttribute
     }
 
     @Override
-    public String getTranslationKey()
+    public String getNBTKey()
     {
         return "bag_empty";
     }

@@ -41,7 +41,7 @@ public class GearUniqueNameAttribute extends StringAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "gear_unique_key";
     }
 

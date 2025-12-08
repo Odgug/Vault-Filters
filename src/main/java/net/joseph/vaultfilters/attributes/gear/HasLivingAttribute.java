@@ -24,7 +24,7 @@ public class HasLivingAttribute extends BooleanAttribute {
         return data.hasAttribute(ModGearAttributes.LIVING);
     }
 
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "has_living";
     }
 }

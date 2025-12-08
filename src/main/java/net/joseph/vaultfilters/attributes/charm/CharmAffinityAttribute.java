@@ -24,7 +24,7 @@ public class CharmAffinityAttribute extends IntAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "charm_affinity";
     }
 

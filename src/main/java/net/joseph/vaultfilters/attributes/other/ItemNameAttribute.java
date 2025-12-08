@@ -19,7 +19,7 @@ public class ItemNameAttribute extends StringAttribute {
         return new Object[] { new TranslatableComponent(this.value).getString() };
     }
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "item_name";
     }
 }

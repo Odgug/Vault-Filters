@@ -23,7 +23,7 @@ public class CatalystSizeAttribute extends IntAttribute {
 
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "catalyst_size";
     }
 }

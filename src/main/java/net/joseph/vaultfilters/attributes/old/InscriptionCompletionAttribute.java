@@ -25,7 +25,7 @@ public class InscriptionCompletionAttribute extends OldAttribute {
 //    }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "inscription_completion";
     }
 

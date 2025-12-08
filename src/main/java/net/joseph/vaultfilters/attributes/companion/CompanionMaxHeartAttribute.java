@@ -24,7 +24,7 @@ public class CompanionMaxHeartAttribute extends IntAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "companion_max_hearts";
     }
 

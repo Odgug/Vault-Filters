@@ -24,7 +24,7 @@ public class CorruptedPrefixAttribute extends AffixAttribute {
         return modifier.hasCategory(VaultGearModifier.AffixCategory.CORRUPTED) && this.value.equals(getName(modifier));
     }
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "corrupted_prefix";
     }
 

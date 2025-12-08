@@ -27,7 +27,7 @@ public class TemporalRelicModifierAttribute extends StringAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "temporal_relic_modifier";
     }
 }

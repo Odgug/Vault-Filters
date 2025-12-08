@@ -53,12 +53,12 @@ public abstract class InnerFilterAttribute extends VaultAttribute<ItemStack>{
     }
     @Override
     public void writeNBT(CompoundTag compoundTag) {
-        compoundTag.put(getTranslationKey(), this.value.save(new CompoundTag()));
+        compoundTag.put(getNBTKey(), this.value.save(new CompoundTag()));
     }
 
     @Override
     public ItemAttribute readNBT(CompoundTag compoundTag) {
-        return withValue(ItemStack.of(compoundTag.getCompound(getTranslationKey())));
+        return withValue(ItemStack.of(compoundTag.getCompound(getNBTKey())));
     }
     @Override
     public ItemStack getValue(ItemStack itemStack) {

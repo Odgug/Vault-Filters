@@ -24,7 +24,7 @@ public class BossRuneModifierAttribute extends StringAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "boss_rune_modifier";
     }
 }

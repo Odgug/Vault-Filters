@@ -23,7 +23,7 @@ public class CharmUsesAttribute extends IntAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "charm_uses";
     }
 

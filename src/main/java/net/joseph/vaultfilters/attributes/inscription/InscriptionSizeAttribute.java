@@ -28,7 +28,7 @@ public class InscriptionSizeAttribute extends IntAttribute {
 
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "inscription_size";
     }
 }

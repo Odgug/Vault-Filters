@@ -48,7 +48,7 @@ public abstract class OldAttribute extends VaultAttribute<Object> {
     @Override
     public ItemAttribute readNBT(CompoundTag nbt) {
         nbt.remove(getLegacyKey());
-        nbt.remove(getTranslationKey());
+        nbt.remove(getNBTKey());
         return null;
     }
 }

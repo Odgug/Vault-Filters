@@ -31,7 +31,7 @@ public class HasGreaterAttribute extends BooleanAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "has_greater";
     }
 

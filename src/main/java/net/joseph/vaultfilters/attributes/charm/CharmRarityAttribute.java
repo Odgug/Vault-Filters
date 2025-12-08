@@ -28,7 +28,7 @@ public class CharmRarityAttribute extends StringAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "charm_rarity";
     }
 

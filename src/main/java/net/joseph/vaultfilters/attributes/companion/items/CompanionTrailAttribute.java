@@ -25,7 +25,7 @@ public class CompanionTrailAttribute extends StringAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "companion_trail_type";
     }
 }

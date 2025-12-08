@@ -78,7 +78,7 @@ public class CardTaskAttribute extends StringAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "card_task";
     }
 }

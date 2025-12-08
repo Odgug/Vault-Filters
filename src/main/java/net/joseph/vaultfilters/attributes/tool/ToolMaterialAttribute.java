@@ -26,7 +26,7 @@ public class ToolMaterialAttribute extends StringAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "tool_material";
     }
 }

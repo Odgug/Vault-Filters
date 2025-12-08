@@ -30,7 +30,7 @@ public class CompanionRelicAtleastAttribute extends IntAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "companion_relic_count";
     }
 }

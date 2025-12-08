@@ -14,7 +14,7 @@ public class PrefixAttribute extends AffixAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "prefix";
     }
 }

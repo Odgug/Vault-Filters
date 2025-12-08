@@ -38,7 +38,7 @@ public class GearRarityAttribute extends StringAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "gear_rarity";
     }
 

@@ -18,7 +18,7 @@ public class CardPackOpenedAttribute extends BooleanAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "card_pack_opened";
     }
 }

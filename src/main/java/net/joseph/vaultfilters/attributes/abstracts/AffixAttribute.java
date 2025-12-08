@@ -149,7 +149,7 @@ public abstract class AffixAttribute extends StringAttribute {
 
     @Override
     public ItemAttribute readNBT(CompoundTag compoundTag) {
-        String key = getTranslationKey();
+        String key = getNBTKey();
         if (compoundTag.contains(key, CompoundTag.TAG_STRING)) {
             return withValue(compoundTag.getString(key));
         }

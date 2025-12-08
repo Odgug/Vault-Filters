@@ -14,7 +14,7 @@ public class NumberImplicitAttribute extends NumberAffixAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "implicit_number";
     }
 

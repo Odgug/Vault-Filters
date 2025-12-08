@@ -11,7 +11,7 @@ public class CatalystModifierCategoryAttribute extends CatalystModifierAttribute
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "catalyst_category";
     }
 

@@ -33,7 +33,7 @@ public class HasLegendaryAttribute extends BooleanAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "has_legendary";
     }
 

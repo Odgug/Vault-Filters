@@ -21,7 +21,7 @@ public class HasUUIDAttribute extends StringAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "bag_uuid";
     }
 

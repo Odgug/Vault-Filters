@@ -30,7 +30,7 @@ public class PotentialCurrentAttribute extends IntAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "current_potential";
     }
 }

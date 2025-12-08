@@ -31,7 +31,7 @@ public class ModifierGroupAttribute extends AffixAttribute {
         return new Object[]{parsedValue};
     }
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "modifier_group";
     }
 }

@@ -60,7 +60,7 @@ public abstract class VaultAttribute<V> implements ItemAttribute {
      * @return The legacy key, defaults to the new key
      */
     public String getLegacyKey() {
-        return getTranslationKey();
+        return getNBTKey();
     }
 
     @Override
@@ -99,4 +99,9 @@ public abstract class VaultAttribute<V> implements ItemAttribute {
         }
         return nbt.contains(getNBTKey());
    }
+
+    @Override
+    public String getTranslationKey() {
+        return this.getNBTKey();
+    }
 }

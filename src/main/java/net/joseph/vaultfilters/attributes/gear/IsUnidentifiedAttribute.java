@@ -30,7 +30,7 @@ public class IsUnidentifiedAttribute extends BooleanAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "is_unidentified";
     }
 

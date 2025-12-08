@@ -24,7 +24,7 @@ public class FacetedFocusTypeAttribute extends StringAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "faceted_focus_type";
     }
 }

@@ -25,7 +25,7 @@ public class InscriptionTimeAttribute extends OldAttribute {
 //    }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "inscription_time";
     }
 

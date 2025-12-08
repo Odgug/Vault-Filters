@@ -29,7 +29,7 @@ public class PotentialMaxAttribute extends IntAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "max_potential";
     }
 }

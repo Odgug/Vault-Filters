@@ -14,7 +14,7 @@ public class GearIsUniqueAttribute extends OldAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "gear_unique";
     }
 

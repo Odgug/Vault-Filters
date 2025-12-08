@@ -31,7 +31,7 @@ public class CardHasConditionAttribute extends BooleanAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "card_has_condition";
     }
 }

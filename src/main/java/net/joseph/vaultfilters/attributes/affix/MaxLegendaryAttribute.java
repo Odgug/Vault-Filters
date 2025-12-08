@@ -57,7 +57,7 @@ public class MaxLegendaryAttribute extends BooleanAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "max_legendary";
     }
 }

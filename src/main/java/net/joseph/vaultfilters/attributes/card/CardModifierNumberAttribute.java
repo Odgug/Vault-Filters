@@ -120,7 +120,7 @@ public class CardModifierNumberAttribute extends ModifierAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "card_modifier_number";
     }
 }

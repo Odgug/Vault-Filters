@@ -15,7 +15,7 @@ public class CardDeckHasModifierAttribute extends BooleanAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "card_deck_has_modifier";
     }
 

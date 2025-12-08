@@ -20,7 +20,7 @@ public class CardDeckTypeAttribute extends StringAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "card_deck_type";
     }
 }

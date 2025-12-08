@@ -60,7 +60,7 @@ public class BaseAbilityAffixAttribute extends AffixAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "base_ability_affix";
     }
 }

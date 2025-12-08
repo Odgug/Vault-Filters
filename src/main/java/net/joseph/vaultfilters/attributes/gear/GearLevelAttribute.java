@@ -23,7 +23,7 @@ public class GearLevelAttribute extends IntAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "level";
     }
 }

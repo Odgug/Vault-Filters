@@ -30,7 +30,7 @@ public class CardIsScalingAttribute extends BooleanAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "card_scales";
     }
 }

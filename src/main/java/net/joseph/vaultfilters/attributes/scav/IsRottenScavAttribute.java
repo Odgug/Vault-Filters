@@ -20,7 +20,7 @@ public class IsRottenScavAttribute extends BooleanAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "rotten_scav";
     }
 }

@@ -33,7 +33,7 @@ public class InscriptionRoomTypeAttribute extends StringAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "inscription_type";
     }
 

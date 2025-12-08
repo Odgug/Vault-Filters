@@ -77,7 +77,7 @@ public class CardConditionNumAttribute extends IntAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "card_condition_num";
     }
 

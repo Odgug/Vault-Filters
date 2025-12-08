@@ -20,7 +20,7 @@ public class CardPackTypeAttribute extends StringAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "card_pack_type";
     }
 }

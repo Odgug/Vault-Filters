@@ -26,7 +26,7 @@ public class GearRepairSlotAttribute extends IntAttribute {
 
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "repair";
     }
 }

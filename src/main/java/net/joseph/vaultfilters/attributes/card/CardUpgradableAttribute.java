@@ -22,7 +22,7 @@ public class CardUpgradableAttribute extends BooleanAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "card_upgradable";
     }
 }

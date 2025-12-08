@@ -8,7 +8,7 @@ public class CatalystHasModifierAttribute extends CatalystModifierAttribute {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getNBTKey() {
         return "catalyst_modifier";
     }
 }
