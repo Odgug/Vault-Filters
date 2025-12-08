@@ -112,6 +112,9 @@
   "create.item_attributes.corrupted_suffix": "has a corrupted \"%1$s\" suffix",
   "create.item_attributes.corrupted_suffix.inverted": "doesn't have a corrupted \"%1$s\" suffix",
 
+  "create.item_attributes.corrupted_affix": "has a corrupted \"%1$s\" affix",
+  "create.item_attributes.corrupted_affix.inverted": "doesn't have a corrupted \"%1$s\" affix",
+
   "create.item_attributes.corrupted_implicit": "has a corrupted \"%1$s\" implicit",
   "create.item_attributes.corrupted_implicit.inverted": "doesn't have a corrupted \"%1$s\" implicit",
 

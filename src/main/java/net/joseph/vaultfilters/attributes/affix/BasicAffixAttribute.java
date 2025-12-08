@@ -37,8 +37,8 @@ public class BasicAffixAttribute extends CountAffixAttribute {
         if (nbt.contains(possiblename)) {
             //get the attribute
             CompoundTag oldAttTag = nbt.getCompound(possiblename);
-            PrefixAttribute suffixAttribute = (PrefixAttribute) new PrefixAttribute("dummy").readNBT(oldAttTag);
-            String name = suffixAttribute.value;
+            PrefixAttribute prefixAttribute = (PrefixAttribute) new PrefixAttribute("dummy").readNBT(oldAttTag);
+            String name = prefixAttribute.value;
 
             //remove the old attribute
             nbt.remove(possiblename);

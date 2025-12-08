@@ -16,6 +16,8 @@ import net.joseph.vaultfilters.attributes.focus.FacetedFocusTypeAttribute;
 import net.joseph.vaultfilters.attributes.inner.InnerCardPackAttribute;
 import net.joseph.vaultfilters.attributes.inner.InnerJewelPouchAttribute;
 import net.joseph.vaultfilters.attributes.inner.InnerRuneItemAttribute;
+import net.joseph.vaultfilters.attributes.old.affix.CorruptedPrefixAttribute;
+import net.joseph.vaultfilters.attributes.old.affix.CorruptedSuffixAttribute;
 import net.joseph.vaultfilters.attributes.old.affix.PrefixAttribute;
 import net.joseph.vaultfilters.attributes.old.affix.SuffixAttribute;
 import net.joseph.vaultfilters.attributes.relic.TemporalRelicModifierAttribute;
@@ -153,8 +155,7 @@ public class VaultFilters {
 
 
         new CorruptedImplicitAttribute("Attack Damage").register(CorruptedImplicitAttribute::new);
-        new CorruptedPrefixAttribute("Attack Damage").register(CorruptedPrefixAttribute::new);
-        new CorruptedSuffixAttribute("Trap Disarm").register(CorruptedSuffixAttribute::new);
+        new CorruptedAffixAttribute("Armor").register(CorruptedAffixAttribute::new);
         new IsCorruptedAttribute(true).register(IsCorruptedAttribute::new);
 
 
@@ -261,6 +262,9 @@ public class VaultFilters {
 
         new PrefixAttribute("Durability").register(PrefixAttribute::new);
         new SuffixAttribute("Poison Cloud").register(SuffixAttribute::new);
+
+        new CorruptedPrefixAttribute("Attack Damage").register(CorruptedPrefixAttribute::new);
+        new CorruptedSuffixAttribute("Trap Disarm").register(CorruptedSuffixAttribute::new);
 
     }
 }
