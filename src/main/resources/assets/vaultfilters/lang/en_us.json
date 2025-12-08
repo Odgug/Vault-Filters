@@ -162,6 +162,9 @@
   "create.item_attributes.prefix_number": "has a prefix that adds at least \"%1$s\"",
   "create.item_attributes.prefix_number.inverted": "doesn't have a prefix that adds at least \"%1$s\"",
 
+  "create.item_attributes.affix_number": "has an affix that adds at least \"%1$s\"",
+  "create.item_attributes.affix_number.inverted": "doesn't have an affix that adds at least \"%1$s\"",
+
   "create.item_attributes.suffix_number": "has a suffix that adds at least \"%1$s\"",
   "create.item_attributes.suffix_number.inverted": "doesn't have a suffix that adds at least \"%1$s\"",
 

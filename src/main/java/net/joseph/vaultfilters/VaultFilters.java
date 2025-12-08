@@ -1,6 +1,7 @@
 package net.joseph.vaultfilters;
 
 import com.mojang.logging.LogUtils;
+import net.joseph.vaultfilters.attributes.abstracts.NumberAffixAbstractAttribute;
 import net.joseph.vaultfilters.attributes.abstracts.Objects.Modifier;
 import net.joseph.vaultfilters.attributes.affix.*;
 import net.joseph.vaultfilters.attributes.artifact.ArtifactIDAttribute;
@@ -147,9 +148,7 @@ public class VaultFilters {
         new BasicAffixAttribute("Armor",1).register(BasicAffixAttribute::new);
 
         new NumberImplicitAttribute("", "", 0).register(NumberImplicitAttribute::new);
-        new NumberPrefixAttribute("", "", 0).register(NumberPrefixAttribute::new);
-        new NumberSuffixAttribute("", "", 0).register(NumberSuffixAttribute::new);
-
+        new NumberAffixAttribute("+32% Increased Attack Damage", "Increased Attack Damage",0.32).register(NumberAffixAttribute::new);
 
         new CorruptedImplicitAttribute("Attack Damage").register(CorruptedImplicitAttribute::new);
         new CorruptedAffixAttribute("Armor").register(CorruptedAffixAttribute::new);
@@ -266,6 +265,10 @@ public class VaultFilters {
 
         new LegendaryPrefixAttribute("Attack Damage").register(LegendaryPrefixAttribute::new);
         new LegendarySuffixAttribute("Trap Disarm").register(LegendarySuffixAttribute::new);
+
+        new NumberPrefixAttribute("", "", 0).register(NumberPrefixAttribute::new);
+        new NumberSuffixAttribute("", "", 0).register(NumberSuffixAttribute::new);
+
 
     }
 }

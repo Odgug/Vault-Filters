@@ -16,12 +16,12 @@ import org.apache.commons.lang3.function.TriFunction;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class NumberAffixAttribute extends AffixAttribute {
+public abstract class NumberAffixAbstractAttribute extends AffixAttribute {
     private static final Map<Class<?>, TriFunction<String, String, Number, ItemAttribute>> factories = new HashMap<>();
-    protected final String name;
-    protected final Number level;
+    public final String name;
+    public final Number level;
 
-    protected NumberAffixAttribute(String value, String name, Number level) {
+    protected NumberAffixAbstractAttribute(String value, String name, Number level) {
         super(value);
         this.name = name;
         this.level = level;
