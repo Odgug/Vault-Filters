@@ -70,6 +70,12 @@
   "create.item_attributes.affix_plural": "has at least \"%1$s\" affixes",
   "create.item_attributes.affix_plural.inverted": "doesn't have at least \"%1$s\" affixes",
 
+  "create.item_attributes.legendary_affix_single": "has a legendary \"%1$s\" affix",
+  "create.item_attributes.legendary_affix_single.inverted": "doesn't have a legendary \"%1$s\" affix",
+
+  "create.item_attributes.legendary_affix_plural": "has at least \"%1$s\" legendary affixes",
+  "create.item_attributes.legendary_affix_plural.inverted": "doesn't have at least \"%1$s\" legendary affixes",
+
   "create.item_attributes.suffix": "has a \"%1$s\" suffix",
   "create.item_attributes.suffix.inverted": "doesn't have a \"%1$s\" suffix",
 
