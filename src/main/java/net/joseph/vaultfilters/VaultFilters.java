@@ -158,6 +158,7 @@ public class VaultFilters {
         new CorruptedAffixAttribute("Armor").register(CorruptedAffixAttribute::new);
         new IsCorruptedAttribute(true).register(IsCorruptedAttribute::new);
 
+        new GreaterAffixAttribute("Attack Damage").register(GreaterAffixAttribute::new);
 
         new ModifierGroupAttribute("ModAbility").register(ModifierGroupAttribute::new);
 
