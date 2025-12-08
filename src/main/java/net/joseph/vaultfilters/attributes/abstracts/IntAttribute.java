@@ -64,6 +64,12 @@ public abstract class IntAttribute extends VaultAttribute<Integer> {
         if (type == CompoundTag.TAG_INT) {
             return withValue(compoundTag.getInt(key));
         }
+        if (type == CompoundTag.TAG_BYTE) {
+            IntAttribute attribute = withValue(1);
+            compoundTag.remove(key);
+            compoundTag.putInt(key,1);
+            return attribute;
+        }
         // Data Fixer
         else if (type == CompoundTag.TAG_STRING) {
             IntAttribute attribute = withValue(Integer.parseInt(compoundTag.getString(key)));

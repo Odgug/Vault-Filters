@@ -136,7 +136,7 @@ public class VaultFilters {
         new ToolMaterialAttribute("Chromatic Steel").register(ToolMaterialAttribute::new);
 
         // Affixes
-        new HasLegendaryAttribute(true).register(HasLegendaryAttribute::new);
+        new HasAtleastLegendaryAttribute(1).register(HasAtleastLegendaryAttribute::new);
         new HasCorruptedAttribute(true).register(HasCorruptedAttribute::new);
         new HasGreaterAttribute(true).register(HasGreaterAttribute::new);
         new HasFrozenAttribute(true).register(HasFrozenAttribute::new);
