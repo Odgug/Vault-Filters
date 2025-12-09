@@ -172,8 +172,8 @@
   "create.item_attributes.modifier_group_single": "has an affix in group \"%1$s\"",
   "create.item_attributes.modifier_group_single.inverted": "doesn't have an affix in group \"%1$s\"",
 
-  "create.item_attributes.modifier_group_plural": "has at least \"%1$s\" affix in group \"%1$s\"",
-  "create.item_attributes.modifier_group_plural.inverted": "doesn't have at least \"%1$s\" affix in group \"%1$s\"",
+  "create.item_attributes.modifier_group_plural": "has at least \"%1$s\" affixes in group \"%1$s\"",
+  "create.item_attributes.modifier_group_plural.inverted": "doesn't have at least \"%1$s\" affixes in group \"%1$s\"",
 
   "create.item_attributes.base_ability_affix": "has an affix that adds to a specialization of \"%1$s\"",
   "create.item_attributes.base_ability_affix.inverted": "doesn't have an affix that adds to a specialization of \"%1$s\"",
