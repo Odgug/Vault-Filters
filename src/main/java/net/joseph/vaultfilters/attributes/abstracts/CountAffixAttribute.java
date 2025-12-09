@@ -97,11 +97,7 @@ public abstract class CountAffixAttribute extends StringAttribute {
     @Override
     public Object[] getTranslationParameters() {
         String text = this.value;
-        if (count != 1) {
-            return new Object[]{count,text};
-        }
-
-        return new Object[]{text};
+            return new Object[]{text,count};
     }
 
     @Override

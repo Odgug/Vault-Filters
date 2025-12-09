@@ -25,11 +25,7 @@ public class ModifierGroupAttribute extends CountAffixAttribute {
     @Override
     public Object[] getTranslationParameters() {
         String text = this.value.substring(0,3).equals("Mod") || this.value.substring(0,3).equals("mod")  ? this.value.substring(3) : this.value;
-        if (count != 1) {
-            return new Object[]{count,text};
-        }
-
-        return new Object[]{text};
+            return new Object[]{text,count};
     }
     @Override
     public String getNBTKey() {
