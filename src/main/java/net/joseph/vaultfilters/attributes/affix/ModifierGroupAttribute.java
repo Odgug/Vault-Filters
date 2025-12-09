@@ -3,35 +3,47 @@ package net.joseph.vaultfilters.attributes.affix;
 import com.simibubi.create.content.logistics.filter.ItemAttribute;
 import iskallia.vault.gear.attribute.VaultGearModifier;
 import net.joseph.vaultfilters.attributes.abstracts.AffixAttribute;
+import net.joseph.vaultfilters.attributes.abstracts.CountAffixAttribute;
+import net.minecraft.nbt.CompoundTag;
 
-public class ModifierGroupAttribute extends AffixAttribute {
-    public ModifierGroupAttribute(String value) {
-        super(value);
+import static net.joseph.vaultfilters.attributes.abstracts.AffixAttribute.getName;
+
+public class ModifierGroupAttribute extends CountAffixAttribute {
+    public ModifierGroupAttribute(String name, Integer count) {
+        super(name,count);
     }
 
     @Override
-    public VaultGearModifier.AffixType getAffixType() {
-        return null;
+    public boolean shouldCheck(VaultGearModifier<?> modifier) {
+        return true;
     }
 
     @Override
-    public ItemAttribute withValue(VaultGearModifier<?> modifier) {
-        String group = modifier.getModifierGroup();
-        return group.isEmpty() ? null : withValue(group);
-    }
-
-
-    @Override
-    public boolean checkModifier(VaultGearModifier<?> modifier) {
-        return this.value.equals(modifier.getModifierGroup());
+    public String getModifierString(VaultGearModifier<?> modifier) {
+        return modifier.getModifierGroup();
     }
     @Override
     public Object[] getTranslationParameters() {
-        String parsedValue = this.value.substring(0,3).equals("Mod") ? this.value.substring(3) : this.value;
-        return new Object[]{parsedValue};
+        String text = this.value.substring(0,3).equals("Mod") ? this.value.substring(3) : this.value;
+        if (count != 1) {
+            return new Object[]{count,text};
+        }
+
+        return new Object[]{text};
     }
     @Override
     public String getNBTKey() {
         return "modifier_group";
+    }
+
+    @Override
+    public ItemAttribute readNBT(CompoundTag tag) {
+        String key = this.getNBTKey();
+        String countKey = key + "_count";
+        if (!(tag.contains(countKey))) {
+            tag.putInt(countKey,1);
+            return this.withValue(tag.getString(key),1);
+        }
+        return this.withValue(tag.getString(key),tag.getInt(countKey));
     }
 }

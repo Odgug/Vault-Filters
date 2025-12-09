@@ -156,7 +156,7 @@ public class VaultFilters {
 
         new GreaterAffixAttribute("Attack Damage").register(GreaterAffixAttribute::new);
 
-        new ModifierGroupAttribute("ModAbility").register(ModifierGroupAttribute::new);
+        new ModifierGroupAttribute("ModAbility",1).register(ModifierGroupAttribute::new);
 
         new MaxLegendaryAttribute(true).register(MaxLegendaryAttribute::new);
 

@@ -35,7 +35,7 @@ public abstract class CountAffixAttribute extends StringAttribute {
         Set<String> alreadyChecked = new HashSet<>();
         for (VaultGearModifier<?> modifier : getModifiers(itemStack)) {
             if (shouldCheck(modifier)) {
-                String name = getName(modifier);
+                String name = getModifierString(modifier);
                 if (name.isEmpty() || alreadyChecked.contains(name)) {
                     continue;
                 }
@@ -63,7 +63,7 @@ public abstract class CountAffixAttribute extends StringAttribute {
             Iterable<VaultGearModifier<?>> modifiers = getModifiers(itemStack);
             for (VaultGearModifier<?> modifier : modifiers) {
                 if (shouldCheck(modifier)) {
-                    if (getName(modifier).equals(name)) {
+                    if (getModifierString(modifier).equals(name)) {
                         count++;
                     }
                 }
@@ -71,7 +71,9 @@ public abstract class CountAffixAttribute extends StringAttribute {
         }
         return count;
     }
-
+    public String getModifierString(VaultGearModifier<?> modifier) {
+        return getName(modifier);
+    }
     @Override
     public boolean appliesTo(ItemStack itemStack) {
         return countModifiers(itemStack, this.value) >= this.count;
@@ -96,7 +98,7 @@ public abstract class CountAffixAttribute extends StringAttribute {
     public Object[] getTranslationParameters() {
         String text = this.value;
         if (count != 1) {
-            text = String.valueOf(count) + " " + text;
+            return new Object[]{count,text};
         }
 
         return new Object[]{text};
