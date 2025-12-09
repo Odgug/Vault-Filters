@@ -58,6 +58,9 @@ public abstract class NumberAffixAbstractAttribute extends AffixAttribute {
     }
 
     public static <T> String getDisplayName(VaultGearModifier<T> modifier, VaultGearModifier.AffixType type) {
+        if (type == null) {
+            type = VaultGearModifier.AffixType.PREFIX;
+        }
         VaultGearModifierReader<T> reader = modifier.getAttribute().getReader();
         MutableComponent displayName = reader.getDisplay(modifier, type);
         return displayName == null ? getName(modifier) : displayName.getString();
