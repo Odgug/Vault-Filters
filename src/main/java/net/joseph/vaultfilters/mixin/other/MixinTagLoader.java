@@ -192,33 +192,38 @@ public class MixinTagLoader {
                         }
                     });
 
-//            Set<ResourceLocation> crucibleItems = new HashSet<>(ModConfigs.VOID_CRUCIBLE_CUSTOM_ROOMS.getAllItems());
-//            for (var theme : VaultRegistry.THEME.getKeys()) {
-//                crucibleItems.addAll(ThemeBlockRetriever.getBlocksForTheme(theme.getId()));
-//            }
-//
-//            List<ResourceLocation> allowedHolders =
-//                    crucibleItems.stream()
-//                            .filter(ThemeBlockRetriever::allowVaultBlock)
-//                            .filter(x -> Registry.ITEM.getOptional(x).isPresent())
-//                            .toList();
-//
-//            Tag.Builder voidedByCrucible = pBuilders.computeIfAbsent(VaultMod.id("voided_by_crucible"), id -> Tag.Builder.tag());
-//            for (ResourceLocation item : allowedHolders) {
-//                voidedByCrucible.addElement(item, "Vault Filters dynamic tags");
-//            }
-//
-//            List<ResourceLocation> notAllowedHolders =
-//                    crucibleItems.stream()
-//                            .filter(x -> !ThemeBlockRetriever.allowVaultBlock(x))
-//                            .filter(x -> Registry.ITEM.getOptional(x).isPresent()) // some mods might not be loaded (for example in dev)
-//                            .toList();
-//            Tag.Builder voidCrucibleExtras = pBuilders.computeIfAbsent(VaultMod.id("void_crucible_extras"), id -> Tag.Builder.tag());
-//            for (ResourceLocation item : notAllowedHolders) {
-//                voidCrucibleExtras.addElement(item, "Vault Filters dynamic tags");
-//            }
-//
-//            ThemeBlockRetriever.CACHE.clear(); // save some memory if the theme is not actually used
+            Set<ResourceLocation> crucibleItems = new HashSet<>(ModConfigs.VOID_CRUCIBLE_CUSTOM_ROOMS.getAllItems());
+            for (var theme : VaultRegistry.THEME.getKeys()) {
+                try {
+                    crucibleItems.addAll(ThemeBlockRetriever.getBlocksForTheme(theme.getId()));
+                } catch (Exception E) {
+                    VaultFilters.LOGGER.info("Theme loaded incorrectly");
+                }
+
+            }
+
+            List<ResourceLocation> allowedHolders =
+                    crucibleItems.stream()
+                            .filter(ThemeBlockRetriever::allowVaultBlock)
+                            .filter(x -> Registry.ITEM.getOptional(x).isPresent())
+                            .toList();
+
+            Tag.Builder voidedByCrucible = pBuilders.computeIfAbsent(VaultMod.id("voided_by_crucible"), id -> Tag.Builder.tag());
+            for (ResourceLocation item : allowedHolders) {
+                voidedByCrucible.addElement(item, "Vault Filters dynamic tags");
+            }
+
+            List<ResourceLocation> notAllowedHolders =
+                    crucibleItems.stream()
+                            .filter(x -> !ThemeBlockRetriever.allowVaultBlock(x))
+                            .filter(x -> Registry.ITEM.getOptional(x).isPresent()) // some mods might not be loaded (for example in dev)
+                            .toList();
+            Tag.Builder voidCrucibleExtras = pBuilders.computeIfAbsent(VaultMod.id("void_crucible_extras"), id -> Tag.Builder.tag());
+            for (ResourceLocation item : notAllowedHolders) {
+                voidCrucibleExtras.addElement(item, "Vault Filters dynamic tags");
+            }
+
+            ThemeBlockRetriever.CACHE.clear(); // save some memory if the theme is not actually used
         }
 
     }
