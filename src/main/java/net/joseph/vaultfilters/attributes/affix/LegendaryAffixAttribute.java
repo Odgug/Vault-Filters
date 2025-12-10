@@ -54,7 +54,7 @@ public class LegendaryAffixAttribute extends CountAffixAttribute {
         if (nbt.contains(possiblename)) {
             //get the attribute
             CompoundTag oldAttTag = nbt.getCompound(possiblename);
-            LegendarySuffixAttribute legendarySuffixAttribute = (LegendarySuffixAttribute) new LegendaryPrefixAttribute("dummy").readNBT(oldAttTag);
+            LegendarySuffixAttribute legendarySuffixAttribute = (LegendarySuffixAttribute) new LegendarySuffixAttribute("dummy").readNBT(oldAttTag);
             String name = legendarySuffixAttribute.value;
 
             //remove the old attribute
