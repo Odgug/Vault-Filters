@@ -6,6 +6,8 @@ import iskallia.vault.config.Config;
 import iskallia.vault.config.LootInfoConfig;
 import iskallia.vault.config.VaultAltarConfig;
 import iskallia.vault.config.altar.entry.AltarIngredientEntry;
+import iskallia.vault.core.util.ThemeBlockRetriever;
+import iskallia.vault.core.vault.VaultRegistry;
 import iskallia.vault.core.world.data.item.ItemPredicate;
 import iskallia.vault.core.world.data.tile.OrItemPredicate;
 import iskallia.vault.core.world.loot.LootTableInfo;
@@ -34,6 +36,7 @@ import java.util.stream.Stream;
 
 @Mixin(TagLoader.class)
 public class MixinTagLoader {
+    //Credits to rizek/radimous for dynamic tag generation
     @Shadow
     @Final
     private String directory;
@@ -188,6 +191,34 @@ public class MixinTagLoader {
                             ores.addElement(rl,"Vault Filters dynamic tags");
                         }
                     });
+
+            Set<ResourceLocation> crucibleItems = new HashSet<>(ModConfigs.VOID_CRUCIBLE_CUSTOM_ROOMS.getAllItems());
+            for (var theme : VaultRegistry.THEME.getKeys()) {
+                crucibleItems.addAll(ThemeBlockRetriever.getBlocksForTheme(theme.getId()));
+            }
+
+            List<ResourceLocation> allowedHolders =
+                    crucibleItems.stream()
+                            .filter(ThemeBlockRetriever::allowVaultBlock)
+                            .filter(x -> Registry.ITEM.getOptional(x).isPresent())
+                            .toList();
+
+            Tag.Builder voidedByCrucible = pBuilders.computeIfAbsent(VaultMod.id("voided_by_crucible"), id -> Tag.Builder.tag());
+            for (ResourceLocation item : allowedHolders) {
+                voidedByCrucible.addElement(item, "Vault Filters dynamic tags");
+            }
+
+            List<ResourceLocation> notAllowedHolders =
+                    crucibleItems.stream()
+                            .filter(x -> !ThemeBlockRetriever.allowVaultBlock(x))
+                            .filter(x -> Registry.ITEM.getOptional(x).isPresent()) // some mods might not be loaded (for example in dev)
+                            .toList();
+            Tag.Builder voidCrucibleExtras = pBuilders.computeIfAbsent(VaultMod.id("void_crucible_extras"), id -> Tag.Builder.tag());
+            for (ResourceLocation item : notAllowedHolders) {
+                voidCrucibleExtras.addElement(item, "Vault Filters dynamic tags");
+            }
+
+            ThemeBlockRetriever.CACHE.clear(); // save some memory if the theme is not actually used
         }
 
     }
