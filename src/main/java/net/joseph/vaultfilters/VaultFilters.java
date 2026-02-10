@@ -13,6 +13,8 @@ import net.joseph.vaultfilters.attributes.companion.items.CompanionRelicAttribut
 import net.joseph.vaultfilters.attributes.companion.items.CompanionTrailAttribute;
 import net.joseph.vaultfilters.attributes.deck.CardDeckHasModifierAttribute;
 import net.joseph.vaultfilters.attributes.deck.CardDeckTypeAttribute;
+import net.joseph.vaultfilters.attributes.deck_core.DeckCoreTypeAttribute;
+import net.joseph.vaultfilters.attributes.deck_core.DeckCoreValueAttribute;
 import net.joseph.vaultfilters.attributes.focus.FacetedFocusTypeAttribute;
 import net.joseph.vaultfilters.attributes.inner.InnerCardPackAttribute;
 import net.joseph.vaultfilters.attributes.inner.InnerJewelPouchAttribute;
@@ -243,6 +245,10 @@ public class VaultFilters {
         //Deck
         new CardDeckHasModifierAttribute(true).register(CardDeckHasModifierAttribute::new);
         new CardDeckTypeAttribute("").register(CardDeckTypeAttribute::new);
+
+        //Deck Core
+        new DeckCoreTypeAttribute("steadfast").register(DeckCoreTypeAttribute::new);
+        new DeckCoreValueAttribute(0.5f).register(DeckCoreValueAttribute::new);
 
         //Temporal Relic
         new TemporalRelicModifierAttribute("").register(TemporalRelicModifierAttribute::new);

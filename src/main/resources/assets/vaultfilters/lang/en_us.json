@@ -310,6 +310,12 @@
   "create.item_attributes.card_deck_type": "is a \"%1$s\"",
   "create.item_attributes.card_deck_type.inverted": "isn't a \"%1$s\"",
 
+  "create.item_attributes.deck_core_type": "is a \"%1$s\"",
+  "create.item_attributes.deck_core_type.inverted": "isn't a \"%1$s\"",
+
+  "create.item_attributes.deck_core_value": "is a deck core with at least \"%1$s\" value",
+  "create.item_attributes.deck_core_value.inverted": "isn't a deck core with at least \"%1$s\" value",
+
   "create.item_attributes.companion_cooldown": "is a Companion on cooldown",
   "create.item_attributes.companion_cooldown.inverted": "isn't a Companion on cooldown",
 
