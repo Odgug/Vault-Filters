@@ -28,7 +28,7 @@ public class IsUnidentifiedAttribute extends BooleanAttribute {
         } else if (stack.getItem() instanceof CharmItem) {
             return !CharmItem.isIdentified(stack);
         } else if (stack.getItem() instanceof TemporalShardItem) {
-            return TemporalShardItem.isIdentified(stack);
+            return !TemporalShardItem.isIdentified(stack);
         } else if (stack.getItem() instanceof IdentifiableItem identifiableItem) {
             VaultGearState state = identifiableItem.getState(stack);
             return state == VaultGearState.UNIDENTIFIED;
