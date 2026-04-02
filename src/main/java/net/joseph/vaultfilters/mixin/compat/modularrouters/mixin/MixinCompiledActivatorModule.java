@@ -2,8 +2,10 @@ package net.joseph.vaultfilters.mixin.compat.modularrouters.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.simibubi.create.content.logistics.filter.FilterItemStack;
+import iskallia.vault.gear.GearScoreHelper;
 import iskallia.vault.item.BoosterPackItem;
 import iskallia.vault.item.JewelPouchItem;
+import iskallia.vault.item.tool.JewelItem;
 import iskallia.vault.util.LootInitialization;
 import iskallia.vault.world.data.PlayerVaultStatsData;
 import me.desht.modularrouters.block.tile.ModularRouterBlockEntity;
@@ -25,8 +27,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Mixin(value = CompiledActivatorModule.class, remap = false)
 public abstract class MixinCompiledActivatorModule {
@@ -111,6 +115,7 @@ public abstract class MixinCompiledActivatorModule {
                 }
             }
             var filter = ((AccessorCompiledModule) this).getFilter();
+            List<ItemStack> acceptableOutcomes = new ArrayList<>();
             for (JewelPouchItem.RolledJewel outcome : outcomes) {
                 ItemStack result = outcome.stack().copy();
                 if (filter.test(result)) {
@@ -118,10 +123,20 @@ public abstract class MixinCompiledActivatorModule {
                         int vaultLevel = JewelPouchItem.getStoredLevel(routerStack).orElseGet(() -> PlayerVaultStatsData.get(fakePlayer.getLevel()).getVaultStats(fakePlayer).getVaultLevel());
                         result = LootInitialization.initializeVaultLoot(result, vaultLevel);
                     }
-                    fakePlayer.setItemInHand(InteractionHand.MAIN_HAND, result.copy());
+                    acceptableOutcomes.add(result);
+
+
+                }
+
+            }
+            if (!acceptableOutcomes.isEmpty()) {
+                Optional<ItemStack> bestCandidate = GearScoreHelper.pickHighestWeight(acceptableOutcomes);
+                if (bestCandidate.isPresent()) {
+                    fakePlayer.setItemInHand(InteractionHand.MAIN_HAND, bestCandidate.get().copy());
                     cir.setReturnValue(true);
                     return;
                 }
+
             }
 //            if (crackedJewel) {
 //                cir.setReturnValue(true);
