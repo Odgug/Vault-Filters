@@ -35,6 +35,9 @@
   "create.item_attributes.soulbound_base": "has Soulbound as a base attribute",
   "create.item_attributes.soulbound_base.inverted": "doesn't have Soulbound as a base attribute",
 
+  "create.item_attributes.has_endless": "has Endless durability",
+  "create.item_attributes.has_endless.inverted": "doesn't have Endless durability",
+
   "create.item_attributes.tool_material": "is a \"%1$s\" vault tool",
   "create.item_attributes.tool_material.inverted": "is not a \"%1$s\" vault tool",
 
