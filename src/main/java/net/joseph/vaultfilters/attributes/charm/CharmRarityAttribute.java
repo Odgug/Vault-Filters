@@ -12,19 +12,25 @@ public class CharmRarityAttribute extends StringAttribute {
 
     @Override
     public String getValue(ItemStack itemStack) {
-        if (!(itemStack.getItem() instanceof CharmItem)) {
+        try
+        {
+            if (!(itemStack.getItem() instanceof CharmItem)) {
+                return null;
+            }
+
+            if (itemStack.getItem() == ModItems.SMALL_CHARM) {
+                return "Noble";
+            } else if (itemStack.getItem() == ModItems.LARGE_CHARM) {
+                return "Distinguished";
+            } else if (itemStack.getItem() == ModItems.GRAND_CHARM) {
+                return "Regal";
+            } else {
+                return "Majestic";
+            }
+        } catch (LinkageError e) {
             return null;
         }
 
-        if (itemStack.getItem() == ModItems.SMALL_CHARM) {
-            return "Noble";
-        } else if (itemStack.getItem() == ModItems.LARGE_CHARM) {
-            return "Distinguished";
-        } else if (itemStack.getItem() == ModItems.GRAND_CHARM) {
-            return "Regal";
-        } else {
-            return "Majestic";
-        }
     }
 
     @Override
