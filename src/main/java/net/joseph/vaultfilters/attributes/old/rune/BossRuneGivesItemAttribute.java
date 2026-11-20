@@ -9,7 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.List;
 
 public class BossRuneGivesItemAttribute extends OldAttribute {
-    public BossRuneGivesItemAttribute(String value) {
+    public BossRuneGivesItemAttribute(Object value) {
         super(value);
     }
 /*

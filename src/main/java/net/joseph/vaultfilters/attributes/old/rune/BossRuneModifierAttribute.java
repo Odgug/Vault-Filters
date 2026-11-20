@@ -6,7 +6,7 @@ import net.joseph.vaultfilters.attributes.abstracts.StringAttribute;
 import net.minecraft.world.item.ItemStack;
 
 public class BossRuneModifierAttribute extends OldAttribute {
-    public BossRuneModifierAttribute(String value) {
+    public BossRuneModifierAttribute(Object value) {
         super(value);
     }
 /*

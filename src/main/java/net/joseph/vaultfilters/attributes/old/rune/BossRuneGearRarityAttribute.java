@@ -17,7 +17,7 @@ import java.util.Locale;
 import java.util.Optional;
 
 public class BossRuneGearRarityAttribute extends OldAttribute {
-    public BossRuneGearRarityAttribute(String value) {
+    public BossRuneGearRarityAttribute(Object value) {
         super(value);
     }
     /*

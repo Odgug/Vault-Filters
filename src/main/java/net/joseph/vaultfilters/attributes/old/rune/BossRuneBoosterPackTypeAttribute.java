@@ -11,7 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.List;
 
 public class BossRuneBoosterPackTypeAttribute extends OldAttribute {
-    public BossRuneBoosterPackTypeAttribute(String value) {
+    public BossRuneBoosterPackTypeAttribute(Object value) {
         super(value);
     }
 /*

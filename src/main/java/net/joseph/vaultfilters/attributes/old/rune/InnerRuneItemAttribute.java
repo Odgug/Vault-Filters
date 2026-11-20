@@ -8,7 +8,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.List;
 
 public class InnerRuneItemAttribute extends OldAttribute {
-    public InnerRuneItemAttribute(ItemStack value) {
+    public InnerRuneItemAttribute(Object value) {
         super(value);
     }
 /*

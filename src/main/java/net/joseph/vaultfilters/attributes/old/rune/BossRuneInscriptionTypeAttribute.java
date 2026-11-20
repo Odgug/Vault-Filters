@@ -10,7 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.List;
 
 public class BossRuneInscriptionTypeAttribute extends OldAttribute {
-    public BossRuneInscriptionTypeAttribute(String value) {
+    public BossRuneInscriptionTypeAttribute(Object value) {
         super(value);
     }
 /*

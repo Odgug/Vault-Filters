@@ -210,13 +210,6 @@ public class VaultFilters {
         new HasUpgradeAttribute("Backpack Upgrade").register(HasUpgradeAttribute::new);
         new HasUUIDAttribute("Backpack UUID").register(HasUUIDAttribute::new);
 
-        // Runes
-        new BossRuneModifierAttribute("Strength").register(BossRuneModifierAttribute::new);
-        new BossRuneGivesItemAttribute("the_vault:helmet").register(BossRuneGivesItemAttribute::new);
-        new BossRuneGearRarityAttribute("Omega").register(BossRuneGearRarityAttribute::new);
-        new BossRuneBoosterPackTypeAttribute("the_vault:mega_stat_pack").register(BossRuneBoosterPackTypeAttribute::new);
-        new BossRuneInscriptionTypeAttribute("Laboratory").register(BossRuneInscriptionTypeAttribute::new);
-
         //Inner checks
         new InnerCardPackAttribute(null).register(InnerCardPackAttribute::new);
         new InnerJewelPouchAttribute(null).register(InnerJewelPouchAttribute::new);
@@ -273,6 +266,13 @@ public class VaultFilters {
 
         new NumberPrefixAttribute("", "", 0).register(NumberPrefixAttribute::new);
         new NumberSuffixAttribute("", "", 0).register(NumberSuffixAttribute::new);
+
+        new BossRuneModifierAttribute("Strength").register(BossRuneModifierAttribute::new);
+        new BossRuneGivesItemAttribute("the_vault:helmet").register(BossRuneGivesItemAttribute::new);
+        new BossRuneGearRarityAttribute("Omega").register(BossRuneGearRarityAttribute::new);
+        new BossRuneBoosterPackTypeAttribute("the_vault:mega_stat_pack").register(BossRuneBoosterPackTypeAttribute::new);
+        new BossRuneInscriptionTypeAttribute("Laboratory").register(BossRuneInscriptionTypeAttribute::new);
+
 
 
     }
