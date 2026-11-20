@@ -120,8 +120,7 @@ public abstract class MixinCompiledActivatorModule {
                 ItemStack result = outcome.stack().copy();
                 if (filter.test(result)) {
                     if (!outcome.identified()) {
-                        int vaultLevel = JewelPouchItem.getStoredLevel(routerStack).orElseGet(() -> PlayerVaultStatsData.get(fakePlayer.getLevel()).getVaultStats(fakePlayer).getVaultLevel());
-                        result = LootInitialization.initializeVaultLoot(result, vaultLevel);
+                        result = JewelPouchItem.identifyRolledJewel(result);
                     }
                     acceptableOutcomes.add(result);
 
