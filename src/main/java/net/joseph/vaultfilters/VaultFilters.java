@@ -1,7 +1,6 @@
 package net.joseph.vaultfilters;
 
 import com.mojang.logging.LogUtils;
-import net.joseph.vaultfilters.attributes.abstracts.NumberAffixAbstractAttribute;
 import net.joseph.vaultfilters.attributes.abstracts.Objects.Modifier;
 import net.joseph.vaultfilters.attributes.affix.*;
 import net.joseph.vaultfilters.attributes.artifact.ArtifactIDAttribute;
@@ -18,14 +17,14 @@ import net.joseph.vaultfilters.attributes.deck_core.DeckCoreValueAttribute;
 import net.joseph.vaultfilters.attributes.focus.FacetedFocusTypeAttribute;
 import net.joseph.vaultfilters.attributes.inner.InnerCardPackAttribute;
 import net.joseph.vaultfilters.attributes.inner.InnerJewelPouchAttribute;
-import net.joseph.vaultfilters.attributes.inner.InnerRuneItemAttribute;
+import net.joseph.vaultfilters.attributes.old.rune.InnerRuneItemAttribute;
 import net.joseph.vaultfilters.attributes.old.affix.*;
 import net.joseph.vaultfilters.attributes.relic.TemporalRelicModifierAttribute;
-import net.joseph.vaultfilters.attributes.rune.BossRuneModifierAttribute;
-import net.joseph.vaultfilters.attributes.rune.BossRuneGivesItemAttribute;
-import net.joseph.vaultfilters.attributes.rune.BossRuneGearRarityAttribute;
-import net.joseph.vaultfilters.attributes.rune.BossRuneBoosterPackTypeAttribute;
-import net.joseph.vaultfilters.attributes.rune.BossRuneInscriptionTypeAttribute;
+import net.joseph.vaultfilters.attributes.old.rune.BossRuneModifierAttribute;
+import net.joseph.vaultfilters.attributes.old.rune.BossRuneGivesItemAttribute;
+import net.joseph.vaultfilters.attributes.old.rune.BossRuneGearRarityAttribute;
+import net.joseph.vaultfilters.attributes.old.rune.BossRuneBoosterPackTypeAttribute;
+import net.joseph.vaultfilters.attributes.old.rune.BossRuneInscriptionTypeAttribute;
 
 import net.joseph.vaultfilters.attributes.backpacks.HasUUIDAttribute;
 import net.joseph.vaultfilters.attributes.backpacks.HasUpgradeAttribute;

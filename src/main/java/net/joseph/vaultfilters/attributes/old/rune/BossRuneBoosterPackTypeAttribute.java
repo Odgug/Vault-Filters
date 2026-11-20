@@ -1,26 +1,20 @@
-package net.joseph.vaultfilters.attributes.rune;
+package net.joseph.vaultfilters.attributes.old.rune;
 
-import com.simibubi.create.content.logistics.filter.ItemAttribute;
 import iskallia.vault.init.ModConfigs;
 import iskallia.vault.item.BoosterPackItem;
 import iskallia.vault.item.BossRuneItem;
+import net.joseph.vaultfilters.attributes.abstracts.OldAttribute;
 import net.joseph.vaultfilters.attributes.abstracts.StringAttribute;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraft.world.item.Item;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class BossRuneBoosterPackTypeAttribute extends StringAttribute {
+public class BossRuneBoosterPackTypeAttribute extends OldAttribute {
     public BossRuneBoosterPackTypeAttribute(String value) {
         super(value);
     }
-
+/*
     @Override
     public String getValue(ItemStack itemStack) {
         if (!(itemStack.getItem() instanceof BossRuneItem)) {
@@ -34,9 +28,11 @@ public class BossRuneBoosterPackTypeAttribute extends StringAttribute {
         }
         return ModConfigs.BOOSTER_PACK.getName(BoosterPackItem.getId(reward)).map(Component::getString).orElse(null);
     }
-
+*/
     @Override
     public String getNBTKey() {
         return "boss_rune_booster_pack_type";
     }
+
+
 }

@@ -1,14 +1,15 @@
-package net.joseph.vaultfilters.attributes.rune;
+package net.joseph.vaultfilters.attributes.old.rune;
 
 import iskallia.vault.item.BossRuneItem;
+import net.joseph.vaultfilters.attributes.abstracts.OldAttribute;
 import net.joseph.vaultfilters.attributes.abstracts.StringAttribute;
 import net.minecraft.world.item.ItemStack;
 
-public class BossRuneModifierAttribute extends StringAttribute {
+public class BossRuneModifierAttribute extends OldAttribute {
     public BossRuneModifierAttribute(String value) {
         super(value);
     }
-
+/*
     @Override
     public String getValue(ItemStack itemStack) {
         if (!(itemStack.getItem() instanceof BossRuneItem)) {
@@ -22,7 +23,7 @@ public class BossRuneModifierAttribute extends StringAttribute {
     public Object[] getTranslationParameters() {
         return new Object[]{BossRuneItem.getModifierName(this.value)};
     }
-
+*/
     @Override
     public String getNBTKey() {
         return "boss_rune_modifier";

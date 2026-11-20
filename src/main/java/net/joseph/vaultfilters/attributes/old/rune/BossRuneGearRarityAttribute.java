@@ -1,29 +1,26 @@
-package net.joseph.vaultfilters.attributes.rune;
+package net.joseph.vaultfilters.attributes.old.rune;
 
-import com.simibubi.create.content.logistics.filter.ItemAttribute;
 import iskallia.vault.gear.data.AttributeGearData;
 import iskallia.vault.gear.data.VaultGearData;
 import iskallia.vault.gear.item.VaultGearItem;
 import iskallia.vault.init.ModGearAttributes;
 import iskallia.vault.item.BossRuneItem;
 import iskallia.vault.item.tool.JewelItem;
+import net.joseph.vaultfilters.attributes.abstracts.OldAttribute;
 import net.joseph.vaultfilters.attributes.abstracts.StringAttribute;
 import net.joseph.vaultfilters.attributes.gear.IsUnidentifiedAttribute;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.world.item.ItemStack;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
-public class BossRuneGearRarityAttribute extends StringAttribute {
+public class BossRuneGearRarityAttribute extends OldAttribute {
     public BossRuneGearRarityAttribute(String value) {
         super(value);
     }
-
+    /*
     @Override
     public String getValue(ItemStack itemStack) {
         if (!(itemStack.getItem() instanceof BossRuneItem)) {
@@ -49,6 +46,7 @@ public class BossRuneGearRarityAttribute extends StringAttribute {
         VaultGearData data = VaultGearData.read(reward);
         return StringUtils.capitalize(data.getRarity().toString().toLowerCase(Locale.ROOT));
     }
+     */
 
     @Override
     public String getNBTKey() {

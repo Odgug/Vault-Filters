@@ -1,22 +1,19 @@
-package net.joseph.vaultfilters.attributes.rune;
+package net.joseph.vaultfilters.attributes.old.rune;
 
-import com.simibubi.create.content.logistics.filter.ItemAttribute;
 import iskallia.vault.item.BossRuneItem;
 import iskallia.vault.item.InscriptionItem;
 import iskallia.vault.item.data.InscriptionData;
+import net.joseph.vaultfilters.attributes.abstracts.OldAttribute;
 import net.joseph.vaultfilters.attributes.abstracts.StringAttribute;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.world.item.ItemStack;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class BossRuneInscriptionTypeAttribute extends StringAttribute {
+public class BossRuneInscriptionTypeAttribute extends OldAttribute {
     public BossRuneInscriptionTypeAttribute(String value) {
         super(value);
     }
-
+/*
     @Override
     public String getValue(ItemStack itemStack) {
         if (!(itemStack.getItem() instanceof BossRuneItem)) {
@@ -39,6 +36,8 @@ public class BossRuneInscriptionTypeAttribute extends StringAttribute {
     public Object[] getTranslationParameters() {
         return new Object[]{this.value};
     }
+
+ */
 
     @Override
     public String getNBTKey() {
