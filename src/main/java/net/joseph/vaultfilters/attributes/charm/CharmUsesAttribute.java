@@ -16,10 +16,17 @@ public class CharmUsesAttribute extends IntAttribute {
 
     @Override
     public Integer getValue(ItemStack itemStack) {
-        if (CharmItem.isIdentified(itemStack)) {
-            return CharmItem.getUses(itemStack) - CharmItem.getUsedVaults(itemStack).size();
+        try
+        {
+            if (CharmItem.isIdentified(itemStack)) {
+                return CharmItem.getUses(itemStack) - CharmItem.getUsedVaults(itemStack).size();
+            }
+            return null;
         }
-        return null;
+        catch (LinkageError e)
+        {
+            return null;
+        }
     }
 
     @Override

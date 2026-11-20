@@ -17,10 +17,17 @@ public class CharmAffinityAttribute extends IntAttribute {
 
     @Override
     public Integer getValue(ItemStack itemStack) {
-        if (CharmItem.isIdentified(itemStack)) {
-            return Math.round(CharmItem.getValue(itemStack) * 100.0F);
+        try
+        {
+            if (CharmItem.isIdentified(itemStack)) {
+                return Math.round(CharmItem.getValue(itemStack) * 100.0F);
+            }
+            return null;
         }
-        return null;
+        catch (LinkageError e)
+        {
+            return null;
+        }
     }
 
     @Override
