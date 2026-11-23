@@ -205,7 +205,7 @@ public class VaultFilters {
         new CatalystHasModifierAttribute("Ornate").register(CatalystHasModifierAttribute::new);
         new CatalystModifierCategoryAttribute("Bonus Chests").register(CatalystModifierCategoryAttribute::new);
 
-
+        
         // Backpacks
         new IsEmptyAttribute(true).register(IsEmptyAttribute::new);
 
@@ -240,7 +240,6 @@ public class VaultFilters {
         new CompanionRelicModifierCountAttribute("", 1).register();
         new CompanionRelicPerfectAttribute("").register(CompanionRelicPerfectAttribute::new);
         new CompanionRetiredAttribute(true).register(CompanionRetiredAttribute::new);
-
         //Deck
         new CardDeckHasModifierAttribute(true).register(CardDeckHasModifierAttribute::new);
         new CardDeckTypeAttribute("").register(CardDeckTypeAttribute::new);

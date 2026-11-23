@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 public class CompanionRelicAttribute extends StringListAttribute {
@@ -37,7 +38,8 @@ public class CompanionRelicAttribute extends StringListAttribute {
                 }
             }
 
-            return modifierNames;
+            // One option per modifier, even when the relic has several copies
+            return new ArrayList<>(new LinkedHashSet<>(modifierNames));
         }
         return null;
     }

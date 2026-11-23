@@ -29,12 +29,20 @@ public class CompanionRelicModifierCountAttribute extends StringAttribute {
     public List<ItemAttribute> listAttributesOf(ItemStack itemStack) {
         List<ItemAttribute> attributes = new ArrayList<>();
         List<String> names = CompanionRelicSlotAttribute.getSlotNames(itemStack);
+        String challenge = CompanionRelicSlotAttribute.getChallengeName();
         for (String name : new LinkedHashSet<>(names)) {
-            if (name != null) {
-                attributes.add(new CompanionRelicModifierCountAttribute(name, Collections.frequency(names, name)));
+            int count = Collections.frequency(names, name);
+            // A count of 1 is the same as the "has modifier" option
+            if (name != null && !name.equals(challenge) && count >= 2) {
+                attributes.add(new CompanionRelicModifierCountAttribute(name, count));
             }
         }
         return attributes;
+    }
+
+    @Override
+    public StringAttribute withValue(String value) {
+        return new CompanionRelicModifierCountAttribute(value, this.count);
     }
 
     @Override

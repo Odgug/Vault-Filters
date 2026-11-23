@@ -34,6 +34,17 @@ public class CompanionRelicSlotAttribute extends StringAttribute {
         return names;
     }
 
+    /** Challenges always fill the last slots, so slot/count options for them only repeat the relic's size. */
+    public static String getChallengeName() {
+        VaultModifier<?> challenge = VaultModifierRegistry.get(CompanionRelicPerfectAttribute.CHALLENGE);
+        return challenge == null ? null : challenge.getDisplayName();
+    }
+
+    @Override
+    public StringAttribute withValue(String value) {
+        return new CompanionRelicSlotAttribute(value, this.slot);
+    }
+
     @Override
     public boolean appliesTo(ItemStack itemStack) {
         List<String> names = getSlotNames(itemStack);
@@ -44,8 +55,9 @@ public class CompanionRelicSlotAttribute extends StringAttribute {
     public List<ItemAttribute> listAttributesOf(ItemStack itemStack) {
         List<ItemAttribute> attributes = new ArrayList<>();
         List<String> names = getSlotNames(itemStack);
+        String challenge = getChallengeName();
         for (int i = 0; i < names.size(); i++) {
-            if (names.get(i) != null) {
+            if (names.get(i) != null && !names.get(i).equals(challenge)) {
                 attributes.add(new CompanionRelicSlotAttribute(names.get(i), i + 1));
             }
         }
