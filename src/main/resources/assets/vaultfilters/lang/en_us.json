@@ -195,6 +195,8 @@
 
   "create.item_attributes.charm_god": "adds affinity for \"%1$s\"",
   "create.item_attributes.charm_god.inverted": "doesn't add affinity for \"%1$s\"",
+  "create.item_attributes.charm_reputation": "is a charm rolled at \"%1$s\" or more reputation",
+  "create.item_attributes.charm_reputation.inverted": "is not a charm rolled at \"%1$s\" or more reputation",
 
   "create.item_attributes.trinket_name": "is a \"%1$s\" trinket",
   "create.item_attributes.trinket_name.inverted": "is not a \"%1$s\" trinket",

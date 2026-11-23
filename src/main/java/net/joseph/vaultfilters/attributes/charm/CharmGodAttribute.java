@@ -1,7 +1,9 @@
 package net.joseph.vaultfilters.attributes.charm;
 
 import iskallia.vault.gear.charm.CharmEffect;
+import iskallia.vault.core.vault.influence.VaultGod;
 import iskallia.vault.item.gear.CharmItem;
+import iskallia.vault.item.gear.VaultCharmItem;
 import net.joseph.vaultfilters.attributes.abstracts.StringAttribute;
 import net.minecraft.world.item.ItemStack;
 
@@ -14,6 +16,9 @@ public class CharmGodAttribute extends StringAttribute {
     public String getValue(ItemStack itemStack) {
         try
         {
+            if (itemStack.getItem() instanceof VaultCharmItem) {
+                return VaultCharmItem.getGod(itemStack).map(VaultGod::getName).orElse(null);
+            }
             if (!CharmItem.isIdentified(itemStack)) {
                 return null;
             }
