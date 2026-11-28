@@ -17,6 +17,7 @@ buildscript {
 plugins {
     id 'eclipse'
     id 'maven-publish'
+    id 'com.radimous.vh-addon-dev' version 'latest.release'
 }
 
 apply plugin: 'net.minecraftforge.gradle'
@@ -145,7 +146,7 @@ dependencies {
     implementation fg.deobf("curse.maven:toms-storage-378609:5211203")
     implementation fg.deobf("curse.maven:laserio-626839:4066820")
     implementation fg.deobf("curse.maven:patchouli-306770:3846086") //laserio
-    implementation fg.deobf("curse.maven:vault-hunters-official-mod-458203:7316662")
+    implementation fg.deobf("curse.maven:vault-hunters-official-mod-458203:9714473")
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.6"))
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.3.6")) {
         jarJar.ranged(it, "[0.3.6,)")

@@ -1,7 +1,6 @@
 package net.joseph.vaultfilters;
 
 import com.mojang.logging.LogUtils;
-import net.joseph.vaultfilters.attributes.abstracts.NumberAffixAbstractAttribute;
 import net.joseph.vaultfilters.attributes.abstracts.Objects.Modifier;
 import net.joseph.vaultfilters.attributes.affix.*;
 import net.joseph.vaultfilters.attributes.artifact.ArtifactIDAttribute;
@@ -18,14 +17,14 @@ import net.joseph.vaultfilters.attributes.deck_core.DeckCoreValueAttribute;
 import net.joseph.vaultfilters.attributes.focus.FacetedFocusTypeAttribute;
 import net.joseph.vaultfilters.attributes.inner.InnerCardPackAttribute;
 import net.joseph.vaultfilters.attributes.inner.InnerJewelPouchAttribute;
-import net.joseph.vaultfilters.attributes.inner.InnerRuneItemAttribute;
+import net.joseph.vaultfilters.attributes.old.rune.InnerRuneItemAttribute;
 import net.joseph.vaultfilters.attributes.old.affix.*;
 import net.joseph.vaultfilters.attributes.relic.TemporalRelicModifierAttribute;
-import net.joseph.vaultfilters.attributes.rune.BossRuneModifierAttribute;
-import net.joseph.vaultfilters.attributes.rune.BossRuneGivesItemAttribute;
-import net.joseph.vaultfilters.attributes.rune.BossRuneGearRarityAttribute;
-import net.joseph.vaultfilters.attributes.rune.BossRuneBoosterPackTypeAttribute;
-import net.joseph.vaultfilters.attributes.rune.BossRuneInscriptionTypeAttribute;
+import net.joseph.vaultfilters.attributes.old.rune.BossRuneModifierAttribute;
+import net.joseph.vaultfilters.attributes.old.rune.BossRuneGivesItemAttribute;
+import net.joseph.vaultfilters.attributes.old.rune.BossRuneGearRarityAttribute;
+import net.joseph.vaultfilters.attributes.old.rune.BossRuneBoosterPackTypeAttribute;
+import net.joseph.vaultfilters.attributes.old.rune.BossRuneInscriptionTypeAttribute;
 
 import net.joseph.vaultfilters.attributes.backpacks.HasUUIDAttribute;
 import net.joseph.vaultfilters.attributes.backpacks.HasUpgradeAttribute;
@@ -212,13 +211,6 @@ public class VaultFilters {
         new HasUpgradeAttribute("Backpack Upgrade").register(HasUpgradeAttribute::new);
         new HasUUIDAttribute("Backpack UUID").register(HasUUIDAttribute::new);
 
-        // Runes
-        new BossRuneModifierAttribute("Strength").register(BossRuneModifierAttribute::new);
-        new BossRuneGivesItemAttribute("the_vault:helmet").register(BossRuneGivesItemAttribute::new);
-        new BossRuneGearRarityAttribute("Omega").register(BossRuneGearRarityAttribute::new);
-        new BossRuneBoosterPackTypeAttribute("the_vault:mega_stat_pack").register(BossRuneBoosterPackTypeAttribute::new);
-        new BossRuneInscriptionTypeAttribute("Laboratory").register(BossRuneInscriptionTypeAttribute::new);
-
         //Inner checks
         new InnerCardPackAttribute(null).register(InnerCardPackAttribute::new);
         new InnerJewelPouchAttribute(null).register(InnerJewelPouchAttribute::new);
@@ -275,6 +267,13 @@ public class VaultFilters {
 
         new NumberPrefixAttribute("", "", 0).register(NumberPrefixAttribute::new);
         new NumberSuffixAttribute("", "", 0).register(NumberSuffixAttribute::new);
+
+        new BossRuneModifierAttribute("Strength").register(BossRuneModifierAttribute::new);
+        new BossRuneGivesItemAttribute("the_vault:helmet").register(BossRuneGivesItemAttribute::new);
+        new BossRuneGearRarityAttribute("Omega").register(BossRuneGearRarityAttribute::new);
+        new BossRuneBoosterPackTypeAttribute("the_vault:mega_stat_pack").register(BossRuneBoosterPackTypeAttribute::new);
+        new BossRuneInscriptionTypeAttribute("Laboratory").register(BossRuneInscriptionTypeAttribute::new);
+
 
 
     }

@@ -1,24 +1,18 @@
-package net.joseph.vaultfilters.attributes.rune;
+package net.joseph.vaultfilters.attributes.old.rune;
 
-import com.simibubi.create.content.logistics.filter.ItemAttribute;
 import iskallia.vault.item.BossRuneItem;
+import net.joseph.vaultfilters.attributes.abstracts.OldAttribute;
 import net.joseph.vaultfilters.attributes.abstracts.StringAttribute;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class BossRuneGivesItemAttribute extends StringAttribute {
-    public BossRuneGivesItemAttribute(String value) {
+public class BossRuneGivesItemAttribute extends OldAttribute {
+    public BossRuneGivesItemAttribute(Object value) {
         super(value);
     }
-
+/*
     @Override
     public String getValue(ItemStack itemStack) {
         if (!(itemStack.getItem() instanceof BossRuneItem)) {
@@ -34,6 +28,8 @@ public class BossRuneGivesItemAttribute extends StringAttribute {
     public Object[] getTranslationParameters() {
         return new Object[] { new TranslatableComponent(this.value).getString() };
     }
+
+ */
 
     @Override
     public String getNBTKey() {
