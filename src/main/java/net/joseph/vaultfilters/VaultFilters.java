@@ -117,6 +117,7 @@ public class VaultFilters {
         // Gear
         new GearLevelAttribute(0).register(GearLevelAttribute::new);
         new HasLivingAttribute(true).register(HasLivingAttribute::new);
+        new HasEndlessAttribute(true).register(HasEndlessAttribute::new);
         new GearTransmogAttribute("Sword_4").register(GearTransmogAttribute::new);
         new GearRepairSlotAttribute(0).register(GearRepairSlotAttribute::new);
         new IsCraftedAttribute(true).register(IsCraftedAttribute::new);
