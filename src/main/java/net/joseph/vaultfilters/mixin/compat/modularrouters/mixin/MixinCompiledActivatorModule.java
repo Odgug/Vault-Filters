@@ -72,6 +72,9 @@ public abstract class MixinCompiledActivatorModule {
     @Inject(method = "doUseItem", at = @At("HEAD"), cancellable = true)
     private void vaultOpenables(ModularRouterBlockEntity router, FakePlayer fakePlayer, CallbackInfoReturnable<Boolean> cir) {
         ItemStack routerStack = router.getBufferItemStack();
+        if (routerStack.getCount() > 1) {
+            return; // opening stacked items deletes rest of them
+        }
         if (routerStack.getItem() instanceof BoosterPackItem packItem) {
             if (!vault_Filters$shouldChooseCard(((AccessorFilter)((AccessorCompiledModule) this).getFilter()).getMatchers())) {
                 return;
