@@ -2,7 +2,10 @@ package net.joseph.vaultfilters.attributes.abstracts;
 
 import com.simibubi.create.content.logistics.filter.ItemAttribute;
 import iskallia.vault.gear.attribute.VaultGearModifier;
+import iskallia.vault.core.vault.modifier.registry.VaultModifierRegistry;
+import iskallia.vault.core.vault.modifier.spi.VaultModifier;
 import iskallia.vault.gear.attribute.ability.AbilityLevelAttribute;
+import iskallia.vault.gear.attribute.custom.RandomGodVaultModifierAttribute;
 import iskallia.vault.gear.attribute.custom.effect.EffectAvoidanceGearAttribute;
 import iskallia.vault.gear.attribute.custom.effect.EffectAvoidanceListGearAttribute;
 import iskallia.vault.gear.attribute.custom.effect.EffectCloudAttribute;
@@ -104,6 +107,10 @@ public abstract class AffixAttribute extends StringAttribute {
         }
         if (modifier.getValue() instanceof EffectAvoidanceListGearAttribute effAvAttribute) {
             return "Effect Avoidance";
+        }
+        // God charm vault modifiers (Rock Solid, Loot Goblin, ...) have a blank name too
+        if (modifier.getValue() instanceof RandomGodVaultModifierAttribute godModifier) {
+            return VaultModifierRegistry.getOpt(godModifier.getModifier()).map(VaultModifier::getDisplayName).orElse("");
         }
 
 

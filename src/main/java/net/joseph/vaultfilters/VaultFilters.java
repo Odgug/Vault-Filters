@@ -192,6 +192,7 @@ public class VaultFilters {
         new CharmUsesAttribute(0).register(CharmUsesAttribute::new);
         new CharmAffinityAttribute(0).register(CharmAffinityAttribute::new);
         new CharmGodAttribute("").register(CharmGodAttribute::new);
+        new CharmReputationAttribute(50).register(CharmReputationAttribute::new);
 
         // Trinkets
         new TrinketUsesAttribute(0).register(TrinketUsesAttribute::new);
