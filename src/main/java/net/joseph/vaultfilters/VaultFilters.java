@@ -9,9 +9,8 @@ import net.joseph.vaultfilters.attributes.companion.*;
 import net.joseph.vaultfilters.attributes.companion.items.CompanionEggSeriesAttribute;
 import net.joseph.vaultfilters.attributes.companion.items.CompanionRelicAtleastAttribute;
 import net.joseph.vaultfilters.attributes.companion.items.CompanionRelicAttribute;
-import net.joseph.vaultfilters.attributes.companion.items.CompanionRelicModifierCountAttribute;
+import net.joseph.vaultfilters.attributes.companion.items.CompanionRelicModifiersPluralAttribute;
 import net.joseph.vaultfilters.attributes.companion.items.CompanionRelicPerfectAttribute;
-import net.joseph.vaultfilters.attributes.companion.items.CompanionRelicSlotAttribute;
 import net.joseph.vaultfilters.attributes.companion.items.CompanionTrailAttribute;
 import net.joseph.vaultfilters.attributes.deck.CardDeckHasModifierAttribute;
 import net.joseph.vaultfilters.attributes.deck.CardDeckTypeAttribute;
@@ -236,8 +235,7 @@ public class VaultFilters {
         new CompanionSkinAttribute("").register(CompanionSkinAttribute::new);
         new CompanionTemporalAttribute("").register(CompanionTemporalAttribute::new);
         new CompanionRelicAtleastAttribute(1).register(CompanionRelicAtleastAttribute::new);
-        new CompanionRelicSlotAttribute("", 1).register();
-        new CompanionRelicModifierCountAttribute("", 1).register();
+        new CompanionRelicModifiersPluralAttribute("", 1).register();
         new CompanionRelicPerfectAttribute("").register(CompanionRelicPerfectAttribute::new);
         new CompanionRetiredAttribute(true).register(CompanionRetiredAttribute::new);
         //Deck

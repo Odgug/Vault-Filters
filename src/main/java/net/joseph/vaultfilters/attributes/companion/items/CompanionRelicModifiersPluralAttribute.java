@@ -1,8 +1,12 @@
 package net.joseph.vaultfilters.attributes.companion.items;
 
 import com.simibubi.create.content.logistics.filter.ItemAttribute;
+import iskallia.vault.core.vault.modifier.registry.VaultModifierRegistry;
+import iskallia.vault.core.vault.modifier.spi.VaultModifier;
+import iskallia.vault.item.CompanionRelicItem;
 import net.joseph.vaultfilters.attributes.abstracts.StringAttribute;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
@@ -11,30 +15,45 @@ import java.util.LinkedHashSet;
 import java.util.List;
 
 /** Matches relics with at least {@code count} copies of a modifier (by display name). */
-public class CompanionRelicModifierCountAttribute extends StringAttribute {
+public class CompanionRelicModifiersPluralAttribute extends StringAttribute {
     protected final int count;
 
-    public CompanionRelicModifierCountAttribute(String value, int count) {
+    public CompanionRelicModifiersPluralAttribute(String value, int count) {
         super(value);
         this.count = count;
     }
 
+    /** Display names of the relic's modifiers; unknown modifiers are null. */
+    private static List<String> getModifierNames(ItemStack itemStack) {
+        List<String> names = new ArrayList<>();
+        if (!(itemStack.getItem() instanceof CompanionRelicItem)) {
+            return names;
+        }
+        for (ResourceLocation id : CompanionRelicItem.getModifiers(itemStack)) {
+            VaultModifier<?> modifier = VaultModifierRegistry.get(id);
+            names.add(modifier == null ? null : modifier.getDisplayName());
+        }
+        return names;
+    }
+
     @Override
     public boolean appliesTo(ItemStack itemStack) {
-        List<String> names = CompanionRelicSlotAttribute.getSlotNames(itemStack);
+        List<String> names = getModifierNames(itemStack);
         return this.count >= 1 && Collections.frequency(names, this.value) >= this.count;
     }
 
     @Override
     public List<ItemAttribute> listAttributesOf(ItemStack itemStack) {
         List<ItemAttribute> attributes = new ArrayList<>();
-        List<String> names = CompanionRelicSlotAttribute.getSlotNames(itemStack);
-        String challenge = CompanionRelicSlotAttribute.getChallengeName();
+        List<String> names = getModifierNames(itemStack);
+        // Challenges fill the remaining slots, so a count option for them only repeats the relic's size
+        VaultModifier<?> challengeModifier = VaultModifierRegistry.get(CompanionRelicPerfectAttribute.CHALLENGE);
+        String challenge = challengeModifier == null ? null : challengeModifier.getDisplayName();
         for (String name : new LinkedHashSet<>(names)) {
             int count = Collections.frequency(names, name);
             // A count of 1 is the same as the "has modifier" option
             if (name != null && !name.equals(challenge) && count >= 2) {
-                attributes.add(new CompanionRelicModifierCountAttribute(name, count));
+                attributes.add(new CompanionRelicModifiersPluralAttribute(name, count));
             }
         }
         return attributes;
@@ -42,7 +61,7 @@ public class CompanionRelicModifierCountAttribute extends StringAttribute {
 
     @Override
     public StringAttribute withValue(String value) {
-        return new CompanionRelicModifierCountAttribute(value, this.count);
+        return new CompanionRelicModifiersPluralAttribute(value, this.count);
     }
 
     @Override
@@ -58,7 +77,7 @@ public class CompanionRelicModifierCountAttribute extends StringAttribute {
 
     @Override
     public String getNBTKey() {
-        return "companion_relic_modifier_count";
+        return "companion_relic_modifiers_plural";
     }
 
     @Override
@@ -69,6 +88,6 @@ public class CompanionRelicModifierCountAttribute extends StringAttribute {
 
     @Override
     public ItemAttribute readNBT(CompoundTag tag) {
-        return new CompanionRelicModifierCountAttribute(tag.getString(getNBTKey()), tag.getInt(getNBTKey() + "_count"));
+        return new CompanionRelicModifiersPluralAttribute(tag.getString(getNBTKey()), tag.getInt(getNBTKey() + "_count"));
     }
 }

@@ -349,11 +349,8 @@
   "create.item_attributes.companion_relic_count": "is a Companion Relic with at least \"%1$s\" modifiers",
   "create.item_attributes.companion_relic_count.inverted": "isn't a Companion Relic with at least \"%1$s\" modifiers",
 
-  "create.item_attributes.companion_relic_slot": "is a Companion Relic with \"%1$s\" in slot %2$s",
-  "create.item_attributes.companion_relic_slot.inverted": "isn't a Companion Relic with \"%1$s\" in slot %2$s",
-
-  "create.item_attributes.companion_relic_modifier_count": "is a Companion Relic with at least %1$s \"%2$s\" modifiers",
-  "create.item_attributes.companion_relic_modifier_count.inverted": "isn't a Companion Relic with at least %1$s \"%2$s\" modifiers",
+  "create.item_attributes.companion_relic_modifiers_plural": "is a Companion Relic with at least %1$s \"%2$s\" modifiers",
+  "create.item_attributes.companion_relic_modifiers_plural.inverted": "isn't a Companion Relic with at least %1$s \"%2$s\" modifiers",
 
   "create.item_attributes.companion_relic_perfect": "is a Companion Relic with only \"%1$s\" positive modifiers",
   "create.item_attributes.companion_relic_perfect.inverted": "isn't a Companion Relic with only \"%1$s\" positive modifiers",
